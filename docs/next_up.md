@@ -2,44 +2,45 @@
 
 ## Immediate next phase
 
-Phase 1: Auth + App Shell
+Phase 2: Upload Service Foundation
 
 ## Recommended first task packet
 
 ### Title
 
-Choose and wire the public auth provider for the first MVP shell.
+Build the first user-owned GG packet upload path for the public MVP shell.
 
 ### Objective
 
-Enable login / signup and protected app routing without leaking auth concerns into canonical poker truth.
+Enable authenticated users to upload GG session packets, see processing state, and safely reach the canonical ingest path.
 
 ### Scope
 
-- choose auth provider
-- add required environment/config scaffolding
-- define public vs protected routes
-- scaffold role-aware app shell
+- upload UI on `/app/upload`
+- upload endpoint or server action
+- upload storage target choice
+- duplicate guard integration
+- processing job state
+- latest upload status block
 
 ### Out of scope
 
-- upload processing
-- Today / Review / Brain public rendering
+- public Today / Review / Brain rendering
 - billing
 
 ### Validation target
 
-- login works
-- protected routes work
-- operator route can be gated separately
+- authenticated user can submit a GG packet
+- duplicate packets fail safely
+- processing state is visible
+- upload ownership is preserved
 
 ### Report destination
 
-- `reports/00_foundation/052-auth-provider-and-app-shell-foundation-report.md`
+- `reports/00_foundation/053-upload-service-foundation-report.md`
 
 ## After that
 
-1. upload service foundation
-2. public Today / Review / Brain surfaces
-3. billing + entitlement
-4. launch operations
+1. public Today / Review / Brain surfaces
+2. billing + entitlement
+3. launch operations

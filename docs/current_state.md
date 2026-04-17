@@ -72,6 +72,8 @@ Use this repo to tighten the actual usefulness of the system:
 - a canonical local SQLite path is now fixed for V2 backfill work and a first 100-file historical batch has already been ingested successfully
 - the full discovered-corpus replay now yields 368 unique sessions, 18,442 hands, 1,039 evidence rows, and 34 cumulative memory items
 - the next repo-level move is to treat this V2 repo as the continuing `opb-poker` codebase rather than a sidecar experiment
+- a first public-app `frontend/` shell now exists with landing, login, signup, pricing, protected `/app` routes, and operator-gated route foundation
+- Supabase Auth has now been chosen as the Phase 1 auth provider for the public MVP shell
 
 ## Core active areas
 
