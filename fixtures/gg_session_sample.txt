@@ -1,0 +1,19 @@
+Session: GG Spring Warmup
+Date: 2026-03-24T02:30:00Z
+Stakes: NLH $200/$400
+Format: Multi-day warmup
+Notes: Pre-Toronto travel stretch, multi-bullet readiness check.
+
+Hand #1
+Table: NLH $200/$400
+Hero action: Flopped T9 with top two pair versus a bigger stack.
+Result: +820
+Pattern: travel momentum focus
+Summary: Called the turn and river, locked a big side pot, reminded myself to breathe.
+
+Hand #2
+Table: NLH $200/$400
+Hero action: Ran aces vs pocket queens and cooled off in a long hand.
+Result: +120
+Pattern: freezeout recovery
+Summary: Folded river when the board ran dry, saved chips, practice reset breathing.

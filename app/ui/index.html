@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hero Performance OS V2</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="shell">
+      <header class="hero">
+        <div>
+          <p class="eyebrow">Hero Performance OS V2</p>
+          <h1>Thin Operator Shell</h1>
+          <p class="subcopy">
+            Read the current state, inspect one session, and inspect cumulative memory without opening raw code or JSON files by hand.
+          </p>
+        </div>
+        <div class="hero-actions">
+          <button id="refresh-all" class="primary">Refresh All</button>
+        </div>
+      </header>
+
+      <nav class="tabs">
+        <button class="tab active" data-panel="command-center">Command Center</button>
+        <button class="tab" data-panel="session-lab">Session Lab</button>
+        <button class="tab" data-panel="memory-graph">Memory Graph</button>
+        <button class="tab" data-panel="hand-matrix-lab">Hand Matrix Lab</button>
+        <button class="tab" data-panel="hud-trend-lab">HUD Trend</button>
+        <button class="tab" data-panel="field-ecology-lab">Field Ecology</button>
+        <button class="tab" data-panel="review-operator-lab">Review Operator</button>
+        <button class="tab" data-panel="conviction-review-lab">Conviction Review</button>
+        <button class="tab" data-panel="timing-stack-review-lab">Timing + Stack</button>
+      </nav>
+
+      <main>
+        <section id="command-center" class="panel active">
+          <div class="panel-header">
+            <h2>Command Center</h2>
+            <button data-action="refresh-command-center">Refresh</button>
+          </div>
+          <div class="grid two">
+            <article class="card">
+              <h3>Current State</h3>
+              <div id="cc-state" class="metric">Loading…</div>
+              <p id="cc-headline" class="muted"></p>
+            </article>
+            <article class="card">
+              <h3>Confidence</h3>
+              <pre id="cc-confidence" class="json-block"></pre>
+            </article>
+          </div>
+          <div class="grid two">
+            <article class="card">
+              <h3>Today Adjustments</h3>
+              <div id="cc-adjustments"></div>
+            </article>
+            <article class="card">
+              <h3>Top Memory</h3>
+              <div id="cc-memory"></div>
+            </article>
+          </div>
+        </section>
+
+        <section id="session-lab" class="panel">
+          <div class="panel-header">
+            <h2>Session Lab</h2>
+            <button data-action="refresh-session-lab">Refresh</button>
+          </div>
+          <div class="grid two">
+            <article class="card">
+              <h3>Session</h3>
+              <pre id="sl-session" class="json-block"></pre>
+            </article>
+            <article class="card">
+              <h3>Parse Quality</h3>
+              <pre id="sl-parse" class="json-block"></pre>
+            </article>
+          </div>
+          <div class="grid two">
+            <article class="card">
+              <h3>Evidence Summary</h3>
+              <pre id="sl-evidence-summary" class="json-block"></pre>
+            </article>
+            <article class="card">
+              <h3>Memory Updates</h3>
+              <div id="sl-memory-updates"></div>
+            </article>
+          </div>
+          <article class="card">
+            <h3>Sample Hands</h3>
+            <pre id="sl-hands" class="json-block"></pre>
+          </article>
+        </section>
+
+        <section id="memory-graph" class="panel">
+          <div class="panel-header">
+            <h2>Memory Graph</h2>
+            <button data-action="refresh-memory-graph">Refresh</button>
+          </div>
+          <div class="grid two">
+            <article class="card">
+              <h3>Summary</h3>
+              <pre id="mg-summary" class="json-block"></pre>
+            </article>
+            <article class="card">
+              <h3>Latest Touched</h3>
+              <div id="mg-latest"></div>
+            </article>
+          </div>
+          <div class="grid two">
+            <article class="card">
+              <h3>Status Buckets</h3>
+              <pre id="mg-status" class="json-block"></pre>
+            </article>
+            <article class="card">
+              <h3>Type Buckets</h3>
+              <pre id="mg-types" class="json-block"></pre>
+            </article>
+          </div>
+        </section>
+
+        <section id="hand-matrix-lab" class="panel">
+          <div class="panel-header">
+            <div>
+              <h2>Hand Matrix Lab</h2>
+              <p class="muted">Explore actual 13x13 hand-class performance with position, format, and stack filters.</p>
+            </div>
+            <button data-action="refresh-hand-matrix">Refresh</button>
+          </div>
+
+          <article class="card filter-card">
+            <div class="filter-row">
+              <label>
+                <span>Window</span>
+                <select id="hm-window">
+                  <option value="90d">Recent 90d</option>
+                  <option value="all">All history</option>
+                </select>
+              </label>
+              <label>
+                <span>Format</span>
+                <select id="hm-format">
+                  <option value="all">All</option>
+                  <option value="standard_mtt">Standard MTT</option>
+                  <option value="pko">PKO</option>
+                  <option value="satellite">Satellite</option>
+                </select>
+              </label>
+              <label>
+                <span>Position</span>
+                <select id="hm-position">
+                  <option value="all">All</option>
+                  <option value="UTG">UTG</option>
+                  <option value="UTG+1">UTG+1</option>
+                  <option value="UTG+2">UTG+2</option>
+                  <option value="LJ">LJ</option>
+                  <option value="HJ">HJ</option>
+                  <option value="CO">CO</option>
+                  <option value="BTN">BTN</option>
+                  <option value="SB">SB</option>
+                  <option value="BB">BB</option>
+                </select>
+              </label>
+              <label>
+                <span>Stack</span>
+                <select id="hm-stack">
+                  <option value="all">All</option>
+                  <option value="lt15">&lt;15bb</option>
+                  <option value="15to25">15-25bb</option>
+                  <option value="gt25">&gt;25bb</option>
+                </select>
+              </label>
+              <label>
+                <span>Min Active Seats</span>
+                <input id="hm-seats" type="number" min="2" max="9" value="5" />
+              </label>
+              <div class="filter-actions">
+                <button id="hm-apply" class="primary">Apply Filters</button>
+              </div>
+            </div>
+          </article>
+
+          <div class="grid two matrix-summary-grid">
+            <article class="card">
+              <h3>Matrix Summary</h3>
+              <pre id="hm-summary" class="json-block"></pre>
+            </article>
+            <article class="card">
+              <h3>Selected Hand Summary</h3>
+              <pre id="hm-selected-summary" class="json-block"></pre>
+            </article>
+          </div>
+
+          <div class="grid three">
+            <article class="card">
+              <h3>Study-Worthy Spots</h3>
+              <div id="hm-study-worthy"></div>
+            </article>
+            <article class="card">
+              <h3>Clear Repeated Mistakes</h3>
+              <div id="hm-clear-mistakes"></div>
+            </article>
+            <article class="card">
+              <h3>Belief-Driven Patterns</h3>
+              <div id="hm-belief-patterns"></div>
+            </article>
+          </div>
+
+          <div class="grid matrix-layout">
+            <article class="card">
+              <div class="matrix-header">
+                <h3>13x13 Actual BB Matrix</h3>
+                <p class="muted">Cell color = average `bb` per hand. Badge = sample count.</p>
+              </div>
+              <div id="hm-matrix" class="matrix-grid"></div>
+            </article>
+            <div class="detail-stack">
+              <article class="card">
+                <h3>Position Breakdown</h3>
+                <div id="hm-position-breakdown"></div>
+              </article>
+              <article class="card">
+                <h3>Recent Examples</h3>
+                <div id="hm-recent-examples"></div>
+              </article>
+            </div>
+          </div>
+
+          <div class="grid two">
+            <article class="card">
+              <h3>Suspicious Hands</h3>
+              <div id="hm-suspicious"></div>
+            </article>
+            <article class="card">
+              <h3>Standout Hands</h3>
+              <div id="hm-standout"></div>
+            </article>
+          </div>
+        </section>
+
+        <section id="hud-trend-lab" class="panel">
+          <div class="panel-header">
+            <div>
+              <h2>HUD Trend</h2>
+              <p class="muted">Tournament-by-tournament HUD trend with legend and interpretation, so change can be felt instead of guessed.</p>
+            </div>
+            <button data-action="refresh-hud-trend">Refresh</button>
+          </div>
+
+          <article class="card filter-card">
+            <div class="filter-row hud-filter-row">
+              <label>
+                <span>Window</span>
+                <select id="ht-window">
+                  <option value="90d">Recent 90d</option>
+                  <option value="all">All history</option>
+                </select>
+              </label>
+              <div class="filter-actions">
+                <button id="ht-apply" class="primary">Apply HUD Window</button>
+              </div>
+            </div>
+          </article>
+
+          <div class="grid two">
+            <article class="card">
+              <h3>Trend Summary</h3>
+              <pre id="ht-summary" class="json-block"></pre>
+            </article>
+            <article class="card">
+              <h3>Legend</h3>
+              <div id="ht-legend"></div>
+            </article>
+          </div>
+
+          <article class="card">
+            <h3>Featured Metric Trend</h3>
+            <div id="ht-featured-metrics" class="metric-grid"></div>
+          </article>
+
+          <div class="grid two">
+            <article class="card">
+              <h3>Last 7 Days</h3>
+              <div id="ht-last-7-days"></div>
+            </article>
+            <article class="card">
+              <h3>What The Change Means</h3>
+              <div id="ht-change-notes"></div>
+            </article>
+          </div>
+
+          <article class="card">
+            <h3>Last 7 Days By Format</h3>
+            <div id="ht-format-splits"></div>
+          </article>
+
+          <article class="card">
+            <h3>Recent Tournaments</h3>
+            <div id="ht-recent-tournaments"></div>
+          </article>
+        </section>
+
+        <section id="field-ecology-lab" class="panel">
+          <div class="panel-header">
+            <div>
+              <h2>Field Ecology</h2>
+              <p class="muted">Track how often red-label pool behavior shows up, and how Hero reacts when limp-heavy multiway textures form.</p>
+            </div>
+            <button data-action="refresh-field-ecology">Refresh</button>
+          </div>
+
+          <article class="card filter-card">
+            <div class="filter-row hud-filter-row">
+              <label>
+                <span>Window</span>
+                <select id="fe-window">
+                  <option value="90d">Recent 90d</option>
+                  <option value="all">All history</option>
+                </select>
+              </label>
+              <div class="filter-actions">
+                <button id="fe-apply" class="primary">Apply Ecology Window</button>
+              </div>
+            </div>
+          </article>
+
+          <div class="grid two">
+            <article class="card">
+              <h3>Ecology Summary</h3>
+              <pre id="fe-summary" class="json-block"></pre>
+            </article>
+            <article class="card">
+              <h3>Hero In Limp-Multiway</h3>
+              <pre id="fe-hero-limp-multiway" class="json-block"></pre>
+            </article>
+          </div>
+
+          <article class="card">
+            <h3>Red-Label Ecology Cards</h3>
+            <div id="fe-ecology-cards" class="metric-grid"></div>
+          </article>
+
+          <article class="card">
+            <h3>Last 7 Days By Format</h3>
+            <div id="fe-format-splits"></div>
+          </article>
+        </section>
+
+        <section id="review-operator-lab" class="panel">
+          <div class="panel-header">
+            <div>
+              <h2>Review Operator</h2>
+              <p class="muted">See repeated decisions together with field environment and style trend so the fix direction feels obvious.</p>
+            </div>
+            <button data-action="refresh-review-operator">Refresh</button>
+          </div>
+
+          <article class="card filter-card">
+            <div class="filter-row hud-filter-row">
+              <label>
+                <span>Window</span>
+                <select id="ro-window">
+                  <option value="90d">Recent 90d</option>
+                  <option value="all">All history</option>
+                </select>
+              </label>
+              <div class="filter-actions">
+                <button id="ro-apply" class="primary">Apply Review Window</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="card">
+            <h3>Review Summary</h3>
+            <pre id="ro-summary" class="json-block"></pre>
+          </article>
+
+          <article class="card">
+            <h3>Integrated Review Cards</h3>
+            <div id="ro-cards"></div>
+          </article>
+        </section>
+
+        <section id="conviction-review-lab" class="panel">
+          <div class="panel-header">
+            <div>
+              <h2>Conviction Review</h2>
+              <p class="muted">Scan the full corpus for hand classes you may be overtrusting, undertrusting, or applying too generally.</p>
+            </div>
+            <button data-action="refresh-conviction-review">Refresh</button>
+          </div>
+
+          <article class="card filter-card">
+            <div class="filter-row hud-filter-row">
+              <label>
+                <span>Window</span>
+                <select id="cr-window">
+                  <option value="all">All history</option>
+                  <option value="90d">Recent 90d</option>
+                </select>
+              </label>
+              <div class="filter-actions">
+                <button id="cr-apply" class="primary">Apply Conviction Window</button>
+              </div>
+            </div>
+          </article>
+
+          <div class="grid two">
+            <article class="card">
+              <h3>Summary</h3>
+              <pre id="cr-summary" class="json-block"></pre>
+            </article>
+            <article class="card">
+              <h3>Operator Notes</h3>
+              <div id="cr-notes"></div>
+            </article>
+          </div>
+
+          <div class="grid three">
+            <article class="card">
+              <h3>Overtrust Hand Classes</h3>
+              <div id="cr-overtrust"></div>
+            </article>
+            <article class="card">
+              <h3>Undertrust Hand Classes</h3>
+              <div id="cr-undertrust"></div>
+            </article>
+            <article class="card">
+              <h3>Context-Sensitive Hands</h3>
+              <div id="cr-context"></div>
+            </article>
+          </div>
+        </section>
+
+        <section id="timing-stack-review-lab" class="panel">
+          <div class="panel-header">
+            <div>
+              <h2>Tournament Timing + Stack Comfort</h2>
+              <p class="muted">Test whether your entry timing, bullet state, and preferred stack depth actually produce your cleanest decisions.</p>
+            </div>
+            <button data-action="refresh-timing-stack-review">Refresh</button>
+          </div>
+
+          <article class="card filter-card">
+            <div class="filter-row hud-filter-row">
+              <label>
+                <span>Window</span>
+                <select id="ts-window">
+                  <option value="all">All history</option>
+                  <option value="90d">Recent 90d</option>
+                </select>
+              </label>
+              <div class="filter-actions">
+                <button id="ts-apply" class="primary">Apply Timing Window</button>
+              </div>
+            </div>
+          </article>
+
+          <div class="grid two">
+            <article class="card">
+              <h3>Summary</h3>
+              <pre id="ts-summary" class="json-block"></pre>
+            </article>
+            <article class="card">
+              <h3>Operator Notes</h3>
+              <div id="ts-notes"></div>
+            </article>
+          </div>
+
+          <div class="grid three">
+            <article class="card">
+              <h3>Entry Timing Split</h3>
+              <div id="ts-entry-cards"></div>
+            </article>
+            <article class="card">
+              <h3>Bullet State Review</h3>
+              <div id="ts-bullet-cards"></div>
+            </article>
+            <article class="card">
+              <h3>AOF Leak Queue</h3>
+              <div id="ts-aof-leaks"></div>
+            </article>
+          </div>
+
+          <article class="card">
+            <h3>Stack Comfort Bands</h3>
+            <div id="ts-stack-cards" class="metric-grid"></div>
+          </article>
+
+          <div class="grid two">
+            <article class="card">
+              <h3>Conviction Top Queue</h3>
+              <div id="ts-conviction-top"></div>
+            </article>
+            <article class="card">
+              <h3>Field + HUD Context</h3>
+              <div id="ts-context"></div>
+            </article>
+          </div>
+
+          <article class="card">
+            <h3>Operator Conclusions</h3>
+            <div id="ts-conclusions"></div>
+          </article>
+        </section>
+      </main>
+    </div>
+
+    <script src="/main.js"></script>
+  </body>
+</html>

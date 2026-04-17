@@ -1,0 +1,72 @@
+Site: GG Poker
+Session: Bounty Hunters HR
+Date: 2026-04-12 21:05:11 ET
+Stakes: NLH $500/$1,000
+Format: Real-style parser coverage
+
+Poker Hand #GG202604120001: Tournament #B12345, Bounty Hunters HR $525 [Day 2] - Level 18(500/1,000(125)) - 2026/04/12 21:05:11 ET
+Table 'Bounty Hunters HR' 9-max Seat #4 is the button
+Seat 1: VillainA (24,500 in chips)
+Seat 2: VillainB (52,000 in chips, $50 bounty)
+Seat 4: Hero (31,250 in chips, $150 bounty)
+Seat 7: VillainC (19,800 in chips)
+Hero: posts ante 125
+VillainA: posts ante 125
+VillainB: posts ante 125
+VillainC: posts ante 125
+VillainA: posts small blind 500
+VillainB: posts big blind 1,000
+*** HOLE CARDS ***
+Dealt to Hero [Ah Kd]
+Hero: raises 1,200 to 2,200
+VillainC: folds
+VillainA: calls 1,700
+VillainB: folds
+*** FLOP *** [Ad Tc 4s]
+VillainA: checks
+Hero: bets 2,100
+VillainA: calls 2,100
+*** TURN *** [Ad Tc 4s] [2h]
+VillainA: checks
+Hero: bets 4,800
+VillainA: folds
+Uncalled bet (4,800) returned to Hero
+Hero collected 9,550 from pot
+*** SUMMARY ***
+Total pot 9,550 | Rake 0
+Board [Ad Tc 4s 2h]
+Seat 4: Hero (button) collected (9,550)
+
+Poker Hand #GG202604120002: Tournament #B12345, Bounty Hunters HR $525 [Day 2] - Level 18(500/1,000(125)) - 2026/04/12 21:11:02 ET
+Table 'Bounty Hunters HR' 9-max Seat #8 is the button
+Seat 3: Hero (28,925 in chips, $150 bounty)
+Seat 5: VillainD (33,400 in chips)
+Seat 8: VillainE (61,200 in chips, $250 bounty)
+Hero: posts ante 125
+VillainD: posts ante 125
+VillainE: posts ante 125
+Hero: posts small blind 500
+VillainD: posts big blind 1,000
+*** HOLE CARDS ***
+Dealt to Hero [7s 7d]
+VillainE: folds
+Hero: raises 1,400 to 1,900
+VillainD: calls 900
+*** FLOP *** [Qs 7h 2c]
+Hero: bets 1,600
+VillainD: calls 1,600
+*** TURN *** [Qs 7h 2c] [Kh]
+Hero: checks
+VillainD: bets 3,200
+Hero: calls 3,200
+*** RIVER *** [Qs 7h 2c Kh] [Jh]
+Hero: checks
+VillainD: bets 6,400
+Hero: calls 6,400
+VillainD: shows [Ah Qh] (a flush, Ace high)
+Hero: shows [7s 7d] (three of a kind, Sevens)
+VillainD collected 26,450 from pot
+*** SUMMARY ***
+Total pot 26,450 | Rake 0
+Board [Qs 7h 2c Kh Jh]
+Seat 3: Hero (small blind) showed [7s 7d] and lost with three of a kind, Sevens
