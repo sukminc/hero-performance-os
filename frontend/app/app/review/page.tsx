@@ -1,7 +1,9 @@
 import { getPublicReviewSurface } from "@/lib/public-surfaces/read";
+import { getCurrentPlan } from "@/lib/billing/account";
 
 export default async function ReviewPage() {
   const review = await getPublicReviewSurface();
+  const plan = await getCurrentPlan();
   const session = review?.session;
   const story = review?.session_story;
 
@@ -24,6 +26,9 @@ export default async function ReviewPage() {
         <article className="page-card">
           <h3>Interpretation Readiness</h3>
           <pre className="status-pre">{JSON.stringify(review?.interpretation_groundwork || {}, null, 2)}</pre>
+          {!plan.gates.premiumReview ? (
+            <p className="subtle">Free Beta plan shows the compact review surface. Premium review depth will unlock under paid entitlement.</p>
+          ) : null}
         </article>
       </section>
     </>

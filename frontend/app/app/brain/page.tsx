@@ -1,7 +1,9 @@
 import { getPublicBrainSurface } from "@/lib/public-surfaces/read";
+import { getCurrentPlan } from "@/lib/billing/account";
 
 export default async function BrainPage() {
   const brain = await getPublicBrainSurface();
+  const plan = await getCurrentPlan();
   const longitudinal = brain?.longitudinal_update;
 
   return (
@@ -22,6 +24,9 @@ export default async function BrainPage() {
         <article className="page-card">
           <h3>Persistent Pressures</h3>
           <pre className="status-pre">{JSON.stringify(brain?.persistent_pressures || [], null, 2)}</pre>
+          {!plan.gates.premiumBrain ? (
+            <p className="subtle">Free Beta plan keeps Brain compact. Deeper cumulative breakdown will live behind paid entitlement.</p>
+          ) : null}
         </article>
       </section>
     </>

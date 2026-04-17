@@ -2,40 +2,40 @@
 
 ## Immediate next phase
 
-Phase 4: Billing + Entitlement
+Phase 5: Launch Operations
 
 ## Recommended first task packet
 
 ### Title
 
-Add billing and entitlement foundation to the public MVP shell.
+Add launch operations foundation for the public MVP shell.
 
 ### Objective
 
-Turn the public MVP shell into a controlled service with plan state and access gating.
+Make the product survivable for limited beta usage with ops visibility, failure handling, and release discipline.
 
 ### Scope
 
-- Stripe product/price setup
-- account plan state
-- entitlement checks
-- upload or surface gating
-- account billing surface
+- production env checklist
+- error/ops runbook
+- upload failure monitoring notes
+- support/admin workflow
+- limited beta launch checklist
 
 ### Out of scope
 
-- launch operations
+- fully automated incident response
 
 ### Validation target
 
-- plan state is visible
-- premium/free boundary is enforceable
-- account access does not corrupt canonical poker truth
+- launch checklist exists
+- support path exists
+- known failure modes are documented
 
 ### Report destination
 
-- `reports/00_foundation/055-billing-and-entitlement-foundation-report.md`
+- `reports/00_foundation/056-launch-operations-foundation-report.md`
 
 ## After that
 
-1. launch operations
+1. limited beta run

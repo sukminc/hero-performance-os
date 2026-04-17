@@ -2,49 +2,51 @@
 
 ## Title
 
-Build the Phase 3 public interpretation surfaces for the public MVP shell.
+Build the Phase 4 billing and entitlement foundation for the public MVP shell.
 
 ## Why this is the active task
 
-The public app can now authenticate and upload.
-The next useful move is to expose believable Today / Review / Brain reads, because that is the first moment the MVP starts behaving like a real product instead of a shell.
+The public MVP shell can now authenticate, upload, and render compact interpretation surfaces.
+The next useful move is to define the commercial boundary, because without plan state and entitlement the product is still an open demo instead of a controllable service.
 
-- connect `/app/today`
-- connect `/app/review`
-- connect `/app/brain`
-- keep the rendering public-safe and confidence-aware
+- choose billing provider
+- define plans
+- define entitlement gates
+- surface account plan state
 
 If this is not built:
 
-- uploads terminate into a dead end
-- users cannot feel the value of cumulative interpretation
-- the public MVP still does not answer the real product question
+- there is no product boundary between free and paid value
+- account surfaces remain incomplete
+- launch readiness stays theoretical
 
 ## Scope
 
 In scope:
 
-- connect the public Today page
-- connect the public Review page
-- connect the public Brain page
-- reuse canonical backend outputs
-- keep operator-only internals out of public UI
+- choose the billing provider
+- define the first plan model
+- scaffold Stripe environment/config
+- add account entitlement rendering
+- add pricing foundation
+- reflect free vs paid gates in public interpretation surfaces
 - validate with a production build
 
 Out of scope:
 
-- billing implementation
+- live checkout flow
+- webhook processing
 - account-to-player linking
-- final public polish
-- billing
+- final launch operations
 
 ## Target outcome
 
 At the end of this task:
 
-- public Today / Review / Brain should render
-- the pages should feel product-like without leaking operator internals
-- the next task should be able to start billing/entitlement or deeper public UX cleanup
+- pricing/account foundation should exist
+- plan state and entitlement model should be visible
+- public surfaces should acknowledge free vs paid boundaries
+- the next task should be able to start launch operations or live checkout wiring
 - another chat should still be able to resume from the canonical handoff docs immediately
 
 ## First files to inspect
@@ -55,7 +57,9 @@ At the end of this task:
 - `frontend/app/app/today/page.tsx`
 - `frontend/app/app/review/page.tsx`
 - `frontend/app/app/brain/page.tsx`
-- `frontend/lib/public-surfaces/`
+- `frontend/app/pricing/page.tsx`
+- `frontend/app/app/account/page.tsx`
+- `frontend/lib/billing/`
 - `docs/current_state.md`
 - `docs/next_up.md`
 
@@ -63,15 +67,15 @@ At the end of this task:
 
 Minimum:
 
-- Today / Review / Brain render
+- pricing/account surfaces render
+- entitlements are explicit
 - build passes
-- the build passes
 
 ## Completion rule
 
 This task is complete only when:
 
-1. the public interpretation surfaces exist
+1. the billing foundation exists
 2. the build passes
 3. a report is written
 4. the canonical handoff path remains accurate
