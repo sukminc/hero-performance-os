@@ -2,45 +2,41 @@
 
 ## Immediate next phase
 
-Phase 2: Upload Service Foundation
+Phase 3: Public Interpretation Surfaces
 
 ## Recommended first task packet
 
 ### Title
 
-Build the first user-owned GG packet upload path for the public MVP shell.
+Connect public Today / Review / Brain pages to user-owned upload outputs.
 
 ### Objective
 
-Enable authenticated users to upload GG session packets, see processing state, and safely reach the canonical ingest path.
+Expose the first believable public interpretation surfaces after upload, without leaking operator-only internals.
 
 ### Scope
 
-- upload UI on `/app/upload`
-- upload endpoint or server action
-- upload storage target choice
-- duplicate guard integration
-- processing job state
-- latest upload status block
+- `/app/today` render
+- `/app/review` render
+- `/app/brain` render
+- latest upload linkage
+- public-safe sample/confidence labeling
 
 ### Out of scope
 
-- public Today / Review / Brain rendering
 - billing
 
 ### Validation target
 
-- authenticated user can submit a GG packet
-- duplicate packets fail safely
-- processing state is visible
-- upload ownership is preserved
+- authenticated user can see Today / Review / Brain shell tied to uploads
+- no operator-only internals leak publicly
+- confidence/sample labeling exists where needed
 
 ### Report destination
 
-- `reports/00_foundation/053-upload-service-foundation-report.md`
+- `reports/00_foundation/054-public-interpretation-surfaces-foundation-report.md`
 
 ## After that
 
-1. public Today / Review / Brain surfaces
-2. billing + entitlement
-3. launch operations
+1. billing + entitlement
+2. launch operations

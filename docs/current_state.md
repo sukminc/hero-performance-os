@@ -74,6 +74,7 @@ Use this repo to tighten the actual usefulness of the system:
 - the next repo-level move is to treat this V2 repo as the continuing `opb-poker` codebase rather than a sidecar experiment
 - a first public-app `frontend/` shell now exists with landing, login, signup, pricing, protected `/app` routes, and operator-gated route foundation
 - Supabase Auth has now been chosen as the Phase 1 auth provider for the public MVP shell
+- the first public upload foundation now exists on `/app/upload`, with GG `.txt` packet submission, duplicate-safe ingest invocation, and latest upload status inspection
 
 ## Core active areas
 

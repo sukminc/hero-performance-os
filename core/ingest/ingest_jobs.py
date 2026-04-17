@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import json
 from pathlib import Path
 
 from core.ingest.file_ingest import ingest_gg_file
@@ -23,7 +24,8 @@ def main() -> None:
     repository = V2Repository()
     result = ingest_gg_file(args.file.expanduser(), repository, args.player_id)
     print(
-        {
+        json.dumps(
+            {
             "status": result.status,
             "ingest_file_id": result.ingest_file_id,
             "session_id": result.session_id,
@@ -31,7 +33,8 @@ def main() -> None:
             "parsed_hand_count": result.parsed_hand_count,
             "evidence_count": result.evidence_count,
             "memory_count": result.memory_count,
-        }
+            }
+        )
     )
 
 

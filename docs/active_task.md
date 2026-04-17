@@ -2,59 +2,59 @@
 
 ## Title
 
-Build the Phase 1 public auth provider and app shell foundation.
+Build the Phase 2 upload service foundation for the public MVP shell.
 
 ## Why this is the active task
 
-The public MVP planning layer is now frozen.
-The next useful move is to stand up the first real authenticated app shell so later upload and interpretation work has a stable public surface to land on.
+The public auth shell now exists and compiles.
+The next useful move is to make upload the first real user action, because the public product cannot be meaningful until a signed-in user can hand the system a GG session packet and see processing state.
 
-- choose the auth provider
-- scaffold public and protected routes
-- create a role-aware app shell
-- keep auth separated from canonical poker truth
+- wire `/app/upload`
+- invoke the canonical ingest path
+- fail duplicates safely
+- surface upload status back to the user
 
 If this is not built:
 
-- upload work has nowhere stable to land
-- public routing will drift while interpretation work continues
-- future handoff will get messy again
+- the public app remains decorative
+- Today / Review / Brain cannot be attached to user-owned uploads
+- productization momentum stalls after the auth shell
 
 ## Scope
 
 In scope:
 
-- choose the Phase 1 auth provider
-- scaffold the public `frontend/` app shell
-- add public routes and protected `/app` routes
-- add operator route gating foundation
-- add environment/config scaffolding
-- validate the scaffold with a production build
+- build the upload UI on `/app/upload`
+- add upload action/runtime scaffolding
+- invoke canonical Python ingest
+- show latest upload statuses
+- keep duplicate handling safe
+- validate with a production build
 
 Out of scope:
 
-- upload implementation
 - Today / Review / Brain public data implementation
 - billing implementation
 - account-to-player linking
+- cloud storage
 
 ## Target outcome
 
 At the end of this task:
 
-- the public app shell should compile
-- public vs protected routes should be stable
-- the auth provider should be chosen
-- the next task should be able to start upload foundation immediately
+- authenticated users should have a real upload path
+- upload status should be visible
+- duplicate-safe ingest should be connected
+- the next task should be able to start public Today / Review / Brain rendering immediately
 - another chat should still be able to resume from the canonical handoff docs immediately
 
 ## First files to inspect
 
 - `app/dev_server.py`
 - `frontend/package.json`
-- `frontend/app/`
-- `frontend/proxy.ts`
-- `frontend/lib/auth/`
+- `frontend/app/app/upload/`
+- `frontend/lib/uploads/`
+- `core/ingest/ingest_jobs.py`
 - `docs/current_state.md`
 - `docs/next_up.md`
 
@@ -62,15 +62,15 @@ At the end of this task:
 
 Minimum:
 
-- the frontend auth shell compiles
-- protected routing exists
-- auth provider choice is explicit
+- upload action exists
+- latest upload status is visible
+- the build passes
 
 ## Completion rule
 
 This task is complete only when:
 
-1. the frontend shell exists
+1. the upload foundation exists
 2. the build passes
 3. a report is written
 4. the canonical handoff path remains accurate
