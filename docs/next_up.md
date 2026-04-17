@@ -1,28 +1,45 @@
 # Next Up
 
-If the current active task completes successfully, the next most valuable task is:
+## Immediate next phase
 
-## Add the first deterministic study-worthy spot queue on top of the browser-viewable 13x13 operator view
+Phase 1: Auth + App Shell
 
-Priority focus:
+## Recommended first task packet
 
-- use the operator matrix to validate the first hand-class cards
-- add deterministic flagging for repeated mistake, threshold study, and belief-driven families
-- keep the evidence trail inspectable from the matrix drilldown
+### Title
 
-Why this is next:
+Choose and wire the public auth provider for the first MVP shell.
 
-- once the matrix is directly inspectable, the next highest-value step is to formalize what deserves a study-worthy surfaced item
-- interpretation should follow evidence, not come before the operator can inspect the raw pattern surface
+### Objective
 
-First likely files:
+Enable login / signup and protected app routing without leaking auth concerns into canonical poker truth.
 
-- `core/parsing/`
-- `core/storage/`
-- `core/surfaces/`
-- `app/api/`
-- `app/ui/`
-- `docs/thirteen_by_thirteen_analysis_spec_v1.md`
-- `docs/study_worthy_spot_output_spec_v1.md`
+### Scope
 
-Do not start this until the first operator matrix implementation is usable in the browser.
+- choose auth provider
+- add required environment/config scaffolding
+- define public vs protected routes
+- scaffold role-aware app shell
+
+### Out of scope
+
+- upload processing
+- Today / Review / Brain public rendering
+- billing
+
+### Validation target
+
+- login works
+- protected routes work
+- operator route can be gated separately
+
+### Report destination
+
+- `reports/00_foundation/052-auth-provider-and-app-shell-foundation-report.md`
+
+## After that
+
+1. upload service foundation
+2. public Today / Review / Brain surfaces
+3. billing + entitlement
+4. launch operations

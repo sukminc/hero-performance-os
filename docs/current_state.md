@@ -19,14 +19,14 @@ It already includes:
 - V2 now has a thin UI shell on top of Command Center / Session Lab / Memory Graph
 - V2 has an executable smoke test that covers ingest -> evidence -> memory -> surfaces
 - V2 can now inventory and backfill the legacy local GG hand-history corpus from the old repo without relying on Supabase
-- the canonical local V2 store is currently the SQLite file at `/Users/chrisyoon/GitHub/opb-poker/data/hero-v2/hero_v2.sqlite3`
+- the canonical local V2 store should now be treated as the SQLite file in this repo's `data/hero_v2.sqlite3`, which after local repo rebasing will live at `/Users/chrisyoon/GitHub/opb-poker/data/hero_v2.sqlite3`
 - the full currently discovered legacy raw corpus replay has been completed into the canonical SQLite store
 
 ## Current active task
 
 The current active task is:
 
-- implement the first browser-viewable `13x13` hand-class / result operator view on top of the locked spec
+- freeze the public MVP planning layer and rebase execution around productization-first phases
 
 See:
 
@@ -71,6 +71,7 @@ Use this repo to tighten the actual usefulness of the system:
 - legacy-corpus discovery and backfill tooling now exists so the old local GG archive can be reused directly
 - a canonical local SQLite path is now fixed for V2 backfill work and a first 100-file historical batch has already been ingested successfully
 - the full discovered-corpus replay now yields 368 unique sessions, 18,442 hands, 1,039 evidence rows, and 34 cumulative memory items
+- the next repo-level move is to treat this V2 repo as the continuing `opb-poker` codebase rather than a sidecar experiment
 
 ## Core active areas
 
