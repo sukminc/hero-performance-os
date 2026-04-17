@@ -2,41 +2,40 @@
 
 ## Immediate next phase
 
-Phase 3: Public Interpretation Surfaces
+Phase 4: Billing + Entitlement
 
 ## Recommended first task packet
 
 ### Title
 
-Connect public Today / Review / Brain pages to user-owned upload outputs.
+Add billing and entitlement foundation to the public MVP shell.
 
 ### Objective
 
-Expose the first believable public interpretation surfaces after upload, without leaking operator-only internals.
+Turn the public MVP shell into a controlled service with plan state and access gating.
 
 ### Scope
 
-- `/app/today` render
-- `/app/review` render
-- `/app/brain` render
-- latest upload linkage
-- public-safe sample/confidence labeling
+- Stripe product/price setup
+- account plan state
+- entitlement checks
+- upload or surface gating
+- account billing surface
 
 ### Out of scope
 
-- billing
+- launch operations
 
 ### Validation target
 
-- authenticated user can see Today / Review / Brain shell tied to uploads
-- no operator-only internals leak publicly
-- confidence/sample labeling exists where needed
+- plan state is visible
+- premium/free boundary is enforceable
+- account access does not corrupt canonical poker truth
 
 ### Report destination
 
-- `reports/00_foundation/054-public-interpretation-surfaces-foundation-report.md`
+- `reports/00_foundation/055-billing-and-entitlement-foundation-report.md`
 
 ## After that
 
-1. billing + entitlement
-2. launch operations
+1. launch operations

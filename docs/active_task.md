@@ -2,50 +2,49 @@
 
 ## Title
 
-Build the Phase 2 upload service foundation for the public MVP shell.
+Build the Phase 3 public interpretation surfaces for the public MVP shell.
 
 ## Why this is the active task
 
-The public auth shell now exists and compiles.
-The next useful move is to make upload the first real user action, because the public product cannot be meaningful until a signed-in user can hand the system a GG session packet and see processing state.
+The public app can now authenticate and upload.
+The next useful move is to expose believable Today / Review / Brain reads, because that is the first moment the MVP starts behaving like a real product instead of a shell.
 
-- wire `/app/upload`
-- invoke the canonical ingest path
-- fail duplicates safely
-- surface upload status back to the user
+- connect `/app/today`
+- connect `/app/review`
+- connect `/app/brain`
+- keep the rendering public-safe and confidence-aware
 
 If this is not built:
 
-- the public app remains decorative
-- Today / Review / Brain cannot be attached to user-owned uploads
-- productization momentum stalls after the auth shell
+- uploads terminate into a dead end
+- users cannot feel the value of cumulative interpretation
+- the public MVP still does not answer the real product question
 
 ## Scope
 
 In scope:
 
-- build the upload UI on `/app/upload`
-- add upload action/runtime scaffolding
-- invoke canonical Python ingest
-- show latest upload statuses
-- keep duplicate handling safe
+- connect the public Today page
+- connect the public Review page
+- connect the public Brain page
+- reuse canonical backend outputs
+- keep operator-only internals out of public UI
 - validate with a production build
 
 Out of scope:
 
-- Today / Review / Brain public data implementation
 - billing implementation
 - account-to-player linking
-- cloud storage
+- final public polish
+- billing
 
 ## Target outcome
 
 At the end of this task:
 
-- authenticated users should have a real upload path
-- upload status should be visible
-- duplicate-safe ingest should be connected
-- the next task should be able to start public Today / Review / Brain rendering immediately
+- public Today / Review / Brain should render
+- the pages should feel product-like without leaking operator internals
+- the next task should be able to start billing/entitlement or deeper public UX cleanup
 - another chat should still be able to resume from the canonical handoff docs immediately
 
 ## First files to inspect
@@ -53,8 +52,10 @@ At the end of this task:
 - `app/dev_server.py`
 - `frontend/package.json`
 - `frontend/app/app/upload/`
-- `frontend/lib/uploads/`
-- `core/ingest/ingest_jobs.py`
+- `frontend/app/app/today/page.tsx`
+- `frontend/app/app/review/page.tsx`
+- `frontend/app/app/brain/page.tsx`
+- `frontend/lib/public-surfaces/`
 - `docs/current_state.md`
 - `docs/next_up.md`
 
@@ -62,15 +63,15 @@ At the end of this task:
 
 Minimum:
 
-- upload action exists
-- latest upload status is visible
+- Today / Review / Brain render
+- build passes
 - the build passes
 
 ## Completion rule
 
 This task is complete only when:
 
-1. the upload foundation exists
+1. the public interpretation surfaces exist
 2. the build passes
 3. a report is written
 4. the canonical handoff path remains accurate

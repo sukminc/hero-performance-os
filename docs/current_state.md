@@ -75,6 +75,7 @@ Use this repo to tighten the actual usefulness of the system:
 - a first public-app `frontend/` shell now exists with landing, login, signup, pricing, protected `/app` routes, and operator-gated route foundation
 - Supabase Auth has now been chosen as the Phase 1 auth provider for the public MVP shell
 - the first public upload foundation now exists on `/app/upload`, with GG `.txt` packet submission, duplicate-safe ingest invocation, and latest upload status inspection
+- the first public-safe Today / Review / Brain pages now read canonical outputs through a thin frontend layer without exposing the full operator shell
 
 ## Core active areas
 
