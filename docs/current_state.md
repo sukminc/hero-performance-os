@@ -77,6 +77,7 @@ Use this repo to tighten the actual usefulness of the system:
 - the first public upload foundation now exists on `/app/upload`, with GG `.txt` packet submission, duplicate-safe ingest invocation, and latest upload status inspection
 - the first public-safe Today / Review / Brain pages now read canonical outputs through a thin frontend layer without exposing the full operator shell
 - Stripe has now been chosen as the Phase 4 billing provider, and the first pricing/account/entitlement foundation now exists in the public shell
+- launch operations foundation docs now exist for production env, support flow, rollback discipline, and private beta gating
 
 ## Core active areas
 

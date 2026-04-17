@@ -62,6 +62,29 @@ python3 scripts/backfill_legacy_gg_corpus.py --apply --limit 10
 - `python3 app/api/session_lab.py`
 - `python3 app/api/memory_graph.py`
 
+## Frontend public shell
+
+Install:
+
+```bash
+cd frontend
+npm install
+```
+
+Build check:
+
+```bash
+npm run build
+```
+
+## Launch ops references
+
+Read before any limited beta release:
+
+1. `docs/launch_readiness_checklist.md`
+2. `docs/launch_ops_runbook.md`
+3. `docs/private_beta_checklist.md`
+
 ## Resuming work later
 
 Read in this order:

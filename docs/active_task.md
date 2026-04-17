@@ -2,51 +2,50 @@
 
 ## Title
 
-Build the Phase 4 billing and entitlement foundation for the public MVP shell.
+Build the Phase 5 launch operations foundation for the public MVP shell.
 
 ## Why this is the active task
 
-The public MVP shell can now authenticate, upload, and render compact interpretation surfaces.
-The next useful move is to define the commercial boundary, because without plan state and entitlement the product is still an open demo instead of a controllable service.
+The public MVP shell can now authenticate, upload, render interpretation, and show billing boundaries.
+The next useful move is to create the operating discipline for a limited beta, because without launch ops the product remains technically assembled but operationally fragile.
 
-- choose billing provider
-- define plans
-- define entitlement gates
-- surface account plan state
+- document production env needs
+- define support/admin workflow
+- define upload failure handling
+- define rollback and beta gate rules
 
 If this is not built:
 
-- there is no product boundary between free and paid value
-- account surfaces remain incomplete
-- launch readiness stays theoretical
+- launch decisions will rely on memory instead of repo truth
+- support response will be inconsistent
+- beta risk will stay implicit rather than managed
 
 ## Scope
 
 In scope:
 
-- choose the billing provider
-- define the first plan model
-- scaffold Stripe environment/config
-- add account entitlement rendering
-- add pricing foundation
-- reflect free vs paid gates in public interpretation surfaces
-- validate with a production build
+- write launch ops runbook
+- write private beta checklist
+- update launch readiness checklist
+- update runbook references
+- refresh current/active/next-up state
+- write report
 
 Out of scope:
 
-- live checkout flow
-- webhook processing
-- account-to-player linking
-- final launch operations
+- full observability tooling
+- automated incident response
+- real support inbox integration
+- actual beta launch execution
 
 ## Target outcome
 
 At the end of this task:
 
-- pricing/account foundation should exist
-- plan state and entitlement model should be visible
-- public surfaces should acknowledge free vs paid boundaries
-- the next task should be able to start launch operations or live checkout wiring
+- beta launch rules should be explicit
+- support/admin handling should be documented
+- failure/rollback behavior should be explicit
+- the next task should be able to move into live checkout wiring or a real private beta
 - another chat should still be able to resume from the canonical handoff docs immediately
 
 ## First files to inspect
@@ -60,6 +59,8 @@ At the end of this task:
 - `frontend/app/pricing/page.tsx`
 - `frontend/app/app/account/page.tsx`
 - `frontend/lib/billing/`
+- `docs/launch_ops_runbook.md`
+- `docs/private_beta_checklist.md`
 - `docs/current_state.md`
 - `docs/next_up.md`
 
@@ -67,15 +68,15 @@ At the end of this task:
 
 Minimum:
 
-- pricing/account surfaces render
-- entitlements are explicit
-- build passes
+- launch docs exist
+- beta gate is explicit
+- handoff is clear
 
 ## Completion rule
 
 This task is complete only when:
 
-1. the billing foundation exists
-2. the build passes
+1. the launch ops docs exist
+2. the next-up queue is aligned
 3. a report is written
 4. the canonical handoff path remains accurate

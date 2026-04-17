@@ -63,6 +63,15 @@ Provide a simple release gate so public MVP work can move phase by phase without
 - [ ] private beta checklist complete
 - [ ] report written
 
+## Current foundation progress
+
+- [x] Phase 0 foundation docs exist
+- [x] Phase 1 auth/app shell foundation exists
+- [x] Phase 2 upload foundation exists
+- [x] Phase 3 public interpretation foundation exists
+- [x] Phase 4 billing/entitlement foundation exists
+- [ ] Phase 5 launch operations foundation exists
+
 ## Release Gate Rules
 
 ### Do not launch if
