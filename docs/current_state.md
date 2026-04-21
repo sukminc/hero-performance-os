@@ -81,6 +81,8 @@ Use this repo to tighten the actual usefulness of the system:
 - the public upload shell now points back at the restored Hero canonical corpus and exposes the real current cutoff date before new batch intake
 - the public uploader now supports large multi-file intake and zip expansion so post-cutoff GG packet dumps can be loaded in one batch
 - summary-only GG tournament export files are now classified as skipped summary artifacts rather than hard ingest failures
+- the public shell viewer scope is no longer hardcoded to Hero; auth identity now has to map to an allowed player scope before Today / Review / Brain / dashboard data resolves
+- unmapped authenticated users now get safe blank states instead of silently reading Hero data through the public shell
 
 ## Core active areas
 

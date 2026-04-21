@@ -17,13 +17,20 @@ async function runPython(code: string) {
   return JSON.parse(stdout.trim());
 }
 
-export async function getPublicTodaySurface() {
+function toPythonLiteral(value: string) {
+  return JSON.stringify(value);
+}
+
+export async function getPublicTodaySurface(playerId: string | null) {
+  if (!playerId) {
+    return null;
+  }
   try {
     return await runPython(
       [
         "import json",
         "from app.api.today import get_today_payload",
-        "payload = get_today_payload()",
+        `payload = get_today_payload(player_id=${toPythonLiteral(playerId)})`,
         "print(json.dumps(payload, default=str))"
       ].join("; ")
     );
@@ -32,7 +39,10 @@ export async function getPublicTodaySurface() {
   }
 }
 
-export async function getPublicReviewSurface() {
+export async function getPublicReviewSurface(playerId: string | null) {
+  if (!playerId) {
+    return null;
+  }
   try {
     return await runPython(
       [
@@ -41,7 +51,7 @@ export async function getPublicReviewSurface() {
         "from core.surfaces.session_lab import build_session_lab_payload",
         "repo = V2Repository()",
         "repo.ensure_schema()",
-        "player_id = '4c9d1e29-1f6b-4e5f-92da-111111111111'",
+        `player_id = ${toPythonLiteral(playerId)}`,
         "session_id = repo.fetch_latest_session_id(player_id)",
         "payload = build_session_lab_payload(repo, player_id, session_id) if session_id else None",
         "print(json.dumps(payload, default=str))"
@@ -52,7 +62,10 @@ export async function getPublicReviewSurface() {
   }
 }
 
-export async function getPublicBrainSurface() {
+export async function getPublicBrainSurface(playerId: string | null) {
+  if (!playerId) {
+    return null;
+  }
   try {
     return await runPython(
       [
@@ -61,7 +74,7 @@ export async function getPublicBrainSurface() {
         "from core.surfaces.interpretation_summary import build_interpretation_summary",
         "repo = V2Repository()",
         "repo.ensure_schema()",
-        "player_id = '4c9d1e29-1f6b-4e5f-92da-111111111111'",
+        `player_id = ${toPythonLiteral(playerId)}`,
         "memory = repo.fetch_memory_items(player_id, statuses=['active','baseline','watch'])",
         "payload = build_interpretation_summary(memory)",
         "print(json.dumps(payload, default=str))"
@@ -72,13 +85,16 @@ export async function getPublicBrainSurface() {
   }
 }
 
-export async function getConvictionReviewSummary() {
+export async function getConvictionReviewSummary(playerId: string | null) {
+  if (!playerId) {
+    return null;
+  }
   try {
     return await runPython(
       [
         "import json",
         "from app.api.conviction_review import get_conviction_review_payload",
-        "payload = get_conviction_review_payload(window='all')",
+        `payload = get_conviction_review_payload(player_id=${toPythonLiteral(playerId)}, window='all')`,
         "print(json.dumps(payload, default=str))"
       ].join("; ")
     );
@@ -87,13 +103,16 @@ export async function getConvictionReviewSummary() {
   }
 }
 
-export async function getTimingStackSummary() {
+export async function getTimingStackSummary(playerId: string | null) {
+  if (!playerId) {
+    return null;
+  }
   try {
     return await runPython(
       [
         "import json",
         "from app.api.timing_stack_review import get_timing_stack_review_payload",
-        "payload = get_timing_stack_review_payload(window='all')",
+        `payload = get_timing_stack_review_payload(player_id=${toPythonLiteral(playerId)}, window='all')`,
         "print(json.dumps(payload, default=str))"
       ].join("; ")
     );
@@ -102,13 +121,16 @@ export async function getTimingStackSummary() {
   }
 }
 
-export async function getHudTrendSummary() {
+export async function getHudTrendSummary(playerId: string | null) {
+  if (!playerId) {
+    return null;
+  }
   try {
     return await runPython(
       [
         "import json",
         "from app.api.hud_trend import get_hud_trend_payload",
-        "payload = get_hud_trend_payload(window='90d')",
+        `payload = get_hud_trend_payload(player_id=${toPythonLiteral(playerId)}, window='90d')`,
         "print(json.dumps(payload, default=str))"
       ].join("; ")
     );
@@ -117,13 +139,16 @@ export async function getHudTrendSummary() {
   }
 }
 
-export async function getFieldEcologySummary() {
+export async function getFieldEcologySummary(playerId: string | null) {
+  if (!playerId) {
+    return null;
+  }
   try {
     return await runPython(
       [
         "import json",
         "from app.api.field_ecology import get_field_ecology_payload",
-        "payload = get_field_ecology_payload(window='90d')",
+        `payload = get_field_ecology_payload(player_id=${toPythonLiteral(playerId)}, window='90d')`,
         "print(json.dumps(payload, default=str))"
       ].join("; ")
     );

@@ -46,6 +46,8 @@ export default async function AccountPage() {
               role: viewer.role,
               playerScope: viewer.playerScope,
               canSeeOperatorDepth: viewer.canSeeOperatorDepth,
+              ownershipResolved: viewer.ownershipResolved,
+              ownershipSource: viewer.ownershipSource,
               requirement: "standard users must not see another player's data; operator/admin can inspect deeper internal detail"
             },
             null,

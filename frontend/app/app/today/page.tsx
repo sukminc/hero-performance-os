@@ -1,7 +1,9 @@
 import { getPublicTodaySurface } from "@/lib/public-surfaces/read";
+import { getViewerContext } from "@/lib/viewer/session";
 
 export default async function TodayPage() {
-  const today = await getPublicTodaySurface();
+  const viewer = await getViewerContext();
+  const today = await getPublicTodaySurface(viewer.playerId);
   const payload = today?.payload;
 
   return (
@@ -10,7 +12,9 @@ export default async function TodayPage() {
         <p className="eyebrow">Today</p>
         <h1>{payload?.headline || "Today surface is not ready yet."}</h1>
         <p className="subtle">
-          {payload?.current_state
+          {!viewer.playerId
+            ? "This login is not mapped to a player ownership record yet, so Today stays blank instead of leaking another player's adjustment surface."
+            : payload?.current_state
             ? `Current state: ${payload.current_state}. This public view intentionally shows the next adjustment, not the full operator backend.`
             : "This page will show the latest pre-session adjustment once a valid upload has produced Today output."}
         </p>

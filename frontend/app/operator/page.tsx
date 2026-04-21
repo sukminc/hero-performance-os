@@ -5,13 +5,15 @@ import {
   getHudTrendSummary,
   getTimingStackSummary
 } from "@/lib/public-surfaces/read";
+import { getViewerContext } from "@/lib/viewer/session";
 
 export default async function OperatorPage() {
+  const viewer = await getViewerContext();
   const [conviction, timing, hud, field] = await Promise.all([
-    getConvictionReviewSummary(),
-    getTimingStackSummary(),
-    getHudTrendSummary(),
-    getFieldEcologySummary()
+    getConvictionReviewSummary(viewer.playerId),
+    getTimingStackSummary(viewer.playerId),
+    getHudTrendSummary(viewer.playerId),
+    getFieldEcologySummary(viewer.playerId)
   ]);
 
   return (

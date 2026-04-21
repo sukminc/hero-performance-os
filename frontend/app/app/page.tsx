@@ -10,10 +10,10 @@ import { getViewerContext } from "@/lib/viewer/session";
 export default async function AppHomePage() {
   const viewer = await getViewerContext();
   const [conviction, timing, hud, field] = await Promise.all([
-    getConvictionReviewSummary(),
-    getTimingStackSummary(),
-    getHudTrendSummary(),
-    getFieldEcologySummary()
+    getConvictionReviewSummary(viewer.playerId),
+    getTimingStackSummary(viewer.playerId),
+    getHudTrendSummary(viewer.playerId),
+    getFieldEcologySummary(viewer.playerId)
   ]);
 
   const overtrust = conviction?.overtrust_cards?.slice(0, 3) || [];
@@ -46,6 +46,16 @@ export default async function AppHomePage() {
           ) : null}
         </div>
       </section>
+
+      {!viewer.playerId ? (
+        <section className="page-card">
+          <h3>Access Boundary</h3>
+          <p className="subtle">
+            This login is authenticated, but it is not currently mapped to a player ownership record. Public shell data stays
+            hidden until the auth identity is explicitly connected to a player scope.
+          </p>
+        </section>
+      ) : null}
 
       <section className="grid three">
         <article className="page-card">
@@ -122,7 +132,8 @@ export default async function AppHomePage() {
                 currentRole: viewer.role,
                 playerScope: viewer.playerScope,
                 canSeeOperatorDepth: viewer.canSeeOperatorDepth,
-                multiUserIsolation: "still needs true auth-to-player ownership wiring"
+                ownershipResolved: viewer.ownershipResolved,
+                ownershipSource: viewer.ownershipSource
               },
               null,
               2

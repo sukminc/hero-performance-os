@@ -2,56 +2,58 @@
 
 ## Title
 
-Restore Hero corpus visibility in the public shell and upgrade upload intake for post-cutoff batch dumps.
+Connect viewer ownership to real auth identity so the public shell enforces player data boundaries.
 
 ## Why this is the active task
 
-The public shell cannot be trusted if Hero logs in and sees an empty corpus.
-Before any further beta-facing movement, the app must:
+The public shell cannot be trusted if a logged-in user can still resolve Hero data through a hardcoded viewer scope.
+Before broader beta movement, the shell must:
 
-- point to the real Hero canonical corpus,
-- show the current cutoff date of already-ingested data,
-- and accept the next backlog as large multi-file or zip batch uploads.
+- resolve the current auth identity,
+- map that identity to the allowed player scope,
+- and hide Today / Review / Brain / dashboard detail when ownership is unresolved.
 
 If this is not built:
 
-- Hero will think the data is gone
-- post-cutoff uploads will be tedious and fragile
-- private beta credibility will be false because the main user's own corpus is not visible
+- public shell access remains mostly cosmetic
+- Hero-vs-operator trust boundaries stay weak
+- private beta credibility will still be lower than the backend truth deserves
 
 ## Scope
 
 In scope:
 
-- restore current repo canonical SQLite from the archived Hero corpus
-- expose corpus coverage and last ingested date in the upload surface
-- support multiple `.txt` uploads and `.zip` expansion in the public uploader
+- resolve viewer identity from current auth state
+- map Hero ownership through explicit env-driven auth identity matching
+- make public surfaces use viewer player scope instead of hardcoded Hero player id
+- surface blank/safe states when ownership is unresolved
 - refresh handoff docs
 - write report
 
 Out of scope:
 
-- full cloud storage ingestion
-- background queueing
-- multi-user ownership hardening
-- production drag-and-drop polish beyond local MVP usefulness
+- full multi-player account model
+- full Supabase role/claim system
+- checkout or entitlement expansion
+- non-Hero onboarding beyond safe blank-state handling
 
 ## Target outcome
 
 At the end of this task:
 
-- Hero's historical corpus should be visible again in the public shell
-- the current cutoff date should be explicit before new dumps are uploaded
-- new zip dumps should be ingestible in one batch
+- Hero should see Hero data only when the auth identity is mapped to Hero ownership
+- unmapped users should not see Hero dashboard / Today / Review / Brain data
+- operator/admin should still be able to inspect deeper detail
 - another chat should still be able to resume from the canonical handoff docs immediately
 
 ## First files to inspect
 
 - `app/dev_server.py`
-- `frontend/package.json`
-- `frontend/app/app/upload/`
-- `frontend/lib/uploads/`
-- `core/ingest/`
+- `frontend/lib/viewer/`
+- `frontend/lib/auth/`
+- `frontend/lib/public-surfaces/`
+- `frontend/app/app/`
+- `frontend/app/operator/`
 - `docs/current_state.md`
 - `docs/next_up.md`
 
@@ -59,9 +61,9 @@ At the end of this task:
 
 Minimum:
 
-- Hero corpus is visible again
-- upload surface shows cutoff coverage
-- zip batch intake works locally
+- viewer scope is not hardcoded to Hero anymore
+- unmapped users do not resolve Hero surfaces
+- mapped Hero access still works
 - handoff is clear
 
 ## Completion rule
@@ -69,7 +71,7 @@ Minimum:
 This task is complete only when:
 
 1. the restored corpus is live in the current repo
-2. the upload surface exposes current coverage and cutoff date
-3. batch zip upload works through the public shell
+2. public surfaces read through resolved viewer ownership instead of a hardcoded Hero id
+3. unmapped auth identities get safe blank states rather than Hero data
 4. a report is written
 5. the canonical handoff path remains accurate

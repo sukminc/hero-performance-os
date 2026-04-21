@@ -1,8 +1,10 @@
 import { getPublicReviewSurface } from "@/lib/public-surfaces/read";
 import { getCurrentPlan } from "@/lib/billing/account";
+import { getViewerContext } from "@/lib/viewer/session";
 
 export default async function ReviewPage() {
-  const review = await getPublicReviewSurface();
+  const viewer = await getViewerContext();
+  const review = await getPublicReviewSurface(viewer.playerId);
   const plan = await getCurrentPlan();
   const session = review?.session;
   const story = review?.session_story;
@@ -13,7 +15,9 @@ export default async function ReviewPage() {
         <p className="eyebrow">Review</p>
         <h1>{session ? "Latest uploaded session review" : "Review surface is waiting for upload-backed session data."}</h1>
         <p className="subtle">
-          {session
+          {!viewer.playerId
+            ? "This login is not mapped to a player ownership record yet, so Review stays blank instead of showing another player's session story."
+            : session
             ? `Latest session: ${session.buyin_band || "Unknown buy-in"} · ${session.hand_count} hands · parse status ${session.parse_status}.`
             : "Once uploads are available, this page will show a public-safe cumulative review instead of raw operator internals."}
         </p>
