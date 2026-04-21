@@ -134,6 +134,10 @@ h3 {
   width: min(480px, 100%);
 }
 
+.signup-shell {
+  width: min(820px, 100%);
+}
+
 .input-grid {
   display: grid;
   gap: 14px;
@@ -153,6 +157,16 @@ h3 {
   padding: 12px 14px;
   font: inherit;
   background: white;
+}
+
+.input-grid select,
+.input-grid textarea {
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  padding: 12px 14px;
+  font: inherit;
+  background: white;
+  resize: vertical;
 }
 
 .input-grid button {
@@ -257,6 +271,37 @@ h3 {
 .upload-details summary {
   cursor: pointer;
   color: var(--accent);
+}
+
+.landing-grid {
+  margin-top: 18px;
+}
+
+.apply-card {
+  margin-top: 18px;
+}
+
+.apply-card.compact {
+  margin-top: 20px;
+}
+
+.compact-grid {
+  margin-top: 12px;
+}
+
+.fine-print {
+  margin-top: 12px;
+  font-size: 13px;
+}
+
+.button-reset {
+  font: inherit;
+  cursor: pointer;
+}
+
+.button-reset:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
 }
 
 @media (max-width: 900px) {

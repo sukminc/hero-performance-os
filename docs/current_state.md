@@ -83,6 +83,7 @@ Use this repo to tighten the actual usefulness of the system:
 - summary-only GG tournament export files are now classified as skipped summary artifacts rather than hard ingest failures
 - the public shell viewer scope is no longer hardcoded to Hero; auth identity now has to map to an allowed player scope before Today / Review / Brain / dashboard data resolves
 - unmapped authenticated users now get safe blank states instead of silently reading Hero data through the public shell
+- the public landing page now explains the product in cold-traffic language, shows sample Today / Review / Brain output, and lets GG Poker Ontario players apply for demo access immediately
 
 ## Core active areas
 
