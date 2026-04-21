@@ -160,6 +160,37 @@ h3 {
   cursor: pointer;
 }
 
+.upload-dropzone {
+  display: grid;
+  gap: 16px;
+  padding: 24px;
+  border-radius: 24px;
+  border: 2px dashed rgba(160, 78, 44, 0.28);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(160, 78, 44, 0.06)),
+    white;
+}
+
+.upload-picker {
+  position: relative;
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 18px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: white;
+  cursor: pointer;
+}
+
+.upload-picker input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
 .app-layout {
   display: grid;
   grid-template-columns: 260px minmax(0, 1fr);
@@ -199,6 +230,11 @@ h3 {
   gap: 12px;
 }
 
+.status-list.compact {
+  gap: 10px;
+  margin-top: 12px;
+}
+
 .status-item {
   border: 1px solid var(--line);
   border-radius: 14px;
@@ -212,6 +248,15 @@ h3 {
   word-break: break-word;
   font-size: 12px;
   line-height: 1.45;
+}
+
+.upload-details {
+  margin-top: 14px;
+}
+
+.upload-details summary {
+  cursor: pointer;
+  color: var(--accent);
 }
 
 @media (max-width: 900px) {

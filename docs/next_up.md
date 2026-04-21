@@ -2,39 +2,41 @@
 
 ## Immediate next phase
 
-Phase 6: Live Checkout Or Private Beta Execution
+Phase 6: Hero-first private beta hardening
 
 ## Recommended first task packet
 
 ### Title
 
-Choose whether to wire live Stripe checkout next or run a manual private beta with the current foundations.
+Harden Hero-first data ownership and review credibility after corpus restoration and batch upload intake.
 
 ### Objective
 
-Move from pure foundation work into the first real go-live decision.
+Validate that the main user sees trustworthy interpretation after new packet dumps, then harden beta access around that truth.
 
 ### Scope
 
-- choose between:
-  - live checkout implementation
-  - manual private beta execution
-- define exact success criteria for that path
-- keep the scope to one business decision
+- verify new post-cutoff zip dumps land correctly
+- ensure Today / Review / Brain reflect the expanded corpus after upload
+- harden hero-vs-operator access scope
+- prepare operator checks for the first real beta cycle
 
 ### Out of scope
 
-- doing both checkout and beta rollout at once
+- live Stripe checkout
+- public open launch
+- broad non-Hero onboarding
 
 ### Validation target
 
-- the next implementation path is singular and explicit
-- the team can move without reopening phase planning
+- Hero can upload post-cutoff batches and immediately see the corpus extension reflected in interpretation surfaces
+- duplicate and failed batch paths are supportable
+- operator can verify access boundaries and corpus freshness in one pass
 
 ### Report destination
 
-- `reports/00_foundation/057-go-live-path-decision-report.md`
+- `reports/00_foundation/058-hero-corpus-restoration-and-batch-upload-report.md`
 
 ## After that
 
-1. execute the chosen go-live path
+1. use beta findings to decide whether checkout is ready

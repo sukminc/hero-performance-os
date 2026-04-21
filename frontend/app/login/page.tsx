@@ -1,6 +1,8 @@
 import Link from "next/link";
 
 export default function LoginPage() {
+  const devLoginEnabled = process.env.OPB_ENABLE_DEV_LOGIN === "1";
+
   return (
     <main className="auth-wrap">
       <section className="auth-card">
@@ -21,9 +23,16 @@ export default function LoginPage() {
           </label>
         </form>
         <div className="cta-row">
-          <Link className="cta" href="/app">
-            Enter App Shell
-          </Link>
+          {devLoginEnabled ? (
+            <Link className="cta" href="/auth/dev-login?role=user&next=/app">
+              Enter As User
+            </Link>
+          ) : null}
+          {devLoginEnabled ? (
+            <Link className="secondary-cta" href="/auth/dev-login?role=operator&next=/operator">
+              Enter As Operator
+            </Link>
+          ) : null}
           <Link className="secondary-cta" href="/signup">
             Create Account
           </Link>

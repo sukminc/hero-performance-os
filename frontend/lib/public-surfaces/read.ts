@@ -71,3 +71,63 @@ export async function getPublicBrainSurface() {
     return null;
   }
 }
+
+export async function getConvictionReviewSummary() {
+  try {
+    return await runPython(
+      [
+        "import json",
+        "from app.api.conviction_review import get_conviction_review_payload",
+        "payload = get_conviction_review_payload(window='all')",
+        "print(json.dumps(payload, default=str))"
+      ].join("; ")
+    );
+  } catch {
+    return null;
+  }
+}
+
+export async function getTimingStackSummary() {
+  try {
+    return await runPython(
+      [
+        "import json",
+        "from app.api.timing_stack_review import get_timing_stack_review_payload",
+        "payload = get_timing_stack_review_payload(window='all')",
+        "print(json.dumps(payload, default=str))"
+      ].join("; ")
+    );
+  } catch {
+    return null;
+  }
+}
+
+export async function getHudTrendSummary() {
+  try {
+    return await runPython(
+      [
+        "import json",
+        "from app.api.hud_trend import get_hud_trend_payload",
+        "payload = get_hud_trend_payload(window='90d')",
+        "print(json.dumps(payload, default=str))"
+      ].join("; ")
+    );
+  } catch {
+    return null;
+  }
+}
+
+export async function getFieldEcologySummary() {
+  try {
+    return await runPython(
+      [
+        "import json",
+        "from app.api.field_ecology import get_field_ecology_payload",
+        "payload = get_field_ecology_payload(window='90d')",
+        "print(json.dumps(payload, default=str))"
+      ].join("; ")
+    );
+  } catch {
+    return null;
+  }
+}

@@ -30,6 +30,7 @@ def main() -> None:
             "ingest_file_id": result.ingest_file_id,
             "session_id": result.session_id,
             "duplicate_of_file_id": result.duplicate_of_file_id,
+            "duplicate_of_status": result.duplicate_of_status,
             "parsed_hand_count": result.parsed_hand_count,
             "evidence_count": result.evidence_count,
             "memory_count": result.memory_count,

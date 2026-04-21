@@ -1,6 +1,8 @@
 import Link from "next/link";
 
 export default function LandingPage() {
+  const devLoginEnabled = process.env.OPB_ENABLE_DEV_LOGIN === "1";
+
   return (
     <main className="shell">
       <section className="hero-card">
@@ -18,6 +20,11 @@ export default function LandingPage() {
             <Link className="secondary-cta" href="/login">
               Log In
             </Link>
+            {devLoginEnabled ? (
+              <Link className="secondary-cta" href="/auth/dev-login?role=operator&next=/operator">
+                Enter As Operator
+              </Link>
+            ) : null}
           </div>
         </div>
         <div className="page-card">

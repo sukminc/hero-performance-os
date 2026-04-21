@@ -170,6 +170,23 @@ class SQLiteV2Repository:
             ).fetchone()
         return dict(row) if row else None
 
+    def get_ingest_file_by_id(self, ingest_file_id: str) -> dict[str, Any] | None:
+        with get_sqlite_connection() as conn:
+            row = conn.execute(
+                """
+                SELECT id, player_id, source_type, file_hash, original_filename, status, duplicate_of_file_id, raw_metadata, uploaded_at
+                FROM ingest_files
+                WHERE id = ?
+                LIMIT 1
+                """,
+                (ingest_file_id,),
+            ).fetchone()
+        if not row:
+            return None
+        payload = dict(row)
+        payload["raw_metadata"] = _json_load(payload.get("raw_metadata"), {})
+        return payload
+
     def create_ingest_file(self, record: IngestFileRecord) -> None:
         with get_sqlite_connection() as conn:
             conn.execute(

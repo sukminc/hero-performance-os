@@ -15,3 +15,7 @@ export function resolveUploadTempDir() {
 export function resolveIngestScriptPath() {
   return path.join(resolveRepoRoot(), "core", "ingest", "ingest_jobs.py");
 }
+
+export function resolveZipExpandScriptPath() {
+  return path.join(resolveRepoRoot(), "core", "ingest", "zip_expand.py");
+}

@@ -7,6 +7,7 @@ from typing import Any
 
 
 SUMMARY_HEADER_RE = re.compile(r"^Tournament #(?P<tournament_id>[^,]+), (?P<title>.+)$")
+TOURNAMENT_SUMMARY_STARTED_RE = re.compile(r"^Tournament started (?P<started_at>.+)$")
 HAND_HEADER_RE = re.compile(
     r"^Poker Hand #(?P<hand_ref>[^:]+):\s+Tournament #(?P<tournament_id>[^,]+),\s+"
     r"(?P<label>.+?)\s+-\s+Level\s*(?P<level>\d+)\("
@@ -73,6 +74,17 @@ def _parse_metadata(lines: list[str]) -> tuple[dict[str, Any], int]:
         if line.startswith("Poker Hand") or line.startswith("Hand #"):
             hand_start = idx
             break
+        summary_match = SUMMARY_HEADER_RE.match(line.strip())
+        if summary_match:
+            metadata.setdefault("tournament_id", summary_match.group("tournament_id").strip())
+            metadata.setdefault("title", summary_match.group("title").strip())
+            metadata.setdefault("summary_format", True)
+            continue
+        started_match = TOURNAMENT_SUMMARY_STARTED_RE.match(line.strip())
+        if started_match:
+            metadata.setdefault("tournament_started_at", started_match.group("started_at").strip())
+            metadata.setdefault("summary_format", True)
+            continue
         if line and ":" in line:
             key, value = line.split(":", 1)
             metadata[key.strip().lower()] = value.strip()
@@ -290,9 +302,14 @@ def parse_gg_text_file(path: Path) -> ParsedSessionPacket:
         "parsed_hands": len(hands),
         "skipped_blocks": skipped_blocks,
         "zero_hand_parse": len(hands) == 0,
-        "parser_mode": "simple_fixture_fallback" if hands and real_blocks == 0 else "gg_real",
+        "parser_mode": (
+            "tournament_summary_only"
+            if not hands and metadata.get("summary_format")
+            else "simple_fixture_fallback" if hands and real_blocks == 0 else "gg_real"
+        ),
         "real_style_block_count": real_blocks,
         "simple_block_count": simple_block_count,
+        "summary_format": bool(metadata.get("summary_format")),
     }
 
     return ParsedSessionPacket(

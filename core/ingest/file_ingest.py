@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from datetime import datetime, timezone
+import json
 from pathlib import Path
 from uuid import uuid4
 
@@ -21,6 +22,7 @@ class IngestResult:
     session_id: str | None
     status: str
     duplicate_of_file_id: str | None = None
+    duplicate_of_status: str | None = None
     parsed_hand_count: int = 0
     evidence_count: int = 0
     memory_count: int = 0
@@ -37,11 +39,13 @@ def ingest_gg_file(path: Path, repository: V2Repository, player_id: str) -> Inge
     ingest_file_id = f"ingest-{uuid4()}"
 
     if duplicate_of_file_id:
+        existing = repository.get_ingest_file_by_id(duplicate_of_file_id)
         return IngestResult(
             ingest_file_id=ingest_file_id,
             session_id=None,
             status="duplicate_skipped",
             duplicate_of_file_id=duplicate_of_file_id,
+            duplicate_of_status=str(existing.get("status")) if existing else None,
             parsed_hand_count=0,
             evidence_count=0,
             memory_count=0,
@@ -62,15 +66,17 @@ def ingest_gg_file(path: Path, repository: V2Repository, player_id: str) -> Inge
 
     parsed_packet = parse_gg_text_file(path)
     if not parsed_packet.hands:
+        parse_mode = parsed_packet.parse_quality.get("parser_mode")
+        ingest_status = "skipped_summary_only" if parse_mode == "tournament_summary_only" else "failed_zero_hands"
         repository.update_ingest_status(
             ingest_file_id,
-            "failed_zero_hands",
+            ingest_status,
             {"parse_quality": parsed_packet.parse_quality, "source_path": str(path)},
         )
         return IngestResult(
             ingest_file_id=ingest_file_id,
             session_id=None,
-            status="failed_zero_hands",
+            status=ingest_status,
             parsed_hand_count=0,
             evidence_count=0,
             memory_count=0,
