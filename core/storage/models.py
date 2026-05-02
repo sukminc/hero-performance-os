@@ -37,6 +37,23 @@ class SessionRecord:
 
 
 @dataclass(slots=True)
+class TournamentResultRecord:
+    id: str
+    player_id: str
+    tournament_id: str
+    source_ingest_file_id: str
+    site: str
+    title: str | None = None
+    started_at: str | None = None
+    buy_in: str | None = None
+    player_count: int | None = None
+    prize_pool: str | None = None
+    finish_place: str | None = None
+    total_received: str | None = None
+    result_payload: dict[str, Any] = field(default_factory=dict)
+
+
+@dataclass(slots=True)
 class HandRecord:
     id: str
     session_id: str
@@ -94,3 +111,47 @@ class OperatorReviewRecord:
     notes: str | None = None
     review_payload: dict[str, Any] = field(default_factory=dict)
     created_at: datetime | None = None
+
+
+@dataclass(slots=True)
+class UserAccountRecord:
+    id: str
+    auth_provider: str
+    auth_provider_user_id: str
+    email: str | None = None
+    status: str = "active"
+    account_metadata: dict[str, Any] = field(default_factory=dict)
+
+
+@dataclass(slots=True)
+class UserPlayerAccessRecord:
+    id: str
+    user_account_id: str
+    player_id: str
+    access_role: str
+    status: str = "active"
+    granted_by_user_account_id: str | None = None
+    granted_reason: str | None = None
+    access_metadata: dict[str, Any] = field(default_factory=dict)
+
+
+@dataclass(slots=True)
+class UserGlobalRoleRecord:
+    id: str
+    user_account_id: str
+    role: str
+    status: str = "active"
+    granted_by_user_account_id: str | None = None
+    role_metadata: dict[str, Any] = field(default_factory=dict)
+
+
+@dataclass(slots=True)
+class DemoApplicationRecord:
+    id: str
+    name: str
+    email: str
+    games: str
+    help_goal: str
+    status: str = "new"
+    source: str = "public_demo_apply"
+    application_metadata: dict[str, Any] = field(default_factory=dict)

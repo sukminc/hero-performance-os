@@ -17,7 +17,14 @@ if str(ROOT) not in sys.path:
 from core.ingest.file_ingest import ingest_gg_file
 from core.memory.memory_updater import update_memory_from_session_evidence
 from core.parsing.gg_parser import parse_gg_text_file
-from core.storage.models import IngestFileRecord, MemoryItemRecord, OperatorReviewRecord, SessionEvidenceRecord, SessionRecord
+from core.storage.models import (
+    IngestFileRecord,
+    MemoryItemRecord,
+    OperatorReviewRecord,
+    SessionEvidenceRecord,
+    SessionRecord,
+    TournamentResultRecord,
+)
 from core.surfaces.command_center import build_command_center_payload
 from core.surfaces.memory_graph import build_memory_graph_payload
 from core.surfaces.session_lab import build_session_lab_payload
@@ -32,6 +39,7 @@ class InMemoryV2Repository:
         self.ingest_files: dict[str, dict[str, Any]] = {}
         self.sessions: dict[str, dict[str, Any]] = {}
         self.hands: list[dict[str, Any]] = []
+        self.tournament_results: dict[tuple[str, str], dict[str, Any]] = {}
         self.session_evidence: list[dict[str, Any]] = []
         self.memory_items: dict[tuple[str, str, str], dict[str, Any]] = {}
         self.operator_reviews: list[dict[str, Any]] = []
@@ -44,6 +52,10 @@ class InMemoryV2Repository:
     def get_ingest_file_by_hash(self, file_hash: str) -> dict[str, Any] | None:
         matches = [row for row in self.ingest_files.values() if row["file_hash"] == file_hash]
         return deepcopy(matches[-1]) if matches else None
+
+    def get_ingest_file_by_id(self, ingest_file_id: str) -> dict[str, Any] | None:
+        ingest_file = self.ingest_files.get(ingest_file_id)
+        return deepcopy(ingest_file) if ingest_file else None
 
     def create_ingest_file(self, record: IngestFileRecord) -> None:
         self.ingest_files[record.id] = deepcopy(asdict(record))
@@ -60,6 +72,15 @@ class InMemoryV2Repository:
         session = self.sessions.get(session_id)
         return deepcopy(session) if session else None
 
+    def fetch_session_by_tournament_id(self, player_id: str, tournament_id: str) -> dict[str, Any] | None:
+        matches = [
+            row
+            for row in self.sessions.values()
+            if row["player_id"] == player_id and str((row.get("session_metadata") or {}).get("tournament_id") or "") == tournament_id
+        ]
+        matches.sort(key=lambda row: int(row.get("hand_count") or 0), reverse=True)
+        return deepcopy(matches[0]) if matches else None
+
     def fetch_latest_session_id(self, player_id: str) -> str | None:
         matches = [row for row in self.sessions.values() if row["player_id"] == player_id]
         return matches[-1]["id"] if matches else None
@@ -71,6 +92,18 @@ class InMemoryV2Repository:
     def fetch_hands_for_session(self, session_id: str, limit: int = 20) -> list[dict[str, Any]]:
         matches = [row for row in self.hands if row["session_id"] == session_id]
         return deepcopy(matches[:limit])
+
+    def upsert_tournament_result(self, record: TournamentResultRecord) -> None:
+        self.tournament_results[(record.player_id, record.tournament_id)] = deepcopy(asdict(record))
+
+    def get_tournament_result(self, player_id: str, tournament_id: str) -> dict[str, Any] | None:
+        result = self.tournament_results.get((player_id, tournament_id))
+        return deepcopy(result) if result else None
+
+    def fetch_tournament_results(self, player_id: str, limit: int = 20) -> list[dict[str, Any]]:
+        results = [row for (owner, _), row in self.tournament_results.items() if owner == player_id]
+        results.sort(key=lambda row: str(row.get("started_at") or ""), reverse=True)
+        return deepcopy(results[:limit])
 
     def create_session_evidence(self, evidence_rows: list[SessionEvidenceRecord]) -> None:
         for row in evidence_rows:
@@ -201,6 +234,34 @@ def main() -> None:
             raise AssertionError("Expected session evidence to be generated")
         if result.memory_count <= 0:
             raise AssertionError("Expected memory items to be generated")
+
+        summary_only = tmpdir / "GG20260424 - Tournament #6408385 - Mini Thursday Throwdown 25 [Bounty].txt"
+        summary_only.write_text(
+            "\n".join(
+                [
+                    "Tournament #6408385, Mini Thursday Throwdown $25 [Bounty], Hold'em No Limit",
+                    "Buy-in: $11.8+$1.2+$12",
+                    "406 Players",
+                    "Total Prize Pool: $9,662.8",
+                    "Tournament started 2026/04/23 20:05:00 ",
+                    "2nd : Hero, $1,098.28",
+                    "You finished the tournament in 2nd place.",
+                    "You received a total of $1,098.28.",
+                    "",
+                ]
+            ),
+            encoding="utf-8",
+        )
+        summary_result = ingest_gg_file(summary_only, repository, HERO_PLAYER_ID)
+        if summary_result.status != "skipped_summary_only":
+            raise AssertionError("Expected official tournament summary to stay summary-only for hand parsing")
+        official_result = repository.get_tournament_result(HERO_PLAYER_ID, "6408385")
+        if not official_result:
+            raise AssertionError("Expected summary-only ingest to persist official tournament result")
+        if official_result["finish_place"] != "2nd place":
+            raise AssertionError("Expected official finish place to parse from GG summary")
+        if official_result["total_received"] != "$1,098.28":
+            raise AssertionError("Expected official received amount to parse from GG summary")
 
         session_id = result.session_id
         if not session_id:

@@ -1,30 +1,19 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useActionState } from "react";
+import { submitDemoApplication, type DemoApplyState } from "./demo-apply/actions";
 
 type DemoApplyFormProps = {
   compact?: boolean;
 };
 
+const initialState: DemoApplyState = {
+  ok: false,
+  message: "",
+};
+
 export function DemoApplyForm({ compact = false }: DemoApplyFormProps) {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [games, setGames] = useState("");
-  const [help, setHelp] = useState("");
-  const [submitted, setSubmitted] = useState(false);
-
-  const canSubmit = useMemo(() => {
-    return name.trim() && email.trim() && games.trim() && help.trim();
-  }, [name, email, games, help]);
-
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    if (!canSubmit) {
-      return;
-    }
-
-    setSubmitted(true);
-  }
+  const [state, formAction, isPending] = useActionState(submitDemoApplication, initialState);
 
   return (
     <section className={`apply-shell ${compact ? "compact" : ""}`} id="apply">
@@ -42,27 +31,29 @@ export function DemoApplyForm({ compact = false }: DemoApplyFormProps) {
       </div>
 
       <div className="apply-panel">
-        {submitted ? (
+        {state.ok ? (
           <div className="success-card">
             <p className="eyebrow">Request Sent</p>
             <h3>You&apos;re on the list.</h3>
             <p className="subtle">
-              Thanks. I&apos;ll use this to screen early demo users and follow up with the best-fit GG Poker Ontario players.
+              {state.message}
             </p>
+            {state.applicationId ? <p className="subtle">Application ID: {state.applicationId}</p> : null}
           </div>
         ) : (
-          <form className={`apply-form ${compact ? "compact-grid" : ""}`} onSubmit={handleSubmit}>
-            <input value={name} onChange={(event) => setName(event.target.value)} placeholder="Name" />
-            <input value={email} onChange={(event) => setEmail(event.target.value)} placeholder="Email" />
-            <input value={games} onChange={(event) => setGames(event.target.value)} placeholder="Games / buy-ins" />
+          <form className={`apply-form ${compact ? "compact-grid" : ""}`} action={formAction}>
+            <input name="name" required placeholder="Name" />
+            <input name="email" required type="email" placeholder="Email" />
+            <input name="games" required placeholder="Games / buy-ins" />
             <textarea
-              value={help}
-              onChange={(event) => setHelp(event.target.value)}
+              name="help"
+              required
               placeholder="What do you want help with most?"
               rows={4}
             />
-            <button className="cta button-reset apply-submit" type="submit" disabled={!canSubmit}>
-              Request Demo
+            {state.message ? <p className="form-error">{state.message}</p> : null}
+            <button className="cta button-reset apply-submit" type="submit" disabled={isPending}>
+              {isPending ? "Sending..." : "Request Demo"}
             </button>
           </form>
         )}

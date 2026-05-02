@@ -1,8 +1,9 @@
 import Link from "next/link";
 import { DemoApplyForm } from "./demo-apply-form";
+import { isDevLoginEnabled } from "@/lib/auth/dev-mode";
 
 export default function LandingPage() {
-  const devLoginEnabled = process.env.OPB_ENABLE_DEV_LOGIN === "1";
+  const devLoginEnabled = isDevLoginEnabled();
 
   return (
     <main className="shell landing-shell">

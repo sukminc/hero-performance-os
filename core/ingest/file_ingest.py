@@ -12,7 +12,7 @@ from core.memory.memory_updater import update_memory_from_session_evidence
 from core.parsing.gg_parser import parse_gg_text_file
 from core.parsing.hand_normalizer import normalize_hands
 from core.parsing.session_builder import build_session_record
-from core.storage.models import IngestFileRecord
+from core.storage.models import IngestFileRecord, TournamentResultRecord
 from core.storage.repositories import V2Repository
 
 
@@ -32,6 +32,37 @@ def _now() -> datetime:
     return datetime.now(timezone.utc)
 
 
+def _summary_result_record(
+    *,
+    player_id: str,
+    ingest_file_id: str,
+    metadata: dict,
+) -> TournamentResultRecord | None:
+    tournament_id = str(metadata.get("tournament_id") or "").strip()
+    if not tournament_id:
+        return None
+    return TournamentResultRecord(
+        id=f"tournament-result-{uuid4()}",
+        player_id=player_id,
+        tournament_id=tournament_id,
+        source_ingest_file_id=ingest_file_id,
+        site="gg",
+        title=str(metadata.get("title") or "").strip() or None,
+        started_at=str(metadata.get("tournament_started_at") or "").strip() or None,
+        buy_in=str(metadata.get("buy-in") or "").strip() or None,
+        player_count=int(metadata["player_count"]) if metadata.get("player_count") is not None else None,
+        prize_pool=str(metadata.get("total prize pool") or "").strip() or None,
+        finish_place=str(metadata.get("finish_place") or "").strip() or None,
+        total_received=str(metadata.get("total_received") or "").strip() or None,
+        result_payload={
+            "source": "gg_tournament_summary",
+            "summary_format": bool(metadata.get("summary_format")),
+            "hero_result_line": metadata.get("hero_result_line"),
+            "raw_metadata": metadata,
+        },
+    )
+
+
 def ingest_gg_file(path: Path, repository: V2Repository, player_id: str) -> IngestResult:
     repository.ensure_schema()
     file_hash = compute_file_hash(path)
@@ -40,6 +71,15 @@ def ingest_gg_file(path: Path, repository: V2Repository, player_id: str) -> Inge
 
     if duplicate_of_file_id:
         existing = repository.get_ingest_file_by_id(duplicate_of_file_id)
+        if existing and str(existing.get("status") or "") == "skipped_summary_only":
+            parsed_packet = parse_gg_text_file(path)
+            official_result = _summary_result_record(
+                player_id=player_id,
+                ingest_file_id=str(existing.get("id") or duplicate_of_file_id),
+                metadata=parsed_packet.metadata,
+            )
+            if official_result is not None:
+                repository.upsert_tournament_result(official_result)
         return IngestResult(
             ingest_file_id=ingest_file_id,
             session_id=None,
@@ -68,10 +108,21 @@ def ingest_gg_file(path: Path, repository: V2Repository, player_id: str) -> Inge
     if not parsed_packet.hands:
         parse_mode = parsed_packet.parse_quality.get("parser_mode")
         ingest_status = "skipped_summary_only" if parse_mode == "tournament_summary_only" else "failed_zero_hands"
+        official_result = _summary_result_record(
+            player_id=player_id,
+            ingest_file_id=ingest_file_id,
+            metadata=parsed_packet.metadata,
+        )
+        if official_result is not None and ingest_status == "skipped_summary_only":
+            repository.upsert_tournament_result(official_result)
         repository.update_ingest_status(
             ingest_file_id,
             ingest_status,
-            {"parse_quality": parsed_packet.parse_quality, "source_path": str(path)},
+            {
+                "parse_quality": parsed_packet.parse_quality,
+                "source_path": str(path),
+                "official_tournament_result_id": official_result.id if official_result else None,
+            },
         )
         return IngestResult(
             ingest_file_id=ingest_file_id,

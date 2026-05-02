@@ -34,7 +34,10 @@ export type UploadCoverageSummary = {
   }>;
 };
 
-export async function getLatestUploadStatuses(limit = 5): Promise<UploadStatusRow[]> {
+export async function getLatestUploadStatuses(playerId: string | null, limit = 5): Promise<UploadStatusRow[]> {
+  if (!playerId) {
+    return [];
+  }
   try {
     const { stdout } = await execFileAsync(
       "python3",
@@ -44,7 +47,7 @@ export async function getLatestUploadStatuses(limit = 5): Promise<UploadStatusRo
           "import sqlite3, os, json",
           "conn = sqlite3.connect(os.environ['SQLITE_DB_PATH'])",
           "conn.row_factory = sqlite3.Row",
-          `rows = conn.execute(\"select id, original_filename, status, uploaded_at, raw_metadata from ingest_files order by uploaded_at desc limit ${limit}\").fetchall()`,
+          `rows = conn.execute(\"select id, original_filename, status, uploaded_at, raw_metadata from ingest_files where player_id = ? order by uploaded_at desc limit ${limit}\", (${JSON.stringify(playerId)},)).fetchall()`,
           "print(json.dumps([dict(r) for r in rows]))"
         ].join("; ")
       ],
@@ -63,7 +66,10 @@ export async function getLatestUploadStatuses(limit = 5): Promise<UploadStatusRo
   }
 }
 
-export async function getUploadCoverageSummary(): Promise<UploadCoverageSummary | null> {
+export async function getUploadCoverageSummary(playerId: string | null): Promise<UploadCoverageSummary | null> {
+  if (!playerId) {
+    return null;
+  }
   try {
     const { stdout } = await execFileAsync(
       "python3",
@@ -73,7 +79,10 @@ export async function getUploadCoverageSummary(): Promise<UploadCoverageSummary 
           "import sqlite3, os, json",
           "conn = sqlite3.connect(os.environ['SQLITE_DB_PATH'])",
           "conn.row_factory = sqlite3.Row",
-          "payload = {'totalSessions': conn.execute(\"select count(*) from sessions\").fetchone()[0], 'totalHands': conn.execute(\"select count(*) from hands\").fetchone()[0], 'totalMemoryItems': conn.execute(\"select count(*) from memory_items\").fetchone()[0], 'firstSessionAt': conn.execute(\"select min(started_at) from sessions\").fetchone()[0], 'lastSessionAt': conn.execute(\"select max(started_at) from sessions\").fetchone()[0], 'firstUploadAt': conn.execute(\"select min(uploaded_at) from ingest_files\").fetchone()[0], 'lastUploadAt': conn.execute(\"select max(uploaded_at) from ingest_files\").fetchone()[0], 'latestFiles': [dict(r) for r in conn.execute(\"select original_filename, uploaded_at from ingest_files order by uploaded_at desc limit 5\").fetchall()], 'latestIngestedFiles': [dict(r) for r in conn.execute(\"select original_filename, uploaded_at from ingest_files where status = 'ingested' order by uploaded_at desc limit 5\").fetchall()], 'latestSummaryOnlyFiles': [dict(r) for r in conn.execute(\"select original_filename, uploaded_at from ingest_files where status = 'skipped_summary_only' order by uploaded_at desc limit 5\").fetchall()]}",
+          `player_id = ${JSON.stringify(playerId)}`,
+          "session_ids = [r[0] for r in conn.execute(\"select id from sessions where player_id = ?\", (player_id,)).fetchall()]",
+          "hand_count = conn.execute(\"select count(*) from hands where session_id in (select id from sessions where player_id = ?)\", (player_id,)).fetchone()[0]",
+          "payload = {'totalSessions': conn.execute(\"select count(*) from sessions where player_id = ?\", (player_id,)).fetchone()[0], 'totalHands': hand_count, 'totalMemoryItems': conn.execute(\"select count(*) from memory_items where player_id = ?\", (player_id,)).fetchone()[0], 'firstSessionAt': conn.execute(\"select min(started_at) from sessions where player_id = ?\", (player_id,)).fetchone()[0], 'lastSessionAt': conn.execute(\"select max(started_at) from sessions where player_id = ?\", (player_id,)).fetchone()[0], 'firstUploadAt': conn.execute(\"select min(uploaded_at) from ingest_files where player_id = ?\", (player_id,)).fetchone()[0], 'lastUploadAt': conn.execute(\"select max(uploaded_at) from ingest_files where player_id = ?\", (player_id,)).fetchone()[0], 'latestFiles': [dict(r) for r in conn.execute(\"select original_filename, uploaded_at from ingest_files where player_id = ? order by uploaded_at desc limit 5\", (player_id,)).fetchall()], 'latestIngestedFiles': [dict(r) for r in conn.execute(\"select original_filename, uploaded_at from ingest_files where player_id = ? and status = 'ingested' order by uploaded_at desc limit 5\", (player_id,)).fetchall()], 'latestSummaryOnlyFiles': [dict(r) for r in conn.execute(\"select original_filename, uploaded_at from ingest_files where player_id = ? and status = 'skipped_summary_only' order by uploaded_at desc limit 5\", (player_id,)).fetchall()]}",
           "print(json.dumps(payload))"
         ].join("; ")
       ],

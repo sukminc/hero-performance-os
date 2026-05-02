@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
+import { isDevLoginEnabled } from "@/lib/auth/dev-mode";
 
 export async function GET(request: NextRequest) {
-  if (process.env.OPB_ENABLE_DEV_LOGIN !== "1") {
+  if (!isDevLoginEnabled()) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
 
@@ -11,12 +12,6 @@ export async function GET(request: NextRequest) {
   const response = NextResponse.redirect(new URL(next, request.url));
 
   response.cookies.set("sb-auth-token", `dev-${role}-session`, {
-    httpOnly: true,
-    sameSite: "lax",
-    path: "/"
-  });
-
-  response.cookies.set("opb_role", role, {
     httpOnly: true,
     sameSite: "lax",
     path: "/"

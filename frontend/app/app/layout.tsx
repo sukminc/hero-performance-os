@@ -1,10 +1,10 @@
 import Link from "next/link";
-import { cookies } from "next/headers";
 import { APP_NAV } from "@/lib/auth/config";
+import { getViewerContext } from "@/lib/viewer/session";
 
 export default async function AppLayout({ children }: { children: React.ReactNode }) {
-  const cookieStore = await cookies();
-  const role = cookieStore.get("opb_role")?.value || "user";
+  const viewer = await getViewerContext();
+  const role = viewer.role;
 
   return (
     <main className="shell app-layout">

@@ -1,8 +1,13 @@
 import { getLatestUploadStatuses, getUploadCoverageSummary } from "@/lib/uploads/status";
+import { getViewerContext } from "@/lib/viewer/session";
 import { UploadForm } from "./upload-form";
 
 export default async function UploadPage() {
-  const [latestUploads, coverage] = await Promise.all([getLatestUploadStatuses(), getUploadCoverageSummary()]);
+  const viewer = await getViewerContext();
+  const [latestUploads, coverage] = await Promise.all([
+    getLatestUploadStatuses(viewer.playerId),
+    getUploadCoverageSummary(viewer.playerId),
+  ]);
   const latestIngested = coverage?.latestIngestedFiles || [];
   const latestSummaryOnly = coverage?.latestSummaryOnlyFiles || [];
 
@@ -12,8 +17,8 @@ export default async function UploadPage() {
         <p className="eyebrow">Upload</p>
         <h1>Restore Hero corpus, inspect the cutoff date, then dump the next packet batch.</h1>
         <p className="subtle">
-          The canonical Hero corpus is now the baseline. Use this dropbox-style intake to add everything after the current
-          cutoff date in one shot, including large zip archives from new exports.
+          This upload path writes to the player model resolved from your login. Unmapped users stay blank until operator
+          provisioning grants explicit player access.
         </p>
         <p className="subtle">
           Tournament result summaries without actual hand blocks are treated as summary-only exports and skipped instead of

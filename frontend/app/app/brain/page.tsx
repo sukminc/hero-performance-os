@@ -7,6 +7,8 @@ export default async function BrainPage() {
   const brain = await getPublicBrainSurface(viewer.playerId);
   const plan = await getCurrentPlan();
   const longitudinal = brain?.longitudinal_update;
+  const latestResultContext = brain?.latest_result_context;
+  const resultSignals = brain?.tournament_result_signals;
 
   return (
     <>
@@ -18,6 +20,16 @@ export default async function BrainPage() {
             ? "This login is not mapped to a player ownership record yet, so Brain stays hidden instead of exposing another player's cumulative interpretation."
             : "This public Brain view is intentionally compact. It keeps the cumulative player interpretation while hiding operator-only tooling and correction layers."}
         </p>
+      </section>
+      <section className="grid two">
+        <article className="page-card">
+          <h3>Top Result Signals</h3>
+          <pre className="status-pre">{JSON.stringify(resultSignals || {}, null, 2)}</pre>
+        </article>
+        <article className="page-card">
+          <h3>Latest Result Context</h3>
+          <pre className="status-pre">{JSON.stringify(latestResultContext || {}, null, 2)}</pre>
+        </article>
       </section>
       <section className="grid two">
         <article className="page-card">

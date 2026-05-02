@@ -119,6 +119,32 @@ Selection criteria:
 - `processing_jobs`
 - `subscription_status`
 
+## Canonical Ownership Truth Refinement
+
+For the current Hero-first private beta, the smallest durable ownership/access layer should be:
+
+- `auth.user_accounts`
+- `auth.user_player_access`
+- `auth.user_global_roles`
+
+Why this refinement exists:
+
+- `auth.user_accounts` gives a stable local identity layer without moving poker truth into hosted auth
+- `auth.user_player_access` becomes the canonical bridge from authenticated user to `player_id`
+- `auth.user_global_roles` keeps operator/admin route access separate from player ownership
+
+Recommended first implementation rules:
+
+- one public beta user maps to one primary player through one active `owner` row
+- operator/admin route access requires one active `operator_admin` global role
+- operator/admin player inspection still uses explicit `user_player_access` rows
+- unmapped authenticated users must remain safely unscoped
+
+See:
+
+- `docs/canonical_ownership_truth.md`
+- `docs/sql_drafts/canonical_ownership_truth.sql`
+
 ## Trust Boundary
 
 ### Hosted edge system may own

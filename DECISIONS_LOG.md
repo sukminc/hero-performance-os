@@ -99,6 +99,19 @@
 - High emotional weight events must be modeled separately from ordinary hand reviews.
 - Strategic truth and emotional/career significance must be separable.
 - Official pattern scoring must remain deterministic / structured, not pure LLM output.
+- Official GG tournament summary exports are canonical result-context inputs and should be persisted separately from hand-history session evidence.
+- Big cashes / final tables are high-weight review context, but repeatable execution evidence must remain separate from run-good and result heat.
+- Big-win hand candidates must be operator-tagged before they become durable positive execution memory; tags are overlays, not mutations of raw hand/result truth.
+- AOF implementation profiling is now a first-class product surface; it compares Hero's real jam / near-jam behavior to a deterministic v1 baseline without claiming solver-grade EV truth.
+- AOF v2 separates short-stack decision leaks from cooler/runout outcomes; standard lost all-ins must not become correction targets unless hand selection or situation logic deviated from baseline.
+- AOF leak candidate counts are not sufficient product insight; operator surfaces should lead with prioritized readable leak cards, next adjustment, and cooler guardrails while keeping raw evidence inspectable.
+- The 13x13 hand matrix is part of Hero Baseline and should expose actual BB hand-class performance with clear warnings that it is not solver EV or all-in adjusted EV.
+- Hero Baseline must compare raw BB result against stack-normalized realization because identical BB wins/losses have different meaning at 10bb versus 125bb starting stacks.
+- Hero Baseline hand-class performance counts must use played pots by default; dealt counts are exposure context and must not drive leak/study conclusions.
+- Hero Baseline played-pot counts must exclude forced antes, blind posts, and big-blind free-check paths unless Hero voluntarily calls, raises, or jams.
+- Hero Baseline played-pot samples should be decomposed by preflop entry type before concluding that a hand class is overplayed.
+- Hero Baseline Matrix Analysis is now a dedicated operator surface, not only a section inside the operator dashboard.
+- Hero Baseline should surface hidden value / positive execution candidates alongside mandatory correction candidates so the product protects working patterns as well as leak fixes.
 - Repeated pattern plus real result should be treated as more important than isolated solver-style hand judgment.
 - Strategic beliefs behind repeated hand-class usage should be inspectable when the evidence supports them.
 - Spot review alone is insufficient; sessions should be interpreted as cumulative evidence.

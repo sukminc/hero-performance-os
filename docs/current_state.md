@@ -26,7 +26,7 @@ It already includes:
 
 The current active task is:
 
-- freeze the public MVP planning layer and rebase execution around productization-first phases
+- run a real Hero hand-history update check through login -> upload -> changed Today / Review / Brain outputs
 
 See:
 
@@ -83,7 +83,15 @@ Use this repo to tighten the actual usefulness of the system:
 - summary-only GG tournament export files are now classified as skipped summary artifacts rather than hard ingest failures
 - the public shell viewer scope is no longer hardcoded to Hero; auth identity now has to map to an allowed player scope before Today / Review / Brain / dashboard data resolves
 - unmapped authenticated users now get safe blank states instead of silently reading Hero data through the public shell
+- operator authorization no longer depends on the old `opb_role` display cookie; operator-only routing now resolves through auth-aware viewer context on the server
+- canonical auth/access tables now exist for user accounts, user-player access, and global operator roles
+- Hero/operator env mapping now bootstraps canonical auth rows, and viewer resolution now prefers canonical ownership truth before falling back
 - the public landing page now explains the product in cold-traffic language, shows sample Today / Review / Brain output, and lets GG Poker Ontario players apply for demo access immediately
+- V2 smoke coverage is restored after the repository contract changed for duplicate ingest lookup
+- demo applications are now captured durably in canonical storage instead of only flipping local UI state
+- operator can now review captured demo applications and provision approved users into explicit owner access
+- upload status and ingest now resolve through the logged-in viewer player id instead of defaulting to Hero
+- the next proof point is a real Hero hand-history update check through login, upload, and changed output surfaces
 
 ## Core active areas
 

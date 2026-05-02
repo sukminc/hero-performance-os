@@ -1,7 +1,8 @@
 import Link from "next/link";
+import { isDevLoginEnabled } from "@/lib/auth/dev-mode";
 
 export default function LoginPage() {
-  const devLoginEnabled = process.env.OPB_ENABLE_DEV_LOGIN === "1";
+  const devLoginEnabled = isDevLoginEnabled();
 
   return (
     <main className="auth-wrap">

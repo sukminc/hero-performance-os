@@ -8,6 +8,7 @@ export default async function ReviewPage() {
   const plan = await getCurrentPlan();
   const session = review?.session;
   const story = review?.session_story;
+  const resultContext = review?.result_context;
 
   return (
     <>
@@ -24,9 +25,15 @@ export default async function ReviewPage() {
       </section>
       <section className="grid two">
         <article className="page-card">
+          <h3>Official Result Context</h3>
+          <pre className="status-pre">{JSON.stringify(resultContext || {}, null, 2)}</pre>
+        </article>
+        <article className="page-card">
           <h3>Session Story</h3>
           <pre className="status-pre">{JSON.stringify(story || {}, null, 2)}</pre>
         </article>
+      </section>
+      <section className="grid two">
         <article className="page-card">
           <h3>Interpretation Readiness</h3>
           <pre className="status-pre">{JSON.stringify(review?.interpretation_groundwork || {}, null, 2)}</pre>

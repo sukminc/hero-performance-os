@@ -8,6 +8,11 @@ from typing import Any
 
 SUMMARY_HEADER_RE = re.compile(r"^Tournament #(?P<tournament_id>[^,]+), (?P<title>.+)$")
 TOURNAMENT_SUMMARY_STARTED_RE = re.compile(r"^Tournament started (?P<started_at>.+)$")
+TOURNAMENT_SUMMARY_FINISH_RE = re.compile(r"^You finished the tournament in (?P<finish_place>.+)\.$")
+TOURNAMENT_SUMMARY_RECEIVED_RE = re.compile(r"^You received a total of (?P<total_received>.+)\.$")
+TOURNAMENT_SUMMARY_HERO_RESULT_RE = re.compile(
+    r"^(?P<place>\d+(?:st|nd|rd|th))\s*:\s*Hero,\s*(?P<received>.+)$"
+)
 HAND_HEADER_RE = re.compile(
     r"^Poker Hand #(?P<hand_ref>[^:]+):\s+Tournament #(?P<tournament_id>[^,]+),\s+"
     r"(?P<label>.+?)\s+-\s+Level\s*(?P<level>\d+)\("
@@ -44,6 +49,13 @@ class ParsedSessionPacket:
 def parse_amount(value: str) -> int:
     digits = re.sub(r"[^\d-]", "", value)
     return int(digits) if digits else 0
+
+
+def _parse_player_count(value: str) -> int | None:
+    match = re.search(r"(?P<count>\d[\d,]*)\s+Players", value)
+    if not match:
+        return None
+    return parse_amount(match.group("count"))
 
 
 def parse_hand_header(header: str) -> dict[str, Any]:
@@ -83,6 +95,27 @@ def _parse_metadata(lines: list[str]) -> tuple[dict[str, Any], int]:
         started_match = TOURNAMENT_SUMMARY_STARTED_RE.match(line.strip())
         if started_match:
             metadata.setdefault("tournament_started_at", started_match.group("started_at").strip())
+            metadata.setdefault("summary_format", True)
+            continue
+        finish_match = TOURNAMENT_SUMMARY_FINISH_RE.match(line.strip())
+        if finish_match:
+            metadata.setdefault("finish_place", finish_match.group("finish_place").strip())
+            metadata.setdefault("summary_format", True)
+            continue
+        received_match = TOURNAMENT_SUMMARY_RECEIVED_RE.match(line.strip())
+        if received_match:
+            metadata.setdefault("total_received", received_match.group("total_received").strip())
+            metadata.setdefault("summary_format", True)
+            continue
+        hero_result_match = TOURNAMENT_SUMMARY_HERO_RESULT_RE.match(line.strip())
+        if hero_result_match:
+            metadata.setdefault("hero_result_line", line.strip())
+            metadata.setdefault("total_received", hero_result_match.group("received").strip())
+            metadata.setdefault("summary_format", True)
+            continue
+        player_count = _parse_player_count(line.strip())
+        if player_count is not None:
+            metadata.setdefault("player_count", player_count)
             metadata.setdefault("summary_format", True)
             continue
         if line and ":" in line:

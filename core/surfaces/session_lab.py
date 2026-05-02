@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from typing import Any
+import re
 
 from core.storage.repositories import V2Repository
 from core.surfaces.interpretation_groundwork import build_review_brain_readiness
@@ -23,6 +24,56 @@ def _evidence_direction_summary(evidence: list[dict[str, Any]]) -> dict[str, int
     return summary
 
 
+def _money_amount(value: str | None) -> float:
+    if not value:
+        return 0.0
+    match = re.search(r"\$([0-9,]+(?:\.[0-9]+)?)", value)
+    return float(match.group(1).replace(",", "")) if match else 0.0
+
+
+def _place_rank(value: str | None) -> int | None:
+    if not value:
+        return None
+    match = re.search(r"\d+", value)
+    return int(match.group(0)) if match else None
+
+
+def _build_result_context(repository: V2Repository, player_id: str, session: dict[str, Any]) -> dict[str, Any]:
+    metadata = session.get("session_metadata") or {}
+    tournament_id = str(metadata.get("tournament_id") or "").strip()
+    official_result = repository.get_tournament_result(player_id, tournament_id) if tournament_id else None
+    if not official_result:
+        return {
+            "tournament_id": tournament_id or None,
+            "official_result": None,
+            "result_signal": "missing_official_summary",
+            "interpretation": "No official GG tournament summary is linked yet, so result-size interpretation stays unavailable.",
+        }
+
+    finish_rank = _place_rank(str(official_result.get("finish_place") or ""))
+    received_amount = _money_amount(str(official_result.get("total_received") or ""))
+    is_final_table = finish_rank is not None and finish_rank <= 9
+    is_big_cash = received_amount >= 500
+    signal = "deep_run_big_cash" if is_final_table and is_big_cash else "deep_run" if is_final_table else "cash_result"
+
+    return {
+        "tournament_id": tournament_id,
+        "official_result": official_result,
+        "result_signal": signal,
+        "interpretation": (
+            "Official GG summary confirms a final-table big cash. Treat this as a high-weight positive session, "
+            "but separate execution review from run-good/result heat."
+            if signal == "deep_run_big_cash"
+            else "Official GG summary is linked; use it as result context while keeping strategic evidence separate."
+        ),
+        "review_prompts": [
+            "Identify which decisions were repeatable positive execution, not just rewarded outcomes.",
+            "Mark obvious run-good spots separately so the product preserves confidence without over-crediting variance.",
+            "Promote only repeatable patterns into Hero memory; keep one-off heat as session context.",
+        ],
+    }
+
+
 def build_session_lab_payload(
     repository: V2Repository,
     player_id: str,
@@ -35,6 +86,7 @@ def build_session_lab_payload(
     evidence = repository.fetch_session_evidence(session_id)
     hands = repository.fetch_hands_for_session(session_id, limit=25)
     memory_updates = repository.fetch_memory_items_for_session(player_id, session_id)
+    result_context = _build_result_context(repository, player_id, session)
 
     parse_quality = dict(session.get("confidence_summary") or {})
     evidence_counts: dict[str, int] = {}
@@ -102,6 +154,7 @@ def build_session_lab_payload(
             "by_direction": evidence_direction_summary,
         },
         "session_story": session_story,
+        "result_context": result_context,
         "interpretation_groundwork": interpretation_groundwork,
         "review_hooks": {
             "session_evidence": build_review_hook(

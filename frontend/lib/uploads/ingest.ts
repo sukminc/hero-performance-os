@@ -72,8 +72,8 @@ async function expandZipArchive(zipPath: string, sourceName: string): Promise<st
   return extractedFiles;
 }
 
-async function ingestPacketFile(packetPath: string, sourceName: string): Promise<SingleIngestResult> {
-  const { stdout } = await execFileAsync("python3", [resolveIngestScriptPath(), "--file", packetPath], {
+async function ingestPacketFile(packetPath: string, sourceName: string, playerId: string): Promise<SingleIngestResult> {
+  const { stdout } = await execFileAsync("python3", [resolveIngestScriptPath(), "--file", packetPath, "--player-id", playerId], {
     cwd: resolveRepoRoot(),
     env: {
       ...process.env,
@@ -98,7 +98,11 @@ async function ingestPacketFile(packetPath: string, sourceName: string): Promise
   };
 }
 
-export async function ingestUploadedFiles(files: File[]): Promise<UploadActionResult> {
+export async function ingestUploadedFiles(files: File[], playerId: string | null): Promise<UploadActionResult> {
+  if (!playerId) {
+    return { ok: false, message: "This login is not mapped to a player ownership record yet." };
+  }
+
   const validFiles = files.filter((file) => file && file.size > 0);
   if (!validFiles.length) {
     return { ok: false, message: "Attach one or more GG packet files or zip archives." };
@@ -131,7 +135,7 @@ export async function ingestUploadedFiles(files: File[]): Promise<UploadActionRe
     const results: SingleIngestResult[] = [];
     for (const item of packetPaths) {
       try {
-        results.push(await ingestPacketFile(item.packetPath, item.sourceName));
+        results.push(await ingestPacketFile(item.packetPath, item.sourceName, playerId));
       } catch (error) {
         results.push({
           sourceName: item.sourceName,

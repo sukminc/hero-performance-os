@@ -2,58 +2,61 @@
 
 ## Title
 
-Connect viewer ownership to real auth identity so the public shell enforces player data boundaries.
+Run a real Hero hand-history update check through login, upload, and changed Today / Review / Brain outputs.
 
 ## Why this is the active task
 
-The public shell cannot be trusted if a logged-in user can still resolve Hero data through a hardcoded viewer scope.
-Before broader beta movement, the shell must:
+Viewer ownership hardening, durable demo capture, and operator provisioning now exist.
+Upload now resolves through the logged-in viewer player id.
+The next blocker is proving the complete Hero workflow with real post-cutoff hand histories.
+Before broader private beta movement, Hero needs to verify:
 
-- resolve the current auth identity,
-- map that identity to the allowed player scope,
-- and hide Today / Review / Brain / dashboard detail when ownership is unresolved.
+- login works
+- upload writes to the correct player model
+- new hand histories update the canonical corpus
+- Today / Review / Brain change in a believable way
 
 If this is not built:
 
-- public shell access remains mostly cosmetic
-- Hero-vs-operator trust boundaries stay weak
-- private beta credibility will still be lower than the backend truth deserves
+- private beta confidence remains theoretical
+- upload/result feedback cannot be trusted end-to-end
+- Hero cannot decide the next product direction from real post-cutoff data
 
 ## Scope
 
 In scope:
 
-- resolve viewer identity from current auth state
-- map Hero ownership through explicit env-driven auth identity matching
-- make public surfaces use viewer player scope instead of hardcoded Hero player id
-- surface blank/safe states when ownership is unresolved
+- run the app locally
+- login as Hero/operator dev user where appropriate
+- upload a real GG hand-history batch provided by Hero
+- compare pre/post corpus and surface outputs
+- report whether Today / Review / Brain changed and whether the change is believable
 - refresh handoff docs
 - write report
 
 Out of scope:
 
-- full multi-player account model
-- full Supabase role/claim system
+- broad frontend polish
 - checkout or entitlement expansion
-- non-Hero onboarding beyond safe blank-state handling
+- solver/GTO exactness claims
+- live in-hand advice
 
 ## Target outcome
 
 At the end of this task:
 
-- Hero should see Hero data only when the auth identity is mapped to Hero ownership
-- unmapped users should not see Hero dashboard / Today / Review / Brain data
-- operator/admin should still be able to inspect deeper detail
+- Hero should know whether the login -> upload -> changed output loop works on real new hand histories
+- the pre/post surface change should be captured in a report
+- any parsing/output credibility gaps should become the next task queue
 - another chat should still be able to resume from the canonical handoff docs immediately
 
 ## First files to inspect
 
-- `app/dev_server.py`
-- `frontend/lib/viewer/`
-- `frontend/lib/auth/`
+- `frontend/app/app/upload/`
+- `frontend/lib/uploads/`
 - `frontend/lib/public-surfaces/`
-- `frontend/app/app/`
-- `frontend/app/operator/`
+- `core/ingest/`
+- `core/parsing/`
 - `docs/current_state.md`
 - `docs/next_up.md`
 
@@ -61,17 +64,17 @@ At the end of this task:
 
 Minimum:
 
-- viewer scope is not hardcoded to Hero anymore
-- unmapped users do not resolve Hero surfaces
-- mapped Hero access still works
+- upload uses the logged-in viewer player id
+- new hand histories ingest or fail honestly
+- Today / Review / Brain can be compared before and after upload
 - handoff is clear
 
 ## Completion rule
 
 This task is complete only when:
 
-1. the restored corpus is live in the current repo
-2. public surfaces read through resolved viewer ownership instead of a hardcoded Hero id
-3. unmapped auth identities get safe blank states rather than Hero data
-4. a report is written
-5. the canonical handoff path remains accurate
+1. a real upload run is performed or blocked on missing files explicitly
+2. pre/post corpus state is captured
+3. pre/post Today / Review / Brain changes are captured
+4. parsing/output credibility gaps are documented
+5. a report is written

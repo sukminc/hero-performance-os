@@ -1,6 +1,7 @@
 "use server";
 
 import { ingestUploadedFiles, type UploadActionResult } from "@/lib/uploads/ingest";
+import { getViewerContext } from "@/lib/viewer/session";
 
 export async function uploadGgPacket(
   _prevState: UploadActionResult | null,
@@ -14,5 +15,6 @@ export async function uploadGgPacket(
     return { ok: false, message: "No file was attached." };
   }
 
-  return ingestUploadedFiles(files);
+  const viewer = await getViewerContext();
+  return ingestUploadedFiles(files, viewer.playerId);
 }

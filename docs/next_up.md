@@ -8,18 +8,19 @@ Phase 6: Hero-first private beta hardening
 
 ### Title
 
-Move operator authorization off display cookies and define the smallest canonical user-to-player ownership record.
+Run a real Hero hand-history update check through login, upload, and changed outputs.
 
 ### Objective
 
-Replace the remaining cosmetic operator gate with verified auth-derived authorization, then define the minimal durable ownership truth needed for post-Hero beta users.
+After durable lead capture and provisioning exist, prove the actual Hero workflow against real post-cutoff GG hand histories.
 
 ### Scope
 
-- derive operator authorization from verified auth identity rather than the `opb_role` display cookie alone
-- define the smallest canonical user-to-player ownership record for future beta users
-- preserve the new safe blank-state behavior for unmapped authenticated users
-- document the env-vs-canonical ownership transition path
+- run local app login path
+- upload a real GG hand-history batch from Hero
+- compare corpus counts and latest upload readout
+- compare Today / Review / Brain before and after
+- document parser/output credibility gaps
 
 ### Out of scope
 
@@ -29,14 +30,14 @@ Replace the remaining cosmetic operator gate with verified auth-derived authoriz
 
 ### Validation target
 
-- operator route access no longer depends on a display-only cookie
-- Hero ownership mapping remains intact
-- the next step toward non-Hero beta users is explicit in repo truth
+- upload is tied to viewer ownership
+- real hand histories ingest or fail honestly
+- output deltas are captured clearly
 
 ### Report destination
 
-- `reports/00_foundation/060-operator-auth-and-ownership-truth-report.md`
+- `reports/00_foundation/069-hero-real-hand-history-update-check-report.md`
 
 ## After that
 
-1. use beta findings to decide whether checkout is ready
+1. choose the next backend credibility gap from the real upload results
