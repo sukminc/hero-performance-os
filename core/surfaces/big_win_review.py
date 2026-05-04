@@ -5,7 +5,8 @@ from datetime import datetime, timezone
 from typing import Any
 from uuid import uuid4
 
-from core.storage.models import OperatorReviewRecord
+from core.memory.memory_queries import build_memory_key
+from core.storage.models import MemoryItemRecord, OperatorReviewRecord
 from core.storage.repositories import V2Repository
 
 ALLOWED_TAGS = {"repeatable_execution", "run_good", "cooler", "unclear"}
@@ -149,6 +150,109 @@ def build_big_win_review_payload(
     }
 
 
+def promote_repeatable_execution_memory(
+    repository: V2Repository,
+    *,
+    player_id: str,
+    tournament_id: str = "6408385",
+) -> dict[str, Any]:
+    payload = build_big_win_review_payload(repository, player_id, tournament_id=tournament_id, limit=1000)
+    if not payload.get("ready"):
+        return {
+            "ok": False,
+            "promoted": False,
+            "reason": "Big Win Review is not ready; official result and linked hand-history session are required.",
+            "tournament_id": tournament_id,
+        }
+
+    repeatable_spots = [
+        spot
+        for spot in payload.get("candidate_spots", [])
+        if (spot.get("operator_tag") or {}).get("decision") == "repeatable_execution"
+    ]
+    if not repeatable_spots:
+        return {
+            "ok": True,
+            "promoted": False,
+            "reason": "No repeatable_execution operator tags found.",
+            "tournament_id": tournament_id,
+            "reviewed_repeatable_count": 0,
+        }
+
+    session = payload.get("session") or {}
+    tournament = payload.get("tournament_result") or {}
+    title = tournament.get("title") or f"tournament {tournament_id}"
+    memory_type = "positive_execution_memory"
+    entity_scope = "deep_run"
+    entity_key = f"repeatable_execution:{tournament_id}"
+    memory_key = build_memory_key(memory_type, entity_scope, entity_key)
+    source_hand_ids = [str(spot.get("spot_id")) for spot in repeatable_spots if spot.get("spot_id")]
+    review_ids = [
+        str((spot.get("operator_tag") or {}).get("review_payload", {}).get("source_review_id") or "")
+        for spot in repeatable_spots
+    ]
+    review_ids = [review_id for review_id in review_ids if review_id]
+    confidence = round(min(0.92, 0.74 + 0.04 * len(repeatable_spots)), 2)
+    summary = (
+        f"Operator approved {len(repeatable_spots)} repeatable execution spot"
+        f"{'' if len(repeatable_spots) == 1 else 's'} from {title}. "
+        "Preserve this as positive execution memory while keeping result heat separate from strategic truth."
+    )
+    record = MemoryItemRecord(
+        id=str((repository.get_memory_item(player_id, memory_type, memory_key) or {}).get("id") or f"memory-{uuid4()}"),
+        player_id=player_id,
+        memory_type=memory_type,
+        memory_key=memory_key,
+        status="baseline",
+        first_seen_session_id=str(session.get("id") or "") or None,
+        last_seen_session_id=str(session.get("id") or "") or None,
+        evidence_count=len(repeatable_spots),
+        confidence=confidence,
+        summary=summary,
+        suggested_adjustment="Keep the approved deep-run execution pattern available without over-learning the tournament result.",
+        memory_payload={
+            "entity_scope": entity_scope,
+            "entity_key": entity_key,
+            "direction": "positive",
+            "maturity": "operator_reviewed",
+            "source": "big_win_review_operator_tags",
+            "tournament_id": tournament_id,
+            "tournament_title": title,
+            "official_result": {
+                "finish_place": tournament.get("finish_place"),
+                "total_received": tournament.get("total_received"),
+                "player_count": tournament.get("player_count"),
+            },
+            "reviewed_repeatable_count": len(repeatable_spots),
+            "source_hand_ids": source_hand_ids,
+            "source_review_ids": review_ids,
+            "spot_summaries": [
+                {
+                    "spot_id": spot.get("spot_id"),
+                    "hand_external_id": spot.get("hand_external_id"),
+                    "score": spot.get("score"),
+                    "reasons": spot.get("reasons") or [],
+                    "effective_stack_bb": spot.get("effective_stack_bb"),
+                    "hero_actions": spot.get("hero_actions") or [],
+                    "operator_notes": (spot.get("operator_tag") or {}).get("notes"),
+                }
+                for spot in repeatable_spots[:12]
+            ],
+            "truth_policy": "operator_approved_positive_execution_memory_separate_from_result_heat",
+        },
+    )
+    repository.upsert_memory_item(record)
+    return {
+        "ok": True,
+        "promoted": True,
+        "memory_id": record.id,
+        "memory_key": record.memory_key,
+        "reviewed_repeatable_count": len(repeatable_spots),
+        "status": record.status,
+        "confidence": record.confidence,
+    }
+
+
 def tag_big_win_spot(
     repository: V2Repository,
     *,
@@ -159,8 +263,9 @@ def tag_big_win_spot(
     normalized = decision.strip().lower()
     if normalized not in ALLOWED_TAGS:
         raise ValueError(f"Unsupported deep-run tag: {decision}")
+    review_id = f"review-{uuid4()}"
     record = OperatorReviewRecord(
-        id=f"review-{uuid4()}",
+        id=review_id,
         target_type="deep_run_spot",
         target_id=spot_id,
         review_type="deep_run_spot_tag",
@@ -169,6 +274,7 @@ def tag_big_win_spot(
         review_payload={
             "truth_policy": "operator_tag_overlay_separate_from_source_hand_truth",
             "allowed_tags": sorted(ALLOWED_TAGS),
+            "source_review_id": review_id,
         },
         created_at=datetime.now(timezone.utc),
     )

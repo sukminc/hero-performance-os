@@ -18,6 +18,7 @@ from core.ingest.file_ingest import ingest_gg_file
 from core.memory.memory_updater import update_memory_from_session_evidence
 from core.parsing.gg_parser import parse_gg_text_file
 from core.storage.models import (
+    HandRecord,
     IngestFileRecord,
     MemoryItemRecord,
     OperatorReviewRecord,
@@ -25,6 +26,7 @@ from core.storage.models import (
     SessionRecord,
     TournamentResultRecord,
 )
+from core.surfaces.big_win_review import promote_repeatable_execution_memory, tag_big_win_spot
 from core.surfaces.command_center import build_command_center_payload
 from core.surfaces.memory_graph import build_memory_graph_payload
 from core.surfaces.session_lab import build_session_lab_payload
@@ -389,6 +391,78 @@ def main() -> None:
         negative_key = "style_drift_candidate:style:passive_blind_compliance"
         if repeated_positive_lookup[("style_drift_candidate", negative_key)]["status"] != "active":
             raise AssertionError("Expected repeated negative drift memory to promote to active")
+
+        deep_run_session = SessionRecord(
+            id="session-big-win",
+            player_id=HERO_PLAYER_ID,
+            ingest_file_id=result.ingest_file_id,
+            session_key="big-win-session",
+            site="GG",
+            parse_status="parsed",
+            hand_count=1,
+            started_at="2026-04-24T01:41:00",
+            buyin_band="Mini Thursday Throwdown $25 [Bounty]",
+            session_metadata={"tournament_id": "6408385"},
+        )
+        repository.create_session(deep_run_session)
+        repository.upsert_tournament_result(
+            TournamentResultRecord(
+                id="tournament-result-big-win",
+                player_id=HERO_PLAYER_ID,
+                tournament_id="6408385",
+                source_ingest_file_id=result.ingest_file_id,
+                site="GG",
+                title="Mini Thursday Throwdown $25 [Bounty]",
+                finish_place="2nd",
+                total_received="$1,098.28",
+                player_count=406,
+            )
+        )
+        repository.create_hands(
+            [
+                HandRecord(
+                    id="hand-big-win-repeatable",
+                    session_id="session-big-win",
+                    hand_external_id="TM101480097",
+                    tournament_id="6408385",
+                    hero_position="button",
+                    effective_stack_bb=14.2,
+                    phase_proxy="late",
+                    bounty_proxy="pko",
+                    players_to_flop=2,
+                    board_texture_summary="A-high dry board",
+                    result_summary={"hero_actions": ["Hero: raises 80,000", "Hero: collected 160,000"], "result": "won"},
+                    raw_payload={
+                        "block": [
+                            "Seat 1: Hero (320,000 in chips)",
+                            "Seat 2: Villain (180,000 in chips)",
+                            "Dealt to Hero [As Kd]",
+                            "Hero: raises 80,000",
+                            "Villain: folds",
+                            "Hero collected 160,000 from pot",
+                        ]
+                    },
+                )
+            ]
+        )
+        tag_big_win_spot(
+            repository,
+            spot_id="hand-big-win-repeatable",
+            decision="repeatable_execution",
+            notes="Kept pressure with premium blocker hand in a high-weight run.",
+        )
+        promotion = promote_repeatable_execution_memory(repository, player_id=HERO_PLAYER_ID, tournament_id="6408385")
+        if not promotion.get("promoted"):
+            raise AssertionError(f"Expected repeatable execution tag to promote positive memory, got {promotion}")
+        promoted_memory = repository.get_memory_item(
+            HERO_PLAYER_ID,
+            "positive_execution_memory",
+            "positive_execution_memory:deep_run:repeatable_execution:6408385",
+        )
+        if not promoted_memory or promoted_memory["status"] != "baseline":
+            raise AssertionError("Expected reviewed repeatable execution to become baseline positive memory")
+        if promoted_memory["memory_payload"].get("direction") != "positive":
+            raise AssertionError("Promoted deep-run memory must remain positive direction")
 
         repository.create_operator_review(
             OperatorReviewRecord(

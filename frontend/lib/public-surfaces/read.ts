@@ -7,6 +7,7 @@ const execFileAsync = promisify(execFile);
 async function runPython(code: string) {
   const { stdout } = await execFileAsync("python3", ["-c", code], {
     cwd: resolveRepoRoot(),
+    maxBuffer: 64 * 1024 * 1024,
     env: {
       ...process.env,
       PYTHONPATH: resolveRepoRoot(),

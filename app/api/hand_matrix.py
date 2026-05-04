@@ -36,6 +36,12 @@ class HandObservation:
     faced_action_preflop: bool
     preflop_entry_type: str
     prior_raise_count: int
+    faced_all_in_preflop: bool
+    open_size_bb: float | None
+    hero_3bet_size_bb: float | None
+    hero_3bet_to_open_ratio: float | None
+    faced_4bet_after_3bet: bool
+    folded_to_4bet_after_3bet: bool
 
 
 def _parse_json(raw: str | None, default: Any) -> Any:
@@ -157,9 +163,10 @@ def _extract_hero_position(block: list[str]) -> str | None:
     return labels[relative_index]
 
 
-def _extract_preflop_pattern(block: list[str]) -> tuple[str | None, bool, str, int]:
+def _extract_preflop_pattern(block: list[str]) -> tuple[str | None, bool, str, int, bool]:
     in_preflop = False
     faced_action = False
+    faced_all_in = False
     prior_raise_count = 0
     prior_call_count = 0
     for row in block:
@@ -178,21 +185,39 @@ def _extract_preflop_pattern(block: list[str]) -> tuple[str | None, bool, str, i
                 action = "call"
             elif " raises " in row:
                 action = "jam" if "all-in" in row else "raise"
-            return (action, faced_action, _entry_type(action, prior_raise_count, prior_call_count), prior_raise_count)
+            return (
+                action,
+                faced_action,
+                _entry_type(action, prior_raise_count, prior_call_count, faced_all_in),
+                prior_raise_count,
+                faced_all_in,
+            )
         if ":" in row and any(token in row for token in (" raises ", " calls ", " bets ")):
             actor = row.split(":", 1)[0]
             if actor != "Hero":
                 faced_action = True
+                if "all-in" in row or "all in" in row:
+                    faced_all_in = True
                 if " raises " in row:
                     prior_raise_count += 1
                 elif " calls " in row:
                     prior_call_count += 1
-    return (None, faced_action, "missing_hero_action", prior_raise_count)
+    return (None, faced_action, "missing_hero_action", prior_raise_count, faced_all_in)
 
 
-def _entry_type(action: str | None, prior_raise_count: int, prior_call_count: int) -> str:
+def _entry_type(action: str | None, prior_raise_count: int, prior_call_count: int, faced_all_in: bool = False) -> str:
     if action == "fold":
-        return "fold"
+        if faced_all_in:
+            return "fold_vs_jam"
+        if prior_raise_count == 0 and prior_call_count == 0:
+            return "open_fold"
+        if prior_raise_count == 0:
+            return "fold_vs_limp"
+        if prior_raise_count == 1:
+            return "fold_vs_open"
+        if prior_raise_count == 2:
+            return "fold_vs_3bet"
+        return "fold_vs_4bet_plus"
     if action == "call":
         if prior_raise_count == 0 and prior_call_count == 0:
             return "open_limp_or_complete"
@@ -215,6 +240,60 @@ def _entry_type(action: str | None, prior_raise_count: int, prior_call_count: in
             return f"four_bet{suffix}"
         return f"five_bet_plus{suffix}"
     return "other"
+
+
+def _raise_to_amount(row: str) -> int | None:
+    match = re.search(r" raises [\d,]+ to ([\d,]+)", row)
+    if not match:
+        return None
+    return _parse_int(match.group(1))
+
+
+def _extract_3bet_line_features(block: list[str], big_blind: float) -> dict[str, Any]:
+    in_preflop = False
+    prior_raise_to: int | None = None
+    prior_raise_count = 0
+    hero_3bet_to: int | None = None
+    hero_made_3bet = False
+    faced_4bet = False
+    folded_to_4bet = False
+
+    for row in block:
+        if row == "*** HOLE CARDS ***":
+            in_preflop = True
+            continue
+        if not in_preflop:
+            continue
+        if row.startswith("*** FLOP ***") or row.startswith("*** SHOWDOWN ***") or row.startswith("*** SUMMARY ***"):
+            break
+        if ":" not in row:
+            continue
+
+        actor, action = row.split(":", 1)
+        if " raises " in row:
+            raise_to = _raise_to_amount(row)
+            if actor != "Hero" and not hero_made_3bet:
+                prior_raise_count += 1
+                if raise_to is not None:
+                    prior_raise_to = raise_to
+            elif actor == "Hero" and prior_raise_count == 1:
+                hero_made_3bet = True
+                hero_3bet_to = raise_to
+            elif actor != "Hero" and hero_made_3bet:
+                faced_4bet = True
+        elif actor == "Hero" and hero_made_3bet and faced_4bet and " folds" in action:
+            folded_to_4bet = True
+
+    open_size_bb = round(prior_raise_to / big_blind, 2) if prior_raise_to and big_blind else None
+    hero_3bet_size_bb = round(hero_3bet_to / big_blind, 2) if hero_3bet_to and big_blind else None
+    ratio = round(hero_3bet_to / prior_raise_to, 2) if hero_3bet_to and prior_raise_to else None
+    return {
+        "open_size_bb": open_size_bb,
+        "hero_3bet_size_bb": hero_3bet_size_bb,
+        "hero_3bet_to_open_ratio": ratio,
+        "faced_4bet_after_3bet": faced_4bet,
+        "folded_to_4bet_after_3bet": folded_to_4bet,
+    }
 
 
 def _compute_bb_net(block: list[str], big_blind: float) -> float:
@@ -363,6 +442,35 @@ def _stack_metrics(rows: list[HandObservation]) -> dict[str, Any]:
     }
 
 
+def _three_bet_line_summary(rows: list[HandObservation]) -> dict[str, Any]:
+    three_bet_rows = [item for item in rows if item.preflop_entry_type in {"three_bet", "three_bet_jam"}]
+    two_x_open_rows = [
+        item
+        for item in three_bet_rows
+        if item.open_size_bb is not None and 1.8 <= item.open_size_bb <= 2.3
+    ]
+    six_x_3bet_rows = [
+        item
+        for item in two_x_open_rows
+        if item.hero_3bet_size_bb is not None and 5.5 <= item.hero_3bet_size_bb <= 6.8
+    ]
+    faced_4bet_rows = [item for item in three_bet_rows if item.faced_4bet_after_3bet]
+    folded_to_4bet_rows = [item for item in three_bet_rows if item.folded_to_4bet_after_3bet]
+    return {
+        "three_bet_count": len(three_bet_rows),
+        "three_bet_vs_2x_open_count": len(two_x_open_rows),
+        "three_bet_6x_vs_2x_open_count": len(six_x_3bet_rows),
+        "faced_4bet_after_3bet_count": len(faced_4bet_rows),
+        "folded_to_4bet_after_3bet_count": len(folded_to_4bet_rows),
+        "fold_to_4bet_after_3bet_rate": round(len(folded_to_4bet_rows) / len(faced_4bet_rows), 4) if faced_4bet_rows else None,
+        "avg_open_size_bb_when_3bet": _avg([item.open_size_bb for item in three_bet_rows if item.open_size_bb is not None]),
+        "avg_3bet_size_bb": _avg([item.hero_3bet_size_bb for item in three_bet_rows if item.hero_3bet_size_bb is not None]),
+        "avg_3bet_to_open_ratio": _avg([
+            item.hero_3bet_to_open_ratio for item in three_bet_rows if item.hero_3bet_to_open_ratio is not None
+        ]),
+    }
+
+
 def _is_played_pot(item: HandObservation) -> bool:
     # Forced antes/blinds and BB free-check paths are not voluntary hand-class decisions.
     return item.first_preflop_action in {"call", "raise", "jam"}
@@ -396,6 +504,35 @@ def _action_depth_summary(rows: list[HandObservation]) -> dict[str, Any]:
     }
 
 
+def _fold_exposure_breakdown(rows: list[HandObservation]) -> list[dict[str, Any]]:
+    fold_rows = [item for item in rows if item.first_preflop_action == "fold"]
+    by_entry: dict[str, list[HandObservation]] = defaultdict(list)
+    for item in fold_rows:
+        by_entry[item.preflop_entry_type].append(item)
+    return [
+        {
+            "entry_type": entry_type,
+            "count": len(items),
+            "positions": _count_attr(items, "position"),
+            "formats": _count_attr(items, "format_tag"),
+            "faced_all_in_count": sum(1 for item in items if item.faced_all_in_preflop),
+            "examples": [
+                {
+                    "hand_id": item.hand_id,
+                    "started_at": item.started_at,
+                    "position": item.position,
+                    "format_tag": item.format_tag,
+                    "stack_bb": round(item.stack_bb, 2) if item.stack_bb is not None else None,
+                    "faced_all_in_preflop": item.faced_all_in_preflop,
+                    "hero_summary": item.hero_summary,
+                }
+                for item in sorted(items, key=lambda row: (row.started_at or "", row.hand_id), reverse=True)[:4]
+            ],
+        }
+        for entry_type, items in sorted(by_entry.items(), key=lambda item: (-len(item[1]), item[0]))
+    ]
+
+
 def _action_depth_breakdown(rows: list[HandObservation]) -> list[dict[str, Any]]:
     by_entry: dict[str, list[HandObservation]] = defaultdict(list)
     for item in rows:
@@ -409,6 +546,7 @@ def _action_depth_breakdown(rows: list[HandObservation]) -> list[dict[str, Any]]
             **_stack_metrics(items),
             "positions": _count_attr(items, "position"),
             "formats": _count_attr(items, "format_tag"),
+            "three_bet_line_summary": _three_bet_line_summary(items),
             "examples": [
                 {
                     "hand_id": item.hand_id,
@@ -417,6 +555,11 @@ def _action_depth_breakdown(rows: list[HandObservation]) -> list[dict[str, Any]]
                     "format_tag": item.format_tag,
                     "stack_bb": round(item.stack_bb, 2) if item.stack_bb is not None else None,
                     "bb_net": round(item.bb_net, 2),
+                    "open_size_bb": item.open_size_bb,
+                    "hero_3bet_size_bb": item.hero_3bet_size_bb,
+                    "hero_3bet_to_open_ratio": item.hero_3bet_to_open_ratio,
+                    "faced_4bet_after_3bet": item.faced_4bet_after_3bet,
+                    "folded_to_4bet_after_3bet": item.folded_to_4bet_after_3bet,
                     "hero_summary": item.hero_summary,
                 }
                 for item in sorted(items, key=lambda row: (row.started_at or "", row.hand_id), reverse=True)[:4]
@@ -444,6 +587,7 @@ def _cell_action_breakdown(rows: list[HandObservation], limit: int = 5) -> list[
             "played_count": item["played_count"],
             "avg_bb_per_hand": item["avg_bb_per_hand"],
             "avg_stack_realization_pct": item.get("avg_stack_realization_pct"),
+            "three_bet_line_summary": item.get("three_bet_line_summary"),
         }
         for item in _action_depth_breakdown(rows)[:limit]
     ]
@@ -799,7 +943,14 @@ def _fetch_observations(
         if stack_filter == "gt25" and not (stack_bb is not None and stack_bb > 25):
             continue
 
-        first_preflop_action, faced_action_preflop, preflop_entry_type, prior_raise_count = _extract_preflop_pattern(block)
+        (
+            first_preflop_action,
+            faced_action_preflop,
+            preflop_entry_type,
+            prior_raise_count,
+            faced_all_in_preflop,
+        ) = _extract_preflop_pattern(block)
+        three_bet_features = _extract_3bet_line_features(block, big_blind)
 
         rows.append(
             HandObservation(
@@ -818,6 +969,12 @@ def _fetch_observations(
                 faced_action_preflop=faced_action_preflop,
                 preflop_entry_type=preflop_entry_type,
                 prior_raise_count=prior_raise_count,
+                faced_all_in_preflop=faced_all_in_preflop,
+                open_size_bb=three_bet_features["open_size_bb"],
+                hero_3bet_size_bb=three_bet_features["hero_3bet_size_bb"],
+                hero_3bet_to_open_ratio=three_bet_features["hero_3bet_to_open_ratio"],
+                faced_4bet_after_3bet=three_bet_features["faced_4bet_after_3bet"],
+                folded_to_4bet_after_3bet=three_bet_features["folded_to_4bet_after_3bet"],
             )
         )
     return rows
@@ -935,6 +1092,8 @@ def get_hand_matrix_payload(
         matrix_cells[hand_class] = {
             "hand_class": hand_class,
             "dealt_count": dealt_count,
+            "non_played_count": max(dealt_count - hands_played, 0),
+            "parsed_preflop_fold_count": sum(1 for item in hand_rows if item.first_preflop_action == "fold"),
             "played_count": hands_played,
             "hands_played": hands_played,
             "actual_bb_net": actual_bb_net,
@@ -943,6 +1102,7 @@ def get_hand_matrix_payload(
             **_action_depth_summary(played_rows),
             "hover_action_lines": _cell_action_lines(played_rows),
             "hover_action_breakdown": _cell_action_breakdown(played_rows),
+            "fold_exposure_breakdown": _fold_exposure_breakdown(hand_rows),
             "sample_band": _sample_band(hands_played) if hands_played else "none",
             "style_tone": _cell_style(avg_bb_per_hand or 0.0) if hands_played else "empty",
             "stack_style_tone": _pct_style(stack_realization or 0.0) if hands_played else "empty",
@@ -999,12 +1159,15 @@ def get_hand_matrix_payload(
             "hand_class": resolved_selected_hand,
             "summary": {
                 "dealt_count": len(dealt_detail_rows),
+                "non_played_count": max(len(dealt_detail_rows) - len(detail_rows), 0),
+                "parsed_preflop_fold_count": sum(1 for item in dealt_detail_rows if item.first_preflop_action == "fold"),
                 "hands_played": len(detail_rows),
                 "played_count": len(detail_rows),
                 "actual_bb_net": round(sum(item.bb_net for item in detail_rows), 2),
                 "avg_bb_per_hand": round(sum(item.bb_net for item in detail_rows) / len(detail_rows), 2) if detail_rows else None,
                 **_stack_metrics(detail_rows),
                 **_action_depth_summary(detail_rows),
+                **_three_bet_line_summary(detail_rows),
                 "sample_band": _sample_band(len(detail_rows)),
                 "formats": dict(sorted((fmt, count) for fmt, count in defaultdict(int, {
                     item.format_tag: sum(1 for row in detail_rows if row.format_tag == item.format_tag)
@@ -1024,6 +1187,7 @@ def get_hand_matrix_payload(
                 for position, items in sorted(by_position_detail.items(), key=lambda pair: _position_sort_key(pair[0]))
             ],
             "action_depth_breakdown": _action_depth_breakdown(detail_rows),
+            "fold_exposure_breakdown": _fold_exposure_breakdown(dealt_detail_rows),
             "recent_examples": [
                 {
                     "hand_id": item.hand_id,

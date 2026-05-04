@@ -1,56 +1,66 @@
-# Hero Performance OS
+# OPB — One Percent Better Poker
 
-Hero Performance OS is a personal poker performance system built to improve decision quality, track drift, separate field distortion from contamination, and generate the next best adjustment before the next session.
+Post-hoc poker performance system for serious GG Poker Ontario MTT players.
+First user is Hero. Inputs are GG `.txt` session packets.
+Outputs are three surfaces: **Today**, **Review**, **Brain**.
 
-This repository is the standalone V2 codebase. It is focused on one high-signal operator-grade user flow first, not broad consumer productization.
+## Read these first
 
-## What exists now
+- [`AGENTS.md`](AGENTS.md) — operating rules for implementation agents.
+- [`STATUS.md`](STATUS.md) — current state, what's done, what's next.
+- [`DECISIONS.md`](DECISIONS.md) — durable product and architecture decisions.
+- [`PROJECT_MASTER_CONTEXT.md`](PROJECT_MASTER_CONTEXT.md), [`WORKFLOW.md`](WORKFLOW.md), and [`DECISIONS_LOG.md`](DECISIONS_LOG.md) — canonical product/workflow context.
+- [`docs/`](docs/) — reference specs, runbooks, active task packets, and planning material.
 
-- V2 storage/schema
-- V2 ingest/parsing
-- V2 evidence generation
-- V2 cumulative memory updates
-- Today surface generation and read path
-- Command Center read model
-- Session Lab read model
-- Memory Graph read model
-- thin local UI shell
-- end-to-end V2 smoke test
-
-## Fast start
-
-Read in this order:
-
-1. `docs/legacy_data_handoff.md`
-2. `docs/current_state.md`
-3. `docs/v2/reentry_start_here.md`
-4. `docs/v2/product_principles.md`
-5. `docs/v2/architecture.md`
-6. `docs/v2/mvp_big_steps.md`
-7. `docs/runbook.md`
+`STATUS.md` and `DECISIONS.md` are compact entrypoints. They do not replace the canonical context docs or the report requirement in `WORKFLOW.md`.
 
 ## Run
 
-Smoke test:
-
 ```bash
+# Backend smoke
 python3 tests/v2_smoke_tests.py
 python3 tests/legacy_corpus_tests.py
+
+# Frontend (Next.js)
+cd frontend
+npm install
+npm run dev          # http://localhost:3000
+npm run build        # build verify
 ```
 
-Thin local UI shell:
+Dev login (Hero impersonation): set `OPB_ENABLE_DEV_LOGIN=1` and visit `/auth/dev-login?role=operator`.
 
-```bash
-python3 app/dev_server.py
+## Layout
+
+```
+core/         Python engine: parsing, evidence, memory, surfaces
+app/api/      Operator-facing Python API wrappers (legacy split — see DECISIONS.md)
+frontend/     Next.js app — public surfaces + operator console
+data/         SQLite canonical store (hero_v2.sqlite3)
+docs/         Reference specs, active task packets, and runbooks
+tests/        Smoke + legacy corpus tests
 ```
 
-Then open `http://127.0.0.1:8765`.
+## Surfaces
+
+**Public** (`/app/*`):
+- `/app/today` — next-session focus and patterns being watched.
+- `/app/review` — latest session story, official tournament result, evidence breakdown.
+- `/app/brain` — long-term cumulative read, hero standard, persistent pressures, deep-run results.
+- `/app/upload` — drop GG `.txt` or `.zip` packets.
+- `/app/account` — plan and access scope.
+
+**Operator** (`/operator/*`, gated):
+- `/operator` — control room with demo applications + headline matrix preview.
+- `/operator/matrix` — Hero baseline 13×13 with click-to-pin detail.
+- `/operator/aof` — AOF analysis (short-stack decision quality).
+- `/operator/big-win` — repeatable execution review for high-weight tournaments.
 
 ## Product rule
 
-This system should answer:
+OPB answers six things over time:
 
-- what hand classes are underperforming
+- which hand classes are underperforming
 - where Hero is drifting
 - what stable strengths are holding or regressing
 - what field distortions characterize the current pool

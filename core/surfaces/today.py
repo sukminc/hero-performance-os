@@ -34,6 +34,8 @@ def _short_memory_label(item: dict) -> str:
         return f"{entity_key} leak review"
     if memory_type == "stable_strength_candidate" and entity_key == "reset_and_preservation_discipline":
         return "reset discipline"
+    if memory_type == "positive_execution_memory" and entity_key.startswith("repeatable_execution:"):
+        return "reviewed deep-run execution"
     return entity_key or memory_type
 
 
@@ -86,6 +88,8 @@ def _adjustment_label(item: dict) -> str:
         return f"Review {entity_key}"
     if memory_type == "stable_strength_candidate" and entity_key == "reset_and_preservation_discipline":
         return "Preserve reset discipline"
+    if memory_type == "positive_execution_memory" and entity_key.startswith("repeatable_execution:"):
+        return "Preserve reviewed execution"
     return memory_type.replace("_", " ")
 
 
@@ -102,6 +106,8 @@ def _adjustment_reason(item: dict) -> str:
         return f"{entity_key} has become a {maturity} leak candidate, so revisit its pre-session threshold before you sit."
     if memory_type == "stable_strength_candidate" and entity_key == "reset_and_preservation_discipline":
         return f"This strength is {maturity}, so deliberately keep the breathing/reset routine that preserved chips in prior sessions."
+    if memory_type == "positive_execution_memory" and entity_key.startswith("repeatable_execution:"):
+        return "This pattern was promoted only after operator review, so keep the execution available while avoiding result-based overconfidence."
     summary = str(item.get("summary") or "").strip()
     return summary or "Carry the strongest mature memory forward into today's play."
 

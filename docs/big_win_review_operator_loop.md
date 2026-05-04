@@ -42,6 +42,14 @@ This keeps the system safe while allowing Hero/operator review to separate repea
 
 ## Next Step
 
-Use the operator tags to create reviewed positive execution memory updates.
+Reviewed `repeatable_execution` tags can now be promoted into aggregate positive execution memory for the tournament.
+
+Promotion rules:
+
+- only `repeatable_execution` tags are eligible
+- `run_good`, `cooler`, and `unclear` remain review overlays only
+- promotion creates or updates one aggregate `positive_execution_memory` item for the tournament
+- raw hands, official result context, and operator review overlays remain unchanged
+- the memory payload preserves source spot ids, review ids where available, official result context, and operator notes
 
 That next step should require explicit tags and should not promote unreviewed big-win spots automatically.

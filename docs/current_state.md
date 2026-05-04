@@ -26,7 +26,7 @@ It already includes:
 
 The current active task is:
 
-- run a real Hero hand-history update check through login -> upload -> changed Today / Review / Brain outputs
+- cleanup after an interrupted Claude run that left a large mixed working-tree rewrite
 
 See:
 
@@ -91,12 +91,22 @@ Use this repo to tighten the actual usefulness of the system:
 - demo applications are now captured durably in canonical storage instead of only flipping local UI state
 - operator can now review captured demo applications and provision approved users into explicit owner access
 - upload status and ingest now resolve through the logged-in viewer player id instead of defaulting to Hero
-- the next proof point is a real Hero hand-history update check through login, upload, and changed output surfaces
+- the real Hero upload/update proof point produced official tournament result context and high-weight deep-run review work
+- Big Win Review and operator tagging now exist for tournament `6408385`
+- reviewed `repeatable_execution` Big Win tags can be promoted into aggregate positive execution memory without mutating hand/result truth
+- AOF v1/v2 derived analysis now has a dedicated `/operator/aof` reading surface
+- Big Win Review now has a dedicated `/operator/big-win` review and promotion surface
+- Hero Baseline Matrix Analysis now has a dedicated `/operator/matrix` page with click-to-pin hand-class detail
+- public Today / Review / Brain / dashboard / account surfaces received a humanized UI pass after previously reading like JSON/debug output
+- the next major product architecture question is whether external beta should use a FastAPI sidecar, Postgres/Node-side reads, or remain a local-only Hero tool while SQLite/Python subprocess coupling remains
 
 ## Core active areas
 
 - `core/`
 - `app/`
+- `frontend/app/app/`
+- `frontend/app/operator/`
+- `frontend/lib/public-surfaces/`
 - `tests/v2_smoke_tests.py`
 - `docs/v2/`
 - `docs/active_task.md`

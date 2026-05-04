@@ -81,6 +81,14 @@ The matrix should also surface a separate mandatory correction queue for repeate
 
 Matrix hover panels must not be clipped by parent cards. The operator page may keep a compact matrix, but the primary reading surface is now the dedicated `/operator/matrix` page where the grid, correction cards, hidden value cards, and selected-hand breakdown have room to breathe.
 
+Matrix inspection should not depend on hover. The dedicated page now supports click-to-pin hand classes so Hero can keep one or two action breakdowns open while scanning the grid or comparing nearby classes.
+
+Pinned detail should lead with a quick action-frequency visual before the table-level evidence. A small donut chart plus legend is acceptable in deep operator mode because it lets Hero see the dominant action mix at a glance while preserving the exact counts and BB / stack details underneath.
+
+Pinned detail should also expose 3bet line structure when available. In particular, Hero wants to inspect common lines such as `2x open -> 6bb 3bet`, and whether Hero later folds after facing a 4bet. These are line-sequence facts, not automatic mistake judgments.
+
+Pinned detail should also expose dealt-but-not-played fold context. Premium hands such as `TT` can be dealt far more often than they are voluntarily played, and some folds may be correct folds versus large pressure. These folds should remain exposure context unless later review proves a mistaken overfold.
+
 ## Dedicated Matrix Page
 
 `/operator/matrix` is the focused Hero Baseline reading surface.
@@ -92,6 +100,10 @@ It should organize the same deterministic payload into:
 - mandatory correction candidates,
 - hidden value / positive execution candidates,
 - 13x13 hand-class grid,
+- click-to-pin one/two hand-class detail,
+- action-frequency visual summary for pinned hand classes,
+- 3bet / 4bet-response line facts where available,
+- dealt-but-not-played fold exposure,
 - and selected-hand action breakdown.
 
 This keeps the operator dashboard from becoming the only place to read deep hand-class interpretation.

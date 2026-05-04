@@ -71,11 +71,14 @@ export async function getViewerContext() {
   const canonicalAccess = await resolveCanonicalViewerAccess(currentUserId, currentUserEmail);
 
   if (canonicalAccess?.resolved) {
+    const canSeeOperatorDepth = Boolean(canonicalAccess.can_see_operator_depth);
+    const resolvedPlayerId =
+      (canonicalAccess.player_id as string | null) || (canSeeOperatorDepth ? HERO_PLAYER_ID : null);
     return {
       role: canonicalAccess.role as ViewerRole,
       playerScope: canonicalAccess.player_scope as PlayerScope,
-      playerId: canonicalAccess.player_id as string | null,
-      canSeeOperatorDepth: Boolean(canonicalAccess.can_see_operator_depth),
+      playerId: resolvedPlayerId,
+      canSeeOperatorDepth,
       isAuthenticated: Boolean(currentUser || (devLoginEnabled && cookieStore.get("sb-auth-token"))),
       authUserId: currentUserId,
       authEmail: currentUserEmail,

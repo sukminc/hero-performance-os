@@ -20,6 +20,9 @@ def _short_label(item: dict[str, Any]) -> str:
     entity_key = _entity_key(item)
     if memory_type == "stable_strength_candidate" and entity_key == "session_survival_discipline":
         return "session survival discipline"
+    if memory_type == "positive_execution_memory" and entity_key.startswith("repeatable_execution:"):
+        tournament_id = entity_key.split(":", 1)[1]
+        return f"reviewed deep-run execution #{tournament_id}"
     if memory_type == "style_drift_candidate" and entity_key == "high_engagement_profile":
         return "high-engagement profile"
     if memory_type == "field_distortion_candidate" and entity_key == "multiway_pressure":

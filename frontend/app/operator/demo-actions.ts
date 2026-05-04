@@ -64,4 +64,25 @@ export async function tagBigWinSpot(formData: FormData) {
     ].join("; ")
   );
   revalidatePath("/operator");
+  revalidatePath("/operator/big-win");
+}
+
+export async function promoteBigWinRepeatableExecution(formData: FormData) {
+  const playerId = String(formData.get("playerId") || "");
+  const tournamentId = String(formData.get("tournamentId") || "6408385");
+  await runPython(
+    [
+      "import json",
+      "from core.storage.repositories import V2Repository",
+      "from core.surfaces.big_win_review import promote_repeatable_execution_memory",
+      "repo = V2Repository()",
+      "repo.ensure_schema()",
+      `payload = promote_repeatable_execution_memory(repo, player_id=${JSON.stringify(playerId)}, tournament_id=${JSON.stringify(tournamentId)})`,
+      "print(json.dumps(payload, default=str))",
+    ].join("; ")
+  );
+  revalidatePath("/operator");
+  revalidatePath("/operator/big-win");
+  revalidatePath("/app/today");
+  revalidatePath("/app/brain");
 }

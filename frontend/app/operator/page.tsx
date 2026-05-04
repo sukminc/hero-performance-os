@@ -39,6 +39,9 @@ export default async function OperatorPage() {
           <Link className="cta" href="/operator/matrix">
             Matrix Analysis
           </Link>
+          <Link className="secondary-cta" href="/operator/aof">
+            AOF Analysis
+          </Link>
           <Link className="secondary-cta" href="/app">
             App Shell
           </Link>
@@ -52,18 +55,18 @@ export default async function OperatorPage() {
           <p>Hand class EV, stack realization, action breakdown, leaks, and hidden value.</p>
           <strong>{baselineMatrix?.summary?.distinct_hand_classes || 0} hand classes</strong>
         </Link>
-        <article className="page-card operator-command-card">
+        <Link className="page-card operator-command-card" href="/operator/aof">
           <span className="sample-kicker">Core Surface</span>
           <h2>AOF Analysis</h2>
           <p>Short-stack decision quality with cooler protection and operator-defer guardrails.</p>
           <strong>{aofV2?.summary?.mistake_candidate_count || 0} leak candidates</strong>
-        </article>
-        <article className="page-card operator-command-card">
+        </Link>
+        <Link className="page-card operator-command-card" href="/operator/big-win">
           <span className="sample-kicker">High Weight Context</span>
           <h2>Big Win Review</h2>
           <p>Separate repeatable execution from run-good in the Mini Thursday Throwdown result.</p>
           <strong>{bigWin?.review_summary?.candidate_count || 0} spots</strong>
-        </article>
+        </Link>
       </section>
 
       <section className="page-card matrix-analysis-card operator-matrix-preview">

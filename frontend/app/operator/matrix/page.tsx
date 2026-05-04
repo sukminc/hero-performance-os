@@ -1,6 +1,9 @@
 import Link from "next/link";
 import { getHeroBaselineMatrix } from "@/lib/public-surfaces/read";
 import { getViewerContext } from "@/lib/viewer/session";
+import { MatrixPinBoard } from "./matrix-pin-board";
+
+const HERO_PLAYER_ID = "4c9d1e29-1f6b-4e5f-92da-111111111111";
 
 function formatMetric(value: unknown, suffix = "") {
   if (value === null || value === undefined) {
@@ -11,7 +14,8 @@ function formatMetric(value: unknown, suffix = "") {
 
 export default async function OperatorMatrixPage() {
   const viewer = await getViewerContext();
-  const baselineMatrix = await getHeroBaselineMatrix(viewer.playerId, "66");
+  const operatorPlayerId = viewer.playerId || (viewer.canSeeOperatorDepth ? HERO_PLAYER_ID : null);
+  const baselineMatrix = await getHeroBaselineMatrix(operatorPlayerId, "66");
   const detail = baselineMatrix?.detail;
 
   return (
@@ -59,7 +63,7 @@ export default async function OperatorMatrixPage() {
           <span>BB = actual chip result</span>
           <span>Stack % = result vs starting stack</span>
           <span>Played = voluntary call/raise/jam only</span>
-          <span>Hover a cell for action breakdown</span>
+          <span>Click cells to pin and compare action breakdowns</span>
         </div>
       </section>
 
@@ -111,65 +115,7 @@ export default async function OperatorMatrixPage() {
         </article>
       </section>
 
-      <section className="page-card standout-card matrix-analysis-card">
-        <div className="section-heading-row">
-          <div>
-            <p className="eyebrow">13x13 Matrix</p>
-            <h3>Hand-class result map</h3>
-          </div>
-          <span className="pill">played pot truth</span>
-        </div>
-        <p className="subtle">
-          The cell headline stays compact so the grid is readable. Hover over a hand to see how Hero actually played it:
-          open raise, call versus open, iso raise, 3-bet jam, and other preflop entry nodes.
-        </p>
-        <div className="baseline-matrix-grid matrix-page-grid">
-          {(baselineMatrix?.matrix_order || []).map((handClass: string) => {
-            const cell = baselineMatrix?.matrix_cells?.[handClass] || {};
-            return (
-              <div
-                className={`baseline-cell tone-${cell.style_tone || "empty"} stack-tone-${cell.stack_style_tone || "empty"}`}
-                key={handClass}
-                tabIndex={0}
-              >
-                <strong>{handClass}</strong>
-                <span>{formatMetric(cell.avg_bb_per_hand, "bb")}</span>
-                <small>{formatMetric(cell.avg_stack_realization_pct, "%")}</small>
-                <small>{cell.played_count || cell.hands_played || 0} played</small>
-                <small>{cell.dealt_count || 0} dealt</small>
-                <div className="baseline-cell-popover">
-                  <div className="popover-header">
-                    <strong>{handClass}</strong>
-                    <span>
-                      {cell.played_count || cell.hands_played || 0} played · {cell.dealt_count || 0} dealt
-                    </span>
-                  </div>
-                  {(cell.hover_action_breakdown || []).length ? (
-                    <div className="popover-table">
-                      <div className="popover-row popover-row-head">
-                        <span>Action</span>
-                        <span>Count</span>
-                        <span>BB</span>
-                        <span>Stack</span>
-                      </div>
-                      {(cell.hover_action_breakdown || []).map((row: any) => (
-                        <div className="popover-row" key={`${handClass}-${row.entry_type}`}>
-                          <span>{row.entry_type}</span>
-                          <span>{row.played_count}x</span>
-                          <span>{formatMetric(row.avg_bb_per_hand, "bb")}</span>
-                          <span>{formatMetric(row.avg_stack_realization_pct, "%")}</span>
-                        </div>
-                      ))}
-                    </div>
-                  ) : (
-                    <span>No played-pot breakdown yet.</span>
-                  )}
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </section>
+      <MatrixPinBoard baselineMatrix={baselineMatrix} />
 
       {detail ? (
         <section className="page-card matrix-analysis-card">
