@@ -4,6 +4,14 @@ Durable product and architecture decisions. Append new decisions at the top with
 
 ---
 
+## 2026-05-05
+
+**External beta production path: managed Postgres + Python backend service boundary.** For any real non-Hero beta user, canonical poker/player/session/memory truth must live in managed Postgres, and the existing Python interpretation engine should be exposed through an explicit backend service boundary such as FastAPI or a worker API. Next.js may remain the app shell, auth UI, and operator UI, but it must call this backend boundary instead of spawning `python3` during page render.
+
+**Local SQLite + Python subprocess is dev/Hero-local only.** The current `execFile("python3", ...)` + `data/hero_v2.sqlite3` pattern remains acceptable for local Hero/operator iteration and deterministic smoke testing. It is not an external-beta architecture because it is not serverless-safe, does not handle concurrent users or writes cleanly, and hides backend failures behind page-render fallbacks.
+
+**Do not rewrite derived poker logic in Node as the first production fix.** The Python parsing/evidence/memory/surface code is the strongest current backend asset. The first production migration should preserve that engine, wire it to Postgres, and expose typed read/write endpoints before considering any Node-side read-model optimization.
+
 ## Product
 
 **OPB is post-hoc, not real-time.** Inputs are GG `.txt` session packets uploaded after play. The product reads, remembers, interprets, and proposes the next adjustment. It is not RTA, not a live advisor, not a hand-history browser, not a solver clone, not a stateless review tool.
@@ -22,11 +30,11 @@ Durable product and architecture decisions. Append new decisions at the top with
 
 ## Architecture
 
-**Canonical store today is `data/hero_v2.sqlite3`.** Postgres remains the documented target for production but is not in use. Vector/RAG is secondary retrieval only, not source of truth.
+**Canonical store today is `data/hero_v2.sqlite3`.** Managed Postgres is the required canonical store before external beta. Vector/RAG is secondary retrieval only, not source of truth.
 
 **Two module trees coexist:** `core/` (engine: parsing, evidence, memory, surfaces) and `app/api/` (operator-style API wrappers). Frontend reads via both. This is debt — should converge.
 
-**Frontend → backend uses `execFile("python3", ...)`.** Each page render spawns Python and reads SQLite directly. Acceptable for single-user local dev; **not** deployable to serverless, will deadlock under concurrent writes. Production path is undecided (see STATUS.md item 4).
+**Frontend → backend uses `execFile("python3", ...)`.** Each page render spawns Python and reads SQLite directly. Acceptable for single-user local dev; **not** deployable to serverless and not acceptable for external beta. The production path is a Python backend service boundary backed by managed Postgres.
 
 **Auth provider: Supabase.** Canonical access tables (`user_accounts`, `user_player_access`, `user_global_roles`) live in the same SQLite as poker truth. Bootstrapping happens from env vars (`OPB_HERO_SUPABASE_USER_ID`, `OPB_OPERATOR_EMAILS`) on first authenticated request.
 

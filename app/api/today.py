@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 import json
 from dataclasses import asdict
+from typing import Any
 
 from core.storage.repositories import V2Repository
 from core.surfaces.today import build_today_surface
@@ -14,8 +15,9 @@ HERO_PLAYER_ID = "4c9d1e29-1f6b-4e5f-92da-111111111111"
 def get_today_payload(
     player_id: str = HERO_PLAYER_ID,
     rebuild: bool = False,
+    repository: Any | None = None,
 ) -> dict:
-    repository = V2Repository()
+    repository = repository or V2Repository()
     repository.ensure_schema()
 
     if rebuild:
@@ -74,4 +76,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

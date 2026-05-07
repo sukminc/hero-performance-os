@@ -10,7 +10,7 @@ First user is Hero (Chris). The product is operator-supervised: a small set of b
 
 ## Where we are
 
-**Backend (solid):** ingest -> evidence -> memory -> surfaces pipeline runs end-to-end. Canonical store is `data/hero_v2.sqlite3` with 553 sessions / 27,642 hands / 1,590 evidence rows / 43 memory items as of last sync. Smoke tests pass (`python3 tests/v2_smoke_tests.py`).
+**Backend (solid locally):** ingest -> evidence -> memory -> surfaces pipeline runs end-to-end. Canonical local store is `data/hero_v2.sqlite3` with 553 sessions / 27,642 hands / 1,590 evidence rows / 43 memory items as of last sync. Smoke tests pass (`python3 tests/v2_smoke_tests.py`). External beta now requires managed Postgres plus a Python backend service boundary before real non-Hero traffic.
 
 **Operator surfaces (working):** `/operator`, `/operator/matrix`, `/operator/aof`, `/operator/big-win`. Matrix has click-to-pin detail. AOF/Big Win have dedicated pages.
 
@@ -27,9 +27,10 @@ In priority order (Claude is sole engineer; no Codex):
 1. **Connect a real Supabase project** (env vars + first non-Hero account E2E test: signup → demo apply → operator approve → provision → upload → Today renders).
 2. **Keep documentation aligned** (`STATUS.md` and `DECISIONS.md` are compact entrypoints; canonical docs and reports remain live).
 3. **Remove `<pre>` JSON dumps from operator surfaces** (Matrix is fine; AOF and Big Win still have raw JSON in places — audit and humanize).
-4. **Decide architecture for prod**: every page renders by spawning `python3` to read SQLite. Won't work on Vercel/serverless and won't survive concurrent users. Options: (a) FastAPI sidecar service, (b) move to Postgres + Node-side queries, (c) commit to local-only Hero tool. **Required before any external beta user.**
-5. **Matrix operator approve/reject overlays** (was Codex's recommended Task 094). Lower priority than the above.
-6. **Today/Review/Brain content quality**: backend produces honest output, but `headline` strings can still feel templated. Once #1 is real, revisit copy with actual user feedback.
+4. **Implement the production backend boundary**: stand up a Python service/API backed by managed Postgres, then move Next.js reads/writes off direct `execFile("python3", ...)` calls. The local SQLite/subprocess path remains dev-only.
+5. **Remove `<pre>` JSON dumps from remaining operator/dev surfaces** (Matrix/AOF/Big Win Next pages are mostly humanized; old `app/ui` and upload status still expose debug-style JSON).
+6. **Matrix operator approve/reject overlays** (was Codex's recommended Task 094). Lower priority than the production boundary.
+7. **Today/Review/Brain content quality**: backend produces honest output, but `headline` strings can still feel templated. Once #1 is real, revisit copy with actual user feedback.
 
 ## Out of scope right now
 
@@ -59,6 +60,6 @@ For dev-login (Hero impersonation): set `OPB_ENABLE_DEV_LOGIN=1` and visit `/aut
 
 - `user_accounts`, `user_player_access`, `user_global_roles`, `demo_applications` tables are all empty in current SQLite.
 - No `.env` files in the repo. Auth env vars (`OPB_HERO_SUPABASE_USER_ID`, etc.) need to be configured per environment.
-- Frontend → backend coupling uses `execFile("python3", ...)`. Acceptable locally; not deployable as-is.
+- Frontend → backend coupling uses `execFile("python3", ...)`. Acceptable locally; external beta must use the Python backend service boundary backed by managed Postgres.
 - Tournament IDs hardcoded in some places (`6408385` for Big Win review default). Fine for Hero, surfaces if any other player joins.
 - Two parallel module trees: `core/surfaces/*.py` and `app/api/*.py`. Boundary unclear. Worth merging.

@@ -4,6 +4,34 @@ import { resolveRepoRoot, resolveSqlitePath } from "@/lib/uploads/runtime";
 
 const execFileAsync = promisify(execFile);
 
+function getBackendBaseUrl() {
+  return process.env.OPB_BACKEND_BASE_URL?.replace(/\/+$/, "") || "";
+}
+
+function getBackendHeaders() {
+  const token = process.env.OPB_BACKEND_API_TOKEN?.trim();
+  return token ? { Authorization: `Bearer ${token}` } : undefined;
+}
+
+function requireBackendService() {
+  return ["1", "true", "yes", "on"].includes((process.env.OPB_REQUIRE_BACKEND_SERVICE || "").toLowerCase());
+}
+
+async function getBackendJson(path: string) {
+  const baseUrl = getBackendBaseUrl();
+  if (!baseUrl) {
+    return null;
+  }
+  const response = await fetch(`${baseUrl}${path}`, {
+    cache: "no-store",
+    headers: getBackendHeaders()
+  });
+  if (!response.ok) {
+    throw new Error(`Backend service returned ${response.status}`);
+  }
+  return response.json();
+}
+
 async function runPython(code: string) {
   const { stdout } = await execFileAsync("python3", ["-c", code], {
     cwd: resolveRepoRoot(),
@@ -25,6 +53,16 @@ function toPythonLiteral(value: string) {
 export async function getPublicTodaySurface(playerId: string | null) {
   if (!playerId) {
     return null;
+  }
+  try {
+    const servicePayload = await getBackendJson(`/v1/players/${encodeURIComponent(playerId)}/today`);
+    if (servicePayload?.ok) {
+      return servicePayload.data;
+    }
+  } catch (error) {
+    if (requireBackendService()) {
+      throw error;
+    }
   }
   try {
     return await runPython(
@@ -114,11 +152,59 @@ export async function getHeroBaselineMatrix(playerId: string | null, selectedHan
     return null;
   }
   try {
+    const params = new URLSearchParams({ window: "all", selected_hand: selectedHand });
+    const servicePayload = await getBackendJson(`/v1/players/${encodeURIComponent(playerId)}/matrix?${params.toString()}`);
+    if (servicePayload?.ok) {
+      return servicePayload.data;
+    }
+  } catch (error) {
+    if (requireBackendService()) {
+      throw error;
+    }
+  }
+  try {
     return await runPython(
       [
         "import json",
         "from app.api.hand_matrix import get_hand_matrix_payload",
         `payload = get_hand_matrix_payload(player_id=${toPythonLiteral(playerId)}, window='all', selected_hand=${toPythonLiteral(selectedHand)})`,
+        "print(json.dumps(payload, default=str))"
+      ].join("; ")
+    );
+  } catch {
+    return null;
+  }
+}
+
+export async function getHeroBaselineQuiz(playerId: string | null, quizDate?: string) {
+  if (!playerId) {
+    return null;
+  }
+  const dateParam =
+    quizDate ||
+    new Intl.DateTimeFormat("en-CA", {
+      timeZone: "America/Toronto",
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+    }).format(new Date());
+  try {
+    const params = new URLSearchParams({ date: dateParam });
+    const servicePayload = await getBackendJson(`/v1/players/${encodeURIComponent(playerId)}/matrix/quiz?${params.toString()}`);
+    if (servicePayload?.ok) {
+      return servicePayload.data;
+    }
+  } catch (error) {
+    if (requireBackendService()) {
+      throw error;
+    }
+  }
+  try {
+    return await runPython(
+      [
+        "import json",
+        "from app.api.matrix_quiz import build_matrix_quiz_payload",
+        `payload = build_matrix_quiz_payload(player_id=${toPythonLiteral(playerId)}, quiz_date=${toPythonLiteral(dateParam)})`,
         "print(json.dumps(payload, default=str))"
       ].join("; ")
     );

@@ -86,3 +86,23 @@ export async function promoteBigWinRepeatableExecution(formData: FormData) {
   revalidatePath("/app/today");
   revalidatePath("/app/brain");
 }
+
+export async function logMatrixQuizAttempt(formData: FormData) {
+  const playerId = String(formData.get("playerId") || "");
+  const quizDate = String(formData.get("quizDate") || "");
+  const cardId = String(formData.get("cardId") || "");
+  const selectedGrade = String(formData.get("selectedGrade") || "");
+  const reaction = String(formData.get("reaction") || "");
+  await runPython(
+    [
+      "import json",
+      "from core.storage.repositories import V2Repository",
+      "from app.api.matrix_quiz import record_matrix_quiz_attempt",
+      "repo = V2Repository()",
+      "repo.ensure_schema()",
+      `payload = record_matrix_quiz_attempt(repo, player_id=${JSON.stringify(playerId)}, quiz_date=${JSON.stringify(quizDate)}, card_id=${JSON.stringify(cardId)}, selected_grade=${JSON.stringify(selectedGrade)}, reaction=${JSON.stringify(reaction)})`,
+      "print(json.dumps(payload, default=str))",
+    ].join("; ")
+  );
+  revalidatePath("/operator/matrix/quiz");
+}

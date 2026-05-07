@@ -1,6 +1,5 @@
 "use client";
 
-import type { CSSProperties } from "react";
 import { useMemo, useState } from "react";
 
 type ActionBreakdown = {
@@ -33,9 +32,56 @@ type MatrixCell = {
   hands_played?: number;
   dealt_count?: number;
   non_played_count?: number;
+  participation_rate_pct?: number | string | null;
+  low_participation?: boolean;
   parsed_preflop_fold_count?: number;
   hover_action_breakdown?: ActionBreakdown[];
+  position_situation_breakdown?: PositionSituationRow[];
   fold_exposure_breakdown?: FoldExposure[];
+  english_read?: HandEnglishRead;
+};
+
+type HandEnglishRead = {
+  headline?: string;
+  stance?: string;
+  one_liner?: string;
+  key_findings?: string[];
+  next_actions?: string[];
+  confidence?: string;
+  truth_policy?: string;
+};
+
+type PositionSituationRow = {
+  position?: string;
+  situation_label?: string;
+  count?: number;
+  played_count?: number;
+  performance_scored?: boolean;
+  avg_bb_per_hand?: number | string | null;
+  avg_stack_realization_pct?: number | string | null;
+  sample_band?: string;
+  stack_band_mix?: Record<string, number>;
+  format_mix?: Record<string, number>;
+  facing_state_mix?: Record<string, number>;
+  entry_type_mix?: Record<string, number>;
+  prior_limper_count_avg?: number | string | null;
+  prior_limper_count_max?: number | null;
+  avg_open_size_bb?: number | string | null;
+  avg_hero_action_size_bb?: number | string | null;
+  avg_hero_3bet_size_bb?: number | string | null;
+  examples?: Array<{
+    hand_id?: string;
+    position?: string;
+    format_tag?: string;
+    stack_bb?: number | string | null;
+    bb_net?: number | string | null;
+    entry_type?: string;
+    facing_state?: string;
+    prior_limper_count?: number;
+    open_size_bb?: number | string | null;
+    hero_preflop_size_bb?: number | string | null;
+    hero_summary?: string;
+  }>;
 };
 
 type FoldExposure = {
@@ -51,17 +97,6 @@ type BaselineMatrixPayload = {
   matrix_cells?: Record<string, MatrixCell>;
 };
 
-const ACTION_COLORS = [
-  "#5eead4",
-  "#ffd166",
-  "#ff784f",
-  "#a7f3d0",
-  "#c4b5fd",
-  "#fca5a5",
-  "#93c5fd",
-  "#fde68a",
-];
-
 function formatMetric(value: unknown, suffix = "") {
   if (value === null || value === undefined || value === "") {
     return "n/a";
@@ -73,62 +108,100 @@ function playedCount(cell: MatrixCell) {
   return cell.played_count || cell.hands_played || 0;
 }
 
+function countLabel(count: unknown, noun: string) {
+  const numeric = Number(count || 0);
+  if (numeric === 1 && noun.endsWith("s")) {
+    return `${numeric} ${noun.slice(0, -1)}`;
+  }
+  return `${numeric} ${noun}`;
+}
+
 function bestAction(cell: MatrixCell) {
+  const situationRows = cell.position_situation_breakdown || [];
+  if (situationRows.length) {
+    const sorted = [...situationRows].sort((left, right) => {
+      const leftSignal = Math.abs(Number(left.avg_stack_realization_pct ?? left.avg_bb_per_hand ?? 0));
+      const rightSignal = Math.abs(Number(right.avg_stack_realization_pct ?? right.avg_bb_per_hand ?? 0));
+      return rightSignal - leftSignal;
+    });
+    const top = sorted[0];
+    return `${top.position || "?"} · ${top.situation_label || "spot"} · ${countLabel(top.count, "spots")}`;
+  }
   const rows = cell.hover_action_breakdown || [];
   if (!rows.length) {
     return "No action breakdown yet";
   }
   const sorted = [...rows].sort((left, right) => (right.played_count || 0) - (left.played_count || 0));
   const top = sorted[0];
-  return `${top.entry_type || "unknown"} · ${top.played_count || 0}x`;
+  return `${top.entry_type || "unknown"} · ${countLabel(top.played_count, "spots")}`;
 }
 
-function hasThreeBetSignal(summary?: ThreeBetLineSummary) {
-  return Boolean(summary?.three_bet_count);
-}
-
-function percentLabel(value: unknown) {
-  if (value === null || value === undefined || value === "") {
-    return "n/a";
+function resultTone(row: PositionSituationRow) {
+  if (!row.performance_scored) {
+    return "neutral";
   }
+  const stack = Number(row.avg_stack_realization_pct ?? 0);
+  const bb = Number(row.avg_bb_per_hand ?? 0);
+  if (stack >= 5 || bb >= 1) {
+    return "value";
+  }
+  if (stack <= -5 || bb <= -1) {
+    return "danger";
+  }
+  return "neutral";
+}
+
+function metricTone(value: unknown) {
   const numeric = Number(value);
-  if (Number.isNaN(numeric)) {
-    return String(value);
+  if (!Number.isFinite(numeric) || numeric === 0) {
+    return "metric-neutral";
   }
-  return `${Math.round(numeric * 100)}%`;
+  return numeric > 0 ? "metric-positive" : "metric-negative";
 }
 
-function actionChartRows(cell: MatrixCell) {
-  const rows = (cell.hover_action_breakdown || [])
-    .filter((row) => (row.played_count || 0) > 0)
-    .map((row, index) => ({
-      label: row.entry_type || "unknown",
-      count: row.played_count || 0,
-      color: ACTION_COLORS[index % ACTION_COLORS.length],
-    }));
-  const foldCount = cell.parsed_preflop_fold_count || 0;
-  if (foldCount > 0) {
-    rows.push({
-      label: "preflop_fold",
-      count: foldCount,
-      color: "#64748b",
-    });
+function contextLine(row: PositionSituationRow) {
+  const pieces = [];
+  if (row.avg_open_size_bb !== null && row.avg_open_size_bb !== undefined) {
+    pieces.push(`faced open ${formatMetric(row.avg_open_size_bb, "x")}`);
   }
-  const total = rows.reduce((sum, row) => sum + row.count, 0);
-  return { rows, total };
+  if ((row.prior_limper_count_max || 0) > 0) {
+    const isIso = String(row.situation_label || "").toLowerCase().includes("limper");
+    pieces.push(`${row.prior_limper_count_max} ${isIso ? "limper" : "caller"} max`);
+  }
+  return pieces.filter(Boolean).join(" · ");
 }
 
-function donutBackground(rows: { count: number; color: string }[], total: number) {
-  if (!total) {
-    return "rgba(255, 255, 255, 0.08)";
+function sizeLabel(row: PositionSituationRow) {
+  if (
+    String(row.situation_label || "").toLowerCase().includes("call vs open") &&
+    row.avg_open_size_bb !== null &&
+    row.avg_open_size_bb !== undefined
+  ) {
+    return formatMetric(row.avg_open_size_bb, "x");
   }
-  let cursor = 0;
-  const stops = rows.map((row) => {
-    const start = cursor;
-    cursor += (row.count / total) * 100;
-    return `${row.color} ${start}% ${cursor}%`;
-  });
-  return `conic-gradient(${stops.join(", ")})`;
+  if (row.avg_hero_3bet_size_bb !== null && row.avg_hero_3bet_size_bb !== undefined) {
+    return formatMetric(row.avg_hero_3bet_size_bb, "x");
+  }
+  if (row.avg_hero_action_size_bb !== null && row.avg_hero_action_size_bb !== undefined) {
+    return formatMetric(row.avg_hero_action_size_bb, "x");
+  }
+  return "n/a";
+}
+
+function readTone(read?: HandEnglishRead) {
+  if (!read?.stance) {
+    return "watch";
+  }
+  if (read.stance === "low_participation" || read.stance === "blank" || read.stance === "insufficient_sample") {
+    return "muted";
+  }
+  if (read.stance === "protect_value" || read.stance === "keep_baseline") {
+    return "value";
+  }
+  if (read.stance === "review_losing_subset") {
+    return "danger";
+  }
+  return "watch";
 }
 
 export function MatrixPinBoard({ baselineMatrix }: { baselineMatrix: BaselineMatrixPayload | null }) {
@@ -162,14 +235,13 @@ export function MatrixPinBoard({ baselineMatrix }: { baselineMatrix: BaselineMat
       <section className="page-card standout-card matrix-analysis-card pinned-matrix-card">
         <div className="section-heading-row">
           <div>
-            <p className="eyebrow">13x13 Matrix</p>
-            <h3>Click a cell to pin it</h3>
+            <p className="eyebrow">Full Preflop Matrix</p>
+            <h3>13x13 actual-result baseline</h3>
           </div>
           <span className="pill">{pinnedHands.join(" vs ")}</span>
         </div>
         <p className="subtle">
-          Pin one or two hand classes to keep their action breakdown open while scanning the matrix. This makes the
-          matrix usable for repeated baseline decisions instead of quick hover checks.
+          Click a hand class to pin it. BB and stack % are actual realized results from Hero hand histories, not solver EV.
         </p>
         <div className="baseline-matrix-grid matrix-page-grid">
           {matrixOrder.map((handClass) => {
@@ -188,7 +260,7 @@ export function MatrixPinBoard({ baselineMatrix }: { baselineMatrix: BaselineMat
                 <strong>{handClass}</strong>
                 <span>{formatMetric(cell.avg_bb_per_hand, "bb")}</span>
                 <small>{formatMetric(cell.avg_stack_realization_pct, "%")}</small>
-                <small>{playedCount(cell)} played</small>
+                <small>{formatMetric(cell.participation_rate_pct, "%")} play</small>
                 <small>{cell.dealt_count || 0} dealt</small>
               </button>
             );
@@ -209,11 +281,13 @@ export function MatrixPinBoard({ baselineMatrix }: { baselineMatrix: BaselineMat
             <div className="result-hero compact-result-hero">
               <div>
                 <span className="sample-kicker">Raw BB</span>
-                <strong>{formatMetric(cell.avg_bb_per_hand, "bb")}</strong>
+                <strong className={metricTone(cell.avg_bb_per_hand)}>{formatMetric(cell.avg_bb_per_hand, "bb")}</strong>
               </div>
               <div>
                 <span className="sample-kicker">Stack %</span>
-                <strong>{formatMetric(cell.avg_stack_realization_pct, "%")}</strong>
+                <strong className={metricTone(cell.avg_stack_realization_pct)}>
+                  {formatMetric(cell.avg_stack_realization_pct, "%")}
+                </strong>
               </div>
               <div>
                 <span className="sample-kicker">Sample</span>
@@ -222,57 +296,86 @@ export function MatrixPinBoard({ baselineMatrix }: { baselineMatrix: BaselineMat
                   {cell.dealt_count || 0} dealt · {cell.non_played_count || 0} no entry
                 </p>
               </div>
+              <div>
+                <span className="sample-kicker">Play Rate</span>
+                <strong>{formatMetric(cell.participation_rate_pct, "%")}</strong>
+                <p>{cell.low_participation ? "low participation · neutralized" : "performance signal active"}</p>
+              </div>
             </div>
-            <ActionFrequencyChart cell={cell} />
-            {(cell.hover_action_breakdown || []).length ? (
-              <div className="popover-table pinned-action-table">
-                <div className="popover-row popover-row-head">
-                  <span>Action</span>
-                  <span>Count</span>
-                  <span>BB</span>
-                  <span>Stack</span>
-                </div>
-                {(cell.hover_action_breakdown || []).map((row) => (
-                  <div className="pinned-action-block" key={`${hand}-${row.entry_type}`}>
-                    <div className="popover-row">
-                      <span>{row.entry_type}</span>
-                      <span>{row.played_count || 0}x</span>
-                      <span>{formatMetric(row.avg_bb_per_hand, "bb")}</span>
-                      <span>{formatMetric(row.avg_stack_realization_pct, "%")}</span>
-                    </div>
-                    {hasThreeBetSignal(row.three_bet_line_summary) ? (
-                      <div className="three-bet-line-grid">
-                        <div>
-                          <span>3bet</span>
-                          <strong>{row.three_bet_line_summary?.three_bet_count || 0}</strong>
-                        </div>
-                        <div>
-                          <span>vs 2x open</span>
-                          <strong>{row.three_bet_line_summary?.three_bet_vs_2x_open_count || 0}</strong>
-                        </div>
-                        <div>
-                          <span>6x vs 2x</span>
-                          <strong>{row.three_bet_line_summary?.three_bet_6x_vs_2x_open_count || 0}</strong>
-                        </div>
-                        <div>
-                          <span>faced 4bet</span>
-                          <strong>{row.three_bet_line_summary?.faced_4bet_after_3bet_count || 0}</strong>
-                        </div>
-                        <div>
-                          <span>folded to 4bet</span>
-                          <strong>{row.three_bet_line_summary?.folded_to_4bet_after_3bet_count || 0}</strong>
-                        </div>
-                        <div>
-                          <span>fold rate</span>
-                          <strong>{percentLabel(row.three_bet_line_summary?.fold_to_4bet_after_3bet_rate)}</strong>
-                        </div>
-                      </div>
-                    ) : null}
+            {cell.english_read ? (
+              <div className={`hand-read-card ${readTone(cell.english_read)}`}>
+                <div className="hand-read-heading">
+                  <div>
+                    <p className="eyebrow">Hand Read</p>
+                    <h4>{cell.english_read.headline || `${hand}: actual-result read`}</h4>
                   </div>
-                ))}
+                  <span className="pill">{cell.english_read.confidence || "watch"}</span>
+                </div>
+                <p>{cell.english_read.one_liner}</p>
+                {(cell.english_read.next_actions || []).length ? (
+                  <div className="hand-read-list">
+                    <span>Next action</span>
+                    {(cell.english_read.next_actions || []).map((action, index) => (
+                      <strong key={`${hand}-next-${index}-${action}`}>{action}</strong>
+                    ))}
+                  </div>
+                ) : null}
+                {(cell.english_read.key_findings || []).length ? (
+                  <div className="hand-read-facts">
+                    {(cell.english_read.key_findings || []).slice(0, 2).map((finding, index) => (
+                      <small key={`${hand}-finding-${index}-${finding}`}>{finding}</small>
+                    ))}
+                  </div>
+                ) : null}
+              </div>
+            ) : null}
+            {!cell.low_participation && (cell.position_situation_breakdown || []).length ? (
+              <div className="position-situation-panel">
+                <div className="section-heading-row compact-heading-row">
+                  <div>
+                    <p className="eyebrow">Actual result drivers</p>
+                    <h4>Position first</h4>
+                  </div>
+                  <span className="pill">{cell.position_situation_breakdown?.length || 0} spots</span>
+                </div>
+                <div className="position-situation-table">
+                  <div className="position-situation-row position-situation-head">
+                    <span>Spot</span>
+                    <span>Count</span>
+                    <span>Avg size</span>
+                    <span>Actual BB</span>
+                    <span>Stack</span>
+                  </div>
+                  {(cell.position_situation_breakdown || []).slice(0, 5).map((row, index) => (
+                    <div
+                      className={`position-situation-row ${resultTone(row)}`}
+                      key={`${hand}-${row.position}-${row.situation_label}-${index}`}
+                    >
+                      <div>
+                        <strong>
+                          {row.position || "?"} · {row.situation_label || "Spot"}
+                        </strong>
+                        <small>{contextLine(row)}</small>
+                        {row.sample_band === "tiny" ? <em>small sample</em> : null}
+                      </div>
+                      <span>{countLabel(row.count, "spots")}</span>
+                      <span>{sizeLabel(row)}</span>
+                      <span className={row.performance_scored ? metricTone(row.avg_bb_per_hand) : ""}>
+                        {row.performance_scored ? formatMetric(row.avg_bb_per_hand, "bb") : "not scored"}
+                      </span>
+                      <span className={row.performance_scored ? metricTone(row.avg_stack_realization_pct) : ""}>
+                        {row.performance_scored ? formatMetric(row.avg_stack_realization_pct, "%") : "exposure"}
+                      </span>
+                    </div>
+                  ))}
+                </div>
               </div>
             ) : (
-              <p className="subtle">No played-pot action breakdown yet.</p>
+              <p className="subtle">
+                {cell.low_participation
+                  ? "Position/result table hidden: participation is under 5%, so this hand is exposure context rather than a core Matrix signal."
+                  : "No position/situation breakdown yet."}
+              </p>
             )}
             {(cell.fold_exposure_breakdown || []).length ? (
               <div className="fold-exposure-panel">
@@ -283,10 +386,10 @@ export function MatrixPinBoard({ baselineMatrix }: { baselineMatrix: BaselineMat
                   </div>
                   <span className="pill">{cell.parsed_preflop_fold_count || 0} parsed folds</span>
                 </div>
-                {(cell.fold_exposure_breakdown || []).map((row) => (
-                  <div className="fold-exposure-row" key={`${hand}-${row.entry_type}`}>
+                {(cell.fold_exposure_breakdown || []).map((row, index) => (
+                  <div className="fold-exposure-row" key={`${hand}-${row.entry_type}-${index}`}>
                     <strong>{row.entry_type || "fold"}</strong>
-                    <span>{row.count || 0}x</span>
+                    <span>{countLabel(row.count, "folds")}</span>
                     <small>{row.faced_all_in_count || 0} facing all-in</small>
                   </div>
                 ))}
@@ -296,93 +399,5 @@ export function MatrixPinBoard({ baselineMatrix }: { baselineMatrix: BaselineMat
         ))}
       </section>
     </>
-  );
-}
-
-function ActionFrequencyChart({ cell }: { cell: MatrixCell }) {
-  const { rows, total } = actionChartRows(cell);
-  if (!total) {
-    return null;
-  }
-  const panelStyle: CSSProperties = {
-    display: "grid",
-    gridTemplateColumns: "132px minmax(0, 1fr)",
-    gap: 16,
-    alignItems: "center",
-    justifyItems: "start",
-    margin: "18px 0 10px",
-    padding: 14,
-    border: "1px solid rgba(255, 248, 231, 0.11)",
-    borderRadius: 18,
-    background: "rgba(255, 255, 255, 0.045)",
-  };
-  const donutStyle: CSSProperties = {
-    display: "grid",
-    placeItems: "center",
-    width: 132,
-    minWidth: 132,
-    maxWidth: 132,
-    height: 132,
-    minHeight: 132,
-    maxHeight: 132,
-    borderRadius: "50%",
-    overflow: "hidden",
-    background: donutBackground(rows, total),
-    boxShadow: "inset 0 0 0 1px rgba(255, 248, 231, 0.18), 0 14px 38px rgba(0, 0, 0, 0.28)",
-  };
-  const donutInnerStyle: CSSProperties = {
-    display: "grid",
-    placeItems: "center",
-    width: 76,
-    minWidth: 76,
-    maxWidth: 76,
-    height: 76,
-    minHeight: 76,
-    maxHeight: 76,
-    borderRadius: "50%",
-    background: "rgba(7, 19, 31, 0.94)",
-    border: "1px solid rgba(255, 248, 231, 0.14)",
-  };
-  const legendStyle: CSSProperties = {
-    display: "grid",
-    gap: 8,
-    width: "100%",
-  };
-  const rowStyle: CSSProperties = {
-    display: "grid",
-    gridTemplateColumns: "12px minmax(0, 1fr) auto auto",
-    gap: 9,
-    alignItems: "center",
-    minHeight: 28,
-    width: "100%",
-  };
-  return (
-    <div className="action-frequency-panel" style={panelStyle}>
-      <div className="action-donut" style={donutStyle}>
-        <div style={donutInnerStyle}>
-          <strong style={{ color: "var(--ink-strong)", fontSize: 24, lineHeight: 1 }}>{total}</strong>
-          <span style={{ color: "var(--muted)", fontSize: 10, fontWeight: 900, textTransform: "uppercase" }}>
-            actions
-          </span>
-        </div>
-      </div>
-      <div className="action-frequency-legend" style={legendStyle}>
-        {rows.map((row) => (
-          <div className="action-frequency-row" key={row.label} style={rowStyle}>
-            <span
-              className="legend-dot"
-              style={{ background: row.color, width: 10, height: 10, borderRadius: "50%" }}
-            />
-            <strong style={{ color: "var(--ink-strong)", fontSize: 12 }}>{row.label}</strong>
-            <em style={{ color: "var(--muted)", fontSize: 12, fontStyle: "normal", fontWeight: 800 }}>
-              {row.count}x
-            </em>
-            <small style={{ color: "var(--muted)", fontSize: 12, fontWeight: 800 }}>
-              {Math.round((row.count / total) * 100)}%
-            </small>
-          </div>
-        ))}
-      </div>
-    </div>
   );
 }

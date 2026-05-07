@@ -6,31 +6,29 @@ Phase 6: Hero-first private beta hardening through operator-trust loops.
 
 ## Current checkpoint
 
-Finish cleanup after the interrupted Claude run, then review the remaining implementation changes as a coherent batch.
+Cleanup after the interrupted Claude run is complete enough to proceed. The production architecture decision is now made: external beta requires managed Postgres plus a Python backend service boundary; local SQLite plus direct Python subprocess remains dev/Hero-local only.
 
 ## Recommended next implementation packet
 
 ### Title
 
-Production architecture decision for external beta.
+Backend service boundary skeleton for external beta.
 
 ### Objective
 
-Decide how the frontend should read/write canonical poker truth before any real external beta user is added.
+Create the first narrow backend service/API boundary that lets Next.js stop spawning Python directly for one vertical slice.
 
 ### Why this is next
 
-`STATUS.md` now correctly calls out a deployment blocker: many frontend pages render by spawning `python3` and reading local SQLite. This is acceptable for local Hero/operator work, but not for Vercel/serverless or concurrent external users.
+The production architecture decision has been made, but the app still renders by spawning `python3` and reading local SQLite. The next step is to prove the new boundary with one high-value read path before migrating every surface.
 
 ### Scope
 
-- audit current frontend -> Python read paths
-- choose one production path:
-  - local-only Hero tool for now
-  - FastAPI sidecar service
-  - move canonical truth reads to Postgres / Node-side queries
-- document the decision
-- define the first implementation step
+- add a small Python HTTP service entrypoint for one surface family, preferably Today or operator Matrix
+- read through `V2Repository` with `V2_STORAGE_BACKEND=postgres` support preserved
+- add a Next.js client/server helper that can call the service when configured and fall back to local subprocess only in dev
+- keep auth/player access checks explicit at the boundary
+- document how to run the service locally
 
 ### Out of scope
 
@@ -38,16 +36,18 @@ Decide how the frontend should read/write canonical poker truth before any real 
 - billing checkout
 - solver/GTO exactness
 - live in-hand advice
-- rewriting all surfaces before the architecture decision
+- migrating every surface in one pass
+- rewriting derived poker interpretation logic in Node
 
 ### Validation target
 
-- decision is documented in `DECISIONS_LOG.md` and/or `DECISIONS.md`
-- next implementation task has a narrow task packet and report destination
+- existing backend smoke tests still pass
+- the selected frontend surface still renders locally
+- service endpoint returns the same payload shape as the existing Python function for the selected slice
 
 ### Report destination
 
-- `reports/00_foundation/096-production-architecture-decision-report.md`
+- `reports/00_foundation/097-backend-service-boundary-skeleton-report.md`
 
 ## Other candidate next tasks
 

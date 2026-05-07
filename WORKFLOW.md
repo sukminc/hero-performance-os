@@ -196,6 +196,20 @@ A task is only considered executed when:
 - validation is actually run,
 - and the exact report file is actually written.
 
+## Frontend Render QA Rule
+Frontend changes to first-value product surfaces such as `/app/matrix` and `/operator/matrix` must include browser-render validation, not only `npm run build`.
+
+The default Matrix render QA loop is:
+
+1. run `npm run build` in `frontend`,
+2. make sure the local dev server is running,
+3. run `npm run qa:matrix:render` in `frontend`,
+4. confirm the QA script passes structural layout assertions for sizing, AOF, correction, trend, and Matrix sections,
+5. inspect the desktop and mobile screenshots under `tmp/qa`,
+6. record screenshot paths and visual findings in the task report.
+
+This rule exists because valid TypeScript/CSS can still render broken product UI. Tables, metric cards, pinned detail cards, matrix grids, and trend tabs should be visually checked after meaningful frontend changes.
+
 ## Report-First Review Rule
 The default loop is:
 

@@ -9,12 +9,12 @@ export default async function AppLayout({ children }: { children: React.ReactNod
   return (
     <main className="shell app-layout">
       <aside className="nav-card">
-        <p className="eyebrow">Authenticated App</p>
+        <p className="eyebrow">Your Poker Baseline</p>
         <h2>One Percent Better</h2>
         <p className="subtle">
           {role === "operator"
-            ? "Operator/admin view is active. You can inspect the public shell and jump into operator-only space."
-            : "Public MVP shell for authenticated users. Operator-only routes remain separate."}
+            ? "Operator/admin view is active. The public product now starts from the Matrix experience."
+            : "Upload hand histories, then start from your Matrix: how you played, what happened, and what to review."}
         </p>
         <div className="pill-row">
           <span className="pill">{role === "operator" ? "Operator/Admin" : "Standard User"}</span>

@@ -17,6 +17,9 @@
 
 ### Architecture
 - Postgres remains the canonical source of truth for core product state, pattern memory, and action surfaces.
+- External beta production architecture is managed Postgres plus an explicit Python backend service boundary; Next.js must not spawn `python3` during page render for real beta traffic.
+- The local SQLite plus Python subprocess path remains allowed only for Hero-local development, deterministic QA, and migration/smoke-test workflows.
+- The Python interpretation engine should be preserved behind the backend boundary; do not rewrite derived poker logic in Node as the first production migration step.
 - Supabase may be used for lead capture, access control, and other edge operational workflows, but not as canonical player/session/memory truth.
 - Vector/RAG is secondary retrieval only.
 - Source systems are metadata, not core business entities.
@@ -112,6 +115,15 @@
 - Hero Baseline played-pot samples should be decomposed by preflop entry type before concluding that a hand class is overplayed.
 - Hero Baseline Matrix Analysis is now a dedicated operator surface, not only a section inside the operator dashboard.
 - Hero Baseline should surface hidden value / positive execution candidates alongside mandatory correction candidates so the product protects working patterns as well as leak fixes.
+- Hero Baseline pinned hand detail should be position/situation-first, not action-label-first, so Hero can see where a hand wins or loses before interpreting lower-level action taxonomy.
+- Hero Baseline pinned hand detail should include deterministic English reads for every hand class. These reads translate Hero's actual-result evidence into review actions, not solver EV, and must not turn baseline-capable hands into automatic range cuts from one losing subset.
+- `/operator/matrix` is the Hero Preflop Baseline surface. It should lead with first-action open sizing, 2x discipline, non-jam 3bet sizing by position, a full-width 13x13 actual-result matrix, and only the top five review-first correction candidates.
+- `/app/matrix` is the authenticated user first-value surface. The user-facing product loop should start from upload -> personal Matrix -> interpretation, while `/operator/matrix` remains the deeper operator inspection version.
+- Matrix preflop sizing summary should separate sizing discipline from all-in pressure. Open sizing should show average plus mode/median because Hero's 2x habit can be hidden by a smaller number of 2.5x/3x opens. 3bet sizing should exclude near-all-in / 20bb+ pressure rows and should emphasize clean 3bets versus single 2x opens.
+- Hero Baseline Matrix should neutralize hand classes with less than 5% voluntary participation. These hands are folded exposure, not core performance signals, and should not compete visually with high-participation red/value cells.
+- Hero Baseline Matrix should surface runout-noise / cooler-watch guardrails for protected premium or standard baseline spots with bad actual results, so Hero does not shrink correct hands from variance alone. These cards are actual-result proxy interpretation, not solver EV or all-in adjusted EV.
+- Runout-noise guardrails should be trend-aware across Last 7 days, Last 30 days, and All history so recent painful premium-hand outcomes do not get diluted by the cumulative baseline. Trend windows are anchored to the latest parsed hand timestamp in the Matrix payload.
+- Daily Hero Baseline Quiz is an operator-only recall/study surface on top of Matrix truth: it helps Hero compare felt memory against real hand-class performance, but quiz attempts remain learning overlays and must not automatically mutate Today, Brain, or canonical Hero memory.
 - Repeated pattern plus real result should be treated as more important than isolated solver-style hand judgment.
 - Strategic beliefs behind repeated hand-class usage should be inspectable when the evidence supports them.
 - Spot review alone is insufficient; sessions should be interpreted as cumulative evidence.

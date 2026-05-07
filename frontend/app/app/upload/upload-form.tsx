@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useActionState } from "react";
 import { uploadGgPacket } from "./actions";
 
@@ -51,6 +52,13 @@ export function UploadForm() {
                 <div>{state.summary.summaryOnlyCount} summary-only files skipped</div>
                 <div>{state.summary.failedCount} failures</div>
               </div>
+            </div>
+          ) : null}
+          {state.ok ? (
+            <div className="dashboard-cta-row">
+              <Link className="cta" href="/app/matrix">
+                View your Matrix
+              </Link>
             </div>
           ) : null}
           {Object.entries(groupedBySource).length ? (
