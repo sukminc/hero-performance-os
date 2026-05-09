@@ -13,6 +13,19 @@ import {
 
 const execFileAsync = promisify(execFile);
 
+function getBackendBaseUrl() {
+  return process.env.OPB_BACKEND_BASE_URL?.replace(/\/+$/, "") || "";
+}
+
+function getBackendHeaders() {
+  const token = process.env.OPB_BACKEND_API_TOKEN?.trim();
+  return token ? { Authorization: `Bearer ${token}` } : undefined;
+}
+
+function requireBackendService() {
+  return ["1", "true", "yes", "on"].includes((process.env.OPB_REQUIRE_BACKEND_SERVICE || "").toLowerCase());
+}
+
 export type SingleIngestResult = {
   sourceName: string;
   uploadedName: string;
@@ -41,6 +54,27 @@ export type UploadActionResult = {
   };
   results?: SingleIngestResult[];
 };
+
+async function uploadFilesViaBackend(files: File[], playerId: string): Promise<UploadActionResult> {
+  const baseUrl = getBackendBaseUrl();
+  const body = new FormData();
+  files.forEach((file) => body.append("packet", file, file.name));
+
+  const response = await fetch(`${baseUrl}/v1/players/${encodeURIComponent(playerId)}/uploads`, {
+    method: "POST",
+    body,
+    cache: "no-store",
+    headers: getBackendHeaders()
+  });
+  const payload = (await response.json().catch(() => null)) as UploadActionResult | null;
+  if (!response.ok || !payload) {
+    return {
+      ok: false,
+      message: `Upload backend returned ${response.status}. Check the production ingest service before accepting users.`
+    };
+  }
+  return payload;
+}
 
 async function saveBrowserFile(file: File): Promise<{ destination: string; safeName: string }> {
   const uploadDir = resolveUploadTempDir();
@@ -116,6 +150,24 @@ export async function ingestUploadedFiles(files: File[], playerId: string | null
     return {
       ok: false,
       message: `Unsupported file types: ${unsupported.map((file) => file.name).join(", ")}. Use .txt or .zip.`
+    };
+  }
+
+  const backendBaseUrl = getBackendBaseUrl();
+  if (backendBaseUrl) {
+    try {
+      return await uploadFilesViaBackend(validFiles, playerId);
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "Unknown backend upload failure.";
+      return { ok: false, message };
+    }
+  }
+
+  if (requireBackendService()) {
+    return {
+      ok: false,
+      message:
+        "Production upload backend is not configured. Set OPB_BACKEND_BASE_URL before accepting live hand-history uploads."
     };
   }
 

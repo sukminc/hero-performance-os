@@ -22,8 +22,15 @@ function normalizeEmail(value: string | null | undefined) {
   return value?.trim().toLowerCase() || null;
 }
 
+function requireBackendService() {
+  return ["1", "true", "yes", "on"].includes((process.env.OPB_REQUIRE_BACKEND_SERVICE || "").toLowerCase());
+}
+
 async function resolveCanonicalViewerAccess(authProviderUserId: string | null, email: string | null) {
   if (!authProviderUserId && !email) {
+    return null;
+  }
+  if (requireBackendService()) {
     return null;
   }
   try {

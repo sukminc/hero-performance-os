@@ -4,6 +4,10 @@ import { resolveRepoRoot, resolveSqlitePath } from "./runtime";
 
 const execFileAsync = promisify(execFile);
 
+function requireBackendService() {
+  return ["1", "true", "yes", "on"].includes((process.env.OPB_REQUIRE_BACKEND_SERVICE || "").toLowerCase());
+}
+
 export type UploadStatusRow = {
   id: string;
   original_filename: string;
@@ -38,6 +42,9 @@ export async function getLatestUploadStatuses(playerId: string | null, limit = 5
   if (!playerId) {
     return [];
   }
+  if (requireBackendService()) {
+    return [];
+  }
   try {
     const { stdout } = await execFileAsync(
       "python3",
@@ -68,6 +75,9 @@ export async function getLatestUploadStatuses(playerId: string | null, limit = 5
 
 export async function getUploadCoverageSummary(playerId: string | null): Promise<UploadCoverageSummary | null> {
   if (!playerId) {
+    return null;
+  }
+  if (requireBackendService()) {
     return null;
   }
   try {

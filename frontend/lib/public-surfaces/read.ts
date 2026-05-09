@@ -20,6 +20,9 @@ function requireBackendService() {
 async function getBackendJson(path: string) {
   const baseUrl = getBackendBaseUrl();
   if (!baseUrl) {
+    if (requireBackendService()) {
+      throw new Error("Backend service is required but OPB_BACKEND_BASE_URL is not configured.");
+    }
     return null;
   }
   const response = await fetch(`${baseUrl}${path}`, {
@@ -33,6 +36,9 @@ async function getBackendJson(path: string) {
 }
 
 async function runPython(code: string) {
+  if (requireBackendService()) {
+    throw new Error("Local Python fallback is disabled because OPB_REQUIRE_BACKEND_SERVICE is enabled.");
+  }
   const { stdout } = await execFileAsync("python3", ["-c", code], {
     cwd: resolveRepoRoot(),
     maxBuffer: 64 * 1024 * 1024,
