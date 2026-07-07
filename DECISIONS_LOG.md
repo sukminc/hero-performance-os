@@ -6,6 +6,8 @@
 - Product is a paid poker performance system for serious tournament players, beginning with Hero.
 - The product analyzes the player, not just the hand.
 - The key promise is Many Inputs -> One Brain -> One Next Move.
+- In the Matrix restart phase, the immediate product promise is simpler: user file dumps become a preserved, deduplicated, cumulative, processable hand-history dataset.
+- Interpretation can kick in later; V0 should lead with cumulative data numbers and Matrix-ready records.
 - The product is not a test of how much GTO Hero has memorized.
 - The product should use AOF analysis, `13x13` hand-class analysis, and EV / actual-result analysis to build Hero's personal baseline.
 - The product should help Hero get more value from later GTO Wizard study rather than trying to replace that study.
@@ -17,6 +19,10 @@
 
 ### Architecture
 - Postgres remains the canonical source of truth for core product state, pattern memory, and action surfaces.
+- Matrix restart V0 must preserve raw `.txt`, `.zip`, and image inputs before parsing or interpretation.
+- Matrix restart V0 must deduplicate both source files and normalized hands.
+- Images are preserved as raw source evidence in V0; OCR and image-derived hand extraction are later.
+- Cumulative ingestion counters are first-value product data, not debug-only metadata.
 - External beta production architecture is managed Postgres plus an explicit Python backend service boundary; Next.js must not spawn `python3` during page render for real beta traffic.
 - The local SQLite plus Python subprocess path remains allowed only for Hero-local development, deterministic QA, and migration/smoke-test workflows.
 - The Python interpretation engine should be preserved behind the backend boundary; do not rewrite derived poker logic in Node as the first production migration step.

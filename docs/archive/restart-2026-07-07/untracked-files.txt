@@ -1,0 +1,45 @@
+docs/archive/restart-2026-07-07/git-status-short.txt
+docs/archive/restart-2026-07-07/raw-and-processed-data-files.txt
+docs/archive/restart-2026-07-07/untracked-files.txt
+frontend/app/auth-email-form.tsx
+frontend/app/auth/actions.ts
+frontend/app/auth/callback/route.ts
+frontend/app/style-preview/page.tsx
+opb-poker/0000019d-5624-85e1-0000-000058f065af/GG20260403-0131 - 6 Satellite to 100K Ontario MILLION, 3 Seats.txt
+opb-poker/0000019d-5624-85e1-0000-000058f065af/GG20260403-0300 - Ontario MILLION, 100K GTD [Day 1].txt
+opb-poker/0000019d-5624-93f8-0000-000058f065af/GG20260403 - Tournament #6130351 - Ontario MILLION, 100K GTD [Day 1].txt
+opb-poker/0000019d-5624-93f8-0000-000058f065af/GG20260403 - Tournament #6227605 - 6 Satellite to 100K Ontario MILLION, 3 Seats.txt
+opb-poker/0000019d-be00-c53f-0000-000058f065af.zip
+opb-poker/0000019d-be01-2bdb-0000-000058f065af.zip
+opb-poker/0000019d-e164-524c-0000-000058f065af.zip
+opb-poker/0000019d-e164-8bfe-0000-000058f065af.zip
+opb-poker/0000019d-f7a9-de18-0000-000058f065af.zip
+opb-poker/0000019d-f7a9-f922-0000-000058f065af.zip
+opb-poker/0000019d-f7aa-3b88-0000-000058f065af.zip
+opb-poker/2026-04-06_ 01-35_AM_$3_$6_#99687627.png
+opb-poker/2026-04-18_ 03-18_AM_$4_$8_#100836295.png
+opb-poker/2026-04-18_ 05-17_AM_$8_$16_#100900185.png
+opb-poker/2026-05-07_ 03-20_AM_$0.30_$0.60_#102706391.png
+opb-poker/GG20260424 - Tournament #6408385 - Mini Thursday Throwdown 25 [Bounty].txt
+opb-poker/GG20260424-0141 - Mini Thursday Throwdown 25 [Bounty]-1.txt
+opb-poker/GG20260424-0141 - Mini Thursday Throwdown 25 [Bounty].txt
+opb-poker/GG20260505-0238 - 13-M 30 Monday Heater CN Rail Ed [Bounty Turbo].txt
+reports/00_foundation/116-founding-member-landing-report.md
+reports/00_foundation/117-clean-felt-landing-direction-report.md
+reports/00_foundation/118-matrix-mvp-scope-lock-report.md
+reports/00_foundation/119-paid-magic-link-signup-report.md
+reports/00_foundation/120-local-operator-login-and-public-page-alignment-report.md
+reports/00_foundation/121-clean-felt-operator-matrix-report.md
+reports/00_foundation/122-matrix-all-in-size-label-clarity-report.md
+reports/00_foundation/123-matrix-preflop-line-driver-report.md
+reports/00_foundation/124-matrix-tiny-sample-driver-demotion-report.md
+reports/00_foundation/125-matrix-preflop-line-language-order-report.md
+reports/00_foundation/126-preflop-sizing-position-bucket-merge-report.md
+reports/00_foundation/127-aof-baseline-position-action-reorg-report.md
+reports/00_foundation/128-matrix-golden-qa-and-trace-report.md
+reports/00_foundation/129-production-landing-deploy-report.md
+reports/00_foundation/130-remove-founder-name-public-signup-report.md
+reports/00_foundation/131-real-baseline-landing-matrix-report.md
+reports/00_foundation/132-landing-matrix-privacy-redaction-report.md
+scripts/matrix_golden_qa.py
+scripts/opb-env.sh

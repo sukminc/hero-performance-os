@@ -37,7 +37,12 @@ The current phase is:
 - backend-first,
 - operator-first,
 - truth-first,
-- deep operator mode.
+- data-processing-first Matrix restart.
+
+The immediate restart goal is to turn repeated user file dumps into a clean,
+deduplicated, cumulative, processable dataset. Interpretation surfaces can return
+after raw preservation, input classification, archive expansion, file dedupe,
+hand dedupe, cumulative counters, and Matrix-ready records are reliable.
 
 Consumer-facing frontend work remains blocked until the backend is trustworthy enough to:
 

@@ -1,0 +1,3859 @@
+diff --git a/.gitignore b/.gitignore
+index 363dbad..d2bb5c5 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -1,6 +1,8 @@
+ __pycache__/
+ *.pyc
+ .DS_Store
++.env.local
++frontend/.env.local
+ data/*.sqlite3
+ data/tmp_uploads_public/
+ tmp/
+@@ -8,6 +10,8 @@ frontend/node_modules/
+ frontend/.next/
+ *.tsbuildinfo
+ .claude/
++.local/
++.pnpm-store/
+ .vercel/
+ frontend/.vercel/
+ .vercel
+diff --git a/DECISIONS_LOG.md b/DECISIONS_LOG.md
+index 25b8e75..efc49b9 100644
+--- a/DECISIONS_LOG.md
++++ b/DECISIONS_LOG.md
+@@ -116,14 +116,23 @@
+ - Hero Baseline Matrix Analysis is now a dedicated operator surface, not only a section inside the operator dashboard.
+ - Hero Baseline should surface hidden value / positive execution candidates alongside mandatory correction candidates so the product protects working patterns as well as leak fixes.
+ - Hero Baseline pinned hand detail should be position/situation-first, not action-label-first, so Hero can see where a hand wins or loses before interpreting lower-level action taxonomy.
++- Hero Baseline pinned hand detail should now prefer position-bucket + preflop-line evidence over raw exact-position rows. The commercial MVP question is "which Hero preflop line produced this actual result?" across Early / Mid / CO / BTN / SB / BB, including combo lines such as Open -> fold vs 3bet and 3bet -> fold vs 4bet, while keeping older position/situation rows for compatibility.
++- Hero Baseline `ACTUAL RESULT DRIVERS` must not promote one-hand tiny samples as baseline drivers when enough non-tiny preflop-line evidence exists. Single-hand postflop stack-offs can remain inspectable examples, but they should not visually outrank repeated preflop lines.
++- Hero Baseline preflop-line language must distinguish defensive calls from passive entries: BB call versus open is `Defend vs open`, non-BB call versus open is `Call vs open`, over-limps are `Passive entry / over-limp`, SB completes are `SB complete`, and BB check-option rows should be treated as `BB free check` rather than voluntary defend.
++- Hero Baseline preflop-line rows should sort by position bucket first, in the order Early -> Mid -> CO -> BTN -> SB -> BB, then by preflop line order. This is more readable for range diagnosis than sorting primarily by result magnitude.
++- Hero Baseline preflop sizing summary should also use merged position buckets instead of raw full-ring seats. UTG / UTG+1 / UTG+2 roll into Early, LJ / HJ roll into Mid, and CO / BTN / SB / BB remain separate, with raw member seats still shown for inspection.
+ - Hero Baseline pinned hand detail should include deterministic English reads for every hand class. These reads translate Hero's actual-result evidence into review actions, not solver EV, and must not turn baseline-capable hands into automatic range cuts from one losing subset.
+ - `/operator/matrix` is the Hero Preflop Baseline surface. It should lead with first-action open sizing, 2x discipline, non-jam 3bet sizing by position, a full-width 13x13 actual-result matrix, and only the top five review-first correction candidates.
+ - `/app/matrix` is the authenticated user first-value surface. The user-facing product loop should start from upload -> personal Matrix -> interpretation, while `/operator/matrix` remains the deeper operator inspection version.
+ - Matrix preflop sizing summary should separate sizing discipline from all-in pressure. Open sizing should show average plus mode/median because Hero's 2x habit can be hidden by a smaller number of 2.5x/3x opens. 3bet sizing should exclude near-all-in / 20bb+ pressure rows and should emphasize clean 3bets versus single 2x opens.
++- AOF Baseline should use the same merged position bucket language as the Matrix: Early, Mid, CO, BTN, SB, BB. AOF action rows should use readable jam families such as Open jam, Iso jam, 3bet jam, and 4bet jam instead of raw parser entry keys.
+ - Hero Baseline Matrix should neutralize hand classes with less than 5% voluntary participation. These hands are folded exposure, not core performance signals, and should not compete visually with high-participation red/value cells.
+ - Hero Baseline Matrix should surface runout-noise / cooler-watch guardrails for protected premium or standard baseline spots with bad actual results, so Hero does not shrink correct hands from variance alone. These cards are actual-result proxy interpretation, not solver EV or all-in adjusted EV.
+ - Runout-noise guardrails should be trend-aware across Last 7 days, Last 30 days, and All history so recent painful premium-hand outcomes do not get diluted by the cumulative baseline. Trend windows are anchored to the latest parsed hand timestamp in the Matrix payload.
+ - Daily Hero Baseline Quiz is an operator-only recall/study surface on top of Matrix truth: it helps Hero compare felt memory against real hand-class performance, but quiz attempts remain learning overlays and must not automatically mutate Today, Brain, or canonical Hero memory.
++- The paid Matrix MVP should focus on three surfaces first: the `13x13` actual-result baseline, pinned detail `ACTUAL RESULT DRIVERS`, and a short correction-candidate list. These are the clearest current commercial insights because they let a player notice surprising hand-class results, drill into position/situation drivers, and leave with a concrete review focus.
++- `/operator/matrix` remains the deep proof surface for this value; authenticated paid users should experience the same product loop more simply by landing on their Matrix first after upload/payment.
++- Public signup should move away from beta/demo application language. The acquisition flow should be SaaS-like: email magic link first, paid membership unlocks upload and real Matrix access, and public previews use sample data only.
+ - Repeated pattern plus real result should be treated as more important than isolated solver-style hand judgment.
+ - Strategic beliefs behind repeated hand-class usage should be inspectable when the evidence supports them.
+ - Spot review alone is insufficient; sessions should be interpreted as cumulative evidence.
+diff --git a/PROJECT_MASTER_CONTEXT.md b/PROJECT_MASTER_CONTEXT.md
+index 2cc90d2..b01286d 100644
+--- a/PROJECT_MASTER_CONTEXT.md
++++ b/PROJECT_MASTER_CONTEXT.md
+@@ -309,6 +309,7 @@ Current MVP surfaces:
+ - Today
+ - Review
+ - Brain
++- authenticated Matrix first-value surface
+ 
+ Current MVP core capabilities:
+ 
+@@ -321,11 +322,22 @@ Current MVP core capabilities:
+ - Hero decision-node, hand-class, and repeated-spot memory,
+ - phase-aware and bounty-aware economic interpretation,
+ - positive execution reinforcement memory,
++- `13x13` actual-result baseline Matrix,
++- pinned hand detail with position/situation `ACTUAL RESULT DRIVERS`,
++- top correction candidates that turn repeated real-result leaks into review actions,
+ - deterministic Today / Review / Brain assembly,
+ - operator review / tuning,
+ - Golden Rule and QA loops,
+ - grounded Today / Review / Brain outputs.
+ 
++Current paid MVP value should be centered on three immediately understandable outputs:
++
++1. the `13x13` actual-result baseline Matrix,
++2. pinned detail that explains where a hand class wins or loses by position and situation,
++3. a short correction-candidate list.
++
++Those three outputs are the first commercial promise: upload GG Poker hand histories, see the actual-result baseline, inspect why surprising hands are winning or losing, and leave with a short review focus.
++
+ Out of scope for MVP core:
+ 
+ - polished consumer-facing frontend,
+diff --git a/app/api/hand_matrix.py b/app/api/hand_matrix.py
+index de68bcc..c7f07b3 100644
+--- a/app/api/hand_matrix.py
++++ b/app/api/hand_matrix.py
+@@ -45,6 +45,8 @@ class HandObservation:
+     hero_3bet_to_open_ratio: float | None
+     faced_4bet_after_3bet: bool
+     folded_to_4bet_after_3bet: bool
++    preflop_line_key: str = ""
++    preflop_line_label: str = ""
+ 
+ 
+ def _parse_json(raw: str | None, default: Any) -> Any:
+@@ -269,6 +271,75 @@ def _facing_state(prior_raise_count: int, prior_call_count: int, faced_all_in: b
+     return "vs_3bet_plus"
+ 
+ 
++def _response_label(response: str | None) -> str:
++    if response == "fold":
++        return "fold"
++    if response == "call":
++        return "flat"
++    if response == "jam":
++        return "jam"
++    if response == "raise":
++        return "raise"
++    return "continue"
++
++
++def _preflop_line_key_label(entry_type: str, line_features: dict[str, Any] | None = None) -> tuple[str, str]:
++    features = line_features or {}
++    if entry_type == "open_raise":
++        if features.get("open_faced_3bet"):
++            response = _response_label(features.get("open_response_to_3bet"))
++            if response == "fold":
++                return ("open_fold_vs_3bet", "Open -> fold vs 3bet")
++            if response == "flat":
++                return ("open_flat_3bet", "Open -> flat 3bet")
++            if response == "jam":
++                return ("open_four_bet_jam", "Open -> 4bet jam")
++            if response == "raise":
++                return ("open_four_bet_raise", "Open -> 4bet")
++            return ("open_continue_vs_3bet", "Open -> continue vs 3bet")
++        return ("open", "Open")
++    if entry_type == "open_raise_jam":
++        return ("open_jam", "Open jam")
++    if entry_type == "open_limp_or_complete":
++        return ("open_limp_complete", "Open limp / complete")
++    if entry_type == "call_vs_open":
++        return ("flat_vs_open", "Flat vs open")
++    if entry_type == "limp_behind":
++        return ("limp_behind", "Limp behind")
++    if entry_type == "iso_raise":
++        return ("iso_raise", "Iso raise")
++    if entry_type == "iso_raise_jam":
++        return ("iso_raise_jam", "Iso jam")
++    if entry_type == "three_bet":
++        if features.get("three_bet_faced_4bet"):
++            response = _response_label(features.get("three_bet_response_to_4bet"))
++            if response == "fold":
++                return ("three_bet_fold_vs_4bet", "3bet -> fold vs 4bet")
++            if response == "flat":
++                return ("three_bet_flat_4bet", "3bet -> flat 4bet")
++            if response == "jam":
++                return ("three_bet_five_bet_jam", "3bet -> 5bet jam")
++            if response == "raise":
++                return ("three_bet_five_bet_raise", "3bet -> 5bet")
++            return ("three_bet_continue_vs_4bet", "3bet -> continue vs 4bet")
++        return ("three_bet_raise", "3bet")
++    if entry_type == "three_bet_jam":
++        return ("three_bet_jam", "3bet jam")
++    if entry_type == "call_vs_3bet":
++        return ("flat_vs_3bet", "Flat vs 3bet")
++    if entry_type == "four_bet":
++        return ("four_bet_raise", "4bet")
++    if entry_type == "four_bet_jam":
++        return ("four_bet_jam", "4bet jam")
++    if entry_type == "call_vs_4bet_plus":
++        return ("flat_vs_4bet", "Flat vs 4bet")
++    if entry_type in {"five_bet_plus", "five_bet_plus_jam"}:
++        return ("five_bet_plus", "5bet+")
++    if entry_type.startswith("fold_") or entry_type == "open_fold":
++        return (entry_type, "Fold exposure")
++    return (entry_type, entry_type.replace("_", " "))
++
++
+ def _raise_to_amount(row: str) -> int | None:
+     match = re.search(r" raises [\d,]+ to ([\d,]+)", row)
+     if not match:
+@@ -346,6 +417,69 @@ def _extract_hero_preflop_size_bb(block: list[str], big_blind: float) -> float |
+     return None
+ 
+ 
++def _hero_action_kind(row: str) -> str | None:
++    if " folds" in row:
++        return "fold"
++    if " calls " in row:
++        return "call"
++    if " raises " in row:
++        return "jam" if "all-in" in row or "all in" in row else "raise"
++    return None
++
++
++def _extract_preflop_line_features(block: list[str]) -> dict[str, Any]:
++    in_preflop = False
++    prior_raise_count = 0
++    hero_first_action: str | None = None
++    hero_opened = False
++    hero_made_3bet = False
++    open_faced_3bet = False
++    open_response_to_3bet: str | None = None
++    three_bet_faced_4bet = False
++    three_bet_response_to_4bet: str | None = None
++
++    for row in block:
++        if row == "*** HOLE CARDS ***":
++            in_preflop = True
++            continue
++        if not in_preflop:
++            continue
++        if row.startswith("*** FLOP ***") or row.startswith("*** SHOWDOWN ***") or row.startswith("*** SUMMARY ***"):
++            break
++        if ":" not in row:
++            continue
++
++        actor, _ = row.split(":", 1)
++        action_kind = _hero_action_kind(row) if actor == "Hero" else None
++
++        if actor == "Hero":
++            if hero_first_action is None:
++                hero_first_action = action_kind
++                if action_kind in {"raise", "jam"} and prior_raise_count == 0:
++                    hero_opened = True
++                elif action_kind in {"raise", "jam"} and prior_raise_count == 1:
++                    hero_made_3bet = True
++            elif open_faced_3bet and open_response_to_3bet is None:
++                open_response_to_3bet = action_kind
++            elif three_bet_faced_4bet and three_bet_response_to_4bet is None:
++                three_bet_response_to_4bet = action_kind
++            continue
++
++        if " raises " in row:
++            prior_raise_count += 1
++            if hero_opened and not open_faced_3bet:
++                open_faced_3bet = True
++            elif hero_made_3bet and not three_bet_faced_4bet:
++                three_bet_faced_4bet = True
++
++    return {
++        "open_faced_3bet": open_faced_3bet,
++        "open_response_to_3bet": open_response_to_3bet,
++        "three_bet_faced_4bet": three_bet_faced_4bet,
++        "three_bet_response_to_4bet": three_bet_response_to_4bet,
++    }
++
++
+ def _compute_bb_net(block: list[str], big_blind: float) -> float:
+     hero_total = 0
+     hero_current_street = 0
+@@ -535,7 +669,9 @@ def _situation_label(item: HandObservation) -> tuple[str, str]:
+     entry_type = item.preflop_entry_type
+     if item.first_preflop_action == "fold":
+         return ("fold_exposure", "Fold exposure")
+-    if item.first_preflop_action == "jam" or entry_type.endswith("_jam") or item.facing_state == "vs_all_in":
++    if item.facing_state == "vs_all_in" and item.first_preflop_action != "jam" and not entry_type.endswith("_jam"):
++        return ("vs_all_in", "Vs all-in")
++    if item.first_preflop_action == "jam" or entry_type.endswith("_jam"):
+         return ("jam_all_in", "Jam / all-in")
+     if entry_type in {"open_raise", "open_limp_or_complete"}:
+         return ("open", "Open")
+@@ -548,6 +684,60 @@ def _situation_label(item: HandObservation) -> tuple[str, str]:
+     return (entry_type, entry_type.replace("_", " "))
+ 
+ 
++def _position_bucket(position: str) -> tuple[str, str]:
++    normalized = (position or "").upper()
++    if normalized in {"UTG", "UTG+1", "UTG+2"}:
++        return ("early", "Early")
++    if normalized in {"LJ", "HJ"}:
++        return ("middle", "Mid")
++    if normalized == "CO":
++        return ("cutoff", "CO")
++    if normalized == "BTN":
++        return ("button", "BTN")
++    if normalized == "SB":
++        return ("small_blind", "SB")
++    if normalized == "BB":
++        return ("big_blind", "BB")
++    return ("other", position or "Other")
++
++
++def _position_bucket_sort_value(bucket_key: str) -> int:
++    order = {
++        "early": 0,
++        "middle": 1,
++        "cutoff": 2,
++        "button": 3,
++        "small_blind": 4,
++        "big_blind": 5,
++    }
++    return order.get(bucket_key, 99)
++
++
++def _line_sort_value(line_key: str) -> int:
++    order = {
++        "open": 0,
++        "open_fold_vs_3bet": 1,
++        "open_flat_3bet": 2,
++        "open_four_bet_raise": 3,
++        "open_four_bet_jam": 4,
++        "flat_vs_open": 5,
++        "limp_behind": 6,
++        "open_limp_complete": 7,
++        "iso_raise": 8,
++        "three_bet_raise": 9,
++        "three_bet_fold_vs_4bet": 10,
++        "three_bet_flat_4bet": 11,
++        "three_bet_five_bet_raise": 12,
++        "three_bet_five_bet_jam": 13,
++        "three_bet_jam": 14,
++        "flat_vs_3bet": 15,
++        "four_bet_raise": 16,
++        "four_bet_jam": 17,
++        "flat_vs_4bet": 18,
++    }
++    return order.get(line_key, 99)
++
++
+ def _position_situation_sort_key(row: dict[str, Any]) -> tuple[int, float, int, tuple[int, str], str]:
+     sample_count = int(row.get("count") or 0)
+     stack_pct = row.get("avg_stack_realization_pct")
+@@ -562,6 +752,110 @@ def _position_situation_sort_key(row: dict[str, Any]) -> tuple[int, float, int,
+     )
+ 
+ 
++def _preflop_line_sort_key(row: dict[str, Any]) -> tuple[int, int, int, int, float, str]:
++    sample_count = int(row.get("count") or 0)
++    stack_pct = row.get("avg_stack_realization_pct")
++    avg_bb = row.get("avg_bb_per_hand")
++    signal = abs(float(stack_pct if stack_pct is not None else avg_bb or 0))
++    return (
++        _position_bucket_sort_value(str(row.get("position_bucket_key") or "")),
++        _line_sort_value(str(row.get("line_key") or "")),
++        0 if sample_count >= 5 else 1,
++        -sample_count,
++        -signal,
++        str(row.get("line_key") or ""),
++    )
++
++
++def _line_key_label(item: HandObservation) -> tuple[str, str]:
++    if item.preflop_line_key and item.preflop_line_label:
++        return item.preflop_line_key, item.preflop_line_label
++    return _preflop_line_key_label(item.preflop_entry_type)
++
++
++def _preflop_line_display_label(bucket_key: str, line_key: str, base_label: str) -> str:
++    if line_key == "flat_vs_open":
++        if bucket_key == "big_blind":
++            return "Defend vs open"
++        return "Call vs open"
++    if line_key == "limp_behind":
++        return "Passive entry / over-limp"
++    if line_key == "open_limp_complete":
++        if bucket_key == "small_blind":
++            return "SB complete"
++        if bucket_key == "big_blind":
++            return "BB free check"
++    return base_label
++
++
++def _preflop_line_breakdown(rows: list[HandObservation]) -> list[dict[str, Any]]:
++    by_bucket_line: dict[tuple[str, str], list[HandObservation]] = defaultdict(list)
++    bucket_labels: dict[str, str] = {}
++    line_labels: dict[str, str] = {}
++    for item in rows:
++        if not _is_played_pot(item):
++            continue
++        bucket_key, bucket_label = _position_bucket(item.position)
++        line_key, line_label = _line_key_label(item)
++        by_bucket_line[(bucket_key, line_key)].append(item)
++        bucket_labels[bucket_key] = bucket_label
++        line_labels[line_key] = line_label
++
++    breakdown: list[dict[str, Any]] = []
++    for (bucket_key, line_key), items in by_bucket_line.items():
++        performance_scored = any(_is_played_pot(item) for item in items)
++        scored_items = [item for item in items if _is_played_pot(item)]
++        metric_rows = scored_items if performance_scored else []
++        actual_bb_net = round(sum(item.bb_net for item in metric_rows), 2) if metric_rows else None
++        avg_bb_per_hand = round(actual_bb_net / len(metric_rows), 2) if metric_rows and actual_bb_net is not None else None
++        stack_metrics = _stack_metrics(metric_rows) if metric_rows else {"avg_stack_realization_pct": None}
++        faced_open_sizes = [
++            item.open_size_bb for item in items if item.open_size_bb is not None and item.facing_state in {"vs_open", "vs_3bet_plus"}
++        ]
++        first_action_sizes = [item.hero_preflop_size_bb for item in items if item.hero_preflop_size_bb is not None]
++        hero_3bet_sizes = [item.hero_3bet_size_bb for item in items if item.hero_3bet_size_bb is not None]
++        breakdown.append(
++            {
++                "position_bucket_key": bucket_key,
++                "position_bucket_label": bucket_labels.get(bucket_key, bucket_key),
++                "line_key": line_key,
++                "line_label": _preflop_line_display_label(bucket_key, line_key, line_labels.get(line_key, line_key.replace("_", " "))),
++                "count": len(items),
++                "played_count": len(scored_items),
++                "performance_scored": performance_scored,
++                "actual_bb_net": actual_bb_net,
++                "avg_bb_per_hand": avg_bb_per_hand,
++                "avg_stack_realization_pct": stack_metrics.get("avg_stack_realization_pct"),
++                "sample_band": _sample_band(len(items)),
++                "avg_first_action_size_bb": _avg_optional(first_action_sizes),
++                "avg_open_size_bb": _avg_optional(faced_open_sizes),
++                "avg_hero_3bet_size_bb": _avg_optional(hero_3bet_sizes),
++                "position_mix": _count_attr(items, "position"),
++                "facing_state_mix": _count_attr(items, "facing_state"),
++                "entry_type_mix": _count_attr(items, "preflop_entry_type"),
++                "example_hand_ids": [item.hand_id for item in sorted(items, key=lambda row: (row.started_at or "", row.hand_id), reverse=True)[:4]],
++                "examples": [
++                    {
++                        "hand_id": item.hand_id,
++                        "started_at": item.started_at,
++                        "position": item.position,
++                        "format_tag": item.format_tag,
++                        "stack_bb": round(item.stack_bb, 2) if item.stack_bb is not None else None,
++                        "bb_net": round(item.bb_net, 2),
++                        "entry_type": item.preflop_entry_type,
++                        "line_label": _preflop_line_display_label(bucket_key, line_key, _line_key_label(item)[1]),
++                        "facing_state": item.facing_state,
++                        "open_size_bb": item.open_size_bb if item.facing_state in {"vs_open", "vs_3bet_plus"} else None,
++                        "hero_preflop_size_bb": item.hero_preflop_size_bb,
++                        "hero_summary": item.hero_summary,
++                    }
++                    for item in sorted(items, key=lambda row: (row.started_at or "", row.hand_id), reverse=True)[:4]
++                ],
++            }
++        )
++    return sorted(breakdown, key=_preflop_line_sort_key)
++
++
+ def _position_situation_breakdown(rows: list[HandObservation]) -> list[dict[str, Any]]:
+     by_position_situation: dict[tuple[str, str], list[HandObservation]] = defaultdict(list)
+     for item in rows:
+@@ -900,17 +1194,25 @@ def _preflop_sizing_summary(rows: list[HandObservation]) -> dict[str, Any]:
+     ]
+ 
+     by_position: dict[str, dict[str, list[HandObservation]]] = defaultdict(lambda: defaultdict(list))
++    position_bucket_labels: dict[str, str] = {}
++    position_bucket_members: dict[str, set[str]] = defaultdict(set)
+     for item in standard_open_rows:
+-        by_position[item.position]["opens"].append(item)
++        bucket_key, bucket_label = _position_bucket(item.position)
++        by_position[bucket_key]["opens"].append(item)
++        position_bucket_labels[bucket_key] = bucket_label
++        position_bucket_members[bucket_key].add(item.position)
+     for item in three_bet_rows:
+-        by_position[item.position]["three_bets"].append(item)
++        bucket_key, bucket_label = _position_bucket(item.position)
++        by_position[bucket_key]["three_bets"].append(item)
++        position_bucket_labels[bucket_key] = bucket_label
++        position_bucket_members[bucket_key].add(item.position)
+         if item.open_size_bb is not None and 1.8 <= item.open_size_bb <= 2.3 and item.prior_call_count == 0:
+-            by_position[item.position]["three_bet_vs_2x_single"].append(item)
++            by_position[bucket_key]["three_bet_vs_2x_single"].append(item)
+         if item.open_size_bb is not None and 1.8 <= item.open_size_bb <= 2.3 and item.prior_call_count > 0:
+-            by_position[item.position]["squeeze_vs_2x_callers"].append(item)
++            by_position[bucket_key]["squeeze_vs_2x_callers"].append(item)
+ 
+     position_rows: list[dict[str, Any]] = []
+-    for position, groups in by_position.items():
++    for bucket_key, groups in by_position.items():
+         opens = groups.get("opens", [])
+         two_x_opens = [
+             item
+@@ -922,7 +1224,9 @@ def _preflop_sizing_summary(rows: list[HandObservation]) -> dict[str, Any]:
+         squeezes = groups.get("squeeze_vs_2x_callers", [])
+         position_rows.append(
+             {
+-                "position": position,
++                "position": position_bucket_labels.get(bucket_key, bucket_key),
++                "position_bucket_key": bucket_key,
++                "position_members": sorted(position_bucket_members.get(bucket_key, set()), key=_position_sort_key),
+                 "open_count": len(opens),
+                 "avg_open_size_bb": _avg([item.hero_preflop_size_bb for item in opens if item.hero_preflop_size_bb is not None]),
+                 "two_x_open_count": len(two_x_opens),
+@@ -968,7 +1272,7 @@ def _preflop_sizing_summary(rows: list[HandObservation]) -> dict[str, Any]:
+         "avg_squeeze_vs_2x_callers_bb": _avg(
+             [item.hero_3bet_size_bb for item in squeeze_vs_2x_callers if item.hero_3bet_size_bb is not None]
+         ),
+-        "position_rows": sorted(position_rows, key=lambda row: _position_sort_key(str(row.get("position") or ""))),
++        "position_rows": sorted(position_rows, key=lambda row: _position_bucket_sort_value(str(row.get("position_bucket_key") or ""))),
+         "open_size_mode_bb": _mode_bucket(
+             [item.hero_preflop_size_bb for item in standard_open_rows if item.hero_preflop_size_bb is not None]
+         ),
+@@ -995,18 +1299,58 @@ def _aof_stack_summary(items: list[HandObservation]) -> dict[str, Any]:
+     }
+ 
+ 
++def _aof_action_key_label(entry_type: str) -> tuple[str, str]:
++    labels = {
++        "open_raise_jam": ("open_jam", "Open jam"),
++        "iso_raise_jam": ("iso_jam", "Iso jam"),
++        "three_bet_jam": ("three_bet_jam", "3bet jam"),
++        "four_bet_jam": ("four_bet_jam", "4bet jam"),
++        "five_bet_plus_jam": ("five_bet_plus_jam", "5bet+ jam"),
++    }
++    return labels.get(entry_type, (entry_type, entry_type.replace("_", " ")))
++
++
++def _aof_action_sort_value(action_key: str) -> int:
++    order = {
++        "open_jam": 0,
++        "iso_jam": 1,
++        "three_bet_jam": 2,
++        "four_bet_jam": 3,
++        "five_bet_plus_jam": 4,
++    }
++    return order.get(action_key, 99)
++
++
++def _aof_position_row_sort_key(row: dict[str, Any]) -> int:
++    return _position_bucket_sort_value(str(row.get("position_bucket_key") or ""))
++
++
++def _aof_entry_row_sort_key(row: dict[str, Any]) -> tuple[int, int]:
++    return (_aof_action_sort_value(str(row.get("action_key") or "")), -int(row.get("count") or 0))
++
++
+ def _aof_big_loss_clusters(items: list[HandObservation], limit: int = 4) -> list[dict[str, Any]]:
+     by_cluster: dict[tuple[str, str, str], list[HandObservation]] = defaultdict(list)
++    cluster_meta: dict[tuple[str, str, str], dict[str, str]] = {}
+     for item in items:
+         realization = _stack_realization_pct(item)
+         if realization is None or realization > -50:
+             continue
+-        by_cluster[(item.hand_class, item.position, item.preflop_entry_type)].append(item)
++        bucket_key, bucket_label = _position_bucket(item.position)
++        action_key, action_label = _aof_action_key_label(item.preflop_entry_type)
++        key = (item.hand_class, bucket_key, action_key)
++        by_cluster[key].append(item)
++        cluster_meta[key] = {
++            "position": bucket_label,
++            "position_bucket_key": bucket_key,
++            "action_label": action_label,
++        }
+ 
+     clusters: list[dict[str, Any]] = []
+-    for (hand_class, position, entry_type), cluster_items in by_cluster.items():
++    for (hand_class, bucket_key, action_key), cluster_items in by_cluster.items():
+         if len(cluster_items) < 2:
+             continue
++        meta = cluster_meta.get((hand_class, bucket_key, action_key), {})
+         stack_metrics = _stack_metrics(cluster_items)
+         avg_stack = stack_metrics.get("avg_stack_realization_pct")
+         avg_bb = _avg([item.bb_net for item in cluster_items])
+@@ -1014,8 +1358,11 @@ def _aof_big_loss_clusters(items: list[HandObservation], limit: int = 4) -> list
+         clusters.append(
+             {
+                 "hand_class": hand_class,
+-                "position": position,
+-                "entry_type": entry_type,
++                "position": meta.get("position", bucket_key),
++                "position_bucket_key": meta.get("position_bucket_key", bucket_key),
++                "entry_type": action_key,
++                "action_key": action_key,
++                "action_label": meta.get("action_label", action_key.replace("_", " ")),
+                 "count": len(cluster_items),
+                 "avg_bb_per_jam": avg_bb,
+                 "avg_stack_realization_pct": avg_stack,
+@@ -1042,18 +1389,38 @@ def _preflop_aof_summary(rows: list[HandObservation]) -> dict[str, Any]:
+     short_jam_rows = [item for item in jam_rows if item.stack_bb is not None and item.stack_bb <= 25]
+ 
+     by_entry: dict[str, list[HandObservation]] = defaultdict(list)
++    entry_labels: dict[str, str] = {}
+     by_position: dict[str, list[HandObservation]] = defaultdict(list)
++    position_labels: dict[str, str] = {}
++    position_members: dict[str, set[str]] = defaultdict(set)
+     for item in jam_rows:
+-        by_entry[item.preflop_entry_type].append(item)
+-        by_position[item.position].append(item)
++        action_key, action_label = _aof_action_key_label(item.preflop_entry_type)
++        by_entry[action_key].append(item)
++        entry_labels[action_key] = action_label
++        bucket_key, bucket_label = _position_bucket(item.position)
++        by_position[bucket_key].append(item)
++        position_labels[bucket_key] = bucket_label
++        position_members[bucket_key].add(item.position)
+ 
+     entry_rows = [
+-        {"entry_type": entry_type, **_aof_stack_summary(items), "big_loss_clusters": _aof_big_loss_clusters(items)}
+-        for entry_type, items in sorted(by_entry.items(), key=lambda pair: (-len(pair[1]), pair[0]))
++        {
++            "entry_type": action_key,
++            "action_key": action_key,
++            "action_label": entry_labels.get(action_key, action_key.replace("_", " ")),
++            **_aof_stack_summary(items),
++            "big_loss_clusters": _aof_big_loss_clusters(items),
++        }
++        for action_key, items in by_entry.items()
+     ]
+     position_rows = [
+-        {"position": position, **_aof_stack_summary(items), "big_loss_clusters": _aof_big_loss_clusters(items)}
+-        for position, items in sorted(by_position.items(), key=lambda pair: _position_sort_key(pair[0]))
++        {
++            "position": position_labels.get(bucket_key, bucket_key),
++            "position_bucket_key": bucket_key,
++            "position_members": sorted(position_members.get(bucket_key, set()), key=_position_sort_key),
++            **_aof_stack_summary(items),
++            "big_loss_clusters": _aof_big_loss_clusters(items),
++        }
++        for bucket_key, items in by_position.items()
+     ]
+     overall = _aof_stack_summary(jam_rows)
+     short_stack = _aof_stack_summary(short_jam_rows)
+@@ -1065,7 +1432,7 @@ def _preflop_aof_summary(rows: list[HandObservation]) -> dict[str, Any]:
+         ),
+         "takeaways": [
+             "Treat 12bb as the practical center of Hero's current AOF baseline.",
+-            "Review SB, CO, and BB separately because those positions include deeper jam behavior.",
++            "Review AOF by position bucket and action family before judging one raw seat or one jam type.",
+             "Use this as post-hoc baseline evidence only; it is not solver EV or a live shove chart.",
+         ],
+     }
+@@ -1074,8 +1441,8 @@ def _preflop_aof_summary(rows: list[HandObservation]) -> dict[str, Any]:
+         "definition": "Hero's first preflop action is jam/all-in.",
+         "overall": overall,
+         "short_stack_lte25": short_stack,
+-        "entry_rows": entry_rows,
+-        "position_rows": position_rows,
++        "entry_rows": sorted(entry_rows, key=_aof_entry_row_sort_key),
++        "position_rows": sorted(position_rows, key=_aof_position_row_sort_key),
+         "big_loss_clusters": _aof_big_loss_clusters(jam_rows, limit=8),
+         "interpretation": interpretation,
+         "truth_policy": "AOF summary uses Hero's first preflop jam/all-in action and reports effective stack BB at the hand start.",
+@@ -1709,6 +2076,8 @@ def _fetch_observations(
+             faced_all_in_preflop,
+         ) = _extract_preflop_pattern(block)
+         three_bet_features = _extract_3bet_line_features(block, big_blind)
++        line_features = _extract_preflop_line_features(block)
++        preflop_line_key, preflop_line_label = _preflop_line_key_label(preflop_entry_type, line_features)
+ 
+         rows.append(
+             HandObservation(
+@@ -1736,6 +2105,8 @@ def _fetch_observations(
+                 hero_3bet_to_open_ratio=three_bet_features["hero_3bet_to_open_ratio"],
+                 faced_4bet_after_3bet=three_bet_features["faced_4bet_after_3bet"],
+                 folded_to_4bet_after_3bet=three_bet_features["folded_to_4bet_after_3bet"],
++                preflop_line_key=preflop_line_key,
++                preflop_line_label=preflop_line_label,
+             )
+         )
+     return rows
+@@ -1854,6 +2225,7 @@ def get_hand_matrix_payload(
+         stack_metrics = _stack_metrics(played_rows)
+         stack_realization = stack_metrics["avg_stack_realization_pct"]
+         position_situation_rows = _position_situation_breakdown(hand_rows)
++        preflop_line_rows = _preflop_line_breakdown(hand_rows)
+         matrix_cells[hand_class] = {
+             "hand_class": hand_class,
+             "dealt_count": dealt_count,
+@@ -1870,6 +2242,7 @@ def get_hand_matrix_payload(
+             "hover_action_lines": _cell_action_lines(played_rows),
+             "hover_action_breakdown": _cell_action_breakdown(played_rows),
+             "position_situation_breakdown": position_situation_rows,
++            "preflop_line_breakdown": preflop_line_rows,
+             "english_read": _build_hand_english_read(
+                 hand_class,
+                 dealt_count=dealt_count,
+@@ -1929,6 +2302,7 @@ def get_hand_matrix_payload(
+         detail_rows = played_by_hand.get(resolved_selected_hand, [])
+         detail_stack_metrics = _stack_metrics(detail_rows)
+         detail_position_situation_rows = _position_situation_breakdown(dealt_detail_rows)
++        detail_preflop_line_rows = _preflop_line_breakdown(dealt_detail_rows)
+         detail_avg_bb_per_hand = round(sum(item.bb_net for item in detail_rows) / len(detail_rows), 2) if detail_rows else None
+         by_position_detail: dict[str, list[HandObservation]] = defaultdict(list)
+         for item in detail_rows:
+@@ -1969,6 +2343,7 @@ def get_hand_matrix_payload(
+             ],
+             "action_depth_breakdown": _action_depth_breakdown(detail_rows),
+             "position_situation_breakdown": detail_position_situation_rows,
++            "preflop_line_breakdown": detail_preflop_line_rows,
+             "english_read": _build_hand_english_read(
+                 resolved_selected_hand,
+                 dealt_count=len(dealt_detail_rows),
+diff --git a/docs/active_task.md b/docs/active_task.md
+index 008af24..02585af 100644
+--- a/docs/active_task.md
++++ b/docs/active_task.md
+@@ -2,74 +2,52 @@
+ 
+ ## Title
+ 
+-Cleanup after interrupted Claude run with 222 file changes.
++Matrix Golden QA and Review Packet.
+ 
+-## Why this is the active task
++## Business Question
+ 
+-Claude stopped after a large working-tree rewrite that mixed useful product/UI work with risky repository hygiene changes.
++Can the current Matrix MVP be trusted enough to explain Hero's real preflop baseline through a small set of golden hand-class examples?
+ 
+-The working tree included:
++## Objective
+ 
+-- deleted canonical root docs
+-- deleted live docs and reports
+-- duplicate archive folders
+-- a copied `.claude/worktrees` workspace
+-- useful frontend/operator changes
+-- useful compact summaries in `STATUS.md` and `DECISIONS.md`
+-
+-The active job is to preserve useful work while restoring the repo's canonical operating structure.
++Create a deterministic QA packet that separates what Codex can verify alone from what Hero must review tomorrow.
+ 
+ ## Scope
+ 
+ In scope:
+ 
+-- restore canonical docs and report locations
+-- remove interrupted-agent workspace noise
+-- keep useful product/UI changes for review
+-- align `STATUS.md`, `DECISIONS.md`, `docs/current_state.md`, and `docs/next_up.md`
+-- run smoke/build validation if feasible
+-- write a report
++- generate a repeatable Matrix QA report from current local Hero data
++- inspect golden hand classes: `99`, `A5s`, `KJo`, `AQo`, `AKo`, `83o`
++- include preflop-line drivers, important losing rows, raw hand trace examples, and review questions
++- summarize 3bet-fold candidates for marginal bluff/value-boundary review
++- keep this as a QA/reporting task, not a behavior-changing product task
+ 
+ Out of scope:
+ 
+-- broad product redesign
+-- discarding useful Claude implementation work
+-- committing without explicit request
+-- solving production architecture for SQLite / Python subprocess coupling
+-
+-## Target outcome
+-
+-At the end of this task:
++- changing Matrix scoring behavior
++- changing paid-user UI
++- importing exact solver outputs
++- converting any finding into product copy without Hero review
++- production deploy
+ 
+-- no canonical docs are deleted
+-- no duplicate `.claude` or `_archive` worktree copies remain
+-- remaining changes are reviewable implementation/docs changes
+-- next task is clear
++## Product Decisions
+ 
+-## First files to inspect
++- The current paid MVP remains focused on three visible insights:
++  1. `13x13` actual-result baseline.
++  2. Pinned detail `ACTUAL RESULT DRIVERS`.
++  3. Short correction candidates.
++- This QA packet treats actual results as post-hoc evidence, not solver EV or all-in adjusted EV.
++- Golden hand examples should become review anchors before public demo copy is finalized.
++- Low-participation hands such as `83o` should stay neutralized and not compete with core red/value cells.
+ 
+-- `git status --short`
+-- `STATUS.md`
+-- `DECISIONS.md`
+-- `README.md`
+-- `docs/README.md`
+-- `frontend/app/app/`
+-- `frontend/app/operator/`
+-- `reports/00_foundation/`
+-
+-## Validation target
++## Validation Target
+ 
+ Minimum:
+ 
+-- `python3 tests/v2_smoke_tests.py`
+-- `python3 tests/legacy_corpus_tests.py`
+-- `npm run build`
+-
+-## Completion rule
++- generate `reports/00_foundation/128-matrix-golden-qa-and-trace-report.md`
++- run Matrix/backend regression checks
++- verify the report includes raw traceable hand ids and next review questions
+ 
+-This task is complete only when:
++## Report Destination
+ 
+-1. file-change noise is reduced and explained
+-2. canonical docs are present
+-3. validation is run or any blocker is reported
+-4. cleanup report is written
++`reports/00_foundation/128-matrix-golden-qa-and-trace-report.md`
+diff --git a/frontend/app/app/brain/page.tsx b/frontend/app/app/brain/page.tsx
+index 70e72b0..25846da 100644
+--- a/frontend/app/app/brain/page.tsx
++++ b/frontend/app/app/brain/page.tsx
+@@ -194,8 +194,7 @@ export default async function BrainPage() {
+ 
+       {!plan.gates.premiumBrain ? (
+         <p className="subtle plan-footnote">
+-          Free Beta plan shows the compact Brain. Per-pattern timelines and operator-grade memory graph live behind paid
+-          entitlement.
++          Paid Matrix access unlocks deeper Brain detail after your GG hand histories are uploaded.
+         </p>
+       ) : null}
+     </>
+diff --git a/frontend/app/app/matrix/page.tsx b/frontend/app/app/matrix/page.tsx
+index edde92c..98177c5 100644
+--- a/frontend/app/app/matrix/page.tsx
++++ b/frontend/app/app/matrix/page.tsx
+@@ -33,6 +33,49 @@ function countLabel(count: unknown, noun: string) {
+   return `${numeric} ${noun}`;
+ }
+ 
++function DemoPreviewMatrix() {
++  const previewHands = ["AA", "AKs", "KQs", "QJs", "TT", "99", "A5s", "KQo", "66", "A9o", "T8s", "55"];
++  return (
++    <section className="page-card standout-card matrix-analysis-card app-preview-card">
++      <div className="section-heading-row">
++        <div>
++          <p className="eyebrow">Demo Preview</p>
++          <h1>Preview the Matrix. Unlock yours after membership and upload.</h1>
++          <p className="subtle">
++            This preview uses sample data only. Your real hand history stays private and appears only after your account
++            is active and you upload GG hand-history packets.
++          </p>
++        </div>
++        <Link className="cta" href="/signup">
++          Unlock My Matrix
++        </Link>
++      </div>
++      <div className="preview-matrix-strip">
++        {previewHands.map((hand, index) => (
++          <span className={index % 4 === 0 ? "value" : index % 5 === 0 ? "danger" : "watch"} key={hand}>
++            <strong>{hand}</strong>
++            <small>{index % 4 === 0 ? "Value" : index % 5 === 0 ? "Leak" : "Watch"}</small>
++          </span>
++        ))}
++      </div>
++      <div className="locked-preview-grid">
++        <div>
++          <span>Locked</span>
++          <strong>Rolling 7 / 30 / 90 day trends</strong>
++        </div>
++        <div>
++          <span>Locked</span>
++          <strong>Monthly leak watchlist</strong>
++        </div>
++        <div>
++          <span>Locked</span>
++          <strong>AOF and sizing baseline</strong>
++        </div>
++      </div>
++    </section>
++  );
++}
++
+ export default async function AppMatrixPage() {
+   const viewer = await getViewerContext();
+   const baselineMatrix = await getHeroBaselineMatrix(viewer.playerId, "66");
+@@ -42,17 +85,7 @@ export default async function AppMatrixPage() {
+ 
+   if (!viewer.playerId) {
+     return (
+-      <section className="page-card standout-card matrix-analysis-card">
+-        <p className="eyebrow">Your Matrix</p>
+-        <h1>Upload hand history, then see your preflop baseline.</h1>
+-        <p className="subtle">
+-          Your account is not mapped to a player model yet. Once access is provisioned, your uploads will turn into this
+-          Matrix view.
+-        </p>
+-        <Link className="cta" href="/app/account">
+-          Check account
+-        </Link>
+-      </section>
++      <DemoPreviewMatrix />
+     );
+   }
+ 
+@@ -80,17 +113,7 @@ export default async function AppMatrixPage() {
+       </section>
+ 
+       {!hasMatrix ? (
+-        <section className="page-card matrix-analysis-card">
+-          <p className="eyebrow">Blank Matrix</p>
+-          <h3>No parsed hand histories yet.</h3>
+-          <p className="subtle">
+-            Add a GG Poker `.txt` packet or zip dump. After upload, your Matrix will show how you actually played and
+-            what the results were.
+-          </p>
+-          <Link className="cta" href="/app/upload">
+-            Upload first packet
+-          </Link>
+-        </section>
++        <DemoPreviewMatrix />
+       ) : (
+         <>
+           <section className="page-card matrix-analysis-card preflop-summary-card">
+diff --git a/frontend/app/app/review/page.tsx b/frontend/app/app/review/page.tsx
+index 41baaf4..20179aa 100644
+--- a/frontend/app/app/review/page.tsx
++++ b/frontend/app/app/review/page.tsx
+@@ -189,7 +189,7 @@ export default async function ReviewPage() {
+ 
+       {!plan.gates.premiumReview ? (
+         <p className="subtle plan-footnote">
+-          Free Beta plan keeps Review compact. Hand-level deep-dives unlock under paid entitlement.
++          Paid Matrix access unlocks deeper Review detail after your GG hand histories are uploaded.
+         </p>
+       ) : null}
+     </>
+diff --git a/frontend/app/demo-apply-form.tsx b/frontend/app/demo-apply-form.tsx
+index 39d5283..9bc60c8 100644
+--- a/frontend/app/demo-apply-form.tsx
++++ b/frontend/app/demo-apply-form.tsx
+@@ -18,15 +18,15 @@ export function DemoApplyForm({ compact = false }: DemoApplyFormProps) {
+   return (
+     <section className={`apply-shell ${compact ? "compact" : ""}`} id="apply">
+       <div className="apply-copy">
+-        <p className="eyebrow">Early Demo</p>
+-        <h2>Join the first GG Poker Ontario test group.</h2>
++        <p className="eyebrow">Founding Access</p>
++        <h2>Join the first 50 GG Poker Matrix users.</h2>
+         <p className="subtle">
+-          Serious online MTT players only. Short application. No long setup. No live advice.
++          Short access request today. Magic-link signup and checkout come next. No live advice, no in-game assistance.
+         </p>
+         <div className="apply-badges">
+-          <span className="apply-badge">GG Ontario</span>
+-          <span className="apply-badge">Online MTT</span>
+-          <span className="apply-badge">Early Access</span>
++          <span className="apply-badge">GG histories</span>
++          <span className="apply-badge">$29 first 90 days</span>
++          <span className="apply-badge">First 50</span>
+         </div>
+       </div>
+ 
+@@ -44,16 +44,16 @@ export function DemoApplyForm({ compact = false }: DemoApplyFormProps) {
+           <form className={`apply-form ${compact ? "compact-grid" : ""}`} action={formAction}>
+             <input name="name" required placeholder="Name" />
+             <input name="email" required type="email" placeholder="Email" />
+-            <input name="games" required placeholder="Games / buy-ins" />
++            <input name="games" required placeholder="Games / buy-ins / site" />
+             <textarea
+               name="help"
+               required
+-              placeholder="What do you want help with most?"
++              placeholder="What would you want your Matrix to show you first?"
+               rows={4}
+             />
+             {state.message ? <p className="form-error">{state.message}</p> : null}
+             <button className="cta button-reset apply-submit" type="submit" disabled={isPending}>
+-              {isPending ? "Sending..." : "Request Demo"}
++              {isPending ? "Sending..." : "Request Founding Access"}
+             </button>
+           </form>
+         )}
+diff --git a/frontend/app/globals.css b/frontend/app/globals.css
+index 5ef530c..d56a930 100644
+--- a/frontend/app/globals.css
++++ b/frontend/app/globals.css
+@@ -856,6 +856,13 @@ h3 {
+   font-weight: 900;
+ }
+ 
++.preflop-sizing-row > strong {
++  display: flex;
++  min-width: 0;
++  flex-direction: column;
++  gap: 2px;
++}
++
+ .preflop-sizing-row small {
+   color: var(--muted);
+   font-size: 11px;
+@@ -920,6 +927,10 @@ h3 {
+ }
+ 
+ .preflop-aof-row strong {
++  display: flex;
++  min-width: 0;
++  flex-direction: column;
++  gap: 2px;
+   color: var(--ink-strong);
+   font-size: 12px;
+ }
+@@ -2395,6 +2406,12 @@ h3 {
+ 
+ @media (max-width: 900px) {
+   .hero-stage,
++  .landing-hero-v2,
++  .landing-section-grid,
++  .landing-process-grid,
++  .landing-offer-card,
++  .landing-coming-card,
++  .locked-preview-grid,
+   .grid.two,
+   .grid.three,
+   .result-hero,
+@@ -2453,6 +2470,32 @@ h3 {
+     width: min(100%, 280px);
+   }
+ 
++  .landing-hero-copy-v2 h1 {
++    max-width: 11ch;
++  }
++
++  .matrix-demo-card {
++    padding: 16px;
++  }
++
++  .demo-matrix-grid {
++    gap: 3px;
++  }
++
++  .demo-matrix-cell {
++    min-height: 28px;
++    border-radius: 7px;
++    font-size: 9px;
++  }
++
++  .preview-matrix-strip {
++    grid-template-columns: repeat(3, minmax(0, 1fr));
++  }
++
++  .upcoming-grid {
++    grid-template-columns: 1fr;
++  }
++
+   .hero-float-primary {
+     right: 0;
+   }
+@@ -2461,6 +2504,77 @@ h3 {
+     top: 132px;
+   }
+ 
++  .landing-v2 {
++    overflow: hidden;
++    padding-inline: 14px;
++  }
++
++  .landing-nav {
++    margin-bottom: 20px;
++  }
++
++  .landing-brand {
++    gap: 9px;
++  }
++
++  .landing-brand span {
++    width: 40px;
++    height: 40px;
++  }
++
++  .landing-brand strong {
++    font-size: 13px;
++  }
++
++  .landing-hero-v2 {
++    display: block;
++    padding: 18px 0 8px;
++  }
++
++  .landing-hero-copy-v2 h1 {
++    max-width: 9ch;
++    font-size: clamp(2.65rem, 14vw, 4rem);
++    line-height: 0.94;
++  }
++
++  .landing-hero-copy-v2 .hero-subtitle {
++    max-width: 20rem;
++    font-size: 1rem;
++  }
++
++  .landing-hero-v2 .matrix-demo-card,
++  .landing-section-grid,
++  .landing-process-card,
++  .landing-grid,
++  .landing-coming-card {
++    display: none;
++  }
++
++  .desktop-note {
++    display: block;
++    width: 100%;
++    max-width: 22rem;
++    border-radius: 16px;
++    line-height: 1.35;
++  }
++
++  .landing-v2 .cta,
++  .landing-v2 .secondary-cta {
++    width: 100%;
++    max-width: 22rem;
++  }
++
++  .landing-offer-card {
++    display: grid;
++    grid-template-columns: 1fr;
++    margin-top: 18px;
++    padding: 20px;
++  }
++
++  .offer-price-card strong {
++    font-size: 3.4rem;
++  }
++
+   .nav-card {
+     position: static;
+   }
+@@ -2960,3 +3074,1564 @@ h3 {
+     radial-gradient(circle at 0% 0%, rgba(94, 234, 212, 0.14), transparent 50%),
+     linear-gradient(180deg, var(--card-strong), var(--card));
+ }
++
++/* Founding landing */
++
++.landing-v2 {
++  max-width: 1280px;
++  position: relative;
++  isolation: isolate;
++  color: #13251f;
++}
++
++.landing-v2::before {
++  content: "";
++  position: fixed;
++  inset: 0;
++  z-index: -1;
++  background:
++    radial-gradient(circle at 14% 8%, rgba(255, 111, 76, 0.16), transparent 24%),
++    radial-gradient(circle at 84% 12%, rgba(47, 143, 111, 0.15), transparent 27%),
++    linear-gradient(180deg, #fbf8ef 0%, #edf8ef 54%, #f7fbf1 100%);
++}
++
++.landing-v2 .eyebrow {
++  color: #2f8f6f;
++}
++
++.landing-v2 h1,
++.landing-v2 h2,
++.landing-v2 h3,
++.landing-v2 .landing-brand strong {
++  color: #13251f;
++}
++
++.landing-v2 .hero-subtitle,
++.landing-v2 .subtle,
++.landing-v2 .landing-proof,
++.landing-v2 .landing-value-card p,
++.landing-v2 .landing-process-grid p,
++.landing-v2 .demo-readout span {
++  color: #53695e;
++}
++
++.landing-v2 .cta {
++  background: #ff6f4c;
++  color: #1d1008;
++  box-shadow: 0 16px 36px rgba(255, 111, 76, 0.26);
++}
++
++.landing-v2 .secondary-cta {
++  border-color: #cfded4;
++  background: rgba(255, 255, 255, 0.72);
++  color: #22513e;
++}
++
++.landing-v2 .sample-kicker {
++  background: #e4f3d7;
++  color: #22513e;
++}
++
++.landing-nav {
++  display: flex;
++  align-items: center;
++  justify-content: space-between;
++  gap: 18px;
++  margin-bottom: 34px;
++}
++
++.landing-brand {
++  display: inline-flex;
++  align-items: center;
++  gap: 12px;
++}
++
++.landing-brand span {
++  display: grid;
++  place-items: center;
++  width: 42px;
++  height: 42px;
++  border: 1px solid #cfe2d4;
++  border-radius: 12px;
++  background: #e4f3d7;
++  color: #22513e;
++  font-weight: 950;
++}
++
++.landing-brand strong {
++  font-size: 15px;
++}
++
++.landing-nav-actions {
++  display: flex;
++  gap: 10px;
++  align-items: center;
++}
++
++.compact-cta {
++  min-height: 42px;
++  padding: 10px 15px;
++}
++
++.landing-hero-v2 {
++  display: grid;
++  grid-template-columns: minmax(0, 0.95fr) minmax(420px, 1.05fr);
++  gap: 28px;
++  align-items: start;
++  min-height: auto;
++  padding: 32px 0 20px;
++}
++
++.landing-hero-copy-v2 h1 {
++  max-width: 11ch;
++  font-size: clamp(2.75rem, 5.6vw, 5.2rem);
++  line-height: 0.95;
++  letter-spacing: 0;
++}
++
++.founding-strip {
++  display: inline-flex;
++  align-items: center;
++  gap: 8px;
++  width: fit-content;
++  margin-bottom: 18px;
++  padding: 8px 10px;
++  border: 1px solid #cfe2d4;
++  border-radius: 999px;
++  background: #e4f3d7;
++}
++
++.founding-strip span,
++.founding-strip strong {
++  font-size: 12px;
++  font-weight: 950;
++  text-transform: uppercase;
++}
++
++.founding-strip span {
++  color: #22513e;
++}
++
++.founding-strip strong {
++  color: #13251f;
++}
++
++.landing-proof {
++  max-width: 42rem;
++  margin: 18px 0 0;
++  color: var(--muted);
++  font-size: 13px;
++  font-weight: 750;
++  line-height: 1.45;
++}
++
++.desktop-note {
++  display: inline-flex;
++  width: fit-content;
++  margin: 12px 0 0;
++  padding: 9px 11px;
++  border: 1px solid #d7e5dc;
++  border-radius: 999px;
++  background: rgba(255, 255, 255, 0.68);
++  color: #22513e;
++  font-size: 12px;
++  font-weight: 900;
++}
++
++.matrix-demo-card {
++  display: grid;
++  gap: 14px;
++  min-width: 0;
++  align-self: start;
++  padding: 22px;
++  border: 1px solid #d7e5dc;
++  border-radius: 22px;
++  background:
++    linear-gradient(155deg, rgba(255, 255, 255, 0.78), transparent 42%),
++    linear-gradient(180deg, #ffffff, #f4faf2);
++  box-shadow: 0 22px 60px rgba(19, 38, 49, 0.13);
++}
++
++.matrix-demo-head {
++  display: flex;
++  align-items: flex-start;
++  justify-content: space-between;
++  gap: 14px;
++}
++
++.matrix-demo-head h2 {
++  max-width: 16ch;
++  font-size: clamp(1.6rem, 3vw, 2.5rem);
++}
++
++.locked-pill {
++  flex: 0 0 auto;
++  padding: 8px 10px;
++  border: 1px solid #d7e5dc;
++  border-radius: 999px;
++  color: #53695e;
++  font-size: 10px;
++  font-weight: 950;
++  text-transform: uppercase;
++}
++
++.demo-matrix-grid {
++  display: grid;
++  grid-template-columns: repeat(13, minmax(0, 1fr));
++  gap: 4px;
++}
++
++.demo-matrix-cell {
++  position: relative;
++  display: grid;
++  min-height: 38px;
++  gap: 1px;
++  place-items: center;
++  align-content: center;
++  padding: 4px 3px 6px;
++  border: 1px solid #d7e5dc;
++  border-radius: 8px;
++  color: #13251f;
++  box-shadow: 0 7px 14px rgba(19, 38, 49, 0.05);
++}
++
++.demo-matrix-cell::after {
++  position: absolute;
++  right: 5px;
++  bottom: 4px;
++  left: 5px;
++  height: 3px;
++  border-radius: 999px;
++  background: #cfded4;
++  content: "";
++}
++
++.demo-matrix-cell strong {
++  color: #13251f;
++  font-size: 9px;
++  font-weight: 950;
++  line-height: 1;
++}
++
++.demo-matrix-cell small {
++  color: #53695e;
++  font-size: 7px;
++  font-weight: 900;
++  line-height: 1;
++}
++
++.demo-matrix-cell.tone-very-good {
++  border-color: rgba(47, 143, 111, 0.42);
++  background: linear-gradient(145deg, rgba(47, 143, 111, 0.24), #ffffff);
++}
++
++.demo-matrix-cell.tone-good {
++  border-color: rgba(47, 143, 111, 0.34);
++  background: linear-gradient(145deg, rgba(47, 143, 111, 0.14), #ffffff);
++}
++
++.demo-matrix-cell.tone-neutral {
++  background: #ffffff;
++}
++
++.demo-matrix-cell.tone-bad {
++  border-color: rgba(242, 206, 105, 0.68);
++  background: linear-gradient(145deg, rgba(242, 206, 105, 0.24), #ffffff);
++}
++
++.demo-matrix-cell.tone-very-bad {
++  border-color: rgba(255, 122, 89, 0.52);
++  background: linear-gradient(145deg, rgba(255, 122, 89, 0.24), #ffffff);
++}
++
++.demo-matrix-cell.tone-low-participation {
++  border-color: #e0e8dd;
++  background: #f8faf5;
++}
++
++.demo-matrix-cell.tone-low-participation strong,
++.demo-matrix-cell.tone-low-participation small {
++  color: #9aa99f;
++}
++
++.demo-matrix-cell.stack-tone-very-good::after {
++  background: #167a59;
++}
++
++.demo-matrix-cell.stack-tone-good::after {
++  background: #2f8f6f;
++}
++
++.demo-matrix-cell.stack-tone-neutral::after {
++  background: #cfded4;
++}
++
++.demo-matrix-cell.stack-tone-bad::after {
++  background: #f2ce69;
++}
++
++.demo-matrix-cell.stack-tone-very-bad::after {
++  background: #ff7a59;
++}
++
++.demo-matrix-cell.stack-tone-low-participation::after {
++  background: #e4eadf;
++}
++
++.demo-readout {
++  display: grid;
++  gap: 5px;
++  padding: 13px;
++  border: 1px solid #d7e5dc;
++  border-radius: 14px;
++  background: #e4f3d7;
++}
++
++.demo-readout strong {
++  color: #13251f;
++}
++
++.demo-readout span {
++  color: var(--muted-strong);
++  font-size: 13px;
++  line-height: 1.35;
++}
++
++.landing-section-grid {
++  display: grid;
++  grid-template-columns: repeat(3, minmax(0, 1fr));
++  gap: 14px;
++  margin: 28px 0;
++}
++
++.landing-value-card,
++.landing-process-grid > div,
++.offer-price-card,
++.upcoming-grid span,
++.preview-matrix-strip span,
++.locked-preview-grid > div {
++  border: 1px solid #d7e5dc;
++  background:
++    linear-gradient(155deg, rgba(255, 255, 255, 0.78), transparent 44%),
++    #ffffff;
++  box-shadow: 0 14px 34px rgba(19, 38, 49, 0.09);
++}
++
++.landing-value-card {
++  display: grid;
++  gap: 8px;
++  min-height: 190px;
++  padding: 18px;
++  border-radius: 18px;
++}
++
++.landing-value-card p {
++  margin: 0;
++  color: var(--muted-strong);
++  line-height: 1.5;
++}
++
++.landing-process-card,
++.landing-position-card,
++.landing-offer-card,
++.landing-coming-card {
++  margin: 18px 0;
++  border-color: #d7e5dc;
++  background:
++    linear-gradient(155deg, rgba(255, 255, 255, 0.78), transparent 40%),
++    linear-gradient(180deg, #ffffff, #f4faf2);
++  box-shadow: 0 18px 50px rgba(19, 38, 49, 0.1);
++}
++
++.landing-process-card::before,
++.landing-position-card::before,
++.landing-offer-card::before,
++.landing-coming-card::before {
++  background: linear-gradient(90deg, #ff6f4c, #f2ce69, #2f8f6f);
++}
++
++.landing-process-grid {
++  display: grid;
++  grid-template-columns: repeat(3, minmax(0, 1fr));
++  gap: 12px;
++  margin-top: 18px;
++}
++
++.landing-process-grid > div {
++  display: grid;
++  gap: 8px;
++  min-height: 180px;
++  padding: 18px;
++  border-radius: 18px;
++}
++
++.landing-process-grid span {
++  color: #2f8f6f;
++  font-size: 12px;
++  font-weight: 950;
++}
++
++.landing-process-grid strong {
++  color: #13251f;
++  font-size: 1.15rem;
++}
++
++.landing-process-grid p {
++  margin: 0;
++  color: var(--muted);
++  line-height: 1.45;
++}
++
++.landing-position-card h2 {
++  max-width: 15ch;
++}
++
++.landing-offer-card {
++  display: grid;
++  grid-template-columns: minmax(0, 1fr) minmax(280px, 360px);
++  gap: 22px;
++  align-items: center;
++}
++
++.offer-price-card {
++  display: grid;
++  gap: 8px;
++  padding: 20px;
++  border-color: #cfe2d4;
++  border-radius: 20px;
++}
++
++.offer-price-card span {
++  color: #22513e;
++  font-size: 12px;
++  font-weight: 950;
++  text-transform: uppercase;
++}
++
++.offer-price-card strong {
++  color: #13251f;
++  font-size: clamp(3rem, 7vw, 5rem);
++  line-height: 0.9;
++}
++
++.offer-price-card p,
++.offer-price-card small {
++  margin: 0;
++  color: #53695e;
++  line-height: 1.4;
++}
++
++.offer-price-card .cta {
++  margin-top: 8px;
++}
++
++.landing-coming-card {
++  display: grid;
++  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
++  gap: 22px;
++  align-items: center;
++}
++
++.upcoming-grid {
++  display: grid;
++  grid-template-columns: repeat(2, minmax(0, 1fr));
++  gap: 10px;
++}
++
++.upcoming-grid span {
++  min-height: 64px;
++  padding: 14px;
++  border-radius: 14px;
++  color: #13251f;
++  font-size: 13px;
++  font-weight: 950;
++}
++
++.founding-signup-card {
++  display: grid;
++  gap: 14px;
++}
++
++.paid-signup-card {
++  display: grid;
++  grid-template-columns: minmax(0, 0.95fr) minmax(320px, 0.8fr);
++  gap: 24px;
++  width: min(980px, 100%);
++  border-color: #d7e5dc;
++  background:
++    radial-gradient(circle at 0% 0%, rgba(255, 111, 76, 0.14), transparent 30%),
++    linear-gradient(155deg, rgba(255, 255, 255, 0.82), transparent 42%),
++    linear-gradient(180deg, #ffffff, #f4faf2);
++  color: #13251f;
++}
++
++.paid-signup-card::before {
++  background: linear-gradient(90deg, #ff6f4c, #f2ce69, #2f8f6f);
++}
++
++.paid-signup-card h1,
++.paid-signup-card h2,
++.paid-signup-card h3 {
++  color: #13251f;
++  letter-spacing: 0;
++}
++
++.paid-signup-card .eyebrow {
++  color: #2f8f6f;
++}
++
++.paid-signup-card .subtle {
++  color: #53695e;
++}
++
++.paid-signup-copy h1 {
++  max-width: 11ch;
++  font-size: clamp(2.6rem, 6vw, 5.1rem);
++  line-height: 0.95;
++}
++
++.paid-flow-list {
++  display: grid;
++  grid-template-columns: repeat(2, minmax(0, 1fr));
++  gap: 10px;
++  margin-top: 24px;
++}
++
++.paid-flow-list span,
++.paid-access-note,
++.paid-email-confirm {
++  border: 1px solid #d7e5dc;
++  border-radius: 14px;
++  background: rgba(255, 255, 255, 0.78);
++  color: #22513e;
++  font-size: 13px;
++  font-weight: 900;
++}
++
++.paid-flow-list span {
++  min-height: 58px;
++  padding: 14px;
++}
++
++.paid-signup-panel {
++  align-self: start;
++  padding: 22px;
++  border: 1px solid #d7e5dc;
++  border-radius: 22px;
++  background: #ffffff;
++  box-shadow: 0 18px 48px rgba(19, 38, 49, 0.1);
++}
++
++.paid-signup-form {
++  display: grid;
++  gap: 14px;
++  margin-top: 18px;
++}
++
++.paid-signup-form label {
++  display: grid;
++  gap: 7px;
++  color: #53695e;
++  font-size: 13px;
++  font-weight: 900;
++}
++
++.paid-signup-form input {
++  width: 100%;
++  border: 1px solid #cfded4;
++  border-radius: 16px;
++  padding: 15px 16px;
++  background: #fbfef9;
++  color: #13251f;
++  font: inherit;
++}
++
++.paid-signup-form .cta,
++.paid-signup-card .cta {
++  min-height: 52px;
++  background: #ff6f4c;
++  color: #1d1008;
++  box-shadow: 0 16px 36px rgba(255, 111, 76, 0.24);
++}
++
++.paid-signup-card .secondary-cta {
++  border-color: #cfded4;
++  background: rgba(255, 255, 255, 0.72);
++  color: #22513e;
++}
++
++.paid-access-note {
++  margin: 16px 0 0;
++  padding: 12px;
++  line-height: 1.4;
++}
++
++.paid-signup-success {
++  color: #13251f;
++}
++
++.paid-email-confirm {
++  display: inline-flex;
++  margin: 8px 0 0;
++  padding: 9px 11px;
++}
++
++.clean-auth-wrap,
++.clean-public-page {
++  position: relative;
++  isolation: isolate;
++  color: #13251f;
++}
++
++.clean-auth-wrap::before,
++.clean-public-page::before {
++  content: "";
++  position: fixed;
++  inset: 0;
++  z-index: -1;
++  background:
++    radial-gradient(circle at 14% 8%, rgba(255, 111, 76, 0.16), transparent 24%),
++    radial-gradient(circle at 84% 12%, rgba(47, 143, 111, 0.15), transparent 27%),
++    linear-gradient(180deg, #fbf8ef 0%, #edf8ef 54%, #f7fbf1 100%);
++}
++
++.operator-login-card,
++.clean-public-hero,
++.clean-price-card {
++  border-color: #d7e5dc;
++  background:
++    linear-gradient(155deg, rgba(255, 255, 255, 0.82), transparent 42%),
++    linear-gradient(180deg, #ffffff, #f4faf2);
++  color: #13251f;
++  box-shadow: 0 18px 50px rgba(19, 38, 49, 0.1);
++}
++
++.operator-login-card::before,
++.clean-public-hero::before,
++.clean-price-card::before {
++  background: linear-gradient(90deg, #ff6f4c, #f2ce69, #2f8f6f);
++}
++
++.operator-login-card {
++  display: grid;
++  grid-template-columns: minmax(0, 0.95fr) minmax(320px, 0.8fr);
++  gap: 24px;
++  width: min(980px, 100%);
++}
++
++.operator-login-card h1,
++.operator-login-card h2,
++.clean-public-page h1,
++.clean-public-page h2,
++.clean-public-page h3 {
++  color: #13251f;
++  letter-spacing: 0;
++}
++
++.operator-login-card .eyebrow,
++.clean-public-page .eyebrow {
++  color: #2f8f6f;
++}
++
++.operator-login-card .subtle,
++.clean-public-page .subtle {
++  color: #53695e;
++}
++
++.operator-login-copy h1,
++.clean-public-hero h1 {
++  max-width: 11ch;
++  font-size: clamp(2.7rem, 6vw, 5.2rem);
++  line-height: 0.95;
++}
++
++.operator-login-actions {
++  display: grid;
++  gap: 12px;
++  margin-top: 18px;
++}
++
++.operator-login-card .cta,
++.clean-public-page .cta {
++  background: #ff6f4c;
++  color: #1d1008;
++  box-shadow: 0 16px 36px rgba(255, 111, 76, 0.24);
++}
++
++.operator-login-card .secondary-cta,
++.clean-public-page .secondary-cta {
++  border-color: #cfded4;
++  background: rgba(255, 255, 255, 0.72);
++  color: #22513e;
++}
++
++.operator-login-footer {
++  grid-column: 1 / -1;
++}
++
++.clean-price-card .metric {
++  color: #13251f;
++}
++
++.clean-price-card .status-item {
++  border-color: #d7e5dc;
++  background: rgba(255, 255, 255, 0.74);
++  color: #22513e;
++}
++
++.app-preview-card {
++  display: grid;
++  gap: 18px;
++}
++
++.preview-matrix-strip {
++  display: grid;
++  grid-template-columns: repeat(6, minmax(0, 1fr));
++  gap: 8px;
++}
++
++.preview-matrix-strip span {
++  display: grid;
++  gap: 4px;
++  min-height: 82px;
++  padding: 12px;
++  border-radius: 14px;
++}
++
++.preview-matrix-strip span.value {
++  border-color: rgba(94, 234, 212, 0.34);
++}
++
++.preview-matrix-strip span.danger {
++  border-color: rgba(255, 120, 79, 0.36);
++}
++
++.preview-matrix-strip span.watch {
++  border-color: rgba(255, 209, 102, 0.32);
++}
++
++.preview-matrix-strip strong {
++  color: var(--ink-strong);
++  font-size: 18px;
++}
++
++.preview-matrix-strip small {
++  color: var(--muted);
++  font-size: 11px;
++  font-weight: 900;
++  text-transform: uppercase;
++}
++
++.locked-preview-grid {
++  display: grid;
++  grid-template-columns: repeat(3, minmax(0, 1fr));
++  gap: 10px;
++}
++
++.locked-preview-grid > div {
++  display: grid;
++  gap: 5px;
++  min-height: 90px;
++  padding: 14px;
++  border-radius: 14px;
++}
++
++.locked-preview-grid span {
++  color: var(--accent-2);
++  font-size: 11px;
++  font-weight: 950;
++  text-transform: uppercase;
++}
++
++.locked-preview-grid strong {
++  color: var(--ink-strong);
++  font-size: 14px;
++  line-height: 1.25;
++}
++
++/* Temporary color direction preview */
++
++.style-preview-page {
++  min-height: 100vh;
++  padding: 32px 20px 64px;
++  background: #f4f8f3;
++  color: #10202a;
++}
++
++.style-preview-header {
++  max-width: 980px;
++  margin: 0 auto 22px;
++}
++
++.style-preview-header h1 {
++  color: #10202a;
++  font-size: clamp(2.1rem, 4vw, 4.2rem);
++  letter-spacing: 0;
++}
++
++.style-preview-header p {
++  max-width: 48rem;
++  color: #4b6070;
++  line-height: 1.5;
++}
++
++.style-scheme-grid {
++  display: grid;
++  grid-template-columns: repeat(3, minmax(0, 1fr));
++  gap: 16px;
++  max-width: 1500px;
++  margin: 0 auto;
++}
++
++.style-scheme-card {
++  display: grid;
++  gap: 16px;
++  min-height: 720px;
++  padding: 18px;
++  border: 1px solid rgba(16, 32, 42, 0.12);
++  border-radius: 22px;
++  box-shadow: 0 20px 60px rgba(19, 38, 49, 0.14);
++}
++
++.style-scheme-top {
++  display: flex;
++  gap: 12px;
++  align-items: flex-start;
++}
++
++.style-scheme-top > span {
++  display: grid;
++  flex: 0 0 auto;
++  place-items: center;
++  width: 44px;
++  height: 44px;
++  border-radius: 13px;
++  font-size: 20px;
++  font-weight: 950;
++}
++
++.style-scheme-top strong {
++  display: block;
++  font-size: 20px;
++  line-height: 1.1;
++}
++
++.style-scheme-top p {
++  margin: 5px 0 0;
++  font-size: 13px;
++  line-height: 1.4;
++}
++
++.style-scheme-hero {
++  display: grid;
++  gap: 18px;
++}
++
++.style-offer {
++  display: inline-flex;
++  width: fit-content;
++  margin-bottom: 13px;
++  padding: 7px 10px;
++  border-radius: 999px;
++  font-size: 11px;
++  font-weight: 950;
++  text-transform: uppercase;
++}
++
++.style-scheme-hero h2 {
++  max-width: 9ch;
++  margin: 0 0 12px;
++  font-size: clamp(2.35rem, 4.4vw, 4.4rem);
++  line-height: 0.95;
++  letter-spacing: 0;
++}
++
++.style-scheme-hero p {
++  max-width: 29rem;
++  margin: 0 0 16px;
++  font-size: 15px;
++  line-height: 1.45;
++}
++
++.style-scheme-hero button {
++  min-height: 44px;
++  padding: 11px 16px;
++  border: 0;
++  border-radius: 999px;
++  font: inherit;
++  font-weight: 950;
++}
++
++.style-mini-matrix {
++  display: grid;
++  grid-template-columns: repeat(4, minmax(0, 1fr));
++  gap: 7px;
++  padding: 14px;
++  border-radius: 18px;
++}
++
++.style-mini-matrix span {
++  display: grid;
++  min-height: 48px;
++  place-items: center;
++  border-radius: 11px;
++  font-size: 12px;
++  font-weight: 950;
++}
++
++.style-scheme-footer {
++  display: grid;
++  gap: 8px;
++  align-self: end;
++}
++
++.style-scheme-footer span {
++  padding: 11px 12px;
++  border-radius: 13px;
++  font-size: 13px;
++  font-weight: 900;
++}
++
++.scheme-clean-felt {
++  background:
++    linear-gradient(180deg, #fbf8ef, #edf8ef);
++  color: #13251f;
++}
++
++.scheme-clean-felt .style-scheme-top > span,
++.scheme-clean-felt button {
++  background: #ff6f4c;
++  color: #1d1008;
++}
++
++.scheme-clean-felt .style-offer,
++.scheme-clean-felt .style-scheme-footer span {
++  background: #e4f3d7;
++  color: #22513e;
++}
++
++.scheme-clean-felt .style-scheme-hero h2,
++.scheme-clean-felt .style-scheme-top strong {
++  color: #13251f;
++}
++
++.scheme-clean-felt .style-scheme-hero p,
++.scheme-clean-felt .style-scheme-top p {
++  color: #53695e;
++}
++
++.scheme-clean-felt .style-mini-matrix {
++  background: #ffffff;
++  border: 1px solid #d7e5dc;
++}
++
++.scheme-clean-felt .style-mini-matrix .value {
++  background: #2f8f6f;
++  color: #ffffff;
++}
++
++.scheme-clean-felt .style-mini-matrix .watch {
++  background: #f2ce69;
++  color: #342509;
++}
++
++.scheme-clean-felt .style-mini-matrix .danger {
++  background: #ff7a59;
++  color: #2b0e06;
++}
++
++.scheme-performance-lab {
++  background:
++    linear-gradient(180deg, #ffffff, #eef6fb);
++  color: #101c2d;
++}
++
++.scheme-performance-lab .style-scheme-top > span,
++.scheme-performance-lab button {
++  background: #11c5c3;
++  color: #071d24;
++}
++
++.scheme-performance-lab .style-offer,
++.scheme-performance-lab .style-scheme-footer span {
++  background: #e8f4ff;
++  color: #17415f;
++}
++
++.scheme-performance-lab .style-scheme-hero h2,
++.scheme-performance-lab .style-scheme-top strong {
++  color: #101c2d;
++}
++
++.scheme-performance-lab .style-scheme-hero p,
++.scheme-performance-lab .style-scheme-top p {
++  color: #506172;
++}
++
++.scheme-performance-lab .style-mini-matrix {
++  background: #f8fbff;
++  border: 1px solid #dce7ef;
++}
++
++.scheme-performance-lab .style-mini-matrix .value {
++  background: #10b981;
++  color: #062016;
++}
++
++.scheme-performance-lab .style-mini-matrix .watch {
++  background: #60a5fa;
++  color: #07152e;
++}
++
++.scheme-performance-lab .style-mini-matrix .danger {
++  background: #fb7185;
++  color: #2a0710;
++}
++
++.scheme-premium-warm {
++  background:
++    linear-gradient(180deg, #fff6e3, #f3ead8);
++  color: #241915;
++}
++
++.scheme-premium-warm .style-scheme-top > span,
++.scheme-premium-warm button {
++  background: #c9932f;
++  color: #1f1305;
++}
++
++.scheme-premium-warm .style-offer,
++.scheme-premium-warm .style-scheme-footer span {
++  background: #efe0be;
++  color: #644611;
++}
++
++.scheme-premium-warm .style-scheme-hero h2,
++.scheme-premium-warm .style-scheme-top strong {
++  color: #241915;
++}
++
++.scheme-premium-warm .style-scheme-hero p,
++.scheme-premium-warm .style-scheme-top p {
++  color: #715f4f;
++}
++
++.scheme-premium-warm .style-mini-matrix {
++  background: #fffaf0;
++  border: 1px solid #e7d3ae;
++}
++
++.scheme-premium-warm .style-mini-matrix .value {
++  background: #197a59;
++  color: #ffffff;
++}
++
++.scheme-premium-warm .style-mini-matrix .watch {
++  background: #d9a63a;
++  color: #221304;
++}
++
++.scheme-premium-warm .style-mini-matrix .danger {
++  background: #c75f46;
++  color: #ffffff;
++}
++
++@media (max-width: 1100px) {
++  .style-scheme-grid {
++    grid-template-columns: 1fr;
++  }
++
++  .style-scheme-card {
++    min-height: auto;
++  }
++}
++
++/* Landing mobile is acquisition-only. Analysis surfaces stay desktop-first. */
++@media (max-width: 900px) {
++  .landing-v2 {
++    overflow: hidden;
++    padding-inline: 14px;
++  }
++
++  .landing-v2 .landing-nav {
++    margin-bottom: 20px;
++  }
++
++  .landing-v2 .landing-brand {
++    gap: 9px;
++  }
++
++  .landing-v2 .landing-brand span {
++    width: 40px;
++    height: 40px;
++  }
++
++  .landing-v2 .landing-brand strong {
++    font-size: 13px;
++  }
++
++  .landing-v2 .landing-hero-v2 {
++    display: block;
++    grid-template-columns: 1fr;
++    padding: 18px 0 8px;
++  }
++
++  .landing-v2 .founding-strip {
++    max-width: 16rem;
++    border-radius: 18px;
++    white-space: normal;
++  }
++
++  .landing-v2 .landing-hero-copy-v2 h1 {
++    max-width: 10.5ch;
++    font-size: clamp(3rem, 14vw, 4rem);
++    line-height: 0.94;
++  }
++
++  .landing-v2 .landing-hero-copy-v2 .hero-subtitle {
++    max-width: 21rem;
++    font-size: 1rem;
++  }
++
++  .landing-v2 .matrix-demo-card,
++  .landing-v2 .landing-section-grid,
++  .landing-v2 .landing-process-card,
++  .landing-v2 .landing-grid,
++  .landing-v2 .landing-coming-card {
++    display: none;
++  }
++
++  .landing-v2 .desktop-note {
++    display: block;
++    width: 100%;
++    max-width: 22rem;
++    border-radius: 16px;
++    line-height: 1.35;
++  }
++
++  .landing-v2 .cta,
++  .landing-v2 .secondary-cta {
++    width: 100%;
++    max-width: 22rem;
++  }
++
++  .landing-v2 .landing-offer-card {
++    display: grid;
++    grid-template-columns: 1fr;
++    margin-top: 18px;
++    padding: 20px;
++  }
++
++  .landing-v2 .offer-price-card strong {
++    font-size: 3.4rem;
++  }
++
++  .paid-signup-card {
++    grid-template-columns: 1fr;
++    padding: 20px;
++  }
++
++  .paid-signup-copy h1 {
++    max-width: 11ch;
++    font-size: clamp(2.7rem, 14vw, 4rem);
++  }
++
++  .paid-flow-list {
++    grid-template-columns: 1fr;
++  }
++
++  .operator-login-card {
++    grid-template-columns: 1fr;
++    padding: 20px;
++  }
++
++  .operator-login-copy h1,
++  .clean-public-hero h1 {
++    max-width: 11ch;
++    font-size: clamp(2.7rem, 14vw, 4rem);
++  }
++}
++
++/* Clean Felt Matrix MVP surface */
++.matrix-shell {
++  position: relative;
++  isolation: isolate;
++  color: #13251f;
++  width: 100%;
++  max-width: none;
++  min-height: 100vh;
++  background:
++    radial-gradient(circle at 12% 4%, rgba(255, 111, 76, 0.16), transparent 24%),
++    radial-gradient(circle at 82% 10%, rgba(47, 143, 111, 0.16), transparent 27%),
++    linear-gradient(180deg, #fbf8ef 0%, #edf8ef 54%, #f7fbf1 100%);
++}
++
++.matrix-shell::before {
++  content: "";
++  position: fixed;
++  inset: 0;
++  z-index: -1;
++  background:
++    radial-gradient(circle at 12% 4%, rgba(255, 111, 76, 0.16), transparent 24%),
++    radial-gradient(circle at 82% 10%, rgba(47, 143, 111, 0.16), transparent 27%),
++    linear-gradient(180deg, #fbf8ef 0%, #edf8ef 54%, #f7fbf1 100%);
++}
++
++.matrix-shell .page-card,
++.matrix-shell .matrix-analysis-card,
++.matrix-shell .standout-card {
++  border-color: #d7e5dc;
++  background:
++    linear-gradient(155deg, rgba(255, 255, 255, 0.82), transparent 42%),
++    linear-gradient(180deg, #ffffff, #f4faf2);
++  color: #13251f;
++  box-shadow: 0 18px 50px rgba(19, 38, 49, 0.1);
++}
++
++.matrix-shell .page-card::before,
++.matrix-shell .matrix-analysis-card::before {
++  background: linear-gradient(90deg, #ff6f4c, #f2ce69, #2f8f6f);
++}
++
++.matrix-shell h1,
++.matrix-shell h2,
++.matrix-shell h3,
++.matrix-shell h4,
++.matrix-shell strong {
++  color: #13251f;
++  letter-spacing: 0;
++}
++
++.matrix-shell .eyebrow,
++.matrix-shell .preflop-sizing-head span,
++.matrix-shell .position-situation-head span,
++.matrix-shell .hand-read-list span,
++.matrix-shell .fold-exposure-row span,
++.matrix-shell .aof-detail-panel > strong,
++.matrix-shell .aof-hover-card > strong {
++  color: #2f8f6f;
++}
++
++.matrix-shell .subtle,
++.matrix-shell .sizing-policy,
++.matrix-shell .result-hero p,
++.matrix-shell .preflop-sizing-row small,
++.matrix-shell .preflop-aof-row small,
++.matrix-shell .position-situation-row small,
++.matrix-shell .hand-read-facts small,
++.matrix-shell .popover-header span,
++.matrix-shell .aof-hover-card > span,
++.matrix-shell .aof-hover-card small,
++.matrix-shell .aof-detail-panel > span,
++.matrix-shell .aof-detail-panel small,
++.matrix-shell .signed-metric em {
++  color: #53695e;
++}
++
++.matrix-shell .pill,
++.matrix-shell .sample-kicker,
++.matrix-shell .secondary-cta,
++.matrix-shell .aof-detail-disclosure summary {
++  border-color: #cfded4;
++  background: rgba(255, 255, 255, 0.72);
++  color: #22513e;
++}
++
++.matrix-shell .secondary-cta:hover,
++.matrix-shell .aof-detail-disclosure summary:hover {
++  border-color: #2f8f6f;
++}
++
++.matrix-shell .cta {
++  background: #ff6f4c;
++  color: #1d1008;
++  box-shadow: 0 16px 36px rgba(255, 111, 76, 0.24);
++}
++
++.matrix-shell .result-hero > div,
++.matrix-shell .preflop-aof-panel,
++.matrix-shell .position-situation-panel,
++.matrix-shell .action-frequency-panel,
++.matrix-shell .hand-read-card,
++.matrix-shell .preflop-aof-read,
++.matrix-shell .matrix-insight-row,
++.matrix-shell .fold-exposure-row,
++.matrix-shell .three-bet-line-grid div {
++  border-color: #d7e5dc;
++  background:
++    linear-gradient(155deg, rgba(255, 255, 255, 0.76), transparent 44%),
++    #ffffff;
++  box-shadow: 0 12px 26px rgba(19, 38, 49, 0.07);
++}
++
++.matrix-shell .result-hero strong {
++  color: #13251f;
++}
++
++.matrix-shell .preflop-sizing-head,
++.matrix-shell .position-situation-head,
++.matrix-shell .popover-row-head {
++  background: #e4f3d7;
++}
++
++.matrix-shell .preflop-sizing-row,
++.matrix-shell .preflop-aof-row,
++.matrix-shell .position-situation-row,
++.matrix-shell .popover-row,
++.matrix-shell .aof-hover-cluster,
++.matrix-shell .hand-read-list strong,
++.matrix-shell .aof-loss-chip {
++  border-color: #d7e5dc;
++  background: rgba(255, 255, 255, 0.78);
++}
++
++.matrix-shell .preflop-sizing-row strong,
++.matrix-shell .preflop-sizing-row b,
++.matrix-shell .preflop-aof-row strong,
++.matrix-shell .preflop-aof-row span,
++.matrix-shell .position-situation-row strong,
++.matrix-shell .position-situation-row > span,
++.matrix-shell .hand-read-list strong,
++.matrix-shell .three-bet-line-grid strong,
++.matrix-shell .fold-exposure-row strong,
++.matrix-shell .aof-loss-chip strong,
++.matrix-shell .aof-hover-cluster b {
++  color: #13251f;
++}
++
++.matrix-shell .position-situation-row em {
++  background: #e4f3d7;
++  color: #22513e;
++}
++
++.matrix-shell .preflop-aof-row.danger,
++.matrix-shell .position-situation-row.danger,
++.matrix-shell .hand-read-card.danger,
++.matrix-shell .matrix-correction-chip {
++  border-color: rgba(255, 122, 89, 0.42);
++  background:
++    linear-gradient(155deg, rgba(255, 122, 89, 0.16), transparent 44%),
++    #ffffff;
++}
++
++.matrix-shell .preflop-aof-row.value,
++.matrix-shell .position-situation-row.value,
++.matrix-shell .hand-read-card.value {
++  border-color: rgba(47, 143, 111, 0.38);
++  background:
++    linear-gradient(155deg, rgba(47, 143, 111, 0.14), transparent 44%),
++    #ffffff;
++}
++
++.matrix-shell .hand-read-card.muted {
++  border-color: #d7e5dc;
++  background:
++    linear-gradient(155deg, rgba(228, 243, 215, 0.68), transparent 44%),
++    #ffffff;
++}
++
++.matrix-shell .matrix-correction-chip p,
++.matrix-shell .matrix-insight-row p,
++.matrix-shell .preflop-aof-read p,
++.matrix-shell .hand-read-card p,
++.matrix-shell .matrix-noise-chip p,
++.matrix-shell .matrix-noise-chip em {
++  color: #53695e;
++}
++
++.matrix-shell .matrix-noise-tabs button,
++.matrix-shell .matrix-noise-meta span,
++.matrix-shell .matrix-noise-empty,
++.matrix-shell .matrix-noise-chip,
++.matrix-shell .matrix-metric-line b {
++  border-color: #d7e5dc;
++  background: rgba(255, 255, 255, 0.78);
++  color: #22513e;
++}
++
++.matrix-shell .matrix-noise-tabs button.active {
++  border-color: #2f8f6f;
++  background: #e4f3d7;
++}
++
++.matrix-shell .matrix-noise-tabs strong,
++.matrix-shell .matrix-noise-chip strong,
++.matrix-shell .matrix-noise-chip small {
++  color: #13251f;
++}
++
++.matrix-shell .matrix-noise-tabs span,
++.matrix-shell .matrix-noise-meta span {
++  color: #53695e;
++}
++
++.matrix-shell .matrix-noise-chip span {
++  border-color: #f2ce69;
++  background: #fff7dc;
++  color: #8b6415;
++}
++
++.matrix-shell .baseline-cell,
++.matrix-shell .matrix-pin-cell {
++  border-color: #d7e5dc;
++  background: #ffffff;
++  color: #13251f;
++  box-shadow: 0 10px 22px rgba(19, 38, 49, 0.06);
++}
++
++.matrix-shell .baseline-cell strong,
++.matrix-shell .baseline-cell span {
++  color: #13251f;
++}
++
++.matrix-shell .baseline-cell small {
++  color: #53695e;
++}
++
++.matrix-shell .baseline-cell.tone-very-good {
++  border-color: rgba(47, 143, 111, 0.42);
++  background: linear-gradient(145deg, rgba(47, 143, 111, 0.24), #ffffff);
++}
++
++.matrix-shell .baseline-cell.tone-good {
++  border-color: rgba(47, 143, 111, 0.34);
++  background: linear-gradient(145deg, rgba(47, 143, 111, 0.14), #ffffff);
++}
++
++.matrix-shell .baseline-cell.tone-neutral {
++  background: #ffffff;
++}
++
++.matrix-shell .baseline-cell.tone-bad {
++  border-color: rgba(242, 206, 105, 0.68);
++  background: linear-gradient(145deg, rgba(242, 206, 105, 0.24), #ffffff);
++}
++
++.matrix-shell .baseline-cell.tone-very-bad {
++  border-color: rgba(255, 122, 89, 0.52);
++  background: linear-gradient(145deg, rgba(255, 122, 89, 0.24), #ffffff);
++}
++
++.matrix-shell .baseline-cell.tone-low-participation {
++  border-color: #e0e8dd;
++  background: #f8faf5;
++}
++
++.matrix-shell .baseline-cell.tone-low-participation span,
++.matrix-shell .baseline-cell.tone-low-participation small {
++  color: #9aa99f;
++}
++
++.matrix-shell .baseline-cell.stack-tone-very-good::after {
++  background: #167a59;
++}
++
++.matrix-shell .baseline-cell.stack-tone-good::after {
++  background: #2f8f6f;
++}
++
++.matrix-shell .baseline-cell.stack-tone-neutral::after {
++  background: #cfded4;
++}
++
++.matrix-shell .baseline-cell.stack-tone-bad::after {
++  background: #f2ce69;
++}
++
++.matrix-shell .baseline-cell.stack-tone-very-bad::after {
++  background: #ff7a59;
++}
++
++.matrix-shell .baseline-cell.stack-tone-low-participation::after {
++  background: #e4eadf;
++}
++
++.matrix-shell .matrix-pin-cell:hover,
++.matrix-shell .matrix-pin-cell:focus-visible,
++.matrix-shell .matrix-pin-cell.pinned {
++  border-color: #2f8f6f;
++  box-shadow:
++    0 0 0 2px rgba(47, 143, 111, 0.16),
++    0 18px 38px rgba(19, 38, 49, 0.16);
++}
++
++.matrix-shell .matrix-pin-cell.pinned::before {
++  background: #2f8f6f;
++  color: #ffffff;
++}
++
++.matrix-shell .baseline-cell-popover,
++.matrix-shell .aof-hover-card,
++.matrix-shell .aof-detail-panel {
++  border-color: #cfded4;
++  background: #ffffff;
++  color: #13251f;
++  box-shadow: 0 18px 54px rgba(19, 38, 49, 0.18);
++}
++
++.matrix-shell .baseline-cell-popover::after {
++  background: #ffffff;
++  border-color: #cfded4;
++}
++
++.matrix-shell .baseline-cell-popover strong,
++.matrix-shell .popover-row span:first-child {
++  color: #13251f;
++}
++
++.matrix-shell .baseline-cell-popover span,
++.matrix-shell .popover-row-head span {
++  color: #53695e;
++}
++
++.matrix-shell .action-donut {
++  box-shadow:
++    inset 0 0 0 1px #d7e5dc,
++    0 14px 34px rgba(19, 38, 49, 0.12);
++}
++
++.matrix-shell .action-donut > div {
++  background: #ffffff;
++  border-color: #d7e5dc;
++}
++
++.matrix-shell .action-donut strong {
++  color: #13251f;
++}
++
++.matrix-shell .action-donut span,
++.matrix-shell .action-frequency-row em,
++.matrix-shell .action-frequency-row small {
++  color: #53695e;
++}
++
++.matrix-shell .action-frequency-row strong {
++  color: #13251f;
++}
++
++.matrix-shell .aof-loss-strip {
++  border-color: rgba(255, 122, 89, 0.34);
++  background: rgba(255, 122, 89, 0.08);
++}
++
++.matrix-shell .aof-loss-metrics b {
++  border-color: #d7e5dc;
++  background: rgba(255, 255, 255, 0.8);
++  color: #53695e;
++}
++
++.matrix-shell .metric-positive {
++  color: #167a59 !important;
++}
++
++.matrix-shell .metric-negative {
++  color: #c94d32 !important;
++}
++
++.matrix-shell .metric-neutral {
++  color: #53695e !important;
++}
++
++.matrix-shell .matrix-pinned-grid {
++  grid-template-columns: repeat(auto-fit, minmax(min(100%, 520px), 1fr));
++}
+diff --git a/frontend/app/layout.tsx b/frontend/app/layout.tsx
+index cc0c152..1b0c8e0 100644
+--- a/frontend/app/layout.tsx
++++ b/frontend/app/layout.tsx
+@@ -3,7 +3,8 @@ import type { Metadata } from "next";
+ 
+ export const metadata: Metadata = {
+   title: "One Percent Better Poker",
+-  description: "Poker performance system for serious GG Poker Ontario tournament players. Track repeated patterns and get clearer next adjustments."
++  description:
++    "Poker performance system for serious GG Poker tournament players. Upload hand histories and unlock your actual-result Matrix."
+ };
+ 
+ export default function RootLayout({ children }: { children: React.ReactNode }) {
+diff --git a/frontend/app/login/page.tsx b/frontend/app/login/page.tsx
+index 4158944..7f386f4 100644
+--- a/frontend/app/login/page.tsx
++++ b/frontend/app/login/page.tsx
+@@ -1,39 +1,52 @@
+ import Link from "next/link";
+ import { isDevLoginEnabled } from "@/lib/auth/dev-mode";
++import { AuthEmailForm } from "../auth-email-form";
+ 
+ export default function LoginPage() {
+   const devLoginEnabled = isDevLoginEnabled();
+ 
+   return (
+-    <main className="auth-wrap">
+-      <section className="auth-card">
+-        <p className="eyebrow">Login</p>
+-        <h1>Return to your performance workspace.</h1>
+-        <p className="subtle">
+-          Supabase Auth is the chosen Phase 1 provider. Form actions will be wired in the next auth task once environment
+-          credentials are configured.
+-        </p>
+-        <form className="input-grid">
+-          <label>
+-            Email
+-            <input type="email" placeholder="you@example.com" />
+-          </label>
+-          <label>
+-            Password
+-            <input type="password" placeholder="Password" />
+-          </label>
+-        </form>
+-        <div className="cta-row">
+-          {devLoginEnabled ? (
+-            <Link className="cta" href="/auth/dev-login?role=user&next=/app">
+-              Enter As User
+-            </Link>
+-          ) : null}
++    <main className="auth-wrap clean-auth-wrap">
++      <section className="auth-card operator-login-card">
++        <div className="operator-login-copy">
++          <p className="eyebrow">Login</p>
++          <h1>Return to the Matrix.</h1>
++          <p className="subtle">
++            Local development opens the operator Matrix directly. Production users sign in by email and unlock the
++            personal Matrix only after paid access.
++          </p>
++          <div className="paid-flow-list" aria-label="Login flow">
++            <span>13x13 baseline</span>
++            <span>Actual Result Drivers</span>
++            <span>Correction candidates</span>
++            <span>Upload history</span>
++          </div>
++        </div>
++
++        <div className="paid-signup-panel">
++          <p className="eyebrow">{devLoginEnabled ? "Local Operator" : "Magic Link"}</p>
++          <h2>{devLoginEnabled ? "Open operator Matrix." : "Enter your email."}</h2>
+           {devLoginEnabled ? (
+-            <Link className="secondary-cta" href="/auth/dev-login?role=operator&next=/operator">
+-              Enter As Operator
+-            </Link>
+-          ) : null}
++            <div className="operator-login-actions">
++              <Link className="cta" href="/auth/dev-login?role=operator&next=/operator/matrix">
++                Enter Operator Matrix
++              </Link>
++              <Link className="secondary-cta" href="/auth/dev-login?role=user&next=/app/matrix">
++                Preview User Matrix
++              </Link>
++            </div>
++          ) : (
++            <AuthEmailForm ctaLabel="Send Magic Link" next="/app/matrix" />
++          )}
++          <p className="paid-access-note">
++            Paid users see their own Matrix after checkout and upload. Local operator mode is for product QA only.
++          </p>
++        </div>
++
++        <div className="cta-row operator-login-footer">
++          <Link className="secondary-cta" href="/">
++            Back To Homepage
++          </Link>
+           <Link className="secondary-cta" href="/signup">
+             Create Account
+           </Link>
+diff --git a/frontend/app/operator/matrix/aof-baseline-section.tsx b/frontend/app/operator/matrix/aof-baseline-section.tsx
+index c7e454e..31e22c2 100644
+--- a/frontend/app/operator/matrix/aof-baseline-section.tsx
++++ b/frontend/app/operator/matrix/aof-baseline-section.tsx
+@@ -103,10 +103,10 @@ export function AofBaselineSection({ preflopAof }: { preflopAof: any }) {
+       </div>
+       <div className="preflop-aof-grid" style={gridStyle}>
+         <div className="preflop-aof-panel" style={panelStyle}>
+-          <span className="sample-kicker">By Action</span>
++          <span className="sample-kicker">By Jam Type</span>
+           {(preflopAof?.entry_rows || []).map((row: any) => (
+-            <div className={`preflop-aof-row ${aofRowTone(row)}`} key={row.entry_type} style={rowStyle}>
+-              <strong>{row.entry_type}</strong>
++            <div className={`preflop-aof-row ${aofRowTone(row)}`} key={row.action_key || row.entry_type} style={rowStyle}>
++              <strong>{row.action_label || row.entry_type}</strong>
+               <span>{countLabel(row.count, "jams")}</span>
+               <span>{formatMetric(row.avg_stack_bb, "bb")} avg</span>
+               <small>
+@@ -117,10 +117,15 @@ export function AofBaselineSection({ preflopAof }: { preflopAof: any }) {
+           ))}
+         </div>
+         <div className="preflop-aof-panel" style={panelStyle}>
+-          <span className="sample-kicker">By Position</span>
++          <span className="sample-kicker">By Position Group</span>
+           {(preflopAof?.position_rows || []).map((row: any) => (
+-            <div className={`preflop-aof-row ${aofRowTone(row)}`} key={row.position} style={rowStyle}>
+-              <strong>{row.position}</strong>
++            <div className={`preflop-aof-row ${aofRowTone(row)}`} key={row.position_bucket_key || row.position} style={rowStyle}>
++              <strong>
++                {row.position}
++                {Array.isArray(row.position_members) && row.position_members.length ? (
++                  <small>{row.position_members.join(" / ")}</small>
++                ) : null}
++              </strong>
+               <span>{countLabel(row.count, "jams")}</span>
+               <span>{formatMetric(row.avg_stack_bb, "bb")} avg</span>
+               <small>
+@@ -137,7 +142,7 @@ export function AofBaselineSection({ preflopAof }: { preflopAof: any }) {
+           {(preflopAof?.big_loss_clusters || []).slice(0, 5).map((cluster: any) => (
+             <div className="aof-loss-chip" key={`${cluster.hand_class}-${cluster.position}-${cluster.entry_type}`}>
+               <strong>
+-                {cluster.hand_class} · {cluster.position} · {cluster.entry_type}
++                {cluster.hand_class} · {cluster.position} · {cluster.action_label || cluster.entry_type}
+               </strong>
+               <span className="aof-loss-metrics">
+                 <b>{countLabel(cluster.count, "jams")}</b>
+diff --git a/frontend/app/operator/matrix/aof-detail-disclosure.tsx b/frontend/app/operator/matrix/aof-detail-disclosure.tsx
+index 34e8870..dd12a17 100644
+--- a/frontend/app/operator/matrix/aof-detail-disclosure.tsx
++++ b/frontend/app/operator/matrix/aof-detail-disclosure.tsx
+@@ -44,7 +44,7 @@ export function AofDetailDisclosure({ row }: { row: any }) {
+             {clusters.slice(0, 3).map((cluster: any, index: number) => (
+               <div className="aof-hover-cluster" key={`${cluster.hand_class}-${cluster.position}-${cluster.entry_type}-${index}`}>
+                 <b>
+-                  {cluster.hand_class} · {cluster.position} · {cluster.entry_type}
++                  {cluster.hand_class} · {cluster.position} · {cluster.action_label || cluster.entry_type}
+                 </b>
+                 <small>
+                   <span className="aof-loss-metrics compact">
+diff --git a/frontend/app/operator/matrix/matrix-pin-board.tsx b/frontend/app/operator/matrix/matrix-pin-board.tsx
+index 547073e..b8bd71f 100644
+--- a/frontend/app/operator/matrix/matrix-pin-board.tsx
++++ b/frontend/app/operator/matrix/matrix-pin-board.tsx
+@@ -37,6 +37,7 @@ type MatrixCell = {
+   parsed_preflop_fold_count?: number;
+   hover_action_breakdown?: ActionBreakdown[];
+   position_situation_breakdown?: PositionSituationRow[];
++  preflop_line_breakdown?: PreflopLineRow[];
+   fold_exposure_breakdown?: FoldExposure[];
+   english_read?: HandEnglishRead;
+ };
+@@ -84,6 +85,36 @@ type PositionSituationRow = {
+   }>;
+ };
+ 
++type PreflopLineRow = {
++  position_bucket_key?: string;
++  position_bucket_label?: string;
++  line_key?: string;
++  line_label?: string;
++  count?: number;
++  played_count?: number;
++  performance_scored?: boolean;
++  avg_bb_per_hand?: number | string | null;
++  avg_stack_realization_pct?: number | string | null;
++  sample_band?: string;
++  avg_first_action_size_bb?: number | string | null;
++  avg_open_size_bb?: number | string | null;
++  avg_hero_3bet_size_bb?: number | string | null;
++  position_mix?: Record<string, number>;
++  facing_state_mix?: Record<string, number>;
++  entry_type_mix?: Record<string, number>;
++  examples?: Array<{
++    hand_id?: string;
++    position?: string;
++    bb_net?: number | string | null;
++    entry_type?: string;
++    line_label?: string;
++    facing_state?: string;
++    open_size_bb?: number | string | null;
++    hero_preflop_size_bb?: number | string | null;
++    hero_summary?: string;
++  }>;
++};
++
+ type FoldExposure = {
+   entry_type?: string;
+   count?: number;
+@@ -117,6 +148,21 @@ function countLabel(count: unknown, noun: string) {
+ }
+ 
+ function bestAction(cell: MatrixCell) {
++  const lineRows = cell.preflop_line_breakdown || [];
++  if (lineRows.length) {
++    const sorted = [...lineRows].sort((left, right) => {
++      const leftSample = (left.count || 0) >= 5 ? 0 : 1;
++      const rightSample = (right.count || 0) >= 5 ? 0 : 1;
++      if (leftSample !== rightSample) {
++        return leftSample - rightSample;
++      }
++      const leftSignal = Math.abs(Number(left.avg_stack_realization_pct ?? left.avg_bb_per_hand ?? 0));
++      const rightSignal = Math.abs(Number(right.avg_stack_realization_pct ?? right.avg_bb_per_hand ?? 0));
++      return rightSignal - leftSignal;
++    });
++    const top = sorted[0];
++    return `${top.position_bucket_label || "?"} · ${top.line_label || "line"} · ${countLabel(top.count, "spots")}`;
++  }
+   const situationRows = cell.position_situation_breakdown || [];
+   if (situationRows.length) {
+     const sorted = [...situationRows].sort((left, right) => {
+@@ -136,7 +182,7 @@ function bestAction(cell: MatrixCell) {
+   return `${top.entry_type || "unknown"} · ${countLabel(top.played_count, "spots")}`;
+ }
+ 
+-function resultTone(row: PositionSituationRow) {
++function resultTone(row: PositionSituationRow | PreflopLineRow) {
+   if (!row.performance_scored) {
+     return "neutral";
+   }
+@@ -161,19 +207,69 @@ function metricTone(value: unknown) {
+ 
+ function contextLine(row: PositionSituationRow) {
+   const pieces = [];
++  const situation = String(row.situation_label || "").toLowerCase();
+   if (row.avg_open_size_bb !== null && row.avg_open_size_bb !== undefined) {
+-    pieces.push(`faced open ${formatMetric(row.avg_open_size_bb, "x")}`);
++    const openSize = Number(row.avg_open_size_bb);
++    if (situation.includes("jam") && Number.isFinite(openSize) && openSize >= 10) {
++      pieces.push(`faced all-in/large raise ${formatMetric(row.avg_open_size_bb, "bb")}`);
++    } else {
++      pieces.push(`faced open ${formatMetric(row.avg_open_size_bb, "x")}`);
++    }
+   }
+   if ((row.prior_limper_count_max || 0) > 0) {
+-    const isIso = String(row.situation_label || "").toLowerCase().includes("limper");
++    const isIso = situation.includes("limper");
+     pieces.push(`${row.prior_limper_count_max} ${isIso ? "limper" : "caller"} max`);
+   }
+   return pieces.filter(Boolean).join(" · ");
+ }
+ 
++function lineContext(row: PreflopLineRow) {
++  const pieces = [];
++  if (row.avg_open_size_bb !== null && row.avg_open_size_bb !== undefined) {
++    pieces.push(`faced avg ${formatMetric(row.avg_open_size_bb, "bb")}`);
++  }
++  const positions = Object.entries(row.position_mix || {})
++    .sort((left, right) => Number(right[1]) - Number(left[1]))
++    .slice(0, 2)
++    .map(([position, count]) => `${position} ${count}`);
++  if (positions.length > 1) {
++    pieces.push(positions.join(" · "));
++  }
++  return pieces.filter(Boolean).join(" · ");
++}
++
++function lineSizeLabel(row: PreflopLineRow) {
++  if (row.avg_first_action_size_bb !== null && row.avg_first_action_size_bb !== undefined) {
++    return formatMetric(row.avg_first_action_size_bb, "bb");
++  }
++  if (row.avg_hero_3bet_size_bb !== null && row.avg_hero_3bet_size_bb !== undefined) {
++    return formatMetric(row.avg_hero_3bet_size_bb, "bb");
++  }
++  if (row.avg_open_size_bb !== null && row.avg_open_size_bb !== undefined) {
++    return `faced ${formatMetric(row.avg_open_size_bb, "bb")}`;
++  }
++  return "n/a";
++}
++
++function primaryLineRows(rows: PreflopLineRow[]) {
++  const stableRows = rows.filter((row) => row.sample_band !== "tiny" && (row.count || 0) >= 2);
++  if (stableRows.length >= 3) {
++    return stableRows;
++  }
++  return rows;
++}
++
+ function sizeLabel(row: PositionSituationRow) {
++  const situation = String(row.situation_label || "").toLowerCase();
+   if (
+-    String(row.situation_label || "").toLowerCase().includes("call vs open") &&
++    situation.includes("jam") &&
++    row.avg_hero_action_size_bb !== null &&
++    row.avg_hero_action_size_bb !== undefined
++  ) {
++    return `${formatMetric(row.avg_hero_action_size_bb, "bb")} jam`;
++  }
++  if (
++    situation.includes("call vs open") &&
+     row.avg_open_size_bb !== null &&
+     row.avg_open_size_bb !== undefined
+   ) {
+@@ -329,7 +425,50 @@ export function MatrixPinBoard({ baselineMatrix }: { baselineMatrix: BaselineMat
+                 ) : null}
+               </div>
+             ) : null}
+-            {!cell.low_participation && (cell.position_situation_breakdown || []).length ? (
++            {!cell.low_participation && (cell.preflop_line_breakdown || []).length ? (
++              <div className="position-situation-panel">
++                <div className="section-heading-row compact-heading-row">
++                  <div>
++                    <p className="eyebrow">Actual result drivers</p>
++                    <h4>Position bucket + preflop line</h4>
++                  </div>
++                  <span className="pill">{cell.preflop_line_breakdown?.length || 0} lines</span>
++                </div>
++                <div className="position-situation-table">
++                  <div className="position-situation-row position-situation-head">
++                    <span>Line</span>
++                    <span>Count</span>
++                    <span>First size</span>
++                    <span>Actual BB</span>
++                    <span>Stack</span>
++                  </div>
++                  {primaryLineRows(cell.preflop_line_breakdown || [])
++                    .slice(0, 6)
++                    .map((row, index) => (
++                    <div
++                      className={`position-situation-row ${resultTone(row)}`}
++                      key={`${hand}-${row.position_bucket_key}-${row.line_key}-${index}`}
++                    >
++                      <div>
++                        <strong>
++                          {row.position_bucket_label || "?"} · {row.line_label || "Line"}
++                        </strong>
++                        <small>{lineContext(row)}</small>
++                        {row.sample_band === "tiny" ? <em>small sample</em> : null}
++                      </div>
++                      <span>{countLabel(row.count, "spots")}</span>
++                      <span>{lineSizeLabel(row)}</span>
++                      <span className={row.performance_scored ? metricTone(row.avg_bb_per_hand) : ""}>
++                        {row.performance_scored ? formatMetric(row.avg_bb_per_hand, "bb") : "not scored"}
++                      </span>
++                      <span className={row.performance_scored ? metricTone(row.avg_stack_realization_pct) : ""}>
++                        {row.performance_scored ? formatMetric(row.avg_stack_realization_pct, "%") : "exposure"}
++                      </span>
++                    </div>
++                  ))}
++                </div>
++              </div>
++            ) : !cell.low_participation && (cell.position_situation_breakdown || []).length ? (
+               <div className="position-situation-panel">
+                 <div className="section-heading-row compact-heading-row">
+                   <div>
+@@ -342,7 +481,7 @@ export function MatrixPinBoard({ baselineMatrix }: { baselineMatrix: BaselineMat
+                   <div className="position-situation-row position-situation-head">
+                     <span>Spot</span>
+                     <span>Count</span>
+-                    <span>Avg size</span>
++                    <span>Hero size</span>
+                     <span>Actual BB</span>
+                     <span>Stack</span>
+                   </div>
+diff --git a/frontend/app/operator/matrix/preflop-sizing-table.tsx b/frontend/app/operator/matrix/preflop-sizing-table.tsx
+index 2ff8b22..93b36ea 100644
+--- a/frontend/app/operator/matrix/preflop-sizing-table.tsx
++++ b/frontend/app/operator/matrix/preflop-sizing-table.tsx
+@@ -12,7 +12,7 @@ function formatPct(value: unknown) {
+ }
+ 
+ export function PreflopSizingTable({ rows }: { rows: any[] }) {
+-  const columns = "96px repeat(5, minmax(116px, 1fr))";
++  const columns = "124px repeat(5, minmax(110px, 1fr))";
+   const headerStyle: CSSProperties = {
+     display: "grid",
+     gridTemplateColumns: columns,
+@@ -61,7 +61,7 @@ export function PreflopSizingTable({ rows }: { rows: any[] }) {
+     <div className="preflop-sizing-table-wrap">
+       <div className="preflop-sizing-table" role="table" aria-label="Preflop sizing by position">
+         <div className="preflop-sizing-head" role="row" style={headerStyle}>
+-          <span>Position</span>
++          <span>Group</span>
+           <span>Open avg</span>
+           <span>2x rate</span>
+               <span>3bet avg</span>
+@@ -70,8 +70,13 @@ export function PreflopSizingTable({ rows }: { rows: any[] }) {
+         </div>
+         <div className="preflop-sizing-body" role="rowgroup">
+           {(rows || []).map((row: any) => (
+-            <div className="preflop-sizing-row" key={row.position} role="row" style={rowStyle}>
+-              <strong>{row.position}</strong>
++            <div className="preflop-sizing-row" key={row.position_bucket_key || row.position} role="row" style={rowStyle}>
++              <strong>
++                {row.position}
++                {Array.isArray(row.position_members) && row.position_members.length ? (
++                  <small>{row.position_members.join(" / ")}</small>
++                ) : null}
++              </strong>
+               {renderMetric(row.avg_open_size_bb, row.open_count, "x", "opens")}
+               {row.two_x_open_rate_pct === null || row.two_x_open_rate_pct === undefined || Number(row.open_count || 0) <= 0
+                 ? blankMetric
+diff --git a/frontend/app/page.tsx b/frontend/app/page.tsx
+index e9846e3..48b99e9 100644
+--- a/frontend/app/page.tsx
++++ b/frontend/app/page.tsx
+@@ -1,82 +1,255 @@
+ import Link from "next/link";
+-import { DemoApplyForm } from "./demo-apply-form";
+ import { isDevLoginEnabled } from "@/lib/auth/dev-mode";
+ 
++const RANKS = ["A", "K", "Q", "J", "T", "9", "8", "7", "6", "5", "4", "3", "2"];
++
++function demoHandLabel(row: number, col: number) {
++  if (row === col) {
++    return `${RANKS[row]}${RANKS[col]}`;
++  }
++  return row < col ? `${RANKS[row]}${RANKS[col]}s` : `${RANKS[col]}${RANKS[row]}o`;
++}
++
++const privacyPreviewTones: Record<string, { tone: string; stackTone: string }> = {
++  AA: { tone: "very-good", stackTone: "very-good" },
++  AKs: { tone: "very-good", stackTone: "very-good" },
++  AQs: { tone: "very-good", stackTone: "good" },
++  AJs: { tone: "very-good", stackTone: "neutral" },
++  ATs: { tone: "good", stackTone: "good" },
++  A9s: { tone: "neutral", stackTone: "neutral" },
++  A8s: { tone: "bad", stackTone: "good" },
++  A7s: { tone: "bad", stackTone: "bad" },
++  A6s: { tone: "bad", stackTone: "neutral" },
++  A5s: { tone: "very-bad", stackTone: "bad" },
++  A4s: { tone: "good", stackTone: "good" },
++  A3s: { tone: "neutral", stackTone: "good" },
++  A2s: { tone: "neutral", stackTone: "bad" },
++  KK: { tone: "very-good", stackTone: "very-good" },
++  QQ: { tone: "very-good", stackTone: "very-good" },
++  JJ: { tone: "very-good", stackTone: "very-good" },
++  TT: { tone: "very-good", stackTone: "good" },
++  99: { tone: "very-good", stackTone: "good" },
++  88: { tone: "neutral", stackTone: "good" },
++  77: { tone: "bad", stackTone: "bad" },
++  66: { tone: "very-bad", stackTone: "bad" },
++  55: { tone: "good", stackTone: "good" },
++  44: { tone: "bad", stackTone: "neutral" },
++  33: { tone: "bad", stackTone: "neutral" },
++  22: { tone: "neutral", stackTone: "good" },
++  KQo: { tone: "good", stackTone: "good" },
++  KTo: { tone: "very-bad", stackTone: "bad" },
++  QTs: { tone: "bad", stackTone: "neutral" },
++  JTs: { tone: "good", stackTone: "good" },
++  T9s: { tone: "very-bad", stackTone: "bad" },
++  T8s: { tone: "bad", stackTone: "neutral" },
++};
++
++function previewTone(label: string, row: number, col: number) {
++  const mapped = privacyPreviewTones[label];
++  if (mapped) {
++    return mapped;
++  }
++  if (row > 8 && col > 7) {
++    return { tone: "low-participation", stackTone: "low-participation" };
++  }
++  const score = row * 5 + col * 7;
++  if (score % 17 === 0) {
++    return { tone: "very-bad", stackTone: "bad" };
++  }
++  if (score % 11 === 0) {
++    return { tone: "bad", stackTone: "neutral" };
++  }
++  if (score % 7 === 0) {
++    return { tone: "good", stackTone: "good" };
++  }
++  return { tone: "neutral", stackTone: "neutral" };
++}
++
++const demoCells = RANKS.flatMap((_, row) =>
++  RANKS.map((__, col) => {
++    const label = demoHandLabel(row, col);
++    const tones = previewTone(label, row, col);
++    return {
++      label,
++      tone: tones.tone,
++      stackTone: tones.stackTone,
++    };
++  })
++);
++
++const valueCards = [
++  {
++    title: "Personal 13x13 Matrix",
++    body: "See the hand classes that are making money, leaking, or worth watching.",
++  },
++  {
++    title: "Rolling 90-day baseline",
++    body: "Compare recent play before GG hand-history exports fall out of reach.",
++  },
++  {
++    title: "Monthly leak watchlist",
++    body: "Get the short list of hands and spots that deserve review.",
++  },
++];
++
++const upcoming = ["HUD Trend Analyzer", "Field Analysis", "Today / Brain", "Performance and Pro tiers"];
++
+ export default function LandingPage() {
+-  const devLoginEnabled = isDevLoginEnabled();
++  const loginHref = isDevLoginEnabled() ? "/auth/dev-login?role=operator&next=/operator/matrix" : "/login";
+ 
+   return (
+-    <main className="shell landing-shell">
+-      <section className="hero-stage">
+-        <div className="hero-copy">
+-          <p className="eyebrow">One Percent Better Poker</p>
+-          <h1>See your leaks. Keep what works. Play the next session sharper.</h1>
++    <main className="shell landing-shell landing-v2">
++      <nav className="landing-nav" aria-label="Public navigation">
++        <Link className="landing-brand" href="/">
++          <span>OPB</span>
++          <strong>One Percent Better</strong>
++        </Link>
++        <div className="landing-nav-actions">
++          <Link className="secondary-cta compact-cta" href={loginHref}>
++            Log In
++          </Link>
++        </div>
++      </nav>
++
++      <section className="landing-hero-v2">
++        <div className="landing-hero-copy-v2">
++          <div className="founding-strip">
++            <span>Founding 50</span>
++            <strong>$29 first 90 days</strong>
++          </div>
++          <p className="eyebrow">Built for GG Poker hand histories</p>
++          <h1>Upload your hand history. See how you actually play.</h1>
+           <p className="hero-subtitle">
+-            Pattern-based post-session review for GG Poker Ontario tournament players.
++            Turn GG Poker histories into a personal Matrix, 90-day trend, and clear leak watchlist.
+           </p>
+           <div className="cta-row hero-actions">
+-            <Link className="cta" href="#apply">
+-              Request Demo
++            <Link className="cta" href="/signup">
++              Request Founding Access
+             </Link>
+-            <Link className="secondary-cta" href="#sample-output">
+-              See Samples
++            <Link className="secondary-cta" href="#offer">
++              View Founding Offer
+             </Link>
+-            {devLoginEnabled ? (
+-              <Link className="secondary-cta" href="/auth/dev-login?role=operator&next=/operator">
+-                Operator
+-              </Link>
+-            ) : null}
+           </div>
++          <p className="landing-proof">
++            Built from GG Poker hand-history analysis. Public preview hides private sample size and exact results.
++          </p>
++          <p className="desktop-note">Mobile signup is supported. Matrix analysis is desktop-first.</p>
+         </div>
+ 
+-        <div className="hero-preview">
+-          <div className="hero-float hero-float-primary">
+-            <span className="float-label">Today</span>
+-            <strong>Wider BB defend vs late opens</strong>
++        <div className="matrix-demo-card" aria-label="Demo 13 by 13 Matrix preview">
++          <div className="matrix-demo-head">
++            <div>
++              <p className="eyebrow">Private Matrix</p>
++              <h2>Baseline preview</h2>
++            </div>
++            <span className="locked-pill">metrics hidden</span>
+           </div>
+-          <div className="hero-float hero-float-secondary">
+-            <span className="float-label">Review</span>
+-            <strong>Medium-stack hesitation cost more than spew</strong>
++          <div className="demo-matrix-grid">
++            {demoCells.map((cell, index) => (
++              <span
++                className={`demo-matrix-cell tone-${cell.tone} stack-tone-${cell.stackTone}`}
++                key={`${cell.label}-${index}`}
++              >
++                <strong>{cell.label}</strong>
++                <small aria-hidden="true">private</small>
++              </span>
++            ))}
+           </div>
+-          <div className="hero-float hero-float-tertiary">
+-            <span className="float-label">Brain</span>
+-            <strong>Late-stage passivity still the main pressure point</strong>
++          <div className="demo-readout">
++            <strong>Private results stay private</strong>
++            <span>The public preview shows Matrix structure and tone only. Exact hand counts, BB results, and personal evidence stay behind access.</span>
+           </div>
+         </div>
+       </section>
+ 
+-      <section className="grid three landing-grid" id="sample-output">
+-        <article className="sample-card sample-today">
+-          <span className="sample-kicker">Today</span>
+-          <h3>Next-session focus</h3>
+-          <p>Defend a little wider. Trust short-stack decisions more.</p>
+-        </article>
+-        <article className="sample-card sample-review">
+-          <span className="sample-kicker">Review</span>
+-          <h3>What actually repeated</h3>
+-          <p>Not chaos. Not spew. Mostly hesitation in the wrong stack bands.</p>
+-        </article>
+-        <article className="sample-card sample-brain">
+-          <span className="sample-kicker">Brain</span>
+-          <h3>Long-term player read</h3>
+-          <p>Composed early. Strong under pressure. Still too passive after setbacks.</p>
+-        </article>
++      <section className="landing-section-grid">
++        {valueCards.map((card) => (
++          <article className="landing-value-card" key={card.title}>
++            <span className="sample-kicker">{card.title}</span>
++            <p>{card.body}</p>
++          </article>
++        ))}
+       </section>
+ 
+-      <section className="grid two landing-grid mini-grid">
+-        <article className="mini-card">
+-          <p className="eyebrow">For</p>
+-          <h3>GG Poker Ontario MTT players</h3>
+-          <p className="subtle">Built for players who want pattern tracking, not random hand comments.</p>
++      <section className="page-card landing-process-card">
++        <div className="section-heading-row">
++          <div>
++            <p className="eyebrow">How It Works</p>
++            <h2>Upload once for the Matrix. Upload again for the trend.</h2>
++          </div>
++          <Link className="secondary-cta compact-cta" href="/signup">
++            Start now
++          </Link>
++        </div>
++        <div className="landing-process-grid">
++          <div>
++            <span>01</span>
++            <strong>Upload GG histories</strong>
++            <p>Bring exported packets into one player model.</p>
++          </div>
++          <div>
++            <span>02</span>
++            <strong>Build your Matrix</strong>
++            <p>See hand-class, sizing, AOF, and correction signals.</p>
++          </div>
++          <div>
++            <span>03</span>
++            <strong>Track 7 / 30 / 90 days</strong>
++            <p>Spot what changed recently, not just all-time noise.</p>
++          </div>
++        </div>
++      </section>
++
++      <section className="grid two landing-grid">
++        <article className="page-card landing-position-card">
++          <p className="eyebrow">Not Another Solver</p>
++          <h2>Your actual game, measured from real hand histories.</h2>
++          <p className="subtle">
++            OPB is post-session analysis only. Study GTO later with a stronger read on your own baseline.
++          </p>
+         </article>
+-        <article className="mini-card">
+-          <p className="eyebrow">How</p>
+-          <h3>Upload. Track. Adjust.</h3>
+-          <p className="subtle">Your sessions turn into a running read on leaks, strengths, and next moves.</p>
++        <article className="page-card landing-position-card">
++          <p className="eyebrow">Your Data</p>
++          <h2>Preserve the history before it disappears.</h2>
++          <p className="subtle">
++            Your histories build your private baseline. Every upload adds evidence to your long-term model.
++          </p>
+         </article>
+       </section>
+ 
+-      <DemoApplyForm />
++      <section className="page-card landing-offer-card" id="offer">
++        <div>
++          <p className="eyebrow">Founding Member Offer</p>
++          <h2>Founding 90-Day Baseline Pass</h2>
++          <p className="subtle">
++            Preserve your GG history, track your baseline, and get a monthly leak watchlist.
++          </p>
++        </div>
++        <div className="offer-price-card">
++          <span>First 50 players only</span>
++          <strong>$29</strong>
++          <p>for your first 90 days</p>
++          <small>Then keep Baseline at $19/mo.</small>
++          <Link className="cta" href="/signup">
++            Request Founding Access
++          </Link>
++        </div>
++      </section>
++
++      <section className="page-card landing-coming-card">
++        <div>
++          <p className="eyebrow">Shipping Next</p>
++          <h2>Founding members help shape the next analyzers.</h2>
++          <p className="subtle">
++            Matrix comes first. Trend HUD, Field Analysis, and Today / Brain ship from real user feedback.
++          </p>
++        </div>
++        <div className="upcoming-grid">
++          {upcoming.map((item) => (
++            <span key={item}>{item}</span>
++          ))}
++        </div>
++      </section>
+     </main>
+   );
+ }
+diff --git a/frontend/app/pricing/page.tsx b/frontend/app/pricing/page.tsx
+index 9d166cc..48d53d3 100644
+--- a/frontend/app/pricing/page.tsx
++++ b/frontend/app/pricing/page.tsx
+@@ -1,18 +1,28 @@
+ import { PLAN_DEFINITIONS } from "@/lib/billing/plans";
++import Link from "next/link";
+ 
+ export default function PricingPage() {
+   return (
+-    <main className="shell">
+-      <section className="page-card">
++    <main className="shell clean-public-page">
++      <section className="page-card clean-public-hero">
+         <p className="eyebrow">Pricing</p>
+-        <h1>One Percent Better Poker pricing foundation is now defined.</h1>
++        <h1>Start with the Matrix. Pay only when you want real access.</h1>
+         <p className="subtle">
+-          Billing provider is Stripe. This phase establishes plan shape and entitlement boundary before checkout wiring.
++          Public previews use sample data. Paid members upload GG Poker histories and unlock their own 13x13
++          actual-result baseline, pinned result drivers, and correction candidates.
+         </p>
++        <div className="cta-row">
++          <Link className="cta" href="/signup">
++            Request Founding Access
++          </Link>
++          <Link className="secondary-cta" href="/">
++            Back Home
++          </Link>
++        </div>
+       </section>
+       <section className="grid two">
+         {PLAN_DEFINITIONS.map((plan) => (
+-          <article className="page-card" key={plan.key}>
++          <article className="page-card clean-price-card" key={plan.key}>
+             <h2>{plan.label}</h2>
+             <div className="metric">{plan.priceLabel}</div>
+             <p className="subtle">Upload limit: {plan.uploadLimit}</p>
+diff --git a/frontend/app/signup/page.tsx b/frontend/app/signup/page.tsx
+index 5a8be82..c2dcf32 100644
+--- a/frontend/app/signup/page.tsx
++++ b/frontend/app/signup/page.tsx
+@@ -1,21 +1,50 @@
+ import Link from "next/link";
+-import { DemoApplyForm } from "../demo-apply-form";
+ 
+ export default function SignupPage() {
+   return (
+     <main className="auth-wrap">
+-      <section className="auth-card signup-shell">
+-        <p className="eyebrow">Signup</p>
+-        <h1>Apply for early demo access.</h1>
+-        <p className="subtle">
+-          Right now the best fit is an online GG Poker Ontario tournament player with real hand histories and a clear idea of
+-          what they want help with.
+-        </p>
+-        <DemoApplyForm compact />
++      <section className="auth-card signup-shell paid-signup-card">
++        <div className="paid-signup-copy">
++          <div className="founding-strip">
++            <span>Founding 50</span>
++            <strong>$29 first 90 days</strong>
++          </div>
++          <p className="eyebrow">Create Account</p>
++          <h1>Request founding access. Unlock your personal Matrix.</h1>
++          <p className="subtle">
++            Magic-link signup and checkout are not public yet. Founding access is being provisioned manually so the
++            first 50 players get the right upload, Matrix, and review setup.
++          </p>
++          <div className="paid-flow-list" aria-label="Signup flow">
++            <span>Request access</span>
++            <span>Manual approval</span>
++            <span>Upload GG history</span>
++            <span>13x13 Matrix</span>
++          </div>
++        </div>
++
++        <div className="paid-signup-panel">
++          <p className="eyebrow">Founding Access</p>
++          <h2>Request your first setup.</h2>
++          <p className="subtle">
++            Ask for OPB founding access and include your GG Poker format, stakes, and what you want your first Matrix
++            to reveal.
++          </p>
++          <a className="cta" href="mailto:founding@opb.poker?subject=OPB%20Founding%20Access">
++            Email Founding Access
++          </a>
++          <p className="paid-access-note">
++            Public previews use sample data only. Real Matrix access is unlocked after founding setup.
++          </p>
++        </div>
++
+         <div className="cta-row">
+           <Link className="secondary-cta" href="/">
+             Back To Homepage
+           </Link>
++          <Link className="secondary-cta" href="/login">
++            Log In
++          </Link>
+         </div>
+       </section>
+     </main>
+diff --git a/frontend/lib/billing/account.ts b/frontend/lib/billing/account.ts
+index c6bbe8d..0aa8bbf 100644
+--- a/frontend/lib/billing/account.ts
++++ b/frontend/lib/billing/account.ts
+@@ -5,7 +5,7 @@ const PLAN_COOKIE = "opb_plan";
+ 
+ export async function getCurrentPlan() {
+   const cookieStore = await cookies();
+-  const planKey = (cookieStore.get(PLAN_COOKIE)?.value as PlanKey | undefined) || "free_beta";
++  const planKey = (cookieStore.get(PLAN_COOKIE)?.value as PlanKey | undefined) || "founding_90";
+   return getPlanDefinition(planKey);
+ }
+ 
+diff --git a/frontend/lib/billing/plans.ts b/frontend/lib/billing/plans.ts
+index 2b60555..1392269 100644
+--- a/frontend/lib/billing/plans.ts
++++ b/frontend/lib/billing/plans.ts
+@@ -1,4 +1,4 @@
+-export type PlanKey = "free_beta" | "pro_monthly";
++export type PlanKey = "founding_90" | "baseline_monthly";
+ 
+ export type PlanDefinition = {
+   key: PlanKey;
+@@ -15,32 +15,34 @@ export type PlanDefinition = {
+ 
+ export const PLAN_DEFINITIONS: PlanDefinition[] = [
+   {
+-    key: "free_beta",
+-    label: "Free Beta",
+-    priceLabel: "$0",
+-    uploadLimit: 10,
++    key: "founding_90",
++    label: "Founding 90-Day Baseline Pass",
++    priceLabel: "$29 / first 90 days",
++    uploadLimit: 90,
+     includes: [
+-      "Account access",
+-      "GG packet upload",
+-      "Today surface",
+-      "Basic Review / Brain"
++      "Email magic-link account",
++      "GG hand-history upload",
++      "13x13 actual-result Matrix",
++      "Pinned Actual Result Drivers",
++      "Top correction candidates"
+     ],
+     gates: {
+-      premiumReview: false,
+-      premiumBrain: false,
++      premiumReview: true,
++      premiumBrain: true,
+       operatorPatterns: false
+     }
+   },
+   {
+-    key: "pro_monthly",
+-    label: "Pro Monthly",
+-    priceLabel: "$39 / month",
++    key: "baseline_monthly",
++    label: "Baseline Monthly",
++    priceLabel: "$19 / month",
+     uploadLimit: 250,
+     includes: [
+-      "Higher upload limit",
+-      "Premium Review depth",
+-      "Premium Brain depth",
+-      "Pattern and study access"
++      "Ongoing Matrix refresh",
++      "Rolling 7 / 30 / 90 day trends",
++      "Monthly leak watchlist",
++      "AOF and sizing baseline",
++      "Future trend analyzers as they ship"
+     ],
+     gates: {
+       premiumReview: true,
+diff --git a/tests/matrix_position_situation_tests.py b/tests/matrix_position_situation_tests.py
+index 16e65ad..5bbe1c6 100644
+--- a/tests/matrix_position_situation_tests.py
++++ b/tests/matrix_position_situation_tests.py
+@@ -10,7 +10,13 @@ ROOT = Path(__file__).resolve().parents[1]
+ if str(ROOT) not in sys.path:
+     sys.path.insert(0, str(ROOT))
+ 
+-from app.api.hand_matrix import HandObservation, _extract_preflop_pattern, get_hand_matrix_payload
++from app.api.hand_matrix import (
++    HandObservation,
++    _extract_preflop_line_features,
++    _extract_preflop_pattern,
++    _preflop_line_key_label,
++    get_hand_matrix_payload,
++)
+ 
+ PLAYER_ID = "matrix-position-situation-player"
+ 
+@@ -27,6 +33,10 @@ def obs(
+     stack_bb: float = 20.0,
+     started_at: str = "2026/05/05 10:00:00",
+     hero_3bet_size_bb: float | None = None,
++    hero_preflop_size_bb: float | None = None,
++    first_preflop_action: str | None = None,
++    preflop_line_key: str = "",
++    preflop_line_label: str = "",
+ ) -> HandObservation:
+     resolved_3bet_size = hero_3bet_size_bb if hero_3bet_size_bb is not None else (6.0 if entry_type == "three_bet" else None)
+     return HandObservation(
+@@ -41,7 +51,7 @@ def obs(
+         stack_bb=stack_bb,
+         bb_net=bb_net,
+         hero_summary=f"Hero {entry_type} from {position}.",
+-        first_preflop_action="raise" if "raise" in entry_type or "bet" in entry_type else "call",
++        first_preflop_action=first_preflop_action or ("raise" if "raise" in entry_type or "bet" in entry_type else "call"),
+         faced_action_preflop=facing_state != "unopened",
+         preflop_entry_type=entry_type,
+         prior_raise_count=1 if facing_state == "vs_open" else 0,
+@@ -49,11 +59,13 @@ def obs(
+         facing_state=facing_state,
+         faced_all_in_preflop=False,
+         open_size_bb=open_size_bb,
+-        hero_preflop_size_bb=resolved_3bet_size if entry_type == "three_bet" else 2.0,
++        hero_preflop_size_bb=hero_preflop_size_bb if hero_preflop_size_bb is not None else (resolved_3bet_size if entry_type == "three_bet" else 2.0),
+         hero_3bet_size_bb=resolved_3bet_size,
+         hero_3bet_to_open_ratio=round(resolved_3bet_size / open_size_bb, 2) if resolved_3bet_size and open_size_bb else None,
+         faced_4bet_after_3bet=False,
+         folded_to_4bet_after_3bet=False,
++        preflop_line_key=preflop_line_key,
++        preflop_line_label=preflop_line_label,
+     )
+ 
+ 
+@@ -79,6 +91,35 @@ def main() -> None:
+     if parsed_call[2] != "call_vs_open" or parsed_call[5] != "vs_open":
+         raise AssertionError("Call versus one raise should be exposed as call_vs_open / vs_open")
+ 
++    open_fold_line = _preflop_line_key_label(
++        "open_raise",
++        _extract_preflop_line_features(
++            [
++                "*** HOLE CARDS ***",
++                "Hero: raises 200 to 400",
++                "a1111111: raises 800 to 1,200",
++                "Hero: folds",
++            ]
++        ),
++    )
++    if open_fold_line != ("open_fold_vs_3bet", "Open -> fold vs 3bet"):
++        raise AssertionError("Open then fold versus 3bet should become a combo preflop line")
++
++    three_bet_jam_line = _preflop_line_key_label(
++        "three_bet",
++        _extract_preflop_line_features(
++            [
++                "*** HOLE CARDS ***",
++                "a1111111: raises 200 to 400",
++                "Hero: raises 800 to 1,200",
++                "a1111111: raises 2,800 to 4,000",
++                "Hero: raises 8,000 to 12,000 and is all-in",
++            ]
++        ),
++    )
++    if three_bet_jam_line != ("three_bet_five_bet_jam", "3bet -> 5bet jam"):
++        raise AssertionError("3bet then jam versus 4bet should become a combo preflop line")
++
+     matrix = get_hand_matrix_payload(
+         player_id=PLAYER_ID,
+         window="all",
+@@ -123,6 +164,113 @@ def main() -> None:
+         raise AssertionError("Iso rows should expose limper count")
+     if labels[("BTN", "Iso vs limper(s)")]["sample_band"] != "tiny":
+         raise AssertionError("Tiny samples should remain visible as tiny, not overinterpreted")
++
++    line_rows = matrix["detail"]["preflop_line_breakdown"]
++    line_labels = {(row["position_bucket_label"], row["line_label"]): row for row in line_rows}
++    if ("Early", "Open") not in line_labels:
++        raise AssertionError("Raw early positions should roll up into Early / Open")
++    if ("BB", "Defend vs open") not in line_labels:
++        raise AssertionError("BB call rows should roll up into BB / Defend vs open")
++    if line_labels[("BB", "Defend vs open")]["avg_open_size_bb"] != 3.1:
++        raise AssertionError("Preflop line rows should preserve faced-open average size")
++
++    combo_matrix = get_hand_matrix_payload(
++        player_id=PLAYER_ID,
++        window="all",
++        selected_hand="JTs",
++        observations=[
++            obs("jts-open-early", "UTG", 2.0, "open_raise", 0, "unopened", hand_class="JTs"),
++            obs(
++                "jts-open-fold",
++                "HJ",
++                -2.0,
++                "open_raise",
++                0,
++                "unopened",
++                hand_class="JTs",
++                preflop_line_key="open_fold_vs_3bet",
++                preflop_line_label="Open -> fold vs 3bet",
++            ),
++            obs(
++                "jts-3bet-fold",
++                "BTN",
++                -6.0,
++                "three_bet",
++                0,
++                "vs_open",
++                open_size_bb=2.0,
++                hand_class="JTs",
++                preflop_line_key="three_bet_fold_vs_4bet",
++                preflop_line_label="3bet -> fold vs 4bet",
++            ),
++            obs("jts-btn-overlimp", "BTN", -1.0, "limp_behind", 2, "vs_multi_limp", hand_class="JTs"),
++            obs("jts-sb-complete", "SB", 1.0, "open_limp_or_complete", 0, "unopened", hand_class="JTs"),
++        ],
++    )
++    combo_labels = {
++        (row["position_bucket_label"], row["line_label"]): row
++        for row in combo_matrix["detail"]["preflop_line_breakdown"]
++    }
++    if ("Mid", "Open -> fold vs 3bet") not in combo_labels:
++        raise AssertionError("Open/fold combo lines should be visible by position bucket")
++    if ("BTN", "3bet -> fold vs 4bet") not in combo_labels:
++        raise AssertionError("3bet/fold combo lines should be visible by position bucket")
++    if ("BTN", "Passive entry / over-limp") not in combo_labels:
++        raise AssertionError("Late-position limps should read as passive entry / over-limp")
++    if ("SB", "SB complete") not in combo_labels:
++        raise AssertionError("Small-blind complete should not be labeled as a defend")
++    combo_order = [
++        (row["position_bucket_label"], row["line_label"])
++        for row in combo_matrix["detail"]["preflop_line_breakdown"]
++    ]
++    if combo_order[:5] != [
++        ("Early", "Open"),
++        ("Mid", "Open -> fold vs 3bet"),
++        ("BTN", "Passive entry / over-limp"),
++        ("BTN", "3bet -> fold vs 4bet"),
++        ("SB", "SB complete"),
++    ]:
++        raise AssertionError("Preflop line rows should be sorted by position bucket before signal magnitude")
++
++    all_in_matrix = get_hand_matrix_payload(
++        player_id=PLAYER_ID,
++        window="all",
++        selected_hand="99",
++        observations=[
++            obs(
++                "sb-jam-over-open",
++                "SB",
++                8.0,
++                "three_bet_jam",
++                0,
++                "vs_open",
++                hand_class="99",
++                open_size_bb=2.0,
++                stack_bb=12.0,
++                hero_3bet_size_bb=12.0,
++                first_preflop_action="jam",
++            ),
++            obs(
++                "sb-facing-all-in",
++                "SB",
++                -4.0,
++                "call_vs_3bet",
++                0,
++                "vs_all_in",
++                hand_class="99",
++                open_size_bb=22.0,
++                stack_bb=22.0,
++                hero_3bet_size_bb=None,
++                first_preflop_action="call",
++            ),
++        ],
++    )
++    all_in_rows = all_in_matrix["detail"]["position_situation_breakdown"]
++    all_in_labels = {(row["position"], row["situation_label"]): row for row in all_in_rows}
++    if ("SB", "Jam / all-in") not in all_in_labels:
++        raise AssertionError("Hero jam rows should stay grouped under Jam / all-in")
++    if ("SB", "Vs all-in") not in all_in_labels:
++        raise AssertionError("Facing all-in rows should not be mixed into Hero jam rows")
+     read = matrix["detail"]["english_read"]
+     if read["stance"] != "review_losing_subset":
+         raise AssertionError("QJs read should preserve baseline while targeting the losing subset")
+@@ -139,6 +287,30 @@ def main() -> None:
+     if sizing["near_all_in_3bet_count"] != 1 or sizing["all_3bet_count"] != 2:
+         raise AssertionError("Preflop summary should separate near-all-in 3bets from sizing discipline")
+ 
++    sizing_merge_matrix = get_hand_matrix_payload(
++        player_id=PLAYER_ID,
++        window="all",
++        selected_hand="AA",
++        observations=[
++            obs("merge-utg", "UTG", 1.0, "open_raise", 0, "unopened", hand_class="AA", hero_preflop_size_bb=2.0),
++            obs("merge-utg2", "UTG+2", 1.0, "open_raise", 0, "unopened", hand_class="AA", hero_preflop_size_bb=2.5),
++            obs("merge-lj", "LJ", 1.0, "open_raise", 0, "unopened", hand_class="AA", hero_preflop_size_bb=2.0),
++            obs("merge-hj", "HJ", 1.0, "open_raise", 0, "unopened", hand_class="AA", hero_preflop_size_bb=2.2),
++            obs("merge-bb-3bet", "BB", 1.0, "three_bet", 0, "vs_open", open_size_bb=2.0, hand_class="AA"),
++        ],
++    )
++    sizing_rows = {row["position"]: row for row in sizing_merge_matrix["preflop_sizing_summary"]["position_rows"]}
++    if "UTG+2" in sizing_rows or "UTG" in sizing_rows:
++        raise AssertionError("Sizing summary should merge raw full-ring seats into product position buckets")
++    if sizing_rows["Early"]["open_count"] != 2 or sizing_rows["Early"]["avg_open_size_bb"] != 2.25:
++        raise AssertionError("Early sizing should merge UTG and UTG+2 opens")
++    if sizing_rows["Early"]["position_members"] != ["UTG", "UTG+2"]:
++        raise AssertionError("Merged sizing rows should preserve raw member labels for inspection")
++    if sizing_rows["Mid"]["open_count"] != 2 or sizing_rows["Mid"]["avg_open_size_bb"] != 2.1:
++        raise AssertionError("Mid sizing should merge LJ and HJ opens")
++    if list(sizing_rows.keys())[:3] != ["Early", "Mid", "BB"]:
++        raise AssertionError("Sizing summary buckets should sort by position bucket order")
++
+     low_participation_rows = [
+         HandObservation(
+             hand_id=f"trash-fold-{index}",
+@@ -253,6 +425,64 @@ def main() -> None:
+         raise AssertionError("AOF summary should expose <=25bb jam baseline")
+     if not aof_summary["big_loss_clusters"]:
+         raise AssertionError("AOF summary should expose repeated big-minus hover clusters")
++    if aof_summary["entry_rows"][0]["action_label"] != "Open jam":
++        raise AssertionError("AOF by-action rows should use readable action family labels")
++    if [row["position"] for row in aof_summary["position_rows"]] != ["BTN", "SB"]:
++        raise AssertionError("AOF by-position rows should use product bucket order")
++
++    aof_merge_matrix = get_hand_matrix_payload(
++        player_id=PLAYER_ID,
++        window="all",
++        selected_hand="A9o",
++        observations=[
++            obs(
++                "aof-merge-utg",
++                "UTG",
++                -10.0,
++                "open_raise_jam",
++                0,
++                "unopened",
++                hand_class="A9o",
++                stack_bb=10.0,
++                hero_preflop_size_bb=10.0,
++                first_preflop_action="jam",
++            ),
++            obs(
++                "aof-merge-utg2",
++                "UTG+2",
++                -12.0,
++                "open_raise_jam",
++                0,
++                "unopened",
++                hand_class="A9o",
++                stack_bb=12.0,
++                hero_preflop_size_bb=12.0,
++                first_preflop_action="jam",
++            ),
++            obs(
++                "aof-merge-hj-3bet",
++                "HJ",
++                -18.0,
++                "three_bet_jam",
++                0,
++                "vs_open",
++                open_size_bb=2.0,
++                hand_class="KQo",
++                stack_bb=18.0,
++                hero_preflop_size_bb=18.0,
++                hero_3bet_size_bb=18.0,
++                first_preflop_action="jam",
++            ),
++        ],
++    )
++    aof_merge = aof_merge_matrix["preflop_aof_summary"]
++    if [row["action_label"] for row in aof_merge["entry_rows"]] != ["Open jam", "3bet jam"]:
++        raise AssertionError("AOF action rows should sort by action family, not raw count label")
++    merge_positions = {row["position"]: row for row in aof_merge["position_rows"]}
++    if merge_positions["Early"]["count"] != 2 or merge_positions["Early"]["position_members"] != ["UTG", "UTG+2"]:
++        raise AssertionError("AOF position rows should merge full-ring early seats")
++    if aof_merge["big_loss_clusters"][0]["position"] != "Early" or aof_merge["big_loss_clusters"][0]["action_label"] != "Open jam":
++        raise AssertionError("AOF big-loss clusters should use bucket/action labels")
+ 
+     cooler_rows = [
+         obs(

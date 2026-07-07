@@ -37,6 +37,26 @@ At the current stage, the product must behave like cumulative Hero-specific poke
 
 ---
 
+# Matrix Restart Phase
+
+As of the Matrix restart, the immediate product focus is simpler than the older
+interpretation-heavy loop:
+
+- users keep dumping GG Poker files,
+- OPB preserves raw `.txt`, `.zip`, and image inputs,
+- OPB deduplicates files and hands,
+- OPB appends only newly processable hands,
+- OPB grows cumulative counters and a Matrix-ready dataset,
+- interpretation can kick in later.
+
+The first restart proof is not coaching quality. It is whether OPB can build a
+clean, cumulative, deduplicated hand-history dataset that later analytics can
+trust.
+
+See `docs/data_processing_contract_v0.md`.
+
+---
+
 # Current Product Promise
 
 The product is moving toward a usable loop that Hero would actually want before and after the next tournament:

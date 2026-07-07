@@ -22,6 +22,19 @@ At the current MVP stage, the highest-priority product job is persistent Hero-sp
 
 A GG Poker `.txt` upload is treated as a session packet, not as an isolated single-spot review input.
 
+In the Matrix restart phase, the immediate execution priority is data processing
+before interpretation:
+
+- preserve raw `.txt`, `.zip`, and image inputs,
+- expand archives safely,
+- fingerprint and deduplicate source files,
+- fingerprint and deduplicate hands,
+- append only new processable hand records,
+- expose cumulative ingestion numbers and Matrix-ready data.
+
+Interpretation, coaching language, Today, Review, Brain, and AOF judgment can
+return after the data loop is trustworthy.
+
 The system must:
 1. parse the uploaded session packet,
 2. split and classify hands,

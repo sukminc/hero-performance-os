@@ -1,0 +1,48 @@
+## main...origin/main
+ M .gitignore
+ M DECISIONS_LOG.md
+ M PROJECT_MASTER_CONTEXT.md
+ M app/api/hand_matrix.py
+ M docs/active_task.md
+ M frontend/app/app/brain/page.tsx
+ M frontend/app/app/matrix/page.tsx
+ M frontend/app/app/review/page.tsx
+ M frontend/app/demo-apply-form.tsx
+ M frontend/app/globals.css
+ M frontend/app/layout.tsx
+ M frontend/app/login/page.tsx
+ M frontend/app/operator/matrix/aof-baseline-section.tsx
+ M frontend/app/operator/matrix/aof-detail-disclosure.tsx
+ M frontend/app/operator/matrix/matrix-pin-board.tsx
+ M frontend/app/operator/matrix/preflop-sizing-table.tsx
+ M frontend/app/page.tsx
+ M frontend/app/pricing/page.tsx
+ M frontend/app/signup/page.tsx
+ M frontend/lib/billing/account.ts
+ M frontend/lib/billing/plans.ts
+ M tests/matrix_position_situation_tests.py
+?? docs/archive/
+?? frontend/app/auth-email-form.tsx
+?? frontend/app/auth/actions.ts
+?? frontend/app/auth/callback/
+?? frontend/app/style-preview/
+?? opb-poker/
+?? reports/00_foundation/116-founding-member-landing-report.md
+?? reports/00_foundation/117-clean-felt-landing-direction-report.md
+?? reports/00_foundation/118-matrix-mvp-scope-lock-report.md
+?? reports/00_foundation/119-paid-magic-link-signup-report.md
+?? reports/00_foundation/120-local-operator-login-and-public-page-alignment-report.md
+?? reports/00_foundation/121-clean-felt-operator-matrix-report.md
+?? reports/00_foundation/122-matrix-all-in-size-label-clarity-report.md
+?? reports/00_foundation/123-matrix-preflop-line-driver-report.md
+?? reports/00_foundation/124-matrix-tiny-sample-driver-demotion-report.md
+?? reports/00_foundation/125-matrix-preflop-line-language-order-report.md
+?? reports/00_foundation/126-preflop-sizing-position-bucket-merge-report.md
+?? reports/00_foundation/127-aof-baseline-position-action-reorg-report.md
+?? reports/00_foundation/128-matrix-golden-qa-and-trace-report.md
+?? reports/00_foundation/129-production-landing-deploy-report.md
+?? reports/00_foundation/130-remove-founder-name-public-signup-report.md
+?? reports/00_foundation/131-real-baseline-landing-matrix-report.md
+?? reports/00_foundation/132-landing-matrix-privacy-redaction-report.md
+?? scripts/matrix_golden_qa.py
+?? scripts/opb-env.sh

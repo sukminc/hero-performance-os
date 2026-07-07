@@ -1,0 +1,933 @@
+data/tmp_uploads_public/18bc83dc-6ed5-497c-8c9d-127b681a680d-0000019d-e164-524c-0000-000058f065af.zip
+data/tmp_uploads_public/expanded/cbd50198-1439-4773-a220-36f027e6182f/GG20260408 - Tournament #6324110 - 10 Deadline to MYSTERY BOUNTY Main Event, 250K GTD, 1 Seat.txt
+data/tmp_uploads_public/expanded/cbd50198-1439-4773-a220-36f027e6182f/GG20260412 - Tournament #6310094 - Bounty Hunters Sunday Big Game 21.txt
+data/tmp_uploads_public/expanded/cbd50198-1439-4773-a220-36f027e6182f/GG20260412 - Tournament #6309933 - 15 Satellite to GGMasters 150, 2 Seats.txt
+data/tmp_uploads_public/expanded/cbd50198-1439-4773-a220-36f027e6182f/GG20260417 - Tournament #5787175 - 1K Thursday Freeroll.txt
+data/tmp_uploads_public/expanded/cbd50198-1439-4773-a220-36f027e6182f/GG20260408 - Tournament #6324109 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/cbd50198-1439-4773-a220-36f027e6182f/GG20260412 - Tournament #6302536 - Mini Saturday Knockout 25 [Bounty].txt
+data/tmp_uploads_public/expanded/cbd50198-1439-4773-a220-36f027e6182f/GG20260411 - Tournament #6294350 - Daily Turbo 10.txt
+data/tmp_uploads_public/expanded/cbd50198-1439-4773-a220-36f027e6182f/GG20260412 - Tournament #6356812 - 1.50 Step to GGMasters 150.txt
+data/tmp_uploads_public/expanded/cbd50198-1439-4773-a220-36f027e6182f/GG20260412 - Tournament #6210358 - Ontario MILLION Bounty Edition, 100K GTD [Stage 1].txt
+data/tmp_uploads_public/expanded/cbd50198-1439-4773-a220-36f027e6182f/GG20260411 - Tournament #6210349 - Ontario MILLION Bounty Edition, 100K GTD [Stage 1].txt
+data/tmp_uploads_public/expanded/cbd50198-1439-4773-a220-36f027e6182f/GG20260415 - Tournament #6340564 - 25 Tuesday Heater [Turbo].txt
+data/tmp_uploads_public/expanded/cbd50198-1439-4773-a220-36f027e6182f/GG20260410 - Tournament #6210504 - 25 Thursday Heater [Turbo].txt
+data/tmp_uploads_public/expanded/cbd50198-1439-4773-a220-36f027e6182f/GG20260409 - Tournament #6324115 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/cbd50198-1439-4773-a220-36f027e6182f/GG20260412 - Tournament #6324178 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/cbd50198-1439-4773-a220-36f027e6182f/GG20260414 - Tournament #6378333 - 10 Satellite to MYSTERY BOUNTY Main Event, 250K GTD, 2 Seats.txt
+data/tmp_uploads_public/expanded/cbd50198-1439-4773-a220-36f027e6182f/GG20260406 - Tournament #6286925 - Freeroll to SOP-C Playground Main Event 1 Step.txt
+data/tmp_uploads_public/expanded/cbd50198-1439-4773-a220-36f027e6182f/GG20260412 - Tournament #6311287 - Omaholic Bounty 5.25.txt
+data/tmp_uploads_public/expanded/cbd50198-1439-4773-a220-36f027e6182f/GG20260409 - Tournament #6210499 - 25 ednesday Heater [Turbo].txt
+data/tmp_uploads_public/expanded/cbd50198-1439-4773-a220-36f027e6182f/GG20260410 - Tournament #6324144 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/cbd50198-1439-4773-a220-36f027e6182f/GG20260410 - Tournament #6286965 - Freeroll to SOP-C Playground Main Event 1 Step.txt
+data/tmp_uploads_public/expanded/cbd50198-1439-4773-a220-36f027e6182f/GG20260411 - Tournament #6286975 - Freeroll to SOP-C Playground Main Event 1 Step.txt
+data/tmp_uploads_public/expanded/cbd50198-1439-4773-a220-36f027e6182f/GG20260410 - Tournament #6285687 - Daily Hyper 10.txt
+data/tmp_uploads_public/expanded/cbd50198-1439-4773-a220-36f027e6182f/GG20260409 - Tournament #6281258 - Omaholic Deepstack 5.txt
+data/tmp_uploads_public/expanded/cbd50198-1439-4773-a220-36f027e6182f/GG20260414 - Tournament #6328867 - Bounty King Jr 10.50.txt
+data/tmp_uploads_public/expanded/cbd50198-1439-4773-a220-36f027e6182f/GG20260410 - Tournament #6285188 - Bounty Hunters Hyper 10.50.txt
+data/tmp_uploads_public/expanded/cbd50198-1439-4773-a220-36f027e6182f/GG20260406 - Tournament #6130277 - Ontario MILLION, 100K GTD [Final Day].txt
+data/tmp_uploads_public/expanded/cbd50198-1439-4773-a220-36f027e6182f/GG20260411 - Tournament #6298793 - 15 Satellite to GGMasters 150, 1 Seat.txt
+data/tmp_uploads_public/expanded/cbd50198-1439-4773-a220-36f027e6182f/GG20260415 - Tournament #6330944 - Bounty Hunters 5.25.txt
+data/tmp_uploads_public/expanded/cbd50198-1439-4773-a220-36f027e6182f/GG20260403 - Tournament #5787165 - 1K Thursday Freeroll.txt
+data/tmp_uploads_public/expanded/cbd50198-1439-4773-a220-36f027e6182f/GG20260412 - Tournament #6324195 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/cbd50198-1439-4773-a220-36f027e6182f/GG20260417 - Tournament #6348883 - Daily Hyper 3.txt
+data/tmp_uploads_public/expanded/cbd50198-1439-4773-a220-36f027e6182f/GG20260410 - Tournament #6289351 - Bounty Hunters 5.25.txt
+data/tmp_uploads_public/expanded/cbd50198-1439-4773-a220-36f027e6182f/GG20260410 - Tournament #6324140 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/cbd50198-1439-4773-a220-36f027e6182f/GG20260412 - Tournament #6324193 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/cbd50198-1439-4773-a220-36f027e6182f/GG20260403 - Tournament #6227605 - 6 Satellite to 100K Ontario MILLION, 3 Seats.txt
+data/tmp_uploads_public/expanded/cbd50198-1439-4773-a220-36f027e6182f/GG20260414 - Tournament #6340562 - 15 Bounty Hunters [Big Bounties].txt
+data/tmp_uploads_public/expanded/cbd50198-1439-4773-a220-36f027e6182f/GG20260405 - Tournament #6293539 - 1.50 Step to GGMasters 150.txt
+data/tmp_uploads_public/expanded/cbd50198-1439-4773-a220-36f027e6182f/GG20260411 - Tournament #6292669 - Mini Friday Night Fight 25 [Bounty 6-Max].txt
+data/tmp_uploads_public/expanded/cbd50198-1439-4773-a220-36f027e6182f/GG20260411 - Tournament #6324169 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/cbd50198-1439-4773-a220-36f027e6182f/GG20260411 - Tournament #6210351 - Ontario MILLION Bounty Edition, 100K GTD [Stage 1].txt
+data/tmp_uploads_public/expanded/cbd50198-1439-4773-a220-36f027e6182f/GG20260412 - Tournament #6324189 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/cbd50198-1439-4773-a220-36f027e6182f/GG20260411 - Tournament #6349089 - 1.50 Step to GGMasters 150.txt
+data/tmp_uploads_public/expanded/cbd50198-1439-4773-a220-36f027e6182f/GG20260405 - Tournament #6242592 - Mini Saturday Knockout 25 [Bounty].txt
+data/tmp_uploads_public/expanded/cbd50198-1439-4773-a220-36f027e6182f/GG20260408 - Tournament #6274413 - Bounty King Jr 10.50.txt
+data/tmp_uploads_public/expanded/cbd50198-1439-4773-a220-36f027e6182f/GG20260401 - Tournament #6156971 - SOP-SC 25 Spring Showers [Bounty Turbo].txt
+data/tmp_uploads_public/expanded/cbd50198-1439-4773-a220-36f027e6182f/GG20260408 - Tournament #6210497 - 15 Bounty Hunters [Big Bounties].txt
+data/tmp_uploads_public/expanded/cbd50198-1439-4773-a220-36f027e6182f/GG20260403 - Tournament #6130351 - Ontario MILLION, 100K GTD [Day 1].txt
+data/tmp_uploads_public/expanded/cbd50198-1439-4773-a220-36f027e6182f/GG20260331 - Tournament #6156958 - SOP-SC 25 Spring Showers [Bounty Turbo].txt
+data/tmp_uploads_public/expanded/cbd50198-1439-4773-a220-36f027e6182f/GG20260410 - Tournament #6286963 - 1 Step to SOP-C Playground Main Event.txt
+data/tmp_uploads_public/expanded/cbd50198-1439-4773-a220-36f027e6182f/GG20260406 - Tournament #6287532 - 10 Satellite to MYSTERY BOUNTY Main Event, 250K GTD, 1 Seat.txt
+data/tmp_uploads_public/expanded/cbd50198-1439-4773-a220-36f027e6182f/GG20260410 - Tournament #6285911 - Bounty Hunters Hyper 5.25.txt
+data/tmp_uploads_public/expanded/cbd50198-1439-4773-a220-36f027e6182f/GG20260407 - Tournament #5787167 - 5K Monday Mega Freeroll.txt
+data/tmp_uploads_public/expanded/cbd50198-1439-4773-a220-36f027e6182f/GG20260411 - Tournament #6324162 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/cbd50198-1439-4773-a220-36f027e6182f/GG20260406 - Tournament #6252126 - Sunday Heater 25 [Bounty Turbo].txt
+data/tmp_uploads_public/expanded/cbd50198-1439-4773-a220-36f027e6182f/GG20260414 - Tournament #6378331 - 10 Satellite to MYSTERY BOUNTY Main Event, 250K GTD, 1 Seat.txt
+data/tmp_uploads_public/expanded/cbd50198-1439-4773-a220-36f027e6182f/GG20260403 - Tournament #6224756 - Mini Thursday Throwdown 25 [Bounty].txt
+data/tmp_uploads_public/expanded/cbd50198-1439-4773-a220-36f027e6182f/GG20260402 - Tournament #6217357 - ednesday Heater 25 [Bounty Turbo].txt
+data/tmp_uploads_public/expanded/cbd50198-1439-4773-a220-36f027e6182f/GG20260411 - Tournament #6210513 - 15 Bounty Hunters [Big Bounties].txt
+data/tmp_uploads_public/expanded/8f94dda2-2efa-4134-aa9a-605c0c52bee4/GG20260408 - Tournament #6324110 - 10 Deadline to MYSTERY BOUNTY Main Event, 250K GTD, 1 Seat.txt
+data/tmp_uploads_public/expanded/8f94dda2-2efa-4134-aa9a-605c0c52bee4/GG20260412 - Tournament #6310094 - Bounty Hunters Sunday Big Game 21.txt
+data/tmp_uploads_public/expanded/8f94dda2-2efa-4134-aa9a-605c0c52bee4/GG20260412 - Tournament #6309933 - 15 Satellite to GGMasters 150, 2 Seats.txt
+data/tmp_uploads_public/expanded/8f94dda2-2efa-4134-aa9a-605c0c52bee4/GG20260417 - Tournament #5787175 - 1K Thursday Freeroll.txt
+data/tmp_uploads_public/expanded/8f94dda2-2efa-4134-aa9a-605c0c52bee4/GG20260408 - Tournament #6324109 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/8f94dda2-2efa-4134-aa9a-605c0c52bee4/GG20260412 - Tournament #6302536 - Mini Saturday Knockout 25 [Bounty].txt
+data/tmp_uploads_public/expanded/8f94dda2-2efa-4134-aa9a-605c0c52bee4/GG20260411 - Tournament #6294350 - Daily Turbo 10.txt
+data/tmp_uploads_public/expanded/8f94dda2-2efa-4134-aa9a-605c0c52bee4/GG20260412 - Tournament #6356812 - 1.50 Step to GGMasters 150.txt
+data/tmp_uploads_public/expanded/8f94dda2-2efa-4134-aa9a-605c0c52bee4/GG20260412 - Tournament #6210358 - Ontario MILLION Bounty Edition, 100K GTD [Stage 1].txt
+data/tmp_uploads_public/expanded/8f94dda2-2efa-4134-aa9a-605c0c52bee4/GG20260411 - Tournament #6210349 - Ontario MILLION Bounty Edition, 100K GTD [Stage 1].txt
+data/tmp_uploads_public/expanded/8f94dda2-2efa-4134-aa9a-605c0c52bee4/GG20260415 - Tournament #6340564 - 25 Tuesday Heater [Turbo].txt
+data/tmp_uploads_public/expanded/8f94dda2-2efa-4134-aa9a-605c0c52bee4/GG20260410 - Tournament #6210504 - 25 Thursday Heater [Turbo].txt
+data/tmp_uploads_public/expanded/8f94dda2-2efa-4134-aa9a-605c0c52bee4/GG20260409 - Tournament #6324115 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/8f94dda2-2efa-4134-aa9a-605c0c52bee4/GG20260412 - Tournament #6324178 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/8f94dda2-2efa-4134-aa9a-605c0c52bee4/GG20260414 - Tournament #6378333 - 10 Satellite to MYSTERY BOUNTY Main Event, 250K GTD, 2 Seats.txt
+data/tmp_uploads_public/expanded/8f94dda2-2efa-4134-aa9a-605c0c52bee4/GG20260406 - Tournament #6286925 - Freeroll to SOP-C Playground Main Event 1 Step.txt
+data/tmp_uploads_public/expanded/8f94dda2-2efa-4134-aa9a-605c0c52bee4/GG20260412 - Tournament #6311287 - Omaholic Bounty 5.25.txt
+data/tmp_uploads_public/expanded/8f94dda2-2efa-4134-aa9a-605c0c52bee4/GG20260409 - Tournament #6210499 - 25 ednesday Heater [Turbo].txt
+data/tmp_uploads_public/expanded/8f94dda2-2efa-4134-aa9a-605c0c52bee4/GG20260410 - Tournament #6324144 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/8f94dda2-2efa-4134-aa9a-605c0c52bee4/GG20260410 - Tournament #6286965 - Freeroll to SOP-C Playground Main Event 1 Step.txt
+data/tmp_uploads_public/expanded/8f94dda2-2efa-4134-aa9a-605c0c52bee4/GG20260411 - Tournament #6286975 - Freeroll to SOP-C Playground Main Event 1 Step.txt
+data/tmp_uploads_public/expanded/8f94dda2-2efa-4134-aa9a-605c0c52bee4/GG20260410 - Tournament #6285687 - Daily Hyper 10.txt
+data/tmp_uploads_public/expanded/8f94dda2-2efa-4134-aa9a-605c0c52bee4/GG20260409 - Tournament #6281258 - Omaholic Deepstack 5.txt
+data/tmp_uploads_public/expanded/8f94dda2-2efa-4134-aa9a-605c0c52bee4/GG20260414 - Tournament #6328867 - Bounty King Jr 10.50.txt
+data/tmp_uploads_public/expanded/8f94dda2-2efa-4134-aa9a-605c0c52bee4/GG20260410 - Tournament #6285188 - Bounty Hunters Hyper 10.50.txt
+data/tmp_uploads_public/expanded/8f94dda2-2efa-4134-aa9a-605c0c52bee4/GG20260406 - Tournament #6130277 - Ontario MILLION, 100K GTD [Final Day].txt
+data/tmp_uploads_public/expanded/8f94dda2-2efa-4134-aa9a-605c0c52bee4/GG20260411 - Tournament #6298793 - 15 Satellite to GGMasters 150, 1 Seat.txt
+data/tmp_uploads_public/expanded/8f94dda2-2efa-4134-aa9a-605c0c52bee4/GG20260415 - Tournament #6330944 - Bounty Hunters 5.25.txt
+data/tmp_uploads_public/expanded/8f94dda2-2efa-4134-aa9a-605c0c52bee4/GG20260403 - Tournament #5787165 - 1K Thursday Freeroll.txt
+data/tmp_uploads_public/expanded/8f94dda2-2efa-4134-aa9a-605c0c52bee4/GG20260412 - Tournament #6324195 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/8f94dda2-2efa-4134-aa9a-605c0c52bee4/GG20260417 - Tournament #6348883 - Daily Hyper 3.txt
+data/tmp_uploads_public/expanded/8f94dda2-2efa-4134-aa9a-605c0c52bee4/GG20260410 - Tournament #6289351 - Bounty Hunters 5.25.txt
+data/tmp_uploads_public/expanded/8f94dda2-2efa-4134-aa9a-605c0c52bee4/GG20260410 - Tournament #6324140 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/8f94dda2-2efa-4134-aa9a-605c0c52bee4/GG20260412 - Tournament #6324193 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/8f94dda2-2efa-4134-aa9a-605c0c52bee4/GG20260403 - Tournament #6227605 - 6 Satellite to 100K Ontario MILLION, 3 Seats.txt
+data/tmp_uploads_public/expanded/8f94dda2-2efa-4134-aa9a-605c0c52bee4/GG20260414 - Tournament #6340562 - 15 Bounty Hunters [Big Bounties].txt
+data/tmp_uploads_public/expanded/8f94dda2-2efa-4134-aa9a-605c0c52bee4/GG20260405 - Tournament #6293539 - 1.50 Step to GGMasters 150.txt
+data/tmp_uploads_public/expanded/8f94dda2-2efa-4134-aa9a-605c0c52bee4/GG20260411 - Tournament #6292669 - Mini Friday Night Fight 25 [Bounty 6-Max].txt
+data/tmp_uploads_public/expanded/8f94dda2-2efa-4134-aa9a-605c0c52bee4/GG20260411 - Tournament #6324169 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/8f94dda2-2efa-4134-aa9a-605c0c52bee4/GG20260411 - Tournament #6210351 - Ontario MILLION Bounty Edition, 100K GTD [Stage 1].txt
+data/tmp_uploads_public/expanded/8f94dda2-2efa-4134-aa9a-605c0c52bee4/GG20260412 - Tournament #6324189 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/8f94dda2-2efa-4134-aa9a-605c0c52bee4/GG20260411 - Tournament #6349089 - 1.50 Step to GGMasters 150.txt
+data/tmp_uploads_public/expanded/8f94dda2-2efa-4134-aa9a-605c0c52bee4/GG20260405 - Tournament #6242592 - Mini Saturday Knockout 25 [Bounty].txt
+data/tmp_uploads_public/expanded/8f94dda2-2efa-4134-aa9a-605c0c52bee4/GG20260408 - Tournament #6274413 - Bounty King Jr 10.50.txt
+data/tmp_uploads_public/expanded/8f94dda2-2efa-4134-aa9a-605c0c52bee4/GG20260401 - Tournament #6156971 - SOP-SC 25 Spring Showers [Bounty Turbo].txt
+data/tmp_uploads_public/expanded/8f94dda2-2efa-4134-aa9a-605c0c52bee4/GG20260408 - Tournament #6210497 - 15 Bounty Hunters [Big Bounties].txt
+data/tmp_uploads_public/expanded/8f94dda2-2efa-4134-aa9a-605c0c52bee4/GG20260403 - Tournament #6130351 - Ontario MILLION, 100K GTD [Day 1].txt
+data/tmp_uploads_public/expanded/8f94dda2-2efa-4134-aa9a-605c0c52bee4/GG20260331 - Tournament #6156958 - SOP-SC 25 Spring Showers [Bounty Turbo].txt
+data/tmp_uploads_public/expanded/8f94dda2-2efa-4134-aa9a-605c0c52bee4/GG20260410 - Tournament #6286963 - 1 Step to SOP-C Playground Main Event.txt
+data/tmp_uploads_public/expanded/8f94dda2-2efa-4134-aa9a-605c0c52bee4/GG20260406 - Tournament #6287532 - 10 Satellite to MYSTERY BOUNTY Main Event, 250K GTD, 1 Seat.txt
+data/tmp_uploads_public/expanded/8f94dda2-2efa-4134-aa9a-605c0c52bee4/GG20260410 - Tournament #6285911 - Bounty Hunters Hyper 5.25.txt
+data/tmp_uploads_public/expanded/8f94dda2-2efa-4134-aa9a-605c0c52bee4/GG20260407 - Tournament #5787167 - 5K Monday Mega Freeroll.txt
+data/tmp_uploads_public/expanded/8f94dda2-2efa-4134-aa9a-605c0c52bee4/GG20260411 - Tournament #6324162 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/8f94dda2-2efa-4134-aa9a-605c0c52bee4/GG20260406 - Tournament #6252126 - Sunday Heater 25 [Bounty Turbo].txt
+data/tmp_uploads_public/expanded/8f94dda2-2efa-4134-aa9a-605c0c52bee4/GG20260414 - Tournament #6378331 - 10 Satellite to MYSTERY BOUNTY Main Event, 250K GTD, 1 Seat.txt
+data/tmp_uploads_public/expanded/8f94dda2-2efa-4134-aa9a-605c0c52bee4/GG20260403 - Tournament #6224756 - Mini Thursday Throwdown 25 [Bounty].txt
+data/tmp_uploads_public/expanded/8f94dda2-2efa-4134-aa9a-605c0c52bee4/GG20260402 - Tournament #6217357 - ednesday Heater 25 [Bounty Turbo].txt
+data/tmp_uploads_public/expanded/8f94dda2-2efa-4134-aa9a-605c0c52bee4/GG20260411 - Tournament #6210513 - 15 Bounty Hunters [Big Bounties].txt
+data/tmp_uploads_public/expanded/1c12342b-ece1-4122-a929-e5c3ceca763b/GG20260401-0230 - WSOP-SC 25 Spring Showers [Bounty Turbo].txt
+data/tmp_uploads_public/expanded/1c12342b-ece1-4122-a929-e5c3ceca763b/GG20260411-1743 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/1c12342b-ece1-4122-a929-e5c3ceca763b/GG20260331-0324 - WSOP-SC 25 Spring Showers [Bounty Turbo].txt
+data/tmp_uploads_public/expanded/1c12342b-ece1-4122-a929-e5c3ceca763b/GG20260410-1851 - Freeroll to WSOP-C Playground Main Event 1 Step.txt
+data/tmp_uploads_public/expanded/1c12342b-ece1-4122-a929-e5c3ceca763b/GG20260411-0005 - Mini Friday Night Fight 25 [Bounty 6-Max].txt
+data/tmp_uploads_public/expanded/1c12342b-ece1-4122-a929-e5c3ceca763b/GG20260411-1900 - Ontario MILLION Bounty Edition, 100K GTD [Stage 1].txt
+data/tmp_uploads_public/expanded/1c12342b-ece1-4122-a929-e5c3ceca763b/GG20260409-0351 - 25 Wednesday Heater [Turbo].txt
+data/tmp_uploads_public/expanded/1c12342b-ece1-4122-a929-e5c3ceca763b/GG20260414-2130 - 15 Bounty Hunters [Big Bounties].txt
+data/tmp_uploads_public/expanded/1c12342b-ece1-4122-a929-e5c3ceca763b/GG20260411-2300 - Ontario MILLION Bounty Edition, 100K GTD [Stage 1].txt
+data/tmp_uploads_public/expanded/1c12342b-ece1-4122-a929-e5c3ceca763b/GG20260410-0511 - Daily Hyper 10.txt
+data/tmp_uploads_public/expanded/1c12342b-ece1-4122-a929-e5c3ceca763b/GG20260412-2123 - 15 Satellite to GGMasters 150, 2 Seats.txt
+data/tmp_uploads_public/expanded/1c12342b-ece1-4122-a929-e5c3ceca763b/GG20260412-0035 - Mini Saturday Knockout 25 [Bounty].txt
+data/tmp_uploads_public/expanded/1c12342b-ece1-4122-a929-e5c3ceca763b/GG20260403-0131 - 6 Satellite to 100K Ontario MILLION, 3 Seats.txt
+data/tmp_uploads_public/expanded/1c12342b-ece1-4122-a929-e5c3ceca763b/GG20260410-0537 - Bounty Hunters Hyper 5.25.txt
+data/tmp_uploads_public/expanded/1c12342b-ece1-4122-a929-e5c3ceca763b/GG20260417-0350 - 25 Thursday Heater [Turbo].txt
+data/tmp_uploads_public/expanded/1c12342b-ece1-4122-a929-e5c3ceca763b/GG20260402-0313 - Wednesday Heater 25 [Bounty Turbo].txt
+data/tmp_uploads_public/expanded/1c12342b-ece1-4122-a929-e5c3ceca763b/GG20260410-0312 - 25 Thursday Heater [Turbo].txt
+data/tmp_uploads_public/expanded/1c12342b-ece1-4122-a929-e5c3ceca763b/GG20260414-1930 - 10 Satellite to MYSTERY BOUNTY Main Event, 250K GTD, 1 Seat.txt
+data/tmp_uploads_public/expanded/1c12342b-ece1-4122-a929-e5c3ceca763b/GG20260408-2247 - 15 Bounty Hunters [Big Bounties].txt
+data/tmp_uploads_public/expanded/1c12342b-ece1-4122-a929-e5c3ceca763b/GG20260406-0205 - Sunday Heater 25 [Bounty Turbo].txt
+data/tmp_uploads_public/expanded/1c12342b-ece1-4122-a929-e5c3ceca763b/GG20260409-0023 - Bounty King Jr 10.50.txt
+data/tmp_uploads_public/expanded/1c12342b-ece1-4122-a929-e5c3ceca763b/GG20260406-0304 - Sunday Heater 25 [Bounty Turbo].txt
+data/tmp_uploads_public/expanded/1c12342b-ece1-4122-a929-e5c3ceca763b/GG20260412-0203 - 1.50 Step to GGMasters 150.txt
+data/tmp_uploads_public/expanded/1c12342b-ece1-4122-a929-e5c3ceca763b/GG20260410-0618 - Bounty Hunters Hyper 5.25.txt
+data/tmp_uploads_public/expanded/1c12342b-ece1-4122-a929-e5c3ceca763b/GG20260405-0209 - 1.50 Step to GGMasters 150.txt
+data/tmp_uploads_public/expanded/1c12342b-ece1-4122-a929-e5c3ceca763b/GG20260403-0013 - 1K Thursday Freeroll.txt
+data/tmp_uploads_public/expanded/1c12342b-ece1-4122-a929-e5c3ceca763b/GG20260412-2103 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/1c12342b-ece1-4122-a929-e5c3ceca763b/GG20260412-2145 - 15 Satellite to GGMasters 150, 2 Seats.txt
+data/tmp_uploads_public/expanded/1c12342b-ece1-4122-a929-e5c3ceca763b/GG20260411-0026 - Mini Friday Night Fight 25 [Bounty 6-Max].txt
+data/tmp_uploads_public/expanded/1c12342b-ece1-4122-a929-e5c3ceca763b/GG20260403-0114 - 6 Satellite to 100K Ontario MILLION, 3 Seats.txt
+data/tmp_uploads_public/expanded/1c12342b-ece1-4122-a929-e5c3ceca763b/GG20260411-2022 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/1c12342b-ece1-4122-a929-e5c3ceca763b/GG20260406-0251 - Sunday Heater 25 [Bounty Turbo].txt
+data/tmp_uploads_public/expanded/1c12342b-ece1-4122-a929-e5c3ceca763b/GG20260417-0211 - 25 Thursday Heater [Turbo].txt
+data/tmp_uploads_public/expanded/1c12342b-ece1-4122-a929-e5c3ceca763b/GG20260415-0332 - Bounty Hunters 5.25.txt
+data/tmp_uploads_public/expanded/1c12342b-ece1-4122-a929-e5c3ceca763b/GG20260417-0215 - Mini Thursday Throwdown 25 [Bounty].txt
+data/tmp_uploads_public/expanded/1c12342b-ece1-4122-a929-e5c3ceca763b/GG20260402-0328 - Wednesday Heater 25 [Bounty Turbo].txt
+data/tmp_uploads_public/expanded/1c12342b-ece1-4122-a929-e5c3ceca763b/GG20260411-0429 - 1.50 Step to GGMasters 150.txt
+data/tmp_uploads_public/expanded/1c12342b-ece1-4122-a929-e5c3ceca763b/GG20260414-2025 - 10 Satellite to MYSTERY BOUNTY Main Event, 250K GTD, 2 Seats.txt
+data/tmp_uploads_public/expanded/1c12342b-ece1-4122-a929-e5c3ceca763b/GG20260406-1830 - Freeroll to WSOP-C Playground Main Event 1 Step.txt
+data/tmp_uploads_public/expanded/1c12342b-ece1-4122-a929-e5c3ceca763b/GG20260410-0501 - Daily Hyper 10.txt
+data/tmp_uploads_public/expanded/1c12342b-ece1-4122-a929-e5c3ceca763b/GG20260403-0021 - Mini Thursday Throwdown 25 [Bounty].txt
+data/tmp_uploads_public/expanded/1c12342b-ece1-4122-a929-e5c3ceca763b/GG20260410-1710 - Bounty Hunters 5.25.txt
+data/tmp_uploads_public/expanded/1c12342b-ece1-4122-a929-e5c3ceca763b/GG20260409-2112 - Omaholic Deepstack 5.txt
+data/tmp_uploads_public/expanded/1c12342b-ece1-4122-a929-e5c3ceca763b/GG20260401-0342 - WSOP-SC 25 Spring Showers [Bounty Turbo].txt
+data/tmp_uploads_public/expanded/1c12342b-ece1-4122-a929-e5c3ceca763b/GG20260410-1627 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/1c12342b-ece1-4122-a929-e5c3ceca763b/GG20260412-1846 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/1c12342b-ece1-4122-a929-e5c3ceca763b/GG20260331-0315 - WSOP-SC 25 Spring Showers [Bounty Turbo].txt
+data/tmp_uploads_public/expanded/1c12342b-ece1-4122-a929-e5c3ceca763b/GG20260411-1850 - Freeroll to WSOP-C Playground Main Event 1 Step.txt
+data/tmp_uploads_public/expanded/1c12342b-ece1-4122-a929-e5c3ceca763b/GG20260405-0005 - Mini Saturday Knockout 25 [Bounty].txt
+data/tmp_uploads_public/expanded/1c12342b-ece1-4122-a929-e5c3ceca763b/GG20260412-2000 - Ontario MILLION Bounty Edition, 100K GTD [Stage 1].txt
+data/tmp_uploads_public/expanded/1c12342b-ece1-4122-a929-e5c3ceca763b/GG20260415-0253 - 25 Tuesday Heater [Turbo].txt
+data/tmp_uploads_public/expanded/1c12342b-ece1-4122-a929-e5c3ceca763b/GG20260412-2236 - Bounty Hunters Sunday Big Game 21.txt
+data/tmp_uploads_public/expanded/1c12342b-ece1-4122-a929-e5c3ceca763b/GG20260401-0236 - WSOP-SC 25 Spring Showers [Bounty Turbo].txt
+data/tmp_uploads_public/expanded/1c12342b-ece1-4122-a929-e5c3ceca763b/GG20260411-1941 - Ontario MILLION Bounty Edition, 100K GTD [Stage 1].txt
+data/tmp_uploads_public/expanded/1c12342b-ece1-4122-a929-e5c3ceca763b/GG20260410-1638 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/1c12342b-ece1-4122-a929-e5c3ceca763b/GG20260417-0014 - Mini Thursday Throwdown 25 [Bounty].txt
+data/tmp_uploads_public/expanded/1c12342b-ece1-4122-a929-e5c3ceca763b/GG20260410-0412 - Bounty Hunters Hyper 10.50.txt
+data/tmp_uploads_public/expanded/1c12342b-ece1-4122-a929-e5c3ceca763b/GG20260410-1651 - Bounty Hunters 5.25.txt
+data/tmp_uploads_public/expanded/1c12342b-ece1-4122-a929-e5c3ceca763b/GG20260411-1647 - 15 Satellite to GGMasters 150, 1 Seat.txt
+data/tmp_uploads_public/expanded/1c12342b-ece1-4122-a929-e5c3ceca763b/GG20260411-2201 - 15 Bounty Hunters [Big Bounties].txt
+data/tmp_uploads_public/expanded/1c12342b-ece1-4122-a929-e5c3ceca763b/GG20260411-1734 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/1c12342b-ece1-4122-a929-e5c3ceca763b/GG20260411-0109 - Mini Friday Night Fight 25 [Bounty 6-Max].txt
+data/tmp_uploads_public/expanded/1c12342b-ece1-4122-a929-e5c3ceca763b/GG20260417-0422 - Daily Hyper 3.txt
+data/tmp_uploads_public/expanded/1c12342b-ece1-4122-a929-e5c3ceca763b/GG20260410-0619 - Bounty Hunters Hyper 5.25.txt
+data/tmp_uploads_public/expanded/1c12342b-ece1-4122-a929-e5c3ceca763b/GG20260417-0207 - Mini Thursday Throwdown 25 [Bounty].txt
+data/tmp_uploads_public/expanded/1c12342b-ece1-4122-a929-e5c3ceca763b/GG20260406-2031 - 10 Satellite to MYSTERY BOUNTY Main Event, 250K GTD, 1 Seat.txt
+data/tmp_uploads_public/expanded/1c12342b-ece1-4122-a929-e5c3ceca763b/GG20260406-0030 - Ontario MILLION, 100K GTD [Final Day].txt
+data/tmp_uploads_public/expanded/1c12342b-ece1-4122-a929-e5c3ceca763b/GG20260331-0338 - WSOP-SC 25 Spring Showers [Bounty Turbo].txt
+data/tmp_uploads_public/expanded/1c12342b-ece1-4122-a929-e5c3ceca763b/GG20260412-0210 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/1c12342b-ece1-4122-a929-e5c3ceca763b/GG20260415-0215 - 25 Tuesday Heater [Turbo].txt
+data/tmp_uploads_public/expanded/1c12342b-ece1-4122-a929-e5c3ceca763b/GG20260412-0006 - Mini Saturday Knockout 25 [Bounty].txt
+data/tmp_uploads_public/expanded/1c12342b-ece1-4122-a929-e5c3ceca763b/GG20260408-2338 - 15 Bounty Hunters [Big Bounties].txt
+data/tmp_uploads_public/expanded/1c12342b-ece1-4122-a929-e5c3ceca763b/GG20260417-0434 - Daily Hyper 3.txt
+data/tmp_uploads_public/expanded/1c12342b-ece1-4122-a929-e5c3ceca763b/GG20260407-0106 - 5K Monday Mega Freeroll.txt
+data/tmp_uploads_public/expanded/1c12342b-ece1-4122-a929-e5c3ceca763b/GG20260412-2109 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/1c12342b-ece1-4122-a929-e5c3ceca763b/GG20260408-2229 - 10 Deadline to MYSTERY BOUNTY Main Event, 250K GTD, 1 Seat.txt
+data/tmp_uploads_public/expanded/1c12342b-ece1-4122-a929-e5c3ceca763b/GG20260408-2344 - Bounty King Jr 10.50.txt
+data/tmp_uploads_public/expanded/1c12342b-ece1-4122-a929-e5c3ceca763b/GG20260409-0250 - 25 Wednesday Heater [Turbo].txt
+data/tmp_uploads_public/expanded/1c12342b-ece1-4122-a929-e5c3ceca763b/GG20260410-1812 - 1 Step to WSOP-C Playground Main Event.txt
+data/tmp_uploads_public/expanded/1c12342b-ece1-4122-a929-e5c3ceca763b/GG20260414-2349 - Bounty King Jr 10.50.txt
+data/tmp_uploads_public/expanded/1c12342b-ece1-4122-a929-e5c3ceca763b/GG20260403-0300 - Ontario MILLION, 100K GTD [Day 1].txt
+data/tmp_uploads_public/expanded/1c12342b-ece1-4122-a929-e5c3ceca763b/GG20260417-0000 - 1K Thursday Freeroll.txt
+data/tmp_uploads_public/expanded/1c12342b-ece1-4122-a929-e5c3ceca763b/GG20260410-1850 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/1c12342b-ece1-4122-a929-e5c3ceca763b/GG20260410-1726 - Bounty Hunters 5.25.txt
+data/tmp_uploads_public/expanded/1c12342b-ece1-4122-a929-e5c3ceca763b/GG20260413-0100 - Omaholic Bounty 5.25.txt
+data/tmp_uploads_public/expanded/1c12342b-ece1-4122-a929-e5c3ceca763b/GG20260409-0404 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/1c12342b-ece1-4122-a929-e5c3ceca763b/GG20260412-2146 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/1c12342b-ece1-4122-a929-e5c3ceca763b/GG20260411-0424 - Daily Turbo 10.txt
+data/tmp_uploads_public/expanded/1c12342b-ece1-4122-a929-e5c3ceca763b/GG20260408-2226 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260426-1836 - 10 Satellite to MYSTERY BOUNTY Main Event, 250K GTD, 1 Seat.txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260429-0205 - Tuesday Heater 25 [Bounty Turbo].txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260427-1710 - 10 Satellite to MYSTERY BOUNTY Main Event, 250K GTD, 2 Seats.txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260419-1519 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260417-1703 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260429-0406 - 15 Satellite to 150 GGMasters Grand Opening, 1 Seat.txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260420-0219 - Sunday Heater 25 [Bounty Turbo].txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260417-1718 - 1 Step to WSOP-C Playground Main Event.txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260418-1837 - 1 Step to WSOP-C Playground Main Event.txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260427-1730 - 10 Satellite to MYSTERY BOUNTY Main Event, 250K GTD, 2 Seats.txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260424-0331 - 25 Thursday Heater [Turbo].txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260421-2047 - 52.50 Bounty Warm-Up [6-Max].txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260422-2039 - 10 Satellite to MYSTERY BOUNTY Main Event, 250K GTD, 2 Seats.txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260427-1936 - 10 Step to WSOP-C Playground Main Event, 75 Satellite.txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260422-0132 - Bounty King Jr 10.50.txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260419-2100 - GGMasters 150, 50K GTD.txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260427-0216 - Sunday Heater 25 [Bounty Turbo].txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260429-0036 - Bounty King Jr 10.50.txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260421-0215 - Mini LUCKY SEVENS Superstack Turbo 7.77 [7-Max].txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260426-1844 - 10 Satellite to MYSTERY BOUNTY Main Event, 250K GTD, 1 Seat.txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260427-2031 - 10 Step to WSOP-C Playground Main Event, 75 Satellite.txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260425-0325 - 25 Friday Heater [Turbo].txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260426-1900 - 10 Satellite to MYSTERY BOUNTY Main Event, 250K GTD, 1 Seat.txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260420-0041 - 25 Sunday Bounty King Jr.txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260427-1849 - 10 Satellite to MYSTERY BOUNTY Main Event, 250K GTD, 2 Seats.txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260419-0424 - 15 Satellite to GGMasters 150, 1 Seat.txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260419-1900 - MYSTERY BOUNTY Main Event, 250K GTD [Stage 1].txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260426-1731 - 15 Satellite to GGMasters 150, 3 Seats.txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260419-1638 - 15 Satellite to GGMasters 150, 1 Seat.txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260422-0354 - 25 Tuesday Heater [Turbo].txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260419-0224 - Mini Saturday Knockout 25 [Bounty].txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260428-2331 - Bounty King Jr 10.50.txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260418-1841 - Freeroll to WSOP-C Playground Main Event 1 Step.txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260425-0115 - Mini Friday Night Fight 25 [Bounty 6-Max].txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260418-0330 - 25 Friday Heater [Turbo].txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260427-1700 - Phase-L 5 Ontario Mini MILLION [Day 1].txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260418-1900 - Ontario MILLION Bounty Edition, 100K GTD [Stage 1].txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260422-0200 - 25 Tuesday Heater [Turbo].txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260421-2111 - 52.50 Bounty Warm-Up [6-Max].txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260419-2300 - 25 Sunday Bounty King Jr.txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260428-2030 - 10 Step to WSOP-C Playground Main Event, 75 Satellite.txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260429-0312 - Tuesday Heater 25 [Bounty Turbo].txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260419-0416 - 15 Satellite to GGMasters 150, 1 Seat.txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260418-0032 - Mini Friday Night Fight 25 [Bounty 6-Max].txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260426-2310 - 25 Sunday Bounty King Jr.txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260420-0334 - Sunday Heater 25 [Bounty Turbo].txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260422-0023 - 105 Bounty King [Deepstack].txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260418-0610 - Ontario MILLION Bounty Edition, 100K GTD [Stage 1].txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260425-0151 - Mini Friday Night Fight 25 [Bounty 6-Max].txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260425-0309 - 25 Friday Heater [Turbo].txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260423-2346 - Bounty King Jr 10.50.txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260423-2134 - 15 Bounty Hunters [Big Bounties].txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260417-1731 - 1 Step to WSOP-C Playground Main Event.txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260419-0239 - 25 Saturday Heater [Turbo].txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260421-2012 - 52.50 Bounty Warm-Up [6-Max].txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260424-0017 - 1K Thursday Freeroll.txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260427-2223 - 15 Bounty Hunters [Big Bounties].txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260427-1711 - Phase-L 5 Ontario Mini MILLION [Day 1].txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260418-1721 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260427-2021 - 6 Satellite to 50 Ontario MILLION Festival Edition, 3 Seats.txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260419-1800 - Ontario MILLION Bounty Edition, 100K GTD [Stage 1].txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260425-0244 - 25 Friday Heater [Turbo].txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260429-0000 - 1K Tuesday Freeroll.txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260419-1716 - 10 Satellite to MYSTERY BOUNTY Main Event, 250K GTD, 1 Seat.txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260425-0143 - Mini Friday Night Fight 25 [Bounty 6-Max].txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260426-1920 - Bounty Hunters Deepstack Turbo 10.50.txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260417-1830 - Freeroll to WSOP-C Playground Main Event 1 Step.txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260418-1816 - 1 Step to WSOP-C Playground Main Event.txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260425-0417 - 84 Midnight Madness [Hyper 5-Max].txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260422-0447 - Daily Hyper 10.txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260422-0400 - T Builder 5.txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260417-0422 - Daily Hyper 3.txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260420-0110 - 25 Sunday Bounty King Jr.txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260419-1909 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260424-2300 - 105 Bounty King [Ultradeep Turbo].txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260424-0141 - Mini Thursday Throwdown 25 [Bounty].txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260423-2222 - 15 Bounty Hunters [Big Bounties].txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260421-0313 - Mini LUCKY SEVENS Superstack Turbo 7.77 [7-Max].txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260423-0122 - Mini Wednesday Double Stack 25.txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260426-1852 - 10 Satellite to MYSTERY BOUNTY Main Event, 250K GTD, 1 Seat.txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260417-0434 - Daily Hyper 3.txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260427-1700 - 10 Satellite to MYSTERY BOUNTY Main Event, 250K GTD, 1 Seat.txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260427-2000 - MYSTERY BOUNTY Main Event, 250K GTD [Last Chance].txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260422-0231 - 25 Tuesday Heater [Turbo].txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260427-2026 - Phase-L 5.25 Mystery Mini MILLION [Stage 1].txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260423-0134 - Mini Wednesday Double Stack 25.txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260428-1954 - 10 Step to WSOP-C Playground Main Event, 75 Satellite.txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260426-0323 - 25 Saturday Heater [Turbo].txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260427-2130 - 15 Bounty Hunters [Big Bounties].txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260422-0117 - 105 Bounty King [Deepstack].txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260428-1927 - 1 Step to WSOP-C Playground Main Event.txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260422-0529 - Daily Hyper 10.txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260423-0222 - 25 Wednesday Heater [Turbo].txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260427-2327 - 15 Bounty Hunters [Big Bounties].txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260418-0614 - Ontario MILLION Bounty Edition, 100K GTD [Stage 1].txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260419-1943 - 10 Step to WSOP-C Playground Main Event, 75 Satellite.txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260426-2100 - GGMasters 150, 50K GTD.txt
+data/tmp_uploads_public/expanded/f01c37e5-e159-4f78-b648-36d53c29c058/GG20260418-0033 - 1K Friday Freeroll.txt
+data/tmp_uploads_public/expanded/ef2b2a94-03ca-4a2b-b244-aaa80ccf4bdd/GG20260408 - Tournament #6324110 - 10 Deadline to MYSTERY BOUNTY Main Event, 250K GTD, 1 Seat.txt
+data/tmp_uploads_public/expanded/ef2b2a94-03ca-4a2b-b244-aaa80ccf4bdd/GG20260412 - Tournament #6310094 - Bounty Hunters Sunday Big Game 21.txt
+data/tmp_uploads_public/expanded/ef2b2a94-03ca-4a2b-b244-aaa80ccf4bdd/GG20260412 - Tournament #6309933 - 15 Satellite to GGMasters 150, 2 Seats.txt
+data/tmp_uploads_public/expanded/ef2b2a94-03ca-4a2b-b244-aaa80ccf4bdd/GG20260417 - Tournament #5787175 - 1K Thursday Freeroll.txt
+data/tmp_uploads_public/expanded/ef2b2a94-03ca-4a2b-b244-aaa80ccf4bdd/GG20260408 - Tournament #6324109 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/ef2b2a94-03ca-4a2b-b244-aaa80ccf4bdd/GG20260412 - Tournament #6302536 - Mini Saturday Knockout 25 [Bounty].txt
+data/tmp_uploads_public/expanded/ef2b2a94-03ca-4a2b-b244-aaa80ccf4bdd/GG20260411 - Tournament #6294350 - Daily Turbo 10.txt
+data/tmp_uploads_public/expanded/ef2b2a94-03ca-4a2b-b244-aaa80ccf4bdd/GG20260412 - Tournament #6356812 - 1.50 Step to GGMasters 150.txt
+data/tmp_uploads_public/expanded/ef2b2a94-03ca-4a2b-b244-aaa80ccf4bdd/GG20260412 - Tournament #6210358 - Ontario MILLION Bounty Edition, 100K GTD [Stage 1].txt
+data/tmp_uploads_public/expanded/ef2b2a94-03ca-4a2b-b244-aaa80ccf4bdd/GG20260411 - Tournament #6210349 - Ontario MILLION Bounty Edition, 100K GTD [Stage 1].txt
+data/tmp_uploads_public/expanded/ef2b2a94-03ca-4a2b-b244-aaa80ccf4bdd/GG20260415 - Tournament #6340564 - 25 Tuesday Heater [Turbo].txt
+data/tmp_uploads_public/expanded/ef2b2a94-03ca-4a2b-b244-aaa80ccf4bdd/GG20260410 - Tournament #6210504 - 25 Thursday Heater [Turbo].txt
+data/tmp_uploads_public/expanded/ef2b2a94-03ca-4a2b-b244-aaa80ccf4bdd/GG20260409 - Tournament #6324115 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/ef2b2a94-03ca-4a2b-b244-aaa80ccf4bdd/GG20260412 - Tournament #6324178 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/ef2b2a94-03ca-4a2b-b244-aaa80ccf4bdd/GG20260414 - Tournament #6378333 - 10 Satellite to MYSTERY BOUNTY Main Event, 250K GTD, 2 Seats.txt
+data/tmp_uploads_public/expanded/ef2b2a94-03ca-4a2b-b244-aaa80ccf4bdd/GG20260406 - Tournament #6286925 - Freeroll to SOP-C Playground Main Event 1 Step.txt
+data/tmp_uploads_public/expanded/ef2b2a94-03ca-4a2b-b244-aaa80ccf4bdd/GG20260412 - Tournament #6311287 - Omaholic Bounty 5.25.txt
+data/tmp_uploads_public/expanded/ef2b2a94-03ca-4a2b-b244-aaa80ccf4bdd/GG20260409 - Tournament #6210499 - 25 ednesday Heater [Turbo].txt
+data/tmp_uploads_public/expanded/ef2b2a94-03ca-4a2b-b244-aaa80ccf4bdd/GG20260410 - Tournament #6324144 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/ef2b2a94-03ca-4a2b-b244-aaa80ccf4bdd/GG20260410 - Tournament #6286965 - Freeroll to SOP-C Playground Main Event 1 Step.txt
+data/tmp_uploads_public/expanded/ef2b2a94-03ca-4a2b-b244-aaa80ccf4bdd/GG20260411 - Tournament #6286975 - Freeroll to SOP-C Playground Main Event 1 Step.txt
+data/tmp_uploads_public/expanded/ef2b2a94-03ca-4a2b-b244-aaa80ccf4bdd/GG20260410 - Tournament #6285687 - Daily Hyper 10.txt
+data/tmp_uploads_public/expanded/ef2b2a94-03ca-4a2b-b244-aaa80ccf4bdd/GG20260409 - Tournament #6281258 - Omaholic Deepstack 5.txt
+data/tmp_uploads_public/expanded/ef2b2a94-03ca-4a2b-b244-aaa80ccf4bdd/GG20260414 - Tournament #6328867 - Bounty King Jr 10.50.txt
+data/tmp_uploads_public/expanded/ef2b2a94-03ca-4a2b-b244-aaa80ccf4bdd/GG20260410 - Tournament #6285188 - Bounty Hunters Hyper 10.50.txt
+data/tmp_uploads_public/expanded/ef2b2a94-03ca-4a2b-b244-aaa80ccf4bdd/GG20260406 - Tournament #6130277 - Ontario MILLION, 100K GTD [Final Day].txt
+data/tmp_uploads_public/expanded/ef2b2a94-03ca-4a2b-b244-aaa80ccf4bdd/GG20260411 - Tournament #6298793 - 15 Satellite to GGMasters 150, 1 Seat.txt
+data/tmp_uploads_public/expanded/ef2b2a94-03ca-4a2b-b244-aaa80ccf4bdd/GG20260415 - Tournament #6330944 - Bounty Hunters 5.25.txt
+data/tmp_uploads_public/expanded/ef2b2a94-03ca-4a2b-b244-aaa80ccf4bdd/GG20260403 - Tournament #5787165 - 1K Thursday Freeroll.txt
+data/tmp_uploads_public/expanded/ef2b2a94-03ca-4a2b-b244-aaa80ccf4bdd/GG20260412 - Tournament #6324195 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/ef2b2a94-03ca-4a2b-b244-aaa80ccf4bdd/GG20260417 - Tournament #6348883 - Daily Hyper 3.txt
+data/tmp_uploads_public/expanded/ef2b2a94-03ca-4a2b-b244-aaa80ccf4bdd/GG20260410 - Tournament #6289351 - Bounty Hunters 5.25.txt
+data/tmp_uploads_public/expanded/ef2b2a94-03ca-4a2b-b244-aaa80ccf4bdd/GG20260410 - Tournament #6324140 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/ef2b2a94-03ca-4a2b-b244-aaa80ccf4bdd/GG20260412 - Tournament #6324193 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/ef2b2a94-03ca-4a2b-b244-aaa80ccf4bdd/GG20260403 - Tournament #6227605 - 6 Satellite to 100K Ontario MILLION, 3 Seats.txt
+data/tmp_uploads_public/expanded/ef2b2a94-03ca-4a2b-b244-aaa80ccf4bdd/GG20260414 - Tournament #6340562 - 15 Bounty Hunters [Big Bounties].txt
+data/tmp_uploads_public/expanded/ef2b2a94-03ca-4a2b-b244-aaa80ccf4bdd/GG20260405 - Tournament #6293539 - 1.50 Step to GGMasters 150.txt
+data/tmp_uploads_public/expanded/ef2b2a94-03ca-4a2b-b244-aaa80ccf4bdd/GG20260411 - Tournament #6292669 - Mini Friday Night Fight 25 [Bounty 6-Max].txt
+data/tmp_uploads_public/expanded/ef2b2a94-03ca-4a2b-b244-aaa80ccf4bdd/GG20260411 - Tournament #6324169 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/ef2b2a94-03ca-4a2b-b244-aaa80ccf4bdd/GG20260411 - Tournament #6210351 - Ontario MILLION Bounty Edition, 100K GTD [Stage 1].txt
+data/tmp_uploads_public/expanded/ef2b2a94-03ca-4a2b-b244-aaa80ccf4bdd/GG20260412 - Tournament #6324189 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/ef2b2a94-03ca-4a2b-b244-aaa80ccf4bdd/GG20260411 - Tournament #6349089 - 1.50 Step to GGMasters 150.txt
+data/tmp_uploads_public/expanded/ef2b2a94-03ca-4a2b-b244-aaa80ccf4bdd/GG20260405 - Tournament #6242592 - Mini Saturday Knockout 25 [Bounty].txt
+data/tmp_uploads_public/expanded/ef2b2a94-03ca-4a2b-b244-aaa80ccf4bdd/GG20260408 - Tournament #6274413 - Bounty King Jr 10.50.txt
+data/tmp_uploads_public/expanded/ef2b2a94-03ca-4a2b-b244-aaa80ccf4bdd/GG20260401 - Tournament #6156971 - SOP-SC 25 Spring Showers [Bounty Turbo].txt
+data/tmp_uploads_public/expanded/ef2b2a94-03ca-4a2b-b244-aaa80ccf4bdd/GG20260408 - Tournament #6210497 - 15 Bounty Hunters [Big Bounties].txt
+data/tmp_uploads_public/expanded/ef2b2a94-03ca-4a2b-b244-aaa80ccf4bdd/GG20260403 - Tournament #6130351 - Ontario MILLION, 100K GTD [Day 1].txt
+data/tmp_uploads_public/expanded/ef2b2a94-03ca-4a2b-b244-aaa80ccf4bdd/GG20260331 - Tournament #6156958 - SOP-SC 25 Spring Showers [Bounty Turbo].txt
+data/tmp_uploads_public/expanded/ef2b2a94-03ca-4a2b-b244-aaa80ccf4bdd/GG20260410 - Tournament #6286963 - 1 Step to SOP-C Playground Main Event.txt
+data/tmp_uploads_public/expanded/ef2b2a94-03ca-4a2b-b244-aaa80ccf4bdd/GG20260406 - Tournament #6287532 - 10 Satellite to MYSTERY BOUNTY Main Event, 250K GTD, 1 Seat.txt
+data/tmp_uploads_public/expanded/ef2b2a94-03ca-4a2b-b244-aaa80ccf4bdd/GG20260410 - Tournament #6285911 - Bounty Hunters Hyper 5.25.txt
+data/tmp_uploads_public/expanded/ef2b2a94-03ca-4a2b-b244-aaa80ccf4bdd/GG20260407 - Tournament #5787167 - 5K Monday Mega Freeroll.txt
+data/tmp_uploads_public/expanded/ef2b2a94-03ca-4a2b-b244-aaa80ccf4bdd/GG20260411 - Tournament #6324162 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/ef2b2a94-03ca-4a2b-b244-aaa80ccf4bdd/GG20260406 - Tournament #6252126 - Sunday Heater 25 [Bounty Turbo].txt
+data/tmp_uploads_public/expanded/ef2b2a94-03ca-4a2b-b244-aaa80ccf4bdd/GG20260414 - Tournament #6378331 - 10 Satellite to MYSTERY BOUNTY Main Event, 250K GTD, 1 Seat.txt
+data/tmp_uploads_public/expanded/ef2b2a94-03ca-4a2b-b244-aaa80ccf4bdd/GG20260403 - Tournament #6224756 - Mini Thursday Throwdown 25 [Bounty].txt
+data/tmp_uploads_public/expanded/ef2b2a94-03ca-4a2b-b244-aaa80ccf4bdd/GG20260402 - Tournament #6217357 - ednesday Heater 25 [Bounty Turbo].txt
+data/tmp_uploads_public/expanded/ef2b2a94-03ca-4a2b-b244-aaa80ccf4bdd/GG20260411 - Tournament #6210513 - 15 Bounty Hunters [Big Bounties].txt
+data/tmp_uploads_public/expanded/78fa194d-c560-4831-bb1a-f7327bd9a5c8/GG20260401-0230 - WSOP-SC 25 Spring Showers [Bounty Turbo].txt
+data/tmp_uploads_public/expanded/78fa194d-c560-4831-bb1a-f7327bd9a5c8/GG20260411-1743 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/78fa194d-c560-4831-bb1a-f7327bd9a5c8/GG20260331-0324 - WSOP-SC 25 Spring Showers [Bounty Turbo].txt
+data/tmp_uploads_public/expanded/78fa194d-c560-4831-bb1a-f7327bd9a5c8/GG20260410-1851 - Freeroll to WSOP-C Playground Main Event 1 Step.txt
+data/tmp_uploads_public/expanded/78fa194d-c560-4831-bb1a-f7327bd9a5c8/GG20260411-0005 - Mini Friday Night Fight 25 [Bounty 6-Max].txt
+data/tmp_uploads_public/expanded/78fa194d-c560-4831-bb1a-f7327bd9a5c8/GG20260411-1900 - Ontario MILLION Bounty Edition, 100K GTD [Stage 1].txt
+data/tmp_uploads_public/expanded/78fa194d-c560-4831-bb1a-f7327bd9a5c8/GG20260409-0351 - 25 Wednesday Heater [Turbo].txt
+data/tmp_uploads_public/expanded/78fa194d-c560-4831-bb1a-f7327bd9a5c8/GG20260414-2130 - 15 Bounty Hunters [Big Bounties].txt
+data/tmp_uploads_public/expanded/78fa194d-c560-4831-bb1a-f7327bd9a5c8/GG20260411-2300 - Ontario MILLION Bounty Edition, 100K GTD [Stage 1].txt
+data/tmp_uploads_public/expanded/78fa194d-c560-4831-bb1a-f7327bd9a5c8/GG20260410-0511 - Daily Hyper 10.txt
+data/tmp_uploads_public/expanded/78fa194d-c560-4831-bb1a-f7327bd9a5c8/GG20260412-2123 - 15 Satellite to GGMasters 150, 2 Seats.txt
+data/tmp_uploads_public/expanded/78fa194d-c560-4831-bb1a-f7327bd9a5c8/GG20260412-0035 - Mini Saturday Knockout 25 [Bounty].txt
+data/tmp_uploads_public/expanded/78fa194d-c560-4831-bb1a-f7327bd9a5c8/GG20260403-0131 - 6 Satellite to 100K Ontario MILLION, 3 Seats.txt
+data/tmp_uploads_public/expanded/78fa194d-c560-4831-bb1a-f7327bd9a5c8/GG20260410-0537 - Bounty Hunters Hyper 5.25.txt
+data/tmp_uploads_public/expanded/78fa194d-c560-4831-bb1a-f7327bd9a5c8/GG20260417-0350 - 25 Thursday Heater [Turbo].txt
+data/tmp_uploads_public/expanded/78fa194d-c560-4831-bb1a-f7327bd9a5c8/GG20260402-0313 - Wednesday Heater 25 [Bounty Turbo].txt
+data/tmp_uploads_public/expanded/78fa194d-c560-4831-bb1a-f7327bd9a5c8/GG20260410-0312 - 25 Thursday Heater [Turbo].txt
+data/tmp_uploads_public/expanded/78fa194d-c560-4831-bb1a-f7327bd9a5c8/GG20260414-1930 - 10 Satellite to MYSTERY BOUNTY Main Event, 250K GTD, 1 Seat.txt
+data/tmp_uploads_public/expanded/78fa194d-c560-4831-bb1a-f7327bd9a5c8/GG20260408-2247 - 15 Bounty Hunters [Big Bounties].txt
+data/tmp_uploads_public/expanded/78fa194d-c560-4831-bb1a-f7327bd9a5c8/GG20260406-0205 - Sunday Heater 25 [Bounty Turbo].txt
+data/tmp_uploads_public/expanded/78fa194d-c560-4831-bb1a-f7327bd9a5c8/GG20260409-0023 - Bounty King Jr 10.50.txt
+data/tmp_uploads_public/expanded/78fa194d-c560-4831-bb1a-f7327bd9a5c8/GG20260406-0304 - Sunday Heater 25 [Bounty Turbo].txt
+data/tmp_uploads_public/expanded/78fa194d-c560-4831-bb1a-f7327bd9a5c8/GG20260412-0203 - 1.50 Step to GGMasters 150.txt
+data/tmp_uploads_public/expanded/78fa194d-c560-4831-bb1a-f7327bd9a5c8/GG20260410-0618 - Bounty Hunters Hyper 5.25.txt
+data/tmp_uploads_public/expanded/78fa194d-c560-4831-bb1a-f7327bd9a5c8/GG20260405-0209 - 1.50 Step to GGMasters 150.txt
+data/tmp_uploads_public/expanded/78fa194d-c560-4831-bb1a-f7327bd9a5c8/GG20260403-0013 - 1K Thursday Freeroll.txt
+data/tmp_uploads_public/expanded/78fa194d-c560-4831-bb1a-f7327bd9a5c8/GG20260412-2103 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/78fa194d-c560-4831-bb1a-f7327bd9a5c8/GG20260412-2145 - 15 Satellite to GGMasters 150, 2 Seats.txt
+data/tmp_uploads_public/expanded/78fa194d-c560-4831-bb1a-f7327bd9a5c8/GG20260411-0026 - Mini Friday Night Fight 25 [Bounty 6-Max].txt
+data/tmp_uploads_public/expanded/78fa194d-c560-4831-bb1a-f7327bd9a5c8/GG20260403-0114 - 6 Satellite to 100K Ontario MILLION, 3 Seats.txt
+data/tmp_uploads_public/expanded/78fa194d-c560-4831-bb1a-f7327bd9a5c8/GG20260411-2022 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/78fa194d-c560-4831-bb1a-f7327bd9a5c8/GG20260406-0251 - Sunday Heater 25 [Bounty Turbo].txt
+data/tmp_uploads_public/expanded/78fa194d-c560-4831-bb1a-f7327bd9a5c8/GG20260417-0211 - 25 Thursday Heater [Turbo].txt
+data/tmp_uploads_public/expanded/78fa194d-c560-4831-bb1a-f7327bd9a5c8/GG20260415-0332 - Bounty Hunters 5.25.txt
+data/tmp_uploads_public/expanded/78fa194d-c560-4831-bb1a-f7327bd9a5c8/GG20260417-0215 - Mini Thursday Throwdown 25 [Bounty].txt
+data/tmp_uploads_public/expanded/78fa194d-c560-4831-bb1a-f7327bd9a5c8/GG20260402-0328 - Wednesday Heater 25 [Bounty Turbo].txt
+data/tmp_uploads_public/expanded/78fa194d-c560-4831-bb1a-f7327bd9a5c8/GG20260411-0429 - 1.50 Step to GGMasters 150.txt
+data/tmp_uploads_public/expanded/78fa194d-c560-4831-bb1a-f7327bd9a5c8/GG20260414-2025 - 10 Satellite to MYSTERY BOUNTY Main Event, 250K GTD, 2 Seats.txt
+data/tmp_uploads_public/expanded/78fa194d-c560-4831-bb1a-f7327bd9a5c8/GG20260406-1830 - Freeroll to WSOP-C Playground Main Event 1 Step.txt
+data/tmp_uploads_public/expanded/78fa194d-c560-4831-bb1a-f7327bd9a5c8/GG20260410-0501 - Daily Hyper 10.txt
+data/tmp_uploads_public/expanded/78fa194d-c560-4831-bb1a-f7327bd9a5c8/GG20260403-0021 - Mini Thursday Throwdown 25 [Bounty].txt
+data/tmp_uploads_public/expanded/78fa194d-c560-4831-bb1a-f7327bd9a5c8/GG20260410-1710 - Bounty Hunters 5.25.txt
+data/tmp_uploads_public/expanded/78fa194d-c560-4831-bb1a-f7327bd9a5c8/GG20260409-2112 - Omaholic Deepstack 5.txt
+data/tmp_uploads_public/expanded/78fa194d-c560-4831-bb1a-f7327bd9a5c8/GG20260401-0342 - WSOP-SC 25 Spring Showers [Bounty Turbo].txt
+data/tmp_uploads_public/expanded/78fa194d-c560-4831-bb1a-f7327bd9a5c8/GG20260410-1627 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/78fa194d-c560-4831-bb1a-f7327bd9a5c8/GG20260412-1846 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/78fa194d-c560-4831-bb1a-f7327bd9a5c8/GG20260331-0315 - WSOP-SC 25 Spring Showers [Bounty Turbo].txt
+data/tmp_uploads_public/expanded/78fa194d-c560-4831-bb1a-f7327bd9a5c8/GG20260411-1850 - Freeroll to WSOP-C Playground Main Event 1 Step.txt
+data/tmp_uploads_public/expanded/78fa194d-c560-4831-bb1a-f7327bd9a5c8/GG20260405-0005 - Mini Saturday Knockout 25 [Bounty].txt
+data/tmp_uploads_public/expanded/78fa194d-c560-4831-bb1a-f7327bd9a5c8/GG20260412-2000 - Ontario MILLION Bounty Edition, 100K GTD [Stage 1].txt
+data/tmp_uploads_public/expanded/78fa194d-c560-4831-bb1a-f7327bd9a5c8/GG20260415-0253 - 25 Tuesday Heater [Turbo].txt
+data/tmp_uploads_public/expanded/78fa194d-c560-4831-bb1a-f7327bd9a5c8/GG20260412-2236 - Bounty Hunters Sunday Big Game 21.txt
+data/tmp_uploads_public/expanded/78fa194d-c560-4831-bb1a-f7327bd9a5c8/GG20260401-0236 - WSOP-SC 25 Spring Showers [Bounty Turbo].txt
+data/tmp_uploads_public/expanded/78fa194d-c560-4831-bb1a-f7327bd9a5c8/GG20260411-1941 - Ontario MILLION Bounty Edition, 100K GTD [Stage 1].txt
+data/tmp_uploads_public/expanded/78fa194d-c560-4831-bb1a-f7327bd9a5c8/GG20260410-1638 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/78fa194d-c560-4831-bb1a-f7327bd9a5c8/GG20260417-0014 - Mini Thursday Throwdown 25 [Bounty].txt
+data/tmp_uploads_public/expanded/78fa194d-c560-4831-bb1a-f7327bd9a5c8/GG20260410-0412 - Bounty Hunters Hyper 10.50.txt
+data/tmp_uploads_public/expanded/78fa194d-c560-4831-bb1a-f7327bd9a5c8/GG20260410-1651 - Bounty Hunters 5.25.txt
+data/tmp_uploads_public/expanded/78fa194d-c560-4831-bb1a-f7327bd9a5c8/GG20260411-1647 - 15 Satellite to GGMasters 150, 1 Seat.txt
+data/tmp_uploads_public/expanded/78fa194d-c560-4831-bb1a-f7327bd9a5c8/GG20260411-2201 - 15 Bounty Hunters [Big Bounties].txt
+data/tmp_uploads_public/expanded/78fa194d-c560-4831-bb1a-f7327bd9a5c8/GG20260411-1734 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/78fa194d-c560-4831-bb1a-f7327bd9a5c8/GG20260411-0109 - Mini Friday Night Fight 25 [Bounty 6-Max].txt
+data/tmp_uploads_public/expanded/78fa194d-c560-4831-bb1a-f7327bd9a5c8/GG20260417-0422 - Daily Hyper 3.txt
+data/tmp_uploads_public/expanded/78fa194d-c560-4831-bb1a-f7327bd9a5c8/GG20260410-0619 - Bounty Hunters Hyper 5.25.txt
+data/tmp_uploads_public/expanded/78fa194d-c560-4831-bb1a-f7327bd9a5c8/GG20260417-0207 - Mini Thursday Throwdown 25 [Bounty].txt
+data/tmp_uploads_public/expanded/78fa194d-c560-4831-bb1a-f7327bd9a5c8/GG20260406-2031 - 10 Satellite to MYSTERY BOUNTY Main Event, 250K GTD, 1 Seat.txt
+data/tmp_uploads_public/expanded/78fa194d-c560-4831-bb1a-f7327bd9a5c8/GG20260406-0030 - Ontario MILLION, 100K GTD [Final Day].txt
+data/tmp_uploads_public/expanded/78fa194d-c560-4831-bb1a-f7327bd9a5c8/GG20260331-0338 - WSOP-SC 25 Spring Showers [Bounty Turbo].txt
+data/tmp_uploads_public/expanded/78fa194d-c560-4831-bb1a-f7327bd9a5c8/GG20260412-0210 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/78fa194d-c560-4831-bb1a-f7327bd9a5c8/GG20260415-0215 - 25 Tuesday Heater [Turbo].txt
+data/tmp_uploads_public/expanded/78fa194d-c560-4831-bb1a-f7327bd9a5c8/GG20260412-0006 - Mini Saturday Knockout 25 [Bounty].txt
+data/tmp_uploads_public/expanded/78fa194d-c560-4831-bb1a-f7327bd9a5c8/GG20260408-2338 - 15 Bounty Hunters [Big Bounties].txt
+data/tmp_uploads_public/expanded/78fa194d-c560-4831-bb1a-f7327bd9a5c8/GG20260417-0434 - Daily Hyper 3.txt
+data/tmp_uploads_public/expanded/78fa194d-c560-4831-bb1a-f7327bd9a5c8/GG20260407-0106 - 5K Monday Mega Freeroll.txt
+data/tmp_uploads_public/expanded/78fa194d-c560-4831-bb1a-f7327bd9a5c8/GG20260412-2109 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/78fa194d-c560-4831-bb1a-f7327bd9a5c8/GG20260408-2229 - 10 Deadline to MYSTERY BOUNTY Main Event, 250K GTD, 1 Seat.txt
+data/tmp_uploads_public/expanded/78fa194d-c560-4831-bb1a-f7327bd9a5c8/GG20260408-2344 - Bounty King Jr 10.50.txt
+data/tmp_uploads_public/expanded/78fa194d-c560-4831-bb1a-f7327bd9a5c8/GG20260409-0250 - 25 Wednesday Heater [Turbo].txt
+data/tmp_uploads_public/expanded/78fa194d-c560-4831-bb1a-f7327bd9a5c8/GG20260410-1812 - 1 Step to WSOP-C Playground Main Event.txt
+data/tmp_uploads_public/expanded/78fa194d-c560-4831-bb1a-f7327bd9a5c8/GG20260414-2349 - Bounty King Jr 10.50.txt
+data/tmp_uploads_public/expanded/78fa194d-c560-4831-bb1a-f7327bd9a5c8/GG20260403-0300 - Ontario MILLION, 100K GTD [Day 1].txt
+data/tmp_uploads_public/expanded/78fa194d-c560-4831-bb1a-f7327bd9a5c8/GG20260417-0000 - 1K Thursday Freeroll.txt
+data/tmp_uploads_public/expanded/78fa194d-c560-4831-bb1a-f7327bd9a5c8/GG20260410-1850 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/78fa194d-c560-4831-bb1a-f7327bd9a5c8/GG20260410-1726 - Bounty Hunters 5.25.txt
+data/tmp_uploads_public/expanded/78fa194d-c560-4831-bb1a-f7327bd9a5c8/GG20260413-0100 - Omaholic Bounty 5.25.txt
+data/tmp_uploads_public/expanded/78fa194d-c560-4831-bb1a-f7327bd9a5c8/GG20260409-0404 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/78fa194d-c560-4831-bb1a-f7327bd9a5c8/GG20260412-2146 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/78fa194d-c560-4831-bb1a-f7327bd9a5c8/GG20260411-0424 - Daily Turbo 10.txt
+data/tmp_uploads_public/expanded/78fa194d-c560-4831-bb1a-f7327bd9a5c8/GG20260408-2226 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/6af53f7d-fcc9-4c90-9719-991965b5c332/GG20260401-0230 - WSOP-SC 25 Spring Showers [Bounty Turbo].txt
+data/tmp_uploads_public/expanded/6af53f7d-fcc9-4c90-9719-991965b5c332/GG20260411-1743 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/6af53f7d-fcc9-4c90-9719-991965b5c332/GG20260331-0324 - WSOP-SC 25 Spring Showers [Bounty Turbo].txt
+data/tmp_uploads_public/expanded/6af53f7d-fcc9-4c90-9719-991965b5c332/GG20260410-1851 - Freeroll to WSOP-C Playground Main Event 1 Step.txt
+data/tmp_uploads_public/expanded/6af53f7d-fcc9-4c90-9719-991965b5c332/GG20260411-0005 - Mini Friday Night Fight 25 [Bounty 6-Max].txt
+data/tmp_uploads_public/expanded/6af53f7d-fcc9-4c90-9719-991965b5c332/GG20260411-1900 - Ontario MILLION Bounty Edition, 100K GTD [Stage 1].txt
+data/tmp_uploads_public/expanded/6af53f7d-fcc9-4c90-9719-991965b5c332/GG20260409-0351 - 25 Wednesday Heater [Turbo].txt
+data/tmp_uploads_public/expanded/6af53f7d-fcc9-4c90-9719-991965b5c332/GG20260414-2130 - 15 Bounty Hunters [Big Bounties].txt
+data/tmp_uploads_public/expanded/6af53f7d-fcc9-4c90-9719-991965b5c332/GG20260411-2300 - Ontario MILLION Bounty Edition, 100K GTD [Stage 1].txt
+data/tmp_uploads_public/expanded/6af53f7d-fcc9-4c90-9719-991965b5c332/GG20260410-0511 - Daily Hyper 10.txt
+data/tmp_uploads_public/expanded/6af53f7d-fcc9-4c90-9719-991965b5c332/GG20260412-2123 - 15 Satellite to GGMasters 150, 2 Seats.txt
+data/tmp_uploads_public/expanded/6af53f7d-fcc9-4c90-9719-991965b5c332/GG20260412-0035 - Mini Saturday Knockout 25 [Bounty].txt
+data/tmp_uploads_public/expanded/6af53f7d-fcc9-4c90-9719-991965b5c332/GG20260403-0131 - 6 Satellite to 100K Ontario MILLION, 3 Seats.txt
+data/tmp_uploads_public/expanded/6af53f7d-fcc9-4c90-9719-991965b5c332/GG20260410-0537 - Bounty Hunters Hyper 5.25.txt
+data/tmp_uploads_public/expanded/6af53f7d-fcc9-4c90-9719-991965b5c332/GG20260417-0350 - 25 Thursday Heater [Turbo].txt
+data/tmp_uploads_public/expanded/6af53f7d-fcc9-4c90-9719-991965b5c332/GG20260402-0313 - Wednesday Heater 25 [Bounty Turbo].txt
+data/tmp_uploads_public/expanded/6af53f7d-fcc9-4c90-9719-991965b5c332/GG20260410-0312 - 25 Thursday Heater [Turbo].txt
+data/tmp_uploads_public/expanded/6af53f7d-fcc9-4c90-9719-991965b5c332/GG20260414-1930 - 10 Satellite to MYSTERY BOUNTY Main Event, 250K GTD, 1 Seat.txt
+data/tmp_uploads_public/expanded/6af53f7d-fcc9-4c90-9719-991965b5c332/GG20260408-2247 - 15 Bounty Hunters [Big Bounties].txt
+data/tmp_uploads_public/expanded/6af53f7d-fcc9-4c90-9719-991965b5c332/GG20260406-0205 - Sunday Heater 25 [Bounty Turbo].txt
+data/tmp_uploads_public/expanded/6af53f7d-fcc9-4c90-9719-991965b5c332/GG20260409-0023 - Bounty King Jr 10.50.txt
+data/tmp_uploads_public/expanded/6af53f7d-fcc9-4c90-9719-991965b5c332/GG20260406-0304 - Sunday Heater 25 [Bounty Turbo].txt
+data/tmp_uploads_public/expanded/6af53f7d-fcc9-4c90-9719-991965b5c332/GG20260412-0203 - 1.50 Step to GGMasters 150.txt
+data/tmp_uploads_public/expanded/6af53f7d-fcc9-4c90-9719-991965b5c332/GG20260410-0618 - Bounty Hunters Hyper 5.25.txt
+data/tmp_uploads_public/expanded/6af53f7d-fcc9-4c90-9719-991965b5c332/GG20260405-0209 - 1.50 Step to GGMasters 150.txt
+data/tmp_uploads_public/expanded/6af53f7d-fcc9-4c90-9719-991965b5c332/GG20260403-0013 - 1K Thursday Freeroll.txt
+data/tmp_uploads_public/expanded/6af53f7d-fcc9-4c90-9719-991965b5c332/GG20260412-2103 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/6af53f7d-fcc9-4c90-9719-991965b5c332/GG20260412-2145 - 15 Satellite to GGMasters 150, 2 Seats.txt
+data/tmp_uploads_public/expanded/6af53f7d-fcc9-4c90-9719-991965b5c332/GG20260411-0026 - Mini Friday Night Fight 25 [Bounty 6-Max].txt
+data/tmp_uploads_public/expanded/6af53f7d-fcc9-4c90-9719-991965b5c332/GG20260403-0114 - 6 Satellite to 100K Ontario MILLION, 3 Seats.txt
+data/tmp_uploads_public/expanded/6af53f7d-fcc9-4c90-9719-991965b5c332/GG20260411-2022 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/6af53f7d-fcc9-4c90-9719-991965b5c332/GG20260406-0251 - Sunday Heater 25 [Bounty Turbo].txt
+data/tmp_uploads_public/expanded/6af53f7d-fcc9-4c90-9719-991965b5c332/GG20260417-0211 - 25 Thursday Heater [Turbo].txt
+data/tmp_uploads_public/expanded/6af53f7d-fcc9-4c90-9719-991965b5c332/GG20260415-0332 - Bounty Hunters 5.25.txt
+data/tmp_uploads_public/expanded/6af53f7d-fcc9-4c90-9719-991965b5c332/GG20260417-0215 - Mini Thursday Throwdown 25 [Bounty].txt
+data/tmp_uploads_public/expanded/6af53f7d-fcc9-4c90-9719-991965b5c332/GG20260402-0328 - Wednesday Heater 25 [Bounty Turbo].txt
+data/tmp_uploads_public/expanded/6af53f7d-fcc9-4c90-9719-991965b5c332/GG20260411-0429 - 1.50 Step to GGMasters 150.txt
+data/tmp_uploads_public/expanded/6af53f7d-fcc9-4c90-9719-991965b5c332/GG20260414-2025 - 10 Satellite to MYSTERY BOUNTY Main Event, 250K GTD, 2 Seats.txt
+data/tmp_uploads_public/expanded/6af53f7d-fcc9-4c90-9719-991965b5c332/GG20260406-1830 - Freeroll to WSOP-C Playground Main Event 1 Step.txt
+data/tmp_uploads_public/expanded/6af53f7d-fcc9-4c90-9719-991965b5c332/GG20260410-0501 - Daily Hyper 10.txt
+data/tmp_uploads_public/expanded/6af53f7d-fcc9-4c90-9719-991965b5c332/GG20260403-0021 - Mini Thursday Throwdown 25 [Bounty].txt
+data/tmp_uploads_public/expanded/6af53f7d-fcc9-4c90-9719-991965b5c332/GG20260410-1710 - Bounty Hunters 5.25.txt
+data/tmp_uploads_public/expanded/6af53f7d-fcc9-4c90-9719-991965b5c332/GG20260409-2112 - Omaholic Deepstack 5.txt
+data/tmp_uploads_public/expanded/6af53f7d-fcc9-4c90-9719-991965b5c332/GG20260401-0342 - WSOP-SC 25 Spring Showers [Bounty Turbo].txt
+data/tmp_uploads_public/expanded/6af53f7d-fcc9-4c90-9719-991965b5c332/GG20260410-1627 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/6af53f7d-fcc9-4c90-9719-991965b5c332/GG20260412-1846 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/6af53f7d-fcc9-4c90-9719-991965b5c332/GG20260331-0315 - WSOP-SC 25 Spring Showers [Bounty Turbo].txt
+data/tmp_uploads_public/expanded/6af53f7d-fcc9-4c90-9719-991965b5c332/GG20260411-1850 - Freeroll to WSOP-C Playground Main Event 1 Step.txt
+data/tmp_uploads_public/expanded/6af53f7d-fcc9-4c90-9719-991965b5c332/GG20260405-0005 - Mini Saturday Knockout 25 [Bounty].txt
+data/tmp_uploads_public/expanded/6af53f7d-fcc9-4c90-9719-991965b5c332/GG20260412-2000 - Ontario MILLION Bounty Edition, 100K GTD [Stage 1].txt
+data/tmp_uploads_public/expanded/6af53f7d-fcc9-4c90-9719-991965b5c332/GG20260415-0253 - 25 Tuesday Heater [Turbo].txt
+data/tmp_uploads_public/expanded/6af53f7d-fcc9-4c90-9719-991965b5c332/GG20260412-2236 - Bounty Hunters Sunday Big Game 21.txt
+data/tmp_uploads_public/expanded/6af53f7d-fcc9-4c90-9719-991965b5c332/GG20260401-0236 - WSOP-SC 25 Spring Showers [Bounty Turbo].txt
+data/tmp_uploads_public/expanded/6af53f7d-fcc9-4c90-9719-991965b5c332/GG20260411-1941 - Ontario MILLION Bounty Edition, 100K GTD [Stage 1].txt
+data/tmp_uploads_public/expanded/6af53f7d-fcc9-4c90-9719-991965b5c332/GG20260410-1638 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/6af53f7d-fcc9-4c90-9719-991965b5c332/GG20260417-0014 - Mini Thursday Throwdown 25 [Bounty].txt
+data/tmp_uploads_public/expanded/6af53f7d-fcc9-4c90-9719-991965b5c332/GG20260410-0412 - Bounty Hunters Hyper 10.50.txt
+data/tmp_uploads_public/expanded/6af53f7d-fcc9-4c90-9719-991965b5c332/GG20260410-1651 - Bounty Hunters 5.25.txt
+data/tmp_uploads_public/expanded/6af53f7d-fcc9-4c90-9719-991965b5c332/GG20260411-1647 - 15 Satellite to GGMasters 150, 1 Seat.txt
+data/tmp_uploads_public/expanded/6af53f7d-fcc9-4c90-9719-991965b5c332/GG20260411-2201 - 15 Bounty Hunters [Big Bounties].txt
+data/tmp_uploads_public/expanded/6af53f7d-fcc9-4c90-9719-991965b5c332/GG20260411-1734 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/6af53f7d-fcc9-4c90-9719-991965b5c332/GG20260411-0109 - Mini Friday Night Fight 25 [Bounty 6-Max].txt
+data/tmp_uploads_public/expanded/6af53f7d-fcc9-4c90-9719-991965b5c332/GG20260417-0422 - Daily Hyper 3.txt
+data/tmp_uploads_public/expanded/6af53f7d-fcc9-4c90-9719-991965b5c332/GG20260410-0619 - Bounty Hunters Hyper 5.25.txt
+data/tmp_uploads_public/expanded/6af53f7d-fcc9-4c90-9719-991965b5c332/GG20260417-0207 - Mini Thursday Throwdown 25 [Bounty].txt
+data/tmp_uploads_public/expanded/6af53f7d-fcc9-4c90-9719-991965b5c332/GG20260406-2031 - 10 Satellite to MYSTERY BOUNTY Main Event, 250K GTD, 1 Seat.txt
+data/tmp_uploads_public/expanded/6af53f7d-fcc9-4c90-9719-991965b5c332/GG20260406-0030 - Ontario MILLION, 100K GTD [Final Day].txt
+data/tmp_uploads_public/expanded/6af53f7d-fcc9-4c90-9719-991965b5c332/GG20260331-0338 - WSOP-SC 25 Spring Showers [Bounty Turbo].txt
+data/tmp_uploads_public/expanded/6af53f7d-fcc9-4c90-9719-991965b5c332/GG20260412-0210 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/6af53f7d-fcc9-4c90-9719-991965b5c332/GG20260415-0215 - 25 Tuesday Heater [Turbo].txt
+data/tmp_uploads_public/expanded/6af53f7d-fcc9-4c90-9719-991965b5c332/GG20260412-0006 - Mini Saturday Knockout 25 [Bounty].txt
+data/tmp_uploads_public/expanded/6af53f7d-fcc9-4c90-9719-991965b5c332/GG20260408-2338 - 15 Bounty Hunters [Big Bounties].txt
+data/tmp_uploads_public/expanded/6af53f7d-fcc9-4c90-9719-991965b5c332/GG20260417-0434 - Daily Hyper 3.txt
+data/tmp_uploads_public/expanded/6af53f7d-fcc9-4c90-9719-991965b5c332/GG20260407-0106 - 5K Monday Mega Freeroll.txt
+data/tmp_uploads_public/expanded/6af53f7d-fcc9-4c90-9719-991965b5c332/GG20260412-2109 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/6af53f7d-fcc9-4c90-9719-991965b5c332/GG20260408-2229 - 10 Deadline to MYSTERY BOUNTY Main Event, 250K GTD, 1 Seat.txt
+data/tmp_uploads_public/expanded/6af53f7d-fcc9-4c90-9719-991965b5c332/GG20260408-2344 - Bounty King Jr 10.50.txt
+data/tmp_uploads_public/expanded/6af53f7d-fcc9-4c90-9719-991965b5c332/GG20260409-0250 - 25 Wednesday Heater [Turbo].txt
+data/tmp_uploads_public/expanded/6af53f7d-fcc9-4c90-9719-991965b5c332/GG20260410-1812 - 1 Step to WSOP-C Playground Main Event.txt
+data/tmp_uploads_public/expanded/6af53f7d-fcc9-4c90-9719-991965b5c332/GG20260414-2349 - Bounty King Jr 10.50.txt
+data/tmp_uploads_public/expanded/6af53f7d-fcc9-4c90-9719-991965b5c332/GG20260403-0300 - Ontario MILLION, 100K GTD [Day 1].txt
+data/tmp_uploads_public/expanded/6af53f7d-fcc9-4c90-9719-991965b5c332/GG20260417-0000 - 1K Thursday Freeroll.txt
+data/tmp_uploads_public/expanded/6af53f7d-fcc9-4c90-9719-991965b5c332/GG20260410-1850 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/6af53f7d-fcc9-4c90-9719-991965b5c332/GG20260410-1726 - Bounty Hunters 5.25.txt
+data/tmp_uploads_public/expanded/6af53f7d-fcc9-4c90-9719-991965b5c332/GG20260413-0100 - Omaholic Bounty 5.25.txt
+data/tmp_uploads_public/expanded/6af53f7d-fcc9-4c90-9719-991965b5c332/GG20260409-0404 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/6af53f7d-fcc9-4c90-9719-991965b5c332/GG20260412-2146 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/6af53f7d-fcc9-4c90-9719-991965b5c332/GG20260411-0424 - Daily Turbo 10.txt
+data/tmp_uploads_public/expanded/6af53f7d-fcc9-4c90-9719-991965b5c332/GG20260408-2226 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/213313d8-b365-4d06-934c-f8cf47f4bcb5/GG20260401-0230 - WSOP-SC 25 Spring Showers [Bounty Turbo].txt
+data/tmp_uploads_public/expanded/213313d8-b365-4d06-934c-f8cf47f4bcb5/GG20260411-1743 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/213313d8-b365-4d06-934c-f8cf47f4bcb5/GG20260331-0324 - WSOP-SC 25 Spring Showers [Bounty Turbo].txt
+data/tmp_uploads_public/expanded/213313d8-b365-4d06-934c-f8cf47f4bcb5/GG20260410-1851 - Freeroll to WSOP-C Playground Main Event 1 Step.txt
+data/tmp_uploads_public/expanded/213313d8-b365-4d06-934c-f8cf47f4bcb5/GG20260411-0005 - Mini Friday Night Fight 25 [Bounty 6-Max].txt
+data/tmp_uploads_public/expanded/213313d8-b365-4d06-934c-f8cf47f4bcb5/GG20260411-1900 - Ontario MILLION Bounty Edition, 100K GTD [Stage 1].txt
+data/tmp_uploads_public/expanded/213313d8-b365-4d06-934c-f8cf47f4bcb5/GG20260409-0351 - 25 Wednesday Heater [Turbo].txt
+data/tmp_uploads_public/expanded/213313d8-b365-4d06-934c-f8cf47f4bcb5/GG20260414-2130 - 15 Bounty Hunters [Big Bounties].txt
+data/tmp_uploads_public/expanded/213313d8-b365-4d06-934c-f8cf47f4bcb5/GG20260411-2300 - Ontario MILLION Bounty Edition, 100K GTD [Stage 1].txt
+data/tmp_uploads_public/expanded/213313d8-b365-4d06-934c-f8cf47f4bcb5/GG20260410-0511 - Daily Hyper 10.txt
+data/tmp_uploads_public/expanded/213313d8-b365-4d06-934c-f8cf47f4bcb5/GG20260412-2123 - 15 Satellite to GGMasters 150, 2 Seats.txt
+data/tmp_uploads_public/expanded/213313d8-b365-4d06-934c-f8cf47f4bcb5/GG20260412-0035 - Mini Saturday Knockout 25 [Bounty].txt
+data/tmp_uploads_public/expanded/213313d8-b365-4d06-934c-f8cf47f4bcb5/GG20260403-0131 - 6 Satellite to 100K Ontario MILLION, 3 Seats.txt
+data/tmp_uploads_public/expanded/213313d8-b365-4d06-934c-f8cf47f4bcb5/GG20260410-0537 - Bounty Hunters Hyper 5.25.txt
+data/tmp_uploads_public/expanded/213313d8-b365-4d06-934c-f8cf47f4bcb5/GG20260417-0350 - 25 Thursday Heater [Turbo].txt
+data/tmp_uploads_public/expanded/213313d8-b365-4d06-934c-f8cf47f4bcb5/GG20260402-0313 - Wednesday Heater 25 [Bounty Turbo].txt
+data/tmp_uploads_public/expanded/213313d8-b365-4d06-934c-f8cf47f4bcb5/GG20260410-0312 - 25 Thursday Heater [Turbo].txt
+data/tmp_uploads_public/expanded/213313d8-b365-4d06-934c-f8cf47f4bcb5/GG20260414-1930 - 10 Satellite to MYSTERY BOUNTY Main Event, 250K GTD, 1 Seat.txt
+data/tmp_uploads_public/expanded/213313d8-b365-4d06-934c-f8cf47f4bcb5/GG20260408-2247 - 15 Bounty Hunters [Big Bounties].txt
+data/tmp_uploads_public/expanded/213313d8-b365-4d06-934c-f8cf47f4bcb5/GG20260406-0205 - Sunday Heater 25 [Bounty Turbo].txt
+data/tmp_uploads_public/expanded/213313d8-b365-4d06-934c-f8cf47f4bcb5/GG20260409-0023 - Bounty King Jr 10.50.txt
+data/tmp_uploads_public/expanded/213313d8-b365-4d06-934c-f8cf47f4bcb5/GG20260406-0304 - Sunday Heater 25 [Bounty Turbo].txt
+data/tmp_uploads_public/expanded/213313d8-b365-4d06-934c-f8cf47f4bcb5/GG20260412-0203 - 1.50 Step to GGMasters 150.txt
+data/tmp_uploads_public/expanded/213313d8-b365-4d06-934c-f8cf47f4bcb5/GG20260410-0618 - Bounty Hunters Hyper 5.25.txt
+data/tmp_uploads_public/expanded/213313d8-b365-4d06-934c-f8cf47f4bcb5/GG20260405-0209 - 1.50 Step to GGMasters 150.txt
+data/tmp_uploads_public/expanded/213313d8-b365-4d06-934c-f8cf47f4bcb5/GG20260403-0013 - 1K Thursday Freeroll.txt
+data/tmp_uploads_public/expanded/213313d8-b365-4d06-934c-f8cf47f4bcb5/GG20260412-2103 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/213313d8-b365-4d06-934c-f8cf47f4bcb5/GG20260412-2145 - 15 Satellite to GGMasters 150, 2 Seats.txt
+data/tmp_uploads_public/expanded/213313d8-b365-4d06-934c-f8cf47f4bcb5/GG20260411-0026 - Mini Friday Night Fight 25 [Bounty 6-Max].txt
+data/tmp_uploads_public/expanded/213313d8-b365-4d06-934c-f8cf47f4bcb5/GG20260403-0114 - 6 Satellite to 100K Ontario MILLION, 3 Seats.txt
+data/tmp_uploads_public/expanded/213313d8-b365-4d06-934c-f8cf47f4bcb5/GG20260411-2022 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/213313d8-b365-4d06-934c-f8cf47f4bcb5/GG20260406-0251 - Sunday Heater 25 [Bounty Turbo].txt
+data/tmp_uploads_public/expanded/213313d8-b365-4d06-934c-f8cf47f4bcb5/GG20260417-0211 - 25 Thursday Heater [Turbo].txt
+data/tmp_uploads_public/expanded/213313d8-b365-4d06-934c-f8cf47f4bcb5/GG20260415-0332 - Bounty Hunters 5.25.txt
+data/tmp_uploads_public/expanded/213313d8-b365-4d06-934c-f8cf47f4bcb5/GG20260417-0215 - Mini Thursday Throwdown 25 [Bounty].txt
+data/tmp_uploads_public/expanded/213313d8-b365-4d06-934c-f8cf47f4bcb5/GG20260402-0328 - Wednesday Heater 25 [Bounty Turbo].txt
+data/tmp_uploads_public/expanded/213313d8-b365-4d06-934c-f8cf47f4bcb5/GG20260411-0429 - 1.50 Step to GGMasters 150.txt
+data/tmp_uploads_public/expanded/213313d8-b365-4d06-934c-f8cf47f4bcb5/GG20260414-2025 - 10 Satellite to MYSTERY BOUNTY Main Event, 250K GTD, 2 Seats.txt
+data/tmp_uploads_public/expanded/213313d8-b365-4d06-934c-f8cf47f4bcb5/GG20260406-1830 - Freeroll to WSOP-C Playground Main Event 1 Step.txt
+data/tmp_uploads_public/expanded/213313d8-b365-4d06-934c-f8cf47f4bcb5/GG20260410-0501 - Daily Hyper 10.txt
+data/tmp_uploads_public/expanded/213313d8-b365-4d06-934c-f8cf47f4bcb5/GG20260403-0021 - Mini Thursday Throwdown 25 [Bounty].txt
+data/tmp_uploads_public/expanded/213313d8-b365-4d06-934c-f8cf47f4bcb5/GG20260410-1710 - Bounty Hunters 5.25.txt
+data/tmp_uploads_public/expanded/213313d8-b365-4d06-934c-f8cf47f4bcb5/GG20260409-2112 - Omaholic Deepstack 5.txt
+data/tmp_uploads_public/expanded/213313d8-b365-4d06-934c-f8cf47f4bcb5/GG20260401-0342 - WSOP-SC 25 Spring Showers [Bounty Turbo].txt
+data/tmp_uploads_public/expanded/213313d8-b365-4d06-934c-f8cf47f4bcb5/GG20260410-1627 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/213313d8-b365-4d06-934c-f8cf47f4bcb5/GG20260412-1846 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/213313d8-b365-4d06-934c-f8cf47f4bcb5/GG20260331-0315 - WSOP-SC 25 Spring Showers [Bounty Turbo].txt
+data/tmp_uploads_public/expanded/213313d8-b365-4d06-934c-f8cf47f4bcb5/GG20260411-1850 - Freeroll to WSOP-C Playground Main Event 1 Step.txt
+data/tmp_uploads_public/expanded/213313d8-b365-4d06-934c-f8cf47f4bcb5/GG20260405-0005 - Mini Saturday Knockout 25 [Bounty].txt
+data/tmp_uploads_public/expanded/213313d8-b365-4d06-934c-f8cf47f4bcb5/GG20260412-2000 - Ontario MILLION Bounty Edition, 100K GTD [Stage 1].txt
+data/tmp_uploads_public/expanded/213313d8-b365-4d06-934c-f8cf47f4bcb5/GG20260415-0253 - 25 Tuesday Heater [Turbo].txt
+data/tmp_uploads_public/expanded/213313d8-b365-4d06-934c-f8cf47f4bcb5/GG20260412-2236 - Bounty Hunters Sunday Big Game 21.txt
+data/tmp_uploads_public/expanded/213313d8-b365-4d06-934c-f8cf47f4bcb5/GG20260401-0236 - WSOP-SC 25 Spring Showers [Bounty Turbo].txt
+data/tmp_uploads_public/expanded/213313d8-b365-4d06-934c-f8cf47f4bcb5/GG20260411-1941 - Ontario MILLION Bounty Edition, 100K GTD [Stage 1].txt
+data/tmp_uploads_public/expanded/213313d8-b365-4d06-934c-f8cf47f4bcb5/GG20260410-1638 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/213313d8-b365-4d06-934c-f8cf47f4bcb5/GG20260417-0014 - Mini Thursday Throwdown 25 [Bounty].txt
+data/tmp_uploads_public/expanded/213313d8-b365-4d06-934c-f8cf47f4bcb5/GG20260410-0412 - Bounty Hunters Hyper 10.50.txt
+data/tmp_uploads_public/expanded/213313d8-b365-4d06-934c-f8cf47f4bcb5/GG20260410-1651 - Bounty Hunters 5.25.txt
+data/tmp_uploads_public/expanded/213313d8-b365-4d06-934c-f8cf47f4bcb5/GG20260411-1647 - 15 Satellite to GGMasters 150, 1 Seat.txt
+data/tmp_uploads_public/expanded/213313d8-b365-4d06-934c-f8cf47f4bcb5/GG20260411-2201 - 15 Bounty Hunters [Big Bounties].txt
+data/tmp_uploads_public/expanded/213313d8-b365-4d06-934c-f8cf47f4bcb5/GG20260411-1734 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/213313d8-b365-4d06-934c-f8cf47f4bcb5/GG20260411-0109 - Mini Friday Night Fight 25 [Bounty 6-Max].txt
+data/tmp_uploads_public/expanded/213313d8-b365-4d06-934c-f8cf47f4bcb5/GG20260417-0422 - Daily Hyper 3.txt
+data/tmp_uploads_public/expanded/213313d8-b365-4d06-934c-f8cf47f4bcb5/GG20260410-0619 - Bounty Hunters Hyper 5.25.txt
+data/tmp_uploads_public/expanded/213313d8-b365-4d06-934c-f8cf47f4bcb5/GG20260417-0207 - Mini Thursday Throwdown 25 [Bounty].txt
+data/tmp_uploads_public/expanded/213313d8-b365-4d06-934c-f8cf47f4bcb5/GG20260406-2031 - 10 Satellite to MYSTERY BOUNTY Main Event, 250K GTD, 1 Seat.txt
+data/tmp_uploads_public/expanded/213313d8-b365-4d06-934c-f8cf47f4bcb5/GG20260406-0030 - Ontario MILLION, 100K GTD [Final Day].txt
+data/tmp_uploads_public/expanded/213313d8-b365-4d06-934c-f8cf47f4bcb5/GG20260331-0338 - WSOP-SC 25 Spring Showers [Bounty Turbo].txt
+data/tmp_uploads_public/expanded/213313d8-b365-4d06-934c-f8cf47f4bcb5/GG20260412-0210 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/213313d8-b365-4d06-934c-f8cf47f4bcb5/GG20260415-0215 - 25 Tuesday Heater [Turbo].txt
+data/tmp_uploads_public/expanded/213313d8-b365-4d06-934c-f8cf47f4bcb5/GG20260412-0006 - Mini Saturday Knockout 25 [Bounty].txt
+data/tmp_uploads_public/expanded/213313d8-b365-4d06-934c-f8cf47f4bcb5/GG20260408-2338 - 15 Bounty Hunters [Big Bounties].txt
+data/tmp_uploads_public/expanded/213313d8-b365-4d06-934c-f8cf47f4bcb5/GG20260417-0434 - Daily Hyper 3.txt
+data/tmp_uploads_public/expanded/213313d8-b365-4d06-934c-f8cf47f4bcb5/GG20260407-0106 - 5K Monday Mega Freeroll.txt
+data/tmp_uploads_public/expanded/213313d8-b365-4d06-934c-f8cf47f4bcb5/GG20260412-2109 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/213313d8-b365-4d06-934c-f8cf47f4bcb5/GG20260408-2229 - 10 Deadline to MYSTERY BOUNTY Main Event, 250K GTD, 1 Seat.txt
+data/tmp_uploads_public/expanded/213313d8-b365-4d06-934c-f8cf47f4bcb5/GG20260408-2344 - Bounty King Jr 10.50.txt
+data/tmp_uploads_public/expanded/213313d8-b365-4d06-934c-f8cf47f4bcb5/GG20260409-0250 - 25 Wednesday Heater [Turbo].txt
+data/tmp_uploads_public/expanded/213313d8-b365-4d06-934c-f8cf47f4bcb5/GG20260410-1812 - 1 Step to WSOP-C Playground Main Event.txt
+data/tmp_uploads_public/expanded/213313d8-b365-4d06-934c-f8cf47f4bcb5/GG20260414-2349 - Bounty King Jr 10.50.txt
+data/tmp_uploads_public/expanded/213313d8-b365-4d06-934c-f8cf47f4bcb5/GG20260403-0300 - Ontario MILLION, 100K GTD [Day 1].txt
+data/tmp_uploads_public/expanded/213313d8-b365-4d06-934c-f8cf47f4bcb5/GG20260417-0000 - 1K Thursday Freeroll.txt
+data/tmp_uploads_public/expanded/213313d8-b365-4d06-934c-f8cf47f4bcb5/GG20260410-1850 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/213313d8-b365-4d06-934c-f8cf47f4bcb5/GG20260410-1726 - Bounty Hunters 5.25.txt
+data/tmp_uploads_public/expanded/213313d8-b365-4d06-934c-f8cf47f4bcb5/GG20260413-0100 - Omaholic Bounty 5.25.txt
+data/tmp_uploads_public/expanded/213313d8-b365-4d06-934c-f8cf47f4bcb5/GG20260409-0404 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/213313d8-b365-4d06-934c-f8cf47f4bcb5/GG20260412-2146 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/213313d8-b365-4d06-934c-f8cf47f4bcb5/GG20260411-0424 - Daily Turbo 10.txt
+data/tmp_uploads_public/expanded/213313d8-b365-4d06-934c-f8cf47f4bcb5/GG20260408-2226 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/7fd2ce46-7b63-49d4-bc27-ad463ecfcc1f/GG20260425 - Tournament #6411641 - 84 Midnight Madness [Hyper 5-Max].txt
+data/tmp_uploads_public/expanded/7fd2ce46-7b63-49d4-bc27-ad463ecfcc1f/GG20260421 - Tournament #6383813 - Mini LUCKY SEVENS Superstack Turbo 7.77 [7-Max].txt
+data/tmp_uploads_public/expanded/7fd2ce46-7b63-49d4-bc27-ad463ecfcc1f/GG20260418 - Tournament #6210401 - Ontario MILLION Bounty Edition, 100K GTD [Stage 1].txt
+data/tmp_uploads_public/expanded/7fd2ce46-7b63-49d4-bc27-ad463ecfcc1f/GG20260425 - Tournament #6417877 - Mini Friday Night Fight 25 [Bounty 6-Max].txt
+data/tmp_uploads_public/expanded/7fd2ce46-7b63-49d4-bc27-ad463ecfcc1f/GG20260426 - Tournament #6434316 - 15 Satellite to GGMasters 150, 3 Seats.txt
+data/tmp_uploads_public/expanded/7fd2ce46-7b63-49d4-bc27-ad463ecfcc1f/GG20260418 - Tournament #6340926 - 1 Step to SOP-C Playground Main Event.txt
+data/tmp_uploads_public/expanded/7fd2ce46-7b63-49d4-bc27-ad463ecfcc1f/GG20260424 - Tournament #5787181 - 1K Thursday Freeroll.txt
+data/tmp_uploads_public/expanded/7fd2ce46-7b63-49d4-bc27-ad463ecfcc1f/GG20260423 - Tournament #6411630 - 25 ednesday Heater [Turbo].txt
+data/tmp_uploads_public/expanded/7fd2ce46-7b63-49d4-bc27-ad463ecfcc1f/GG20260419 - Tournament #6367266 - 15 Satellite to GGMasters 150, 1 Seat.txt
+data/tmp_uploads_public/expanded/7fd2ce46-7b63-49d4-bc27-ad463ecfcc1f/GG20260421 - Tournament #6390415 - Bounty King Jr 10.50.txt
+data/tmp_uploads_public/expanded/7fd2ce46-7b63-49d4-bc27-ad463ecfcc1f/GG20260427 - Tournament #6474520 - Phase-L 5.25 Mystery Mini MILLION [Stage 1].txt
+data/tmp_uploads_public/expanded/7fd2ce46-7b63-49d4-bc27-ad463ecfcc1f/GG20260417 - Tournament #6340918 - Freeroll to SOP-C Playground Main Event 1 Step.txt
+data/tmp_uploads_public/expanded/7fd2ce46-7b63-49d4-bc27-ad463ecfcc1f/GG20260419 - Tournament #6340941 - 10 Step to SOP-C Playground Main Event, 75 Satellite.txt
+data/tmp_uploads_public/expanded/7fd2ce46-7b63-49d4-bc27-ad463ecfcc1f/GG20260419 - Tournament #6340585 - 25 Saturday Heater [Turbo].txt
+data/tmp_uploads_public/expanded/7fd2ce46-7b63-49d4-bc27-ad463ecfcc1f/GG20260417 - Tournament #6340915 - 1 Step to SOP-C Playground Main Event.txt
+data/tmp_uploads_public/expanded/7fd2ce46-7b63-49d4-bc27-ad463ecfcc1f/GG20260419 - Tournament #6373202 - GGMasters 150, 50K GTD.txt
+data/tmp_uploads_public/expanded/7fd2ce46-7b63-49d4-bc27-ad463ecfcc1f/GG20260418 - Tournament #5787177 - 1K Friday Freeroll.txt
+data/tmp_uploads_public/expanded/7fd2ce46-7b63-49d4-bc27-ad463ecfcc1f/GG20260424 - Tournament #6408385 - Mini Thursday Throwdown 25 [Bounty].txt
+data/tmp_uploads_public/expanded/7fd2ce46-7b63-49d4-bc27-ad463ecfcc1f/GG20260426 - Tournament #6435988 - GGMasters 150, 50K GTD.txt
+data/tmp_uploads_public/expanded/7fd2ce46-7b63-49d4-bc27-ad463ecfcc1f/GG20260421 - Tournament #6411624 - 105 Bounty King [Deepstack].txt
+data/tmp_uploads_public/expanded/7fd2ce46-7b63-49d4-bc27-ad463ecfcc1f/GG20260426 - Tournament #6434887 - Bounty Hunters Deepstack Turbo 10.50.txt
+data/tmp_uploads_public/expanded/7fd2ce46-7b63-49d4-bc27-ad463ecfcc1f/GG20260419 - Tournament #6210412 - Ontario MILLION Bounty Edition, 100K GTD [Stage 1].txt
+data/tmp_uploads_public/expanded/7fd2ce46-7b63-49d4-bc27-ad463ecfcc1f/GG20260419 - Tournament #6395115 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/7fd2ce46-7b63-49d4-bc27-ad463ecfcc1f/GG20260427 - Tournament #6210476 - MYSTERY BOUNTY Main Event, 250K GTD [Last Chance].txt
+data/tmp_uploads_public/expanded/7fd2ce46-7b63-49d4-bc27-ad463ecfcc1f/GG20260420 - Tournament #6375898 - Sunday Heater 25 [Bounty Turbo].txt
+data/tmp_uploads_public/expanded/7fd2ce46-7b63-49d4-bc27-ad463ecfcc1f/GG20260427 - Tournament #6474029 - 10 Satellite to MYSTERY BOUNTY Main Event, 250K GTD, 2 Seats.txt
+data/tmp_uploads_public/expanded/7fd2ce46-7b63-49d4-bc27-ad463ecfcc1f/GG20260418 - Tournament #6340580 - 25 Friday Heater [Turbo].txt
+data/tmp_uploads_public/expanded/7fd2ce46-7b63-49d4-bc27-ad463ecfcc1f/GG20260419 - Tournament #6395122 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/7fd2ce46-7b63-49d4-bc27-ad463ecfcc1f/GG20260426 - Tournament #6411651 - 25 Sunday Bounty King Jr.txt
+data/tmp_uploads_public/expanded/7fd2ce46-7b63-49d4-bc27-ad463ecfcc1f/GG20260422 - Tournament #6393311 - Daily Hyper 10.txt
+data/tmp_uploads_public/expanded/7fd2ce46-7b63-49d4-bc27-ad463ecfcc1f/GG20260427 - Tournament #6439745 - 6 Satellite to 50 Ontario MILLION Festival Edition, 3 Seats.txt
+data/tmp_uploads_public/expanded/7fd2ce46-7b63-49d4-bc27-ad463ecfcc1f/GG20260428 - Tournament #6341038 - 10 Step to SOP-C Playground Main Event, 75 Satellite.txt
+data/tmp_uploads_public/expanded/7fd2ce46-7b63-49d4-bc27-ad463ecfcc1f/GG20260418 - Tournament #6355910 - Mini Friday Night Fight 25 [Bounty 6-Max].txt
+data/tmp_uploads_public/expanded/7fd2ce46-7b63-49d4-bc27-ad463ecfcc1f/GG20260417 - Tournament #6348883 - Daily Hyper 3.txt
+data/tmp_uploads_public/expanded/7fd2ce46-7b63-49d4-bc27-ad463ecfcc1f/GG20260421 - Tournament #6411622 - 52.50 Bounty arm-Up [6-Max].txt
+data/tmp_uploads_public/expanded/7fd2ce46-7b63-49d4-bc27-ad463ecfcc1f/GG20260422 - Tournament #6448221 - T Builder 5.txt
+data/tmp_uploads_public/expanded/7fd2ce46-7b63-49d4-bc27-ad463ecfcc1f/GG20260427 - Tournament #6474026 - 10 Satellite to MYSTERY BOUNTY Main Event, 250K GTD, 1 Seat.txt
+data/tmp_uploads_public/expanded/7fd2ce46-7b63-49d4-bc27-ad463ecfcc1f/GG20260428 - Tournament #6454526 - Bounty King Jr 10.50.txt
+data/tmp_uploads_public/expanded/7fd2ce46-7b63-49d4-bc27-ad463ecfcc1f/GG20260424 - Tournament #6411635 - 25 Thursday Heater [Turbo].txt
+data/tmp_uploads_public/expanded/7fd2ce46-7b63-49d4-bc27-ad463ecfcc1f/GG20260418 - Tournament #6340928 - Freeroll to SOP-C Playground Main Event 1 Step.txt
+data/tmp_uploads_public/expanded/7fd2ce46-7b63-49d4-bc27-ad463ecfcc1f/GG20260429 - Tournament #6502123 - Tuesday Heater 25 [Bounty Turbo].txt
+data/tmp_uploads_public/expanded/7fd2ce46-7b63-49d4-bc27-ad463ecfcc1f/GG20260427 - Tournament #6341028 - 10 Step to SOP-C Playground Main Event, 75 Satellite.txt
+data/tmp_uploads_public/expanded/7fd2ce46-7b63-49d4-bc27-ad463ecfcc1f/GG20260428 - Tournament #6341037 - 1 Step to SOP-C Playground Main Event.txt
+data/tmp_uploads_public/expanded/7fd2ce46-7b63-49d4-bc27-ad463ecfcc1f/GG20260419 - Tournament #6370895 - 15 Satellite to GGMasters 150, 1 Seat.txt
+data/tmp_uploads_public/expanded/7fd2ce46-7b63-49d4-bc27-ad463ecfcc1f/GG20260419 - Tournament #6395119 - 10 Satellite to MYSTERY BOUNTY Main Event, 250K GTD, 1 Seat.txt
+data/tmp_uploads_public/expanded/7fd2ce46-7b63-49d4-bc27-ad463ecfcc1f/GG20260423 - Tournament #6407815 - Bounty King Jr 10.50.txt
+data/tmp_uploads_public/expanded/7fd2ce46-7b63-49d4-bc27-ad463ecfcc1f/GG20260429 - Tournament #6512288 - 15 Satellite to 150 GGMasters Grand Opening, 1 Seat.txt
+data/tmp_uploads_public/expanded/7fd2ce46-7b63-49d4-bc27-ad463ecfcc1f/GG20260422 - Tournament #6442685 - 10 Satellite to MYSTERY BOUNTY Main Event, 250K GTD, 2 Seats.txt
+data/tmp_uploads_public/expanded/7fd2ce46-7b63-49d4-bc27-ad463ecfcc1f/GG20260427 - Tournament #6438800 - Sunday Heater 25 [Bounty Turbo].txt
+data/tmp_uploads_public/expanded/7fd2ce46-7b63-49d4-bc27-ad463ecfcc1f/GG20260426 - Tournament #6411646 - 25 Saturday Heater [Turbo].txt
+data/tmp_uploads_public/expanded/7fd2ce46-7b63-49d4-bc27-ad463ecfcc1f/GG20260427 - Tournament #6474027 - 10 Satellite to MYSTERY BOUNTY Main Event, 250K GTD, 2 Seats.txt
+data/tmp_uploads_public/expanded/7fd2ce46-7b63-49d4-bc27-ad463ecfcc1f/GG20260418 - Tournament #6210403 - Ontario MILLION Bounty Edition, 100K GTD [Stage 1].txt
+data/tmp_uploads_public/expanded/7fd2ce46-7b63-49d4-bc27-ad463ecfcc1f/GG20260419 - Tournament #6340591 - 25 Sunday Bounty King Jr.txt
+data/tmp_uploads_public/expanded/7fd2ce46-7b63-49d4-bc27-ad463ecfcc1f/GG20260424 - Tournament #6411639 - 105 Bounty King [Ultradeep Turbo].txt
+data/tmp_uploads_public/expanded/7fd2ce46-7b63-49d4-bc27-ad463ecfcc1f/GG20260427 - Tournament #6474405 - Phase-L 5 Ontario Mini MILLION [Day 1].txt
+data/tmp_uploads_public/expanded/7fd2ce46-7b63-49d4-bc27-ad463ecfcc1f/GG20260427 - Tournament #6341030 - 10 Step to SOP-C Playground Main Event, 75 Satellite.txt
+data/tmp_uploads_public/expanded/7fd2ce46-7b63-49d4-bc27-ad463ecfcc1f/GG20260423 - Tournament #6399660 - Mini ednesday Double Stack 25.txt
+data/tmp_uploads_public/expanded/7fd2ce46-7b63-49d4-bc27-ad463ecfcc1f/GG20260427 - Tournament #6411656 - 15 Bounty Hunters [Big Bounties].txt
+data/tmp_uploads_public/expanded/7fd2ce46-7b63-49d4-bc27-ad463ecfcc1f/GG20260425 - Tournament #6411640 - 25 Friday Heater [Turbo].txt
+data/tmp_uploads_public/expanded/7fd2ce46-7b63-49d4-bc27-ad463ecfcc1f/GG20260429 - Tournament #5787184 - 1K Tuesday Freeroll.txt
+data/tmp_uploads_public/expanded/7fd2ce46-7b63-49d4-bc27-ad463ecfcc1f/GG20260419 - Tournament #6365270 - Mini Saturday Knockout 25 [Bounty].txt
+data/tmp_uploads_public/expanded/7fd2ce46-7b63-49d4-bc27-ad463ecfcc1f/GG20260419 - Tournament #6210441 - MYSTERY BOUNTY Main Event, 250K GTD [Stage 1].txt
+data/tmp_uploads_public/expanded/7fd2ce46-7b63-49d4-bc27-ad463ecfcc1f/GG20260422 - Tournament #6411625 - 25 Tuesday Heater [Turbo].txt
+data/tmp_uploads_public/expanded/7fd2ce46-7b63-49d4-bc27-ad463ecfcc1f/GG20260423 - Tournament #6411633 - 15 Bounty Hunters [Big Bounties].txt
+data/tmp_uploads_public/expanded/7fd2ce46-7b63-49d4-bc27-ad463ecfcc1f/GG20260426 - Tournament #6474016 - 10 Satellite to MYSTERY BOUNTY Main Event, 250K GTD, 1 Seat.txt
+data/tmp_uploads_public/expanded/7fd2ce46-7b63-49d4-bc27-ad463ecfcc1f/GG20260428 - Tournament #6341040 - 10 Step to SOP-C Playground Main Event, 75 Satellite.txt
+data/tmp_uploads_public/expanded/7fd2ce46-7b63-49d4-bc27-ad463ecfcc1f/GG20260417 - Tournament #6395064 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/7fd2ce46-7b63-49d4-bc27-ad463ecfcc1f/GG20260418 - Tournament #6395092 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/fa0f1e9a-82f2-4173-99ec-11050eddbd64/GG20260401-0230 - WSOP-SC 25 Spring Showers [Bounty Turbo].txt
+data/tmp_uploads_public/expanded/fa0f1e9a-82f2-4173-99ec-11050eddbd64/GG20260411-1743 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/fa0f1e9a-82f2-4173-99ec-11050eddbd64/GG20260331-0324 - WSOP-SC 25 Spring Showers [Bounty Turbo].txt
+data/tmp_uploads_public/expanded/fa0f1e9a-82f2-4173-99ec-11050eddbd64/GG20260410-1851 - Freeroll to WSOP-C Playground Main Event 1 Step.txt
+data/tmp_uploads_public/expanded/fa0f1e9a-82f2-4173-99ec-11050eddbd64/GG20260411-0005 - Mini Friday Night Fight 25 [Bounty 6-Max].txt
+data/tmp_uploads_public/expanded/fa0f1e9a-82f2-4173-99ec-11050eddbd64/GG20260411-1900 - Ontario MILLION Bounty Edition, 100K GTD [Stage 1].txt
+data/tmp_uploads_public/expanded/fa0f1e9a-82f2-4173-99ec-11050eddbd64/GG20260409-0351 - 25 Wednesday Heater [Turbo].txt
+data/tmp_uploads_public/expanded/fa0f1e9a-82f2-4173-99ec-11050eddbd64/GG20260414-2130 - 15 Bounty Hunters [Big Bounties].txt
+data/tmp_uploads_public/expanded/fa0f1e9a-82f2-4173-99ec-11050eddbd64/GG20260411-2300 - Ontario MILLION Bounty Edition, 100K GTD [Stage 1].txt
+data/tmp_uploads_public/expanded/fa0f1e9a-82f2-4173-99ec-11050eddbd64/GG20260410-0511 - Daily Hyper 10.txt
+data/tmp_uploads_public/expanded/fa0f1e9a-82f2-4173-99ec-11050eddbd64/GG20260412-2123 - 15 Satellite to GGMasters 150, 2 Seats.txt
+data/tmp_uploads_public/expanded/fa0f1e9a-82f2-4173-99ec-11050eddbd64/GG20260412-0035 - Mini Saturday Knockout 25 [Bounty].txt
+data/tmp_uploads_public/expanded/fa0f1e9a-82f2-4173-99ec-11050eddbd64/GG20260403-0131 - 6 Satellite to 100K Ontario MILLION, 3 Seats.txt
+data/tmp_uploads_public/expanded/fa0f1e9a-82f2-4173-99ec-11050eddbd64/GG20260410-0537 - Bounty Hunters Hyper 5.25.txt
+data/tmp_uploads_public/expanded/fa0f1e9a-82f2-4173-99ec-11050eddbd64/GG20260417-0350 - 25 Thursday Heater [Turbo].txt
+data/tmp_uploads_public/expanded/fa0f1e9a-82f2-4173-99ec-11050eddbd64/GG20260402-0313 - Wednesday Heater 25 [Bounty Turbo].txt
+data/tmp_uploads_public/expanded/fa0f1e9a-82f2-4173-99ec-11050eddbd64/GG20260410-0312 - 25 Thursday Heater [Turbo].txt
+data/tmp_uploads_public/expanded/fa0f1e9a-82f2-4173-99ec-11050eddbd64/GG20260414-1930 - 10 Satellite to MYSTERY BOUNTY Main Event, 250K GTD, 1 Seat.txt
+data/tmp_uploads_public/expanded/fa0f1e9a-82f2-4173-99ec-11050eddbd64/GG20260408-2247 - 15 Bounty Hunters [Big Bounties].txt
+data/tmp_uploads_public/expanded/fa0f1e9a-82f2-4173-99ec-11050eddbd64/GG20260406-0205 - Sunday Heater 25 [Bounty Turbo].txt
+data/tmp_uploads_public/expanded/fa0f1e9a-82f2-4173-99ec-11050eddbd64/GG20260409-0023 - Bounty King Jr 10.50.txt
+data/tmp_uploads_public/expanded/fa0f1e9a-82f2-4173-99ec-11050eddbd64/GG20260406-0304 - Sunday Heater 25 [Bounty Turbo].txt
+data/tmp_uploads_public/expanded/fa0f1e9a-82f2-4173-99ec-11050eddbd64/GG20260412-0203 - 1.50 Step to GGMasters 150.txt
+data/tmp_uploads_public/expanded/fa0f1e9a-82f2-4173-99ec-11050eddbd64/GG20260410-0618 - Bounty Hunters Hyper 5.25.txt
+data/tmp_uploads_public/expanded/fa0f1e9a-82f2-4173-99ec-11050eddbd64/GG20260405-0209 - 1.50 Step to GGMasters 150.txt
+data/tmp_uploads_public/expanded/fa0f1e9a-82f2-4173-99ec-11050eddbd64/GG20260403-0013 - 1K Thursday Freeroll.txt
+data/tmp_uploads_public/expanded/fa0f1e9a-82f2-4173-99ec-11050eddbd64/GG20260412-2103 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/fa0f1e9a-82f2-4173-99ec-11050eddbd64/GG20260412-2145 - 15 Satellite to GGMasters 150, 2 Seats.txt
+data/tmp_uploads_public/expanded/fa0f1e9a-82f2-4173-99ec-11050eddbd64/GG20260411-0026 - Mini Friday Night Fight 25 [Bounty 6-Max].txt
+data/tmp_uploads_public/expanded/fa0f1e9a-82f2-4173-99ec-11050eddbd64/GG20260403-0114 - 6 Satellite to 100K Ontario MILLION, 3 Seats.txt
+data/tmp_uploads_public/expanded/fa0f1e9a-82f2-4173-99ec-11050eddbd64/GG20260411-2022 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/fa0f1e9a-82f2-4173-99ec-11050eddbd64/GG20260406-0251 - Sunday Heater 25 [Bounty Turbo].txt
+data/tmp_uploads_public/expanded/fa0f1e9a-82f2-4173-99ec-11050eddbd64/GG20260417-0211 - 25 Thursday Heater [Turbo].txt
+data/tmp_uploads_public/expanded/fa0f1e9a-82f2-4173-99ec-11050eddbd64/GG20260415-0332 - Bounty Hunters 5.25.txt
+data/tmp_uploads_public/expanded/fa0f1e9a-82f2-4173-99ec-11050eddbd64/GG20260417-0215 - Mini Thursday Throwdown 25 [Bounty].txt
+data/tmp_uploads_public/expanded/fa0f1e9a-82f2-4173-99ec-11050eddbd64/GG20260402-0328 - Wednesday Heater 25 [Bounty Turbo].txt
+data/tmp_uploads_public/expanded/fa0f1e9a-82f2-4173-99ec-11050eddbd64/GG20260411-0429 - 1.50 Step to GGMasters 150.txt
+data/tmp_uploads_public/expanded/fa0f1e9a-82f2-4173-99ec-11050eddbd64/GG20260414-2025 - 10 Satellite to MYSTERY BOUNTY Main Event, 250K GTD, 2 Seats.txt
+data/tmp_uploads_public/expanded/fa0f1e9a-82f2-4173-99ec-11050eddbd64/GG20260406-1830 - Freeroll to WSOP-C Playground Main Event 1 Step.txt
+data/tmp_uploads_public/expanded/fa0f1e9a-82f2-4173-99ec-11050eddbd64/GG20260410-0501 - Daily Hyper 10.txt
+data/tmp_uploads_public/expanded/fa0f1e9a-82f2-4173-99ec-11050eddbd64/GG20260403-0021 - Mini Thursday Throwdown 25 [Bounty].txt
+data/tmp_uploads_public/expanded/fa0f1e9a-82f2-4173-99ec-11050eddbd64/GG20260410-1710 - Bounty Hunters 5.25.txt
+data/tmp_uploads_public/expanded/fa0f1e9a-82f2-4173-99ec-11050eddbd64/GG20260409-2112 - Omaholic Deepstack 5.txt
+data/tmp_uploads_public/expanded/fa0f1e9a-82f2-4173-99ec-11050eddbd64/GG20260401-0342 - WSOP-SC 25 Spring Showers [Bounty Turbo].txt
+data/tmp_uploads_public/expanded/fa0f1e9a-82f2-4173-99ec-11050eddbd64/GG20260410-1627 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/fa0f1e9a-82f2-4173-99ec-11050eddbd64/GG20260412-1846 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/fa0f1e9a-82f2-4173-99ec-11050eddbd64/GG20260331-0315 - WSOP-SC 25 Spring Showers [Bounty Turbo].txt
+data/tmp_uploads_public/expanded/fa0f1e9a-82f2-4173-99ec-11050eddbd64/GG20260411-1850 - Freeroll to WSOP-C Playground Main Event 1 Step.txt
+data/tmp_uploads_public/expanded/fa0f1e9a-82f2-4173-99ec-11050eddbd64/GG20260405-0005 - Mini Saturday Knockout 25 [Bounty].txt
+data/tmp_uploads_public/expanded/fa0f1e9a-82f2-4173-99ec-11050eddbd64/GG20260412-2000 - Ontario MILLION Bounty Edition, 100K GTD [Stage 1].txt
+data/tmp_uploads_public/expanded/fa0f1e9a-82f2-4173-99ec-11050eddbd64/GG20260415-0253 - 25 Tuesday Heater [Turbo].txt
+data/tmp_uploads_public/expanded/fa0f1e9a-82f2-4173-99ec-11050eddbd64/GG20260412-2236 - Bounty Hunters Sunday Big Game 21.txt
+data/tmp_uploads_public/expanded/fa0f1e9a-82f2-4173-99ec-11050eddbd64/GG20260401-0236 - WSOP-SC 25 Spring Showers [Bounty Turbo].txt
+data/tmp_uploads_public/expanded/fa0f1e9a-82f2-4173-99ec-11050eddbd64/GG20260411-1941 - Ontario MILLION Bounty Edition, 100K GTD [Stage 1].txt
+data/tmp_uploads_public/expanded/fa0f1e9a-82f2-4173-99ec-11050eddbd64/GG20260410-1638 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/fa0f1e9a-82f2-4173-99ec-11050eddbd64/GG20260417-0014 - Mini Thursday Throwdown 25 [Bounty].txt
+data/tmp_uploads_public/expanded/fa0f1e9a-82f2-4173-99ec-11050eddbd64/GG20260410-0412 - Bounty Hunters Hyper 10.50.txt
+data/tmp_uploads_public/expanded/fa0f1e9a-82f2-4173-99ec-11050eddbd64/GG20260410-1651 - Bounty Hunters 5.25.txt
+data/tmp_uploads_public/expanded/fa0f1e9a-82f2-4173-99ec-11050eddbd64/GG20260411-1647 - 15 Satellite to GGMasters 150, 1 Seat.txt
+data/tmp_uploads_public/expanded/fa0f1e9a-82f2-4173-99ec-11050eddbd64/GG20260411-2201 - 15 Bounty Hunters [Big Bounties].txt
+data/tmp_uploads_public/expanded/fa0f1e9a-82f2-4173-99ec-11050eddbd64/GG20260411-1734 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/fa0f1e9a-82f2-4173-99ec-11050eddbd64/GG20260411-0109 - Mini Friday Night Fight 25 [Bounty 6-Max].txt
+data/tmp_uploads_public/expanded/fa0f1e9a-82f2-4173-99ec-11050eddbd64/GG20260417-0422 - Daily Hyper 3.txt
+data/tmp_uploads_public/expanded/fa0f1e9a-82f2-4173-99ec-11050eddbd64/GG20260410-0619 - Bounty Hunters Hyper 5.25.txt
+data/tmp_uploads_public/expanded/fa0f1e9a-82f2-4173-99ec-11050eddbd64/GG20260417-0207 - Mini Thursday Throwdown 25 [Bounty].txt
+data/tmp_uploads_public/expanded/fa0f1e9a-82f2-4173-99ec-11050eddbd64/GG20260406-2031 - 10 Satellite to MYSTERY BOUNTY Main Event, 250K GTD, 1 Seat.txt
+data/tmp_uploads_public/expanded/fa0f1e9a-82f2-4173-99ec-11050eddbd64/GG20260406-0030 - Ontario MILLION, 100K GTD [Final Day].txt
+data/tmp_uploads_public/expanded/fa0f1e9a-82f2-4173-99ec-11050eddbd64/GG20260331-0338 - WSOP-SC 25 Spring Showers [Bounty Turbo].txt
+data/tmp_uploads_public/expanded/fa0f1e9a-82f2-4173-99ec-11050eddbd64/GG20260412-0210 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/fa0f1e9a-82f2-4173-99ec-11050eddbd64/GG20260415-0215 - 25 Tuesday Heater [Turbo].txt
+data/tmp_uploads_public/expanded/fa0f1e9a-82f2-4173-99ec-11050eddbd64/GG20260412-0006 - Mini Saturday Knockout 25 [Bounty].txt
+data/tmp_uploads_public/expanded/fa0f1e9a-82f2-4173-99ec-11050eddbd64/GG20260408-2338 - 15 Bounty Hunters [Big Bounties].txt
+data/tmp_uploads_public/expanded/fa0f1e9a-82f2-4173-99ec-11050eddbd64/GG20260417-0434 - Daily Hyper 3.txt
+data/tmp_uploads_public/expanded/fa0f1e9a-82f2-4173-99ec-11050eddbd64/GG20260407-0106 - 5K Monday Mega Freeroll.txt
+data/tmp_uploads_public/expanded/fa0f1e9a-82f2-4173-99ec-11050eddbd64/GG20260412-2109 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/fa0f1e9a-82f2-4173-99ec-11050eddbd64/GG20260408-2229 - 10 Deadline to MYSTERY BOUNTY Main Event, 250K GTD, 1 Seat.txt
+data/tmp_uploads_public/expanded/fa0f1e9a-82f2-4173-99ec-11050eddbd64/GG20260408-2344 - Bounty King Jr 10.50.txt
+data/tmp_uploads_public/expanded/fa0f1e9a-82f2-4173-99ec-11050eddbd64/GG20260409-0250 - 25 Wednesday Heater [Turbo].txt
+data/tmp_uploads_public/expanded/fa0f1e9a-82f2-4173-99ec-11050eddbd64/GG20260410-1812 - 1 Step to WSOP-C Playground Main Event.txt
+data/tmp_uploads_public/expanded/fa0f1e9a-82f2-4173-99ec-11050eddbd64/GG20260414-2349 - Bounty King Jr 10.50.txt
+data/tmp_uploads_public/expanded/fa0f1e9a-82f2-4173-99ec-11050eddbd64/GG20260403-0300 - Ontario MILLION, 100K GTD [Day 1].txt
+data/tmp_uploads_public/expanded/fa0f1e9a-82f2-4173-99ec-11050eddbd64/GG20260417-0000 - 1K Thursday Freeroll.txt
+data/tmp_uploads_public/expanded/fa0f1e9a-82f2-4173-99ec-11050eddbd64/GG20260410-1850 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/fa0f1e9a-82f2-4173-99ec-11050eddbd64/GG20260410-1726 - Bounty Hunters 5.25.txt
+data/tmp_uploads_public/expanded/fa0f1e9a-82f2-4173-99ec-11050eddbd64/GG20260413-0100 - Omaholic Bounty 5.25.txt
+data/tmp_uploads_public/expanded/fa0f1e9a-82f2-4173-99ec-11050eddbd64/GG20260409-0404 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/fa0f1e9a-82f2-4173-99ec-11050eddbd64/GG20260412-2146 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/fa0f1e9a-82f2-4173-99ec-11050eddbd64/GG20260411-0424 - Daily Turbo 10.txt
+data/tmp_uploads_public/expanded/fa0f1e9a-82f2-4173-99ec-11050eddbd64/GG20260408-2226 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/b348eaeb-c5cc-493a-ac26-32951b8bf4bc/GG20260408 - Tournament #6324110 - 10 Deadline to MYSTERY BOUNTY Main Event, 250K GTD, 1 Seat.txt
+data/tmp_uploads_public/expanded/b348eaeb-c5cc-493a-ac26-32951b8bf4bc/GG20260412 - Tournament #6310094 - Bounty Hunters Sunday Big Game 21.txt
+data/tmp_uploads_public/expanded/b348eaeb-c5cc-493a-ac26-32951b8bf4bc/GG20260412 - Tournament #6309933 - 15 Satellite to GGMasters 150, 2 Seats.txt
+data/tmp_uploads_public/expanded/b348eaeb-c5cc-493a-ac26-32951b8bf4bc/GG20260417 - Tournament #5787175 - 1K Thursday Freeroll.txt
+data/tmp_uploads_public/expanded/b348eaeb-c5cc-493a-ac26-32951b8bf4bc/GG20260408 - Tournament #6324109 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/b348eaeb-c5cc-493a-ac26-32951b8bf4bc/GG20260412 - Tournament #6302536 - Mini Saturday Knockout 25 [Bounty].txt
+data/tmp_uploads_public/expanded/b348eaeb-c5cc-493a-ac26-32951b8bf4bc/GG20260411 - Tournament #6294350 - Daily Turbo 10.txt
+data/tmp_uploads_public/expanded/b348eaeb-c5cc-493a-ac26-32951b8bf4bc/GG20260412 - Tournament #6356812 - 1.50 Step to GGMasters 150.txt
+data/tmp_uploads_public/expanded/b348eaeb-c5cc-493a-ac26-32951b8bf4bc/GG20260412 - Tournament #6210358 - Ontario MILLION Bounty Edition, 100K GTD [Stage 1].txt
+data/tmp_uploads_public/expanded/b348eaeb-c5cc-493a-ac26-32951b8bf4bc/GG20260411 - Tournament #6210349 - Ontario MILLION Bounty Edition, 100K GTD [Stage 1].txt
+data/tmp_uploads_public/expanded/b348eaeb-c5cc-493a-ac26-32951b8bf4bc/GG20260415 - Tournament #6340564 - 25 Tuesday Heater [Turbo].txt
+data/tmp_uploads_public/expanded/b348eaeb-c5cc-493a-ac26-32951b8bf4bc/GG20260410 - Tournament #6210504 - 25 Thursday Heater [Turbo].txt
+data/tmp_uploads_public/expanded/b348eaeb-c5cc-493a-ac26-32951b8bf4bc/GG20260409 - Tournament #6324115 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/b348eaeb-c5cc-493a-ac26-32951b8bf4bc/GG20260412 - Tournament #6324178 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/b348eaeb-c5cc-493a-ac26-32951b8bf4bc/GG20260414 - Tournament #6378333 - 10 Satellite to MYSTERY BOUNTY Main Event, 250K GTD, 2 Seats.txt
+data/tmp_uploads_public/expanded/b348eaeb-c5cc-493a-ac26-32951b8bf4bc/GG20260406 - Tournament #6286925 - Freeroll to SOP-C Playground Main Event 1 Step.txt
+data/tmp_uploads_public/expanded/b348eaeb-c5cc-493a-ac26-32951b8bf4bc/GG20260412 - Tournament #6311287 - Omaholic Bounty 5.25.txt
+data/tmp_uploads_public/expanded/b348eaeb-c5cc-493a-ac26-32951b8bf4bc/GG20260409 - Tournament #6210499 - 25 ednesday Heater [Turbo].txt
+data/tmp_uploads_public/expanded/b348eaeb-c5cc-493a-ac26-32951b8bf4bc/GG20260410 - Tournament #6324144 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/b348eaeb-c5cc-493a-ac26-32951b8bf4bc/GG20260410 - Tournament #6286965 - Freeroll to SOP-C Playground Main Event 1 Step.txt
+data/tmp_uploads_public/expanded/b348eaeb-c5cc-493a-ac26-32951b8bf4bc/GG20260411 - Tournament #6286975 - Freeroll to SOP-C Playground Main Event 1 Step.txt
+data/tmp_uploads_public/expanded/b348eaeb-c5cc-493a-ac26-32951b8bf4bc/GG20260410 - Tournament #6285687 - Daily Hyper 10.txt
+data/tmp_uploads_public/expanded/b348eaeb-c5cc-493a-ac26-32951b8bf4bc/GG20260409 - Tournament #6281258 - Omaholic Deepstack 5.txt
+data/tmp_uploads_public/expanded/b348eaeb-c5cc-493a-ac26-32951b8bf4bc/GG20260414 - Tournament #6328867 - Bounty King Jr 10.50.txt
+data/tmp_uploads_public/expanded/b348eaeb-c5cc-493a-ac26-32951b8bf4bc/GG20260410 - Tournament #6285188 - Bounty Hunters Hyper 10.50.txt
+data/tmp_uploads_public/expanded/b348eaeb-c5cc-493a-ac26-32951b8bf4bc/GG20260406 - Tournament #6130277 - Ontario MILLION, 100K GTD [Final Day].txt
+data/tmp_uploads_public/expanded/b348eaeb-c5cc-493a-ac26-32951b8bf4bc/GG20260411 - Tournament #6298793 - 15 Satellite to GGMasters 150, 1 Seat.txt
+data/tmp_uploads_public/expanded/b348eaeb-c5cc-493a-ac26-32951b8bf4bc/GG20260415 - Tournament #6330944 - Bounty Hunters 5.25.txt
+data/tmp_uploads_public/expanded/b348eaeb-c5cc-493a-ac26-32951b8bf4bc/GG20260403 - Tournament #5787165 - 1K Thursday Freeroll.txt
+data/tmp_uploads_public/expanded/b348eaeb-c5cc-493a-ac26-32951b8bf4bc/GG20260412 - Tournament #6324195 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/b348eaeb-c5cc-493a-ac26-32951b8bf4bc/GG20260417 - Tournament #6348883 - Daily Hyper 3.txt
+data/tmp_uploads_public/expanded/b348eaeb-c5cc-493a-ac26-32951b8bf4bc/GG20260410 - Tournament #6289351 - Bounty Hunters 5.25.txt
+data/tmp_uploads_public/expanded/b348eaeb-c5cc-493a-ac26-32951b8bf4bc/GG20260410 - Tournament #6324140 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/b348eaeb-c5cc-493a-ac26-32951b8bf4bc/GG20260412 - Tournament #6324193 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/b348eaeb-c5cc-493a-ac26-32951b8bf4bc/GG20260403 - Tournament #6227605 - 6 Satellite to 100K Ontario MILLION, 3 Seats.txt
+data/tmp_uploads_public/expanded/b348eaeb-c5cc-493a-ac26-32951b8bf4bc/GG20260414 - Tournament #6340562 - 15 Bounty Hunters [Big Bounties].txt
+data/tmp_uploads_public/expanded/b348eaeb-c5cc-493a-ac26-32951b8bf4bc/GG20260405 - Tournament #6293539 - 1.50 Step to GGMasters 150.txt
+data/tmp_uploads_public/expanded/b348eaeb-c5cc-493a-ac26-32951b8bf4bc/GG20260411 - Tournament #6292669 - Mini Friday Night Fight 25 [Bounty 6-Max].txt
+data/tmp_uploads_public/expanded/b348eaeb-c5cc-493a-ac26-32951b8bf4bc/GG20260411 - Tournament #6324169 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/b348eaeb-c5cc-493a-ac26-32951b8bf4bc/GG20260411 - Tournament #6210351 - Ontario MILLION Bounty Edition, 100K GTD [Stage 1].txt
+data/tmp_uploads_public/expanded/b348eaeb-c5cc-493a-ac26-32951b8bf4bc/GG20260412 - Tournament #6324189 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/b348eaeb-c5cc-493a-ac26-32951b8bf4bc/GG20260411 - Tournament #6349089 - 1.50 Step to GGMasters 150.txt
+data/tmp_uploads_public/expanded/b348eaeb-c5cc-493a-ac26-32951b8bf4bc/GG20260405 - Tournament #6242592 - Mini Saturday Knockout 25 [Bounty].txt
+data/tmp_uploads_public/expanded/b348eaeb-c5cc-493a-ac26-32951b8bf4bc/GG20260408 - Tournament #6274413 - Bounty King Jr 10.50.txt
+data/tmp_uploads_public/expanded/b348eaeb-c5cc-493a-ac26-32951b8bf4bc/GG20260401 - Tournament #6156971 - SOP-SC 25 Spring Showers [Bounty Turbo].txt
+data/tmp_uploads_public/expanded/b348eaeb-c5cc-493a-ac26-32951b8bf4bc/GG20260408 - Tournament #6210497 - 15 Bounty Hunters [Big Bounties].txt
+data/tmp_uploads_public/expanded/b348eaeb-c5cc-493a-ac26-32951b8bf4bc/GG20260403 - Tournament #6130351 - Ontario MILLION, 100K GTD [Day 1].txt
+data/tmp_uploads_public/expanded/b348eaeb-c5cc-493a-ac26-32951b8bf4bc/GG20260331 - Tournament #6156958 - SOP-SC 25 Spring Showers [Bounty Turbo].txt
+data/tmp_uploads_public/expanded/b348eaeb-c5cc-493a-ac26-32951b8bf4bc/GG20260410 - Tournament #6286963 - 1 Step to SOP-C Playground Main Event.txt
+data/tmp_uploads_public/expanded/b348eaeb-c5cc-493a-ac26-32951b8bf4bc/GG20260406 - Tournament #6287532 - 10 Satellite to MYSTERY BOUNTY Main Event, 250K GTD, 1 Seat.txt
+data/tmp_uploads_public/expanded/b348eaeb-c5cc-493a-ac26-32951b8bf4bc/GG20260410 - Tournament #6285911 - Bounty Hunters Hyper 5.25.txt
+data/tmp_uploads_public/expanded/b348eaeb-c5cc-493a-ac26-32951b8bf4bc/GG20260407 - Tournament #5787167 - 5K Monday Mega Freeroll.txt
+data/tmp_uploads_public/expanded/b348eaeb-c5cc-493a-ac26-32951b8bf4bc/GG20260411 - Tournament #6324162 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/b348eaeb-c5cc-493a-ac26-32951b8bf4bc/GG20260406 - Tournament #6252126 - Sunday Heater 25 [Bounty Turbo].txt
+data/tmp_uploads_public/expanded/b348eaeb-c5cc-493a-ac26-32951b8bf4bc/GG20260414 - Tournament #6378331 - 10 Satellite to MYSTERY BOUNTY Main Event, 250K GTD, 1 Seat.txt
+data/tmp_uploads_public/expanded/b348eaeb-c5cc-493a-ac26-32951b8bf4bc/GG20260403 - Tournament #6224756 - Mini Thursday Throwdown 25 [Bounty].txt
+data/tmp_uploads_public/expanded/b348eaeb-c5cc-493a-ac26-32951b8bf4bc/GG20260402 - Tournament #6217357 - ednesday Heater 25 [Bounty Turbo].txt
+data/tmp_uploads_public/expanded/b348eaeb-c5cc-493a-ac26-32951b8bf4bc/GG20260411 - Tournament #6210513 - 15 Bounty Hunters [Big Bounties].txt
+data/tmp_uploads_public/expanded/4ad0b2d2-12b6-489e-b55a-8b69d4a4f2c2/GG20260408 - Tournament #6324110 - 10 Deadline to MYSTERY BOUNTY Main Event, 250K GTD, 1 Seat.txt
+data/tmp_uploads_public/expanded/4ad0b2d2-12b6-489e-b55a-8b69d4a4f2c2/GG20260412 - Tournament #6310094 - Bounty Hunters Sunday Big Game 21.txt
+data/tmp_uploads_public/expanded/4ad0b2d2-12b6-489e-b55a-8b69d4a4f2c2/GG20260412 - Tournament #6309933 - 15 Satellite to GGMasters 150, 2 Seats.txt
+data/tmp_uploads_public/expanded/4ad0b2d2-12b6-489e-b55a-8b69d4a4f2c2/GG20260417 - Tournament #5787175 - 1K Thursday Freeroll.txt
+data/tmp_uploads_public/expanded/4ad0b2d2-12b6-489e-b55a-8b69d4a4f2c2/GG20260408 - Tournament #6324109 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/4ad0b2d2-12b6-489e-b55a-8b69d4a4f2c2/GG20260412 - Tournament #6302536 - Mini Saturday Knockout 25 [Bounty].txt
+data/tmp_uploads_public/expanded/4ad0b2d2-12b6-489e-b55a-8b69d4a4f2c2/GG20260411 - Tournament #6294350 - Daily Turbo 10.txt
+data/tmp_uploads_public/expanded/4ad0b2d2-12b6-489e-b55a-8b69d4a4f2c2/GG20260412 - Tournament #6356812 - 1.50 Step to GGMasters 150.txt
+data/tmp_uploads_public/expanded/4ad0b2d2-12b6-489e-b55a-8b69d4a4f2c2/GG20260412 - Tournament #6210358 - Ontario MILLION Bounty Edition, 100K GTD [Stage 1].txt
+data/tmp_uploads_public/expanded/4ad0b2d2-12b6-489e-b55a-8b69d4a4f2c2/GG20260411 - Tournament #6210349 - Ontario MILLION Bounty Edition, 100K GTD [Stage 1].txt
+data/tmp_uploads_public/expanded/4ad0b2d2-12b6-489e-b55a-8b69d4a4f2c2/GG20260415 - Tournament #6340564 - 25 Tuesday Heater [Turbo].txt
+data/tmp_uploads_public/expanded/4ad0b2d2-12b6-489e-b55a-8b69d4a4f2c2/GG20260410 - Tournament #6210504 - 25 Thursday Heater [Turbo].txt
+data/tmp_uploads_public/expanded/4ad0b2d2-12b6-489e-b55a-8b69d4a4f2c2/GG20260409 - Tournament #6324115 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/4ad0b2d2-12b6-489e-b55a-8b69d4a4f2c2/GG20260412 - Tournament #6324178 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/4ad0b2d2-12b6-489e-b55a-8b69d4a4f2c2/GG20260414 - Tournament #6378333 - 10 Satellite to MYSTERY BOUNTY Main Event, 250K GTD, 2 Seats.txt
+data/tmp_uploads_public/expanded/4ad0b2d2-12b6-489e-b55a-8b69d4a4f2c2/GG20260406 - Tournament #6286925 - Freeroll to SOP-C Playground Main Event 1 Step.txt
+data/tmp_uploads_public/expanded/4ad0b2d2-12b6-489e-b55a-8b69d4a4f2c2/GG20260412 - Tournament #6311287 - Omaholic Bounty 5.25.txt
+data/tmp_uploads_public/expanded/4ad0b2d2-12b6-489e-b55a-8b69d4a4f2c2/GG20260409 - Tournament #6210499 - 25 ednesday Heater [Turbo].txt
+data/tmp_uploads_public/expanded/4ad0b2d2-12b6-489e-b55a-8b69d4a4f2c2/GG20260410 - Tournament #6324144 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/4ad0b2d2-12b6-489e-b55a-8b69d4a4f2c2/GG20260410 - Tournament #6286965 - Freeroll to SOP-C Playground Main Event 1 Step.txt
+data/tmp_uploads_public/expanded/4ad0b2d2-12b6-489e-b55a-8b69d4a4f2c2/GG20260411 - Tournament #6286975 - Freeroll to SOP-C Playground Main Event 1 Step.txt
+data/tmp_uploads_public/expanded/4ad0b2d2-12b6-489e-b55a-8b69d4a4f2c2/GG20260410 - Tournament #6285687 - Daily Hyper 10.txt
+data/tmp_uploads_public/expanded/4ad0b2d2-12b6-489e-b55a-8b69d4a4f2c2/GG20260409 - Tournament #6281258 - Omaholic Deepstack 5.txt
+data/tmp_uploads_public/expanded/4ad0b2d2-12b6-489e-b55a-8b69d4a4f2c2/GG20260414 - Tournament #6328867 - Bounty King Jr 10.50.txt
+data/tmp_uploads_public/expanded/4ad0b2d2-12b6-489e-b55a-8b69d4a4f2c2/GG20260410 - Tournament #6285188 - Bounty Hunters Hyper 10.50.txt
+data/tmp_uploads_public/expanded/4ad0b2d2-12b6-489e-b55a-8b69d4a4f2c2/GG20260406 - Tournament #6130277 - Ontario MILLION, 100K GTD [Final Day].txt
+data/tmp_uploads_public/expanded/4ad0b2d2-12b6-489e-b55a-8b69d4a4f2c2/GG20260411 - Tournament #6298793 - 15 Satellite to GGMasters 150, 1 Seat.txt
+data/tmp_uploads_public/expanded/4ad0b2d2-12b6-489e-b55a-8b69d4a4f2c2/GG20260415 - Tournament #6330944 - Bounty Hunters 5.25.txt
+data/tmp_uploads_public/expanded/4ad0b2d2-12b6-489e-b55a-8b69d4a4f2c2/GG20260403 - Tournament #5787165 - 1K Thursday Freeroll.txt
+data/tmp_uploads_public/expanded/4ad0b2d2-12b6-489e-b55a-8b69d4a4f2c2/GG20260412 - Tournament #6324195 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/4ad0b2d2-12b6-489e-b55a-8b69d4a4f2c2/GG20260417 - Tournament #6348883 - Daily Hyper 3.txt
+data/tmp_uploads_public/expanded/4ad0b2d2-12b6-489e-b55a-8b69d4a4f2c2/GG20260410 - Tournament #6289351 - Bounty Hunters 5.25.txt
+data/tmp_uploads_public/expanded/4ad0b2d2-12b6-489e-b55a-8b69d4a4f2c2/GG20260410 - Tournament #6324140 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/4ad0b2d2-12b6-489e-b55a-8b69d4a4f2c2/GG20260412 - Tournament #6324193 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/4ad0b2d2-12b6-489e-b55a-8b69d4a4f2c2/GG20260403 - Tournament #6227605 - 6 Satellite to 100K Ontario MILLION, 3 Seats.txt
+data/tmp_uploads_public/expanded/4ad0b2d2-12b6-489e-b55a-8b69d4a4f2c2/GG20260414 - Tournament #6340562 - 15 Bounty Hunters [Big Bounties].txt
+data/tmp_uploads_public/expanded/4ad0b2d2-12b6-489e-b55a-8b69d4a4f2c2/GG20260405 - Tournament #6293539 - 1.50 Step to GGMasters 150.txt
+data/tmp_uploads_public/expanded/4ad0b2d2-12b6-489e-b55a-8b69d4a4f2c2/GG20260411 - Tournament #6292669 - Mini Friday Night Fight 25 [Bounty 6-Max].txt
+data/tmp_uploads_public/expanded/4ad0b2d2-12b6-489e-b55a-8b69d4a4f2c2/GG20260411 - Tournament #6324169 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/4ad0b2d2-12b6-489e-b55a-8b69d4a4f2c2/GG20260411 - Tournament #6210351 - Ontario MILLION Bounty Edition, 100K GTD [Stage 1].txt
+data/tmp_uploads_public/expanded/4ad0b2d2-12b6-489e-b55a-8b69d4a4f2c2/GG20260412 - Tournament #6324189 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/4ad0b2d2-12b6-489e-b55a-8b69d4a4f2c2/GG20260411 - Tournament #6349089 - 1.50 Step to GGMasters 150.txt
+data/tmp_uploads_public/expanded/4ad0b2d2-12b6-489e-b55a-8b69d4a4f2c2/GG20260405 - Tournament #6242592 - Mini Saturday Knockout 25 [Bounty].txt
+data/tmp_uploads_public/expanded/4ad0b2d2-12b6-489e-b55a-8b69d4a4f2c2/GG20260408 - Tournament #6274413 - Bounty King Jr 10.50.txt
+data/tmp_uploads_public/expanded/4ad0b2d2-12b6-489e-b55a-8b69d4a4f2c2/GG20260401 - Tournament #6156971 - SOP-SC 25 Spring Showers [Bounty Turbo].txt
+data/tmp_uploads_public/expanded/4ad0b2d2-12b6-489e-b55a-8b69d4a4f2c2/GG20260408 - Tournament #6210497 - 15 Bounty Hunters [Big Bounties].txt
+data/tmp_uploads_public/expanded/4ad0b2d2-12b6-489e-b55a-8b69d4a4f2c2/GG20260403 - Tournament #6130351 - Ontario MILLION, 100K GTD [Day 1].txt
+data/tmp_uploads_public/expanded/4ad0b2d2-12b6-489e-b55a-8b69d4a4f2c2/GG20260331 - Tournament #6156958 - SOP-SC 25 Spring Showers [Bounty Turbo].txt
+data/tmp_uploads_public/expanded/4ad0b2d2-12b6-489e-b55a-8b69d4a4f2c2/GG20260410 - Tournament #6286963 - 1 Step to SOP-C Playground Main Event.txt
+data/tmp_uploads_public/expanded/4ad0b2d2-12b6-489e-b55a-8b69d4a4f2c2/GG20260406 - Tournament #6287532 - 10 Satellite to MYSTERY BOUNTY Main Event, 250K GTD, 1 Seat.txt
+data/tmp_uploads_public/expanded/4ad0b2d2-12b6-489e-b55a-8b69d4a4f2c2/GG20260410 - Tournament #6285911 - Bounty Hunters Hyper 5.25.txt
+data/tmp_uploads_public/expanded/4ad0b2d2-12b6-489e-b55a-8b69d4a4f2c2/GG20260407 - Tournament #5787167 - 5K Monday Mega Freeroll.txt
+data/tmp_uploads_public/expanded/4ad0b2d2-12b6-489e-b55a-8b69d4a4f2c2/GG20260411 - Tournament #6324162 - 6 Satellite to Ontario MILLION Bounty, 100K GTD, 3 Seats.txt
+data/tmp_uploads_public/expanded/4ad0b2d2-12b6-489e-b55a-8b69d4a4f2c2/GG20260406 - Tournament #6252126 - Sunday Heater 25 [Bounty Turbo].txt
+data/tmp_uploads_public/expanded/4ad0b2d2-12b6-489e-b55a-8b69d4a4f2c2/GG20260414 - Tournament #6378331 - 10 Satellite to MYSTERY BOUNTY Main Event, 250K GTD, 1 Seat.txt
+data/tmp_uploads_public/expanded/4ad0b2d2-12b6-489e-b55a-8b69d4a4f2c2/GG20260403 - Tournament #6224756 - Mini Thursday Throwdown 25 [Bounty].txt
+data/tmp_uploads_public/expanded/4ad0b2d2-12b6-489e-b55a-8b69d4a4f2c2/GG20260402 - Tournament #6217357 - ednesday Heater 25 [Bounty Turbo].txt
+data/tmp_uploads_public/expanded/4ad0b2d2-12b6-489e-b55a-8b69d4a4f2c2/GG20260411 - Tournament #6210513 - 15 Bounty Hunters [Big Bounties].txt
+data/tmp_uploads_public/e2a95400-79ac-46b6-a700-2cd9167daf24-0000019d-9a07-44d0-0000-000058f065af.zip
+data/tmp_uploads_public/c25f44e0-3c1b-4615-82df-2e57020ff7cf-0000019d-9a07-79af-0000-000058f065af.zip
+data/tmp_uploads_public/3a549bf7-6fe3-4a21-8c44-469f3d88c0f6-0000019d-9a07-44d0-0000-000058f065af.zip
+data/tmp_uploads_public/d6a94626-5586-478a-b08b-27c5fa869231-0000019d-9a07-79af-0000-000058f065af.zip
+data/tmp_uploads_public/43a9403d-42b5-4605-8328-3aeb029a72c2-0000019d-9a07-79af-0000-000058f065af.zip
+data/tmp_uploads_public/23596aa8-9f63-4e55-ae7b-ae0c72c3d780-0000019d-9a07-79af-0000-000058f065af.zip
+data/tmp_uploads_public/f059038f-2fb4-4812-9af4-8b23137ec4c0-0000019d-9a07-44d0-0000-000058f065af.zip
+data/tmp_uploads_public/04b7dc2e-a485-44ee-b734-3b8f96e537d3-0000019d-e164-8bfe-0000-000058f065af.zip
+data/tmp_uploads_public/16ad9628-fddb-4f7c-9f1d-ea992584de11-0000019d-9a07-44d0-0000-000058f065af.zip
+data/tmp_uploads_public/6b87b925-efab-4d16-b5fb-ef2c12552131-0000019d-9a07-79af-0000-000058f065af.zip
+data/tmp_uploads_public/159dcc22-e1be-48e5-9672-f02ebe1d3593-0000019d-9a07-44d0-0000-000058f065af.zip
+data/hero_v2.sqlite3
+opb-poker/0000019d-be00-c53f-0000-000058f065af.zip
+opb-poker/GG20260424-0141 - Mini Thursday Throwdown 25 [Bounty]-1.txt
+opb-poker/0000019d-be01-2bdb-0000-000058f065af.zip
+opb-poker/GG20260505-0238 - 13-M 30 Monday Heater CN Rail Ed [Bounty Turbo].txt
+opb-poker/GG20260424 - Tournament #6408385 - Mini Thursday Throwdown 25 [Bounty].txt
+opb-poker/0000019d-5624-93f8-0000-000058f065af/GG20260403 - Tournament #6227605 - 6 Satellite to 100K Ontario MILLION, 3 Seats.txt
+opb-poker/0000019d-5624-93f8-0000-000058f065af/GG20260403 - Tournament #6130351 - Ontario MILLION, 100K GTD [Day 1].txt
+opb-poker/0000019d-f7a9-de18-0000-000058f065af.zip
+opb-poker/2026-05-07_ 03-20_AM_$0.30_$0.60_#102706391.png
+opb-poker/2026-04-18_ 05-17_AM_$8_$16_#100900185.png
+opb-poker/0000019d-e164-8bfe-0000-000058f065af.zip
+opb-poker/0000019d-f7a9-f922-0000-000058f065af.zip
+opb-poker/0000019d-e164-524c-0000-000058f065af.zip
+opb-poker/GG20260424-0141 - Mini Thursday Throwdown 25 [Bounty].txt
+opb-poker/2026-04-06_ 01-35_AM_$3_$6_#99687627.png
+opb-poker/2026-04-18_ 03-18_AM_$4_$8_#100836295.png
+opb-poker/0000019d-f7aa-3b88-0000-000058f065af.zip
+opb-poker/0000019d-5624-85e1-0000-000058f065af/GG20260403-0131 - 6 Satellite to 100K Ontario MILLION, 3 Seats.txt
+opb-poker/0000019d-5624-85e1-0000-000058f065af/GG20260403-0300 - Ontario MILLION, 100K GTD [Day 1].txt
